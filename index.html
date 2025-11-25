@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PG 2026 - Structural Geometry // V5.8 Updated</title>
+    
+    <link rel="icon" href="pg26_files/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="96x96" href="pg26_files/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="pg26_files/apple-touch-icon.png">
+    <meta name="theme-color" content="#4f46e5">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Mono:wght@400;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxTlZBo=" crossorigin=""></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script> 
+
+    <style>
+        :root {
+            /* 主背景色：深灰蓝 (slate-900) */
+            --bg-main: #0F172A;
+            /* 强调色：几何黄 (amber-400) */
+            --theme-accent: #FBBF24;
+            /* 辅助线条色 */
+            --line-color: #334155; /* slate-700 */
+            /* 标题字体 */
+            --font-heading: 'Nova Mono', monospace;
+            /* 正文字体 */
+            --font-body: 'Roboto Mono', monospace;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: #E2E8F0; /* slate-200 */
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            /* 建筑蓝图/结构网格背景 */
+            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* 标题和结构化风格 */
+        h1, h2, h3, .font-heading {
+            font-family: var(--font-heading);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        
+        /* 导航栏 Logo 容器样式 */
+        .header-logo-container {
+            width: 350px; 
+            height: 100px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .header-logo-container img {
+            filter: brightness(1.5) contrast(1.2); 
+            transition: filter 0.3s;
+        }
+        .header-logo-container img:hover {
+            filter: brightness(2) contrast(1.5) drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
+        }
+
+        /* 导航栏：结构化边框和强调色 */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            letter-spacing: 0.05em;
+        }
+        .nav-link:hover { color: var(--theme-accent); }
+        .nav-link::after, .nav-link.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: transparent;
+            border-bottom: 2px solid var(--theme-accent);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+        /* 结构化按钮风格 */
+        .btn-structural {
+            border: 2px solid var(--theme-accent);
+            color: var(--theme-accent);
+            background-color: transparent;
+            font-family: var(--font-heading);
+            font-size: 1.125rem;
+            padding: 0.5rem 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 rgba(251, 191, 36, 0.5);
+        }
+        .btn-structural:hover { 
+            background-color: var(--theme-accent);
+            color: var(--bg-main); 
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.7);
+            transform: translateY(-1px);
+        }
+
+        /* 委员会卡片样式 */
+        .chair-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px dashed var(--line-color);
+            transition: background-color 0.3s;
+        }
+        .chair-card:hover {
+            background-color: #1E293B; 
+        }
+        .chair-card:last-child {
+            border-bottom: none;
+        }
+        .chair-photo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--theme-accent);
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+        }
+        .chair-name {
+            font-family: var(--font-heading);
+            color: #FFFFFF;
+            transition: color 0.2s;
+            letter-spacing: 0.05em;
+        }
+        .chair-name:hover {
+            color: var(--theme-accent);
+            text-decoration: underline;
+        }
+        .chair-affiliation {
+            font-size: 0.875rem;
+            color: var(--line-color);
+            font-family: var(--font-body);
+        }
+
+
+        /* ============================================ */
+        /* V5.7 核心样式 - 双模型容器定位 (已更新右侧容器) */
+        /* ============================================ */
+        
+        #hero {
+            position: relative;
+            min-height: 90vh; 
+            overflow: hidden; 
+        }
+        
+        /* 统一的 3D 模型容器样式 */
+        .model-container-style {
+            position: absolute; 
+            z-index: 30; 
+            pointer-events: none; 
+            display: none; /* 默认隐藏 */
+        }
+        @media (min-width: 1024px) { /* lg */
+            .model-container-style {
+                display: block; /* 仅在大屏幕上显示 */
+            }
+        }
+        
+        /* 左侧模型 (小尺寸，自动旋转) */
+        #model-container-left {
+            left: 2.5%; 
+            top: 10%; /* 垂直居中 */
+            transform: translateY(-50%);
+            width: 400px; 
+            height: 400px; 
+        }
+        
+        /* 🚀 核心修改: 右侧模型 (大尺寸，互动拖动) */
+        #model-container-right {
+            right: 0; /* 贴紧右侧 */
+            top: 40%; /* 垂直居中 */
+            transform: translateY(-50%);
+            width: 50%; /* 占据右侧大片区域 */
+            height: 90vh; /* 垂直拉伸 */
+            z-index: 18; /* 低于标题 (z-index: 20)，实现重叠效果 */
+            pointer-events: auto; /* 启用鼠标事件，以便 OrbitControls 工作 */
+        }
+
+        /* 统一的几何装饰基类 (固定位置，非飘落) */
+        .hero-geometric-decor {
+            position: absolute;
+            z-index: 15;
+            filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
+            pointer-events: none;
+        }
+
+        /* 动态飘落几何图形基类 */
+        .floating-decor {
+            position: absolute;
+            z-index: 10;
+            pointer-events: none;
+            background-color: var(--theme-accent); /* 默认黄色 */
+            opacity: 0; /* 初始隐藏 */
+            animation: float-fade linear infinite;
+        }
+
+        /* 新增飘落动画 */
+        @keyframes float-fade {
+            0% {
+                transform: translate(0, -10%) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(0, 100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 标题和信息覆盖层保持不变 */
+        #hero-main-title {
+            position: absolute;
+            top: 40%;
+            left: 45%;
+            transform: translate(-50%, -50%); 
+            text-align: center;
+            z-index: 20; 
+            pointer-events: none; 
+            
+            font-size: 5rem; 
+            line-height: 0.9; 
+            letter-spacing: 0.2em; 
+            text-shadow: 
+                0 0 10px rgba(251, 191, 36, 0.6), 
+                0 0 20px rgba(251, 191, 36, 0.4),
+                0 0 30px rgba(251, 191, 36, 0.2);
+            animation: pulse-glow 3s infinite alternate ease-in-out;
+        }
+        /* 响应式调整标题大小 */
+        @media (min-width: 640px) { /* sm */
+            #hero-main-title { font-size: 7rem; }
+        }
+        @media (min-width: 1024px) { /* lg */
+            #hero-main-title { font-size: 10rem; } 
+        }
+        @media (min-width: 1280px) { /* xl */
+            #hero-main-title { font-size: 12rem; } 
+        }
+
+        @keyframes pulse-glow {
+            from {
+                text-shadow: 
+                    0 0 8px rgba(251, 191, 36, 0.7),
+                    0 0 15px rgba(251, 191, 36, 0.5),
+                    0 0 25px rgba(251, 191, 36, 0.3);
+            }
+            to {
+                text-shadow: 
+                    0 0 12px rgba(251, 191, 36, 0.9),
+                    0 0 25px rgba(251, 191, 36, 0.6),
+                    0 0 40px rgba(251, 191, 36, 0.4);
+            }
+        }
+        
+        /* 禁用 #canvas-container 的背景图像，只保留背景 */
+        #hero #canvas-container {
+            position: absolute;
+            inset: 0; 
+            border: none; 
+            box-shadow: none; 
+            background-color: transparent; 
+            opacity: 0.6; 
+            filter: brightness(0.7) contrast(1.2); 
+            max-width: none;
+            width: 100%;
+            height: 100%;
+        }
+        #hero #canvas-container img {
+            opacity: 0.4; 
+            filter: brightness(0.6) contrast(1.1) grayscale(0.5); 
+        }
+        
+        /* 其他 V2/V3 样式保持不变 */
+        #scroll-progress {
+            position: fixed;
+            top: 80px; 
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background-color: var(--theme-accent);
+            z-index: 100;
+            box-shadow: 0 0 15px var(--theme-accent);
+            transition: width 0.1s linear; 
+        }
+        .stat-card {
+            background-color: #1E293B; 
+            border: 1px solid var(--line-color);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card:hover {
+            border-color: var(--theme-accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        .stat-value {
+            font-family: 'Nova Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--theme-accent);
+            line-height: 1;
+        }
+        .stat-label {
+            font-family: 'Roboto Mono', monospace;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            color: #FFFFFF;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Timeline Box Style */
+        .date-box {
+            border-left: 2px solid var(--theme-accent);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .date-box::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background-color: var(--theme-accent);
+            box-shadow: 0 0 10px var(--theme-accent);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            filter: grayscale(0.7) contrast(1.1) brightness(0.9);
+            border-top: 3px solid var(--theme-accent);
+            border-bottom: 3px solid var(--theme-accent);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="scroll-progress"></div>
+
+    <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
+        <div class="max-w-7xl mx-auto px-10 h-30 flex items-center justify-between">
+            <a href="#hero" class="header-logo-container">
+                <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
+            </a>
+            
+            <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
+                <a href="#about" class="nav-link" data-target="about">MODULE_01</a>
+                <a href="#dates" class="nav-link" data-target="dates">TIMELINE</a>
+                <a href="#committee" class="nav-link" data-target="committee">COMMITTEE</a>
+                <a href="#organizers" class="nav-link" data-target="organizers">SUPPORT</a>
+                <a href="#venue" class="nav-link" data-target="venue">GRID_LOC</a>
+            </nav>
+
+            <a href="#register" class="btn-structural">
+                INITIATE //
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+            
+            <div id="model-container-left" class="model-container-style"></div>
+            
+            <div id="model-container-right" class="model-container-style"></div>
+
+            <div id="canvas-container" class="rounded-none overflow-hidden">
+                <img id="fallback-image" src="pg26_files/image_828e5f.jpg" alt="Pacific Graphics 2026 Singapore Visual" class="w-full h-full object-cover" />
+            </div>
+
+            <div id="hero-decor-polygon" class="hero-geometric-decor"></div>
+            <div id="hero-decor-voxels" class="hero-geometric-decor"></div>
+            <div id="hero-decor-data-stream" class="hero-geometric-decor"></div>
+            
+            <div class="floating-decor" style="width: 8px; height: 8px; left: 10%; background-color: #38BDF8; animation-delay: 0s; animation-duration: 15s; opacity: 0.8; filter: drop-shadow(0 0 5px #38BDF8);"></div>
+            <div class="floating-decor" style="width: 15px; height: 15px; left: 25%; background-color: var(--theme-accent); transform: rotate(45deg); animation-delay: 2s; animation-duration: 20s; opacity: 0.6; filter: drop-shadow(0 0 8px var(--theme-accent));"></div>
+            <div class="floating-decor" style="width: 5px; height: 5px; left: 40%; background-color: #8B5CF6; animation-delay: 5s; animation-duration: 12s; opacity: 0.7; filter: drop-shadow(0 0 4px #8B5CF6);"></div>
+            <div class="floating-decor" style="width: 20px; height: 20px; left: 55%; background-color: #38BDF8; border: 1px solid white; background: none; animation-delay: 8s; animation-duration: 25s; opacity: 0.5; filter: drop-shadow(0 0 6px #38BDF8);"></div>
+            <div class="floating-decor" style="width: 10px; height: 10px; left: 70%; background-color: var(--theme-accent); animation-delay: 1s; animation-duration: 18s; opacity: 0.9; filter: drop-shadow(0 0 7px var(--theme-accent));"></div>
+            
+            <div class="floating-decor" style="width: 6px; height: 6px; left: 5%; background-color: var(--theme-accent); animation-delay: 4s; animation-duration: 14s; opacity: 0.5;"></div>
+            <div class="floating-decor" style="width: 18px; height: 18px; left: 15%; background-color: #38BDF8; animation-delay: 10s; animation-duration: 22s; opacity: 0.4; transform: rotate(45deg);"></div>
+            <div class="floating-decor" style="width: 4px; height: 4px; left: 35%; background-color: #8B5CF6; animation-delay: 1s; animation-duration: 11s; opacity: 0.8; filter: drop-shadow(0 0 3px #8B5CF6);"></div>
+            <div class="floating-decor" style="width: 15px; height: 15px; left: 60%; background-color: var(--theme-accent); animation-delay: 7s; animation-duration: 19s; opacity: 0.6; border: 1px dashed white; background: none;"></div>
+            <div class="floating-decor" style="width: 7px; height: 7px; left: 80%; background-color: #38BDF8; animation-delay: 3s; animation-duration: 17s; opacity: 0.9;"></div>
+
+            <h1 id="hero-main-title">
+                PACIFIC<br>
+                <span class="text-[var(--theme-accent)]">GRAPHICS</span><br>
+                2026
+            </h1>
+        </section>
+        
+        <section id="about" class="max-w-6xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                <div class="md:w-1/3 sticky top-24">
+                    <h2 class="font-heading text-4xl text-white mb-6">MODULE_01 //<br><span class="text-[var(--theme-accent)]">ABOUT_PG</span></h2>
+                    <div class="w-20 h-1 bg-[var(--theme-accent)] mb-6"></div>
+                    <p class="font-mono text-sm text-[var(--line-color)]">SYSTEM_DATA: ANNUAL_CONF</p>
+                </div>
+                <div class="md:w-2/3 space-y-6 text-lg leading-relaxed text-slate-300 bg-slate-800/30 p-8 border border-[var(--line-color)]">
+                    <p>
+                        <strong class="text-white">Pacific Graphics (PG)</strong> is an annual international conference on computer graphics and applications. As a flagship conference of the <span class="text-[var(--theme-accent)]">Asia Graphics Association</span>, PG provides a premium forum for researchers, developers, and practitioners in the Pacific Rim and around the world to present and discuss new problems, solutions, and technologies in computer graphics and related areas.
+                    </p>
+                    <p>
+                        In 2026, we activate the protocol in <strong class="text-white">Singapore</strong>. We invite you to join the network, exchange data, and help construct the future geometry of our field.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="dates" class="bg-[#0F172A] py-24 border-t border-[var(--line-color)] relative">
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(var(--line-color) 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="max-w-6xl mx-auto px-6 relative z-10">
+                <h2 class="font-heading text-4xl text-white text-center mb-16">TIMELINE_SYNC // KEY_DATES</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
+                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">PHASE_01</div>
+                        <h3 class="text-xl font-bold text-white mb-1">Abstract Deadline</h3>
+                        <p class="text-slate-400 font-mono">June 15, 2026</p>
+                    </div>
+
+                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
+                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">PHASE_02</div>
+                        <h3 class="text-xl font-bold text-white mb-1">Paper Deadline</h3>
+                        <p class="text-slate-400 font-mono">June 22, 2026</p>
+                    </div>
+
+                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
+                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">PHASE_03</div>
+                        <h3 class="text-xl font-bold text-white mb-1">Notification</h3>
+                        <p class="text-slate-400 font-mono">August 15, 2026</p>
+                    </div>
+
+                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors" style="border-color: var(--theme-accent);">
+                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">EXECUTION</div>
+                        <h3 class="text-xl font-bold text-white mb-1">Conference</h3>
+                        <p class="text-slate-400 font-mono">Oct 20-23, 2026</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="committee" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
+            <h2 class="font-heading text-4xl text-white text-center mb-12">ORGANIZING PROTOCOL COMM.</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">CONF_CHAIRS //</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/sfh.jpg" alt="Shengfeng He" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://shengfenghe.github.io/" target="_blank" class="chair-name text-base">Shengfeng He</a>
+                                <div class="chair-affiliation text-xs">Singapore Management University (SMU)</div>
+                            </div>
+                        </div>
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/njm.jpg" alt="Niloy Mitra" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="http://www0.cs.ucl.ac.uk/staff/n.mitra/" target="_blank" class="chair-name text-base">Niloy Mitra</a>
+                                <div class="chair-affiliation text-xs">University College London (UCL)</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/holly.webp" alt="Holly Rushmeier" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://graphics.cs.yale.edu/people/holly-rushmeier/" target="_blank" class="chair-name text-base">Holly Rushmeier</a>
+                                <div class="chair-affiliation text-xs">Yale University</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">PROGRAM_CHAIRS //</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/yh.jpg" alt="Ying He" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://personal.ntu.edu.sg/yhe/" target="_blank" class="chair-name text-base">Ying He</a>
+                                <div class="chair-affiliation text-xs">Nanyang Technological University (NTU)</div>
+                            </div>
+                        </div>
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/nils.jpeg" alt="Nils Thuerey" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://www.professoren.tum.de/en/thuerey-nils" target="_blank" class="chair-name text-base">Nils Thuerey</a>
+                                <div class="chair-affiliation text-xs">Technical University of Munich (TUM)</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/ljl.jpg" alt="Lingjie Liu" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://lingjie0206.github.io//" target="_blank" class="chair-name text-base">Lingjie Liu</a>
+                                <div class="chair-affiliation text-xs">University of Pennsylvania (UPenn)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">ORG_CHAIRS //</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/bz.jpg" alt="Bin Zhu" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://faculty.smu.edu.sg/profile/bin-zhu-7716" target="_blank" class="chair-name text-base">Bin Zhu</a>
+                                <div class="chair-affiliation text-xs">Singapore Management University (SMU)</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/xyy.png" alt="Yangyang Xu" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://cnnlstm.github.io/" target="_blank" class="chair-name text-base">Yangyang Xu</a>
+                                <div class="chair-affiliation text-xs">Harbin Institute of Technology, Shenzhen</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">POSTER_CHAIRS //</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/nxz.jpg" alt="Nanxuan Zhao" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://www.nxzhao.com//" target="_blank" class="chair-name text-base">Nanxuan Zhao</a>
+                                <div class="chair-affiliation text-xs">Adobe</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/xy.png" alt="Xin Yang" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://xinyangdut.github.io/" target="_blank" class="chair-name text-base">Xin Yang</a>
+                                <div class="chair-affiliation text-xs">Dalian University of Technology (DUT)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+<!--                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">LOCAL_ORGANIZER //</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/ly.jpg" alt="Long Ye" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://longye-ai.com/" target="_blank" class="chair-name text-base">Long Ye</a>
+                                <div class="chair-affiliation text-xs">SMU - Singapore</div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">DEMO_CHAIR //</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/jnl.png" alt="Jiannan Li" class="chair-photo w-14 h-14" />
+                            <div class="chair-info">
+                                <a href="https://jchrisli.github.io/" target="_blank" class="chair-name text-base">Jiannan Li</a>
+                                <div class="chair-affiliation text-xs">Singapore Management University (SMU)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section id="organizers" class="py-24 border-t border-[var(--line-color)]">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="font-heading text-4xl text-white text-center mb-12">SUPPORTING ENTITIES //</h2>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center">
+                    <div class="flex justify-center p-4">
+                        <img src="pg26_files/logos/AG.png" alt="Asia Graphics Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
+                    </div>
+                    <div class="flex justify-center p-4">
+                        <img src="pg26_files/logos/SMU.png" alt="SMU Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
+                    </div>
+                    <div class="flex justify-center p-4">
+                        <img src="pg26_files/logos/NTU.png" alt="NTU Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
+                    </div>
+                    <div class="flex justify-center p-4">
+                        <img src="pg26_files/logos/NUS.png" alt="NUS Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
+                    </div>
+                        <div class="flex justify-center p-4 col-span-2 md:col-span-1">
+                        <img src="pg26_files/logos/SIGGRAPH.png" alt="SIGGRAPH Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="venue" class="py-24 border-t border-[var(--line-color)]">
+            <div class="max-w-6xl mx-auto px-6 mb-12">
+                        <h2 class="font-heading text-4xl text-white text-center mb-4">GRID_LOC // Singapore</h2>
+                        <p class="text-center text-[var(--line-color)] tracking-wider font-mono font-bold text-lg">
+                            NGEE ANN KONGSI AUDITORIUM
+                        </p>
+            </div>
+            <div class="h-[600px] w-full relative">
+                <div id="map"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[var(--bg-main)]/95 backdrop-blur-sm p-8 border-4 border-[var(--theme-accent)] shadow-2xl max-w-md text-center z-40">
+                    <h3 class="text-2xl font-heading text-[var(--theme-accent)] mb-2">DATA_HUB POINT</h3>
+                    <p class="text-white font-bold text-lg mb-1">Ngee Ann Kongsi Auditorium</p>
+                    <p class="text-sm text-slate-400 mt-2 font-mono">
+                        Singapore Management University (SMU)<br>
+                        School of Accountancy / Law<br>
+                        60 Stamford Rd, Singapore 178900
+                    </p>
+                    <a href="https://www.google.com/maps/place/Ngee+Ann+Kongsi+Auditorium" target="_blank" class="mt-6 inline-block text-xs uppercase text-white border border-white px-4 py-2 hover:bg-white hover:text-black transition">
+                        > INITIATE_NAVIGATION <
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+    
+    <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
+        <p>© 2025 PG 2026. ALL RIGHTS RESERVED. // DESIGNED FOR STRUCTURAL RIGOR & GEOMETRIC CLARITY // PROTOCOL V5.8</p>
+    </footer>
+
+    <script>
+        // ============================================
+        // Three.js 3D 渲染逻辑 (双模型集成)
+        // ============================================
+
+        const MODEL_CONFIG = [
+            { id: 'model-container-left', url: 'neon_open_sign.glb', label: 'Left Model (neon_open_sign.glb)' }, // 目标左侧模型
+            { id: 'model-container-right', url: 'singapore_speedway.glb', label: 'Right Model (singapore_speedway.glb)' } // 目标右侧模型
+        ];
+
+        // 可复用的模型加载和渲染函数 (自动旋转)
+        const loadModel = (containerId, modelUrl, rotationDirection = 1, scaleMultiplier = 1.0, yOffset = 0.5) => {
+            const container = document.getElementById(containerId);
+
+            if (!container) return;
+            if (!modelUrl) {
+                console.log(`⚠️ 警告: ${containerId} 模型 URL 未设置。`);
+                return;
+            }
+            
+            // 1. Scene setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+            camera.position.set(0, 1.5, 8); 
+            
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            // 💡 修复：强制设置清除颜色为透明
+            renderer.setClearColor(0x0f172a, 0);
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            renderer.domElement.style.position = 'absolute';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            container.appendChild(renderer.domElement);
+            
+            // 2. Lighting 
+            const ambientLight = new THREE.AmbientLight(0x404040, 1.5); scene.add(ambientLight);
+            const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
+            keyLight.position.set(5, 10, 7); keyLight.castShadow = true; scene.add(keyLight);
+            const fillLight = new THREE.DirectionalLight(0xfacc15, 1.0); fillLight.position.set(-5, 2, 0); scene.add(fillLight);
+            const rimLight = new THREE.DirectionalLight(0x2563eb, 1.5); rimLight.position.set(0, 5, -10); scene.add(rimLight);
+
+            // 4. Model Loading
+            let objectToRotate = null;
+            const loader = new THREE.GLTFLoader();
+            
+            loader.load(modelUrl, (gltf) => {
+                console.log(`✅ 3D 模型 (${modelUrl}) 加载成功！`);
+                const model = gltf.scene;
+                
+                // 自动缩放和居中逻辑
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const scaleFactor = (4 / maxDim) * scaleMultiplier; // 应用缩放乘数
+
+                // 1. 缩放模型
+                model.scale.multiplyScalar(scaleFactor);
+                
+                // 2. 重新计算缩放后的中心点，并移动模型使其居中
+                box.setFromObject(model); 
+                box.getCenter(center);
+                
+                // 3. 最终居中定位
+                model.position.x += (model.position.x - center.x);
+                model.position.y += (model.position.y - center.y);
+                model.position.y += yOffset; // 稍微抬高一点
+
+                scene.add(model);
+                objectToRotate = model;
+                renderer.domElement.style.zIndex = '1';
+
+            }, 
+            undefined, 
+            (error) => {
+                console.error(`❌ 3D 模型 (${modelUrl}) 加载出错！`, error);
+                const errorMesh = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshStandardMaterial({ color: 0xff0000, wireframe: true }));
+                errorMesh.position.y = 1;
+                scene.add(errorMesh);
+                objectToRotate = errorMesh;
+            });
+
+            // 5. Animation
+            const animate = () => {
+                requestAnimationFrame(animate);
+                if (objectToRotate) {
+                    objectToRotate.rotation.y += (0.005 * rotationDirection); // 自动旋转
+                }
+                renderer.render(scene, camera);
+            };
+            animate();
+
+            // 6. Resize
+            window.addEventListener('resize', () => {
+                if (container) {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+            });
+        };
+        
+        // ============================================
+        // 增强型 3D 渲染函数 (占地面积大, 鼠标拖动旋转)
+        // ============================================
+
+        const loadInteractiveModel = (containerId, modelUrl, scaleMultiplier = 2.5, yOffset = 0.0) => {
+            const container = document.getElementById(containerId);
+
+            if (!container) return;
+            if (!modelUrl) {
+                console.log(`⚠️ 警告: ${containerId} 模型 URL 未设置。`);
+                return;
+            }
+            
+            // 1. Scene & Renderer setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+            camera.position.set(0, 0, 10); // 调整相机位置，以便容纳更大的模型
+            
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            // 强制设置清除颜色为透明
+            renderer.setClearColor(0x0f172a, 0); 
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            
+            // 设置 Canvas 样式
+            renderer.domElement.style.position = 'absolute';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.zIndex = '1'; // 确保模型在容器内正确分层
+
+            container.appendChild(renderer.domElement);
+
+            // 2. Lighting (使用环境光和主题色)
+            const ambientLight = new THREE.AmbientLight(0x404040, 3); scene.add(ambientLight);
+            const keyLight = new THREE.DirectionalLight(0xffffff, 3.0);
+            keyLight.position.set(5, 10, 7); keyLight.castShadow = true; scene.add(keyLight);
+            const fillLight = new THREE.DirectionalLight(0xfacc15, 1.5); fillLight.position.set(-5, 2, 0); scene.add(fillLight);
+            
+            // 3. Orbit Controls (轨道控制器) - 核心功能
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true; // 启用阻尼（平滑效果）
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 5;      // 最小缩放距离
+            controls.maxDistance = 20;     // 最大缩放距离
+            controls.autoRotate = false;   // 禁用自动旋转
+            
+            // 4. Model Loading
+            let objectToRotate = null;
+            const loader = new THREE.GLTFLoader();
+            
+            loader.load(modelUrl, (gltf) => {
+                console.log(`✅ 3D 互动模型 (${modelUrl}) 加载成功！`);
+                const model = gltf.scene;
+                
+                // 自动缩放和居中逻辑
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                
+                // 目标尺寸为 6 个单位宽 (更大)
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const baseScaleFactor = 5 / maxDim; 
+                
+                // 1. 缩放模型
+                model.scale.multiplyScalar(baseScaleFactor * scaleMultiplier); 
+                
+                // 2. 重新计算缩放后的中心点，并移动模型使其居中
+                box.setFromObject(model); 
+                box.getCenter(center);
+                
+                // 3. 最终居中定位
+                model.position.x -= center.x;
+                model.position.y -= center.y;
+                model.position.z -= center.z;
+
+                model.position.y += yOffset; // 应用垂直偏移
+
+                scene.add(model);
+                objectToRotate = model;
+
+            }, 
+            undefined, // 进度回调 (可选)
+            (error) => {
+                console.error(`❌ 3D 互动模型 (${modelUrl}) 加载出错！`, error);
+                const errorMesh = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshStandardMaterial({ color: 0xff0000, wireframe: true }));
+                errorMesh.position.y = 1;
+                scene.add(errorMesh);
+                objectToRotate = errorMesh;
+            });
+
+            // 5. Animation
+            const animate = () => {
+                requestAnimationFrame(animate);
+                if (objectToRotate) {
+                    objectToRotate.rotation.y += (0.0005 * 1); // 自动旋转
+                    objectToRotate.rotation.x += (0.0005 * 1);
+                }
+                renderer.render(scene, camera);
+            };
+            animate();
+
+            // // 5. Animation (使用 controls.update())
+            // const animate = () => {
+            //     requestAnimationFrame(animate);
+                
+            //     controls.update(); // 更新控制器
+                
+            //     renderer.render(scene, camera);
+            // };
+            // animate();
+
+            // 6. Resize
+            window.addEventListener('resize', () => {
+                if (container) {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+            });
+        };
+
+        // Leaflet 地图逻辑
+        const initMap = () => {
+            // SMU / Ngee Ann Kongsi Auditorium 坐标
+            const venueLat = 1.2963;
+            const venueLng = 103.8502;
+
+            const map = L.map('map', { scrollWheelZoom: false }).setView([venueLat, venueLng], 16);
+            
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; CartoDB &copy; OpenStreetMap contributors',
+            }).addTo(map);
+
+            L.marker([venueLat, venueLng]).addTo(map)
+                .bindPopup('<b>Ngee Ann Kongsi Auditorium</b><br>SMU School of Accountancy')
+                .openPopup();
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 左侧模型
+            loadModel(
+                'model-container-left', 
+                MODEL_CONFIG[0].url, 
+                1,    // 顺时针
+                1.0,  // 较小尺寸 (默认)
+                -0.5  // 稍微向下移 
+            );
+            
+            // 右侧模型
+            loadInteractiveModel(
+                'model-container-right', 
+                MODEL_CONFIG[1].url, 
+                1.0,  // 放大模型尺寸
+                0.0   // 居中
+            );
+            
+            initMap(); // 初始化地图
+            
+            // 滚动进度条逻辑
+            const updateScrollProgress = () => {
+                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = window.scrollY;
+                const progress = (scrolled / scrollableHeight) * 100;
+                document.getElementById('scroll-progress').style.width = progress + '%';
+            };
+            
+            window.addEventListener('scroll', updateScrollProgress);
+            updateScrollProgress(); // 首次加载时调用
+        });
+    </script>
+</body>
+</html>
