@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PG 2026 - Structural Geometry // V5.8 Updated</title>
     
+    <title>Pacific Graphics 2026 (PG2026) - Singapore | International Conference on Computer Graphics</title>
+    
+    <meta name="description" content="Pacific Graphics 2026 (PG 2026) will be held in Singapore from Oct 20-23, 2026. Hosted by SMU, it is a flagship conference of the Asia Graphics Association on computer graphics and applications.">
+    
+    <meta name="keywords" content="Pacific Graphics 2026, PG2026, Computer Graphics, Conference, Singapore, SMU, Asia Graphics, Rendering, Visualization, Animation">
+    
+    <meta name="author" content="Pacific Graphics 2026 Committee">
+    <meta name="copyright" content="Pacific Graphics 2026">
+    <meta name="robots" content="index, follow"> <meta property="og:type" content="website">
+    <meta property="og:title" content="Pacific Graphics 2026 - Singapore">
+    <meta property="og:description" content="The 34th Pacific Conference on Computer Graphics and Applications. Join us in Singapore, Oct 20-23, 2026.">
+    <meta property="og:image" content="pg26_files/share-preview.png"> <meta property="og:url" content="https://pacificgraphics2026.github.io/"> <meta property="og:site_name" content="PG 2026">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pacific Graphics 2026 Singapore">
+    <meta name="twitter:description" content="Annual international conference on computer graphics and applications.">
+    <meta name="twitter:image" content="pg26_files/share-preview.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Pacific Graphics 2026",
+      "startDate": "2026-10-20",
+      "endDate": "2026-10-23",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Ngee Ann Kongsi Auditorium",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "60 Stamford Rd",
+          "addressLocality": "Singapore",
+          "postalCode": "178900",
+          "addressCountry": "SG"
+        }
+      },
+      "image": [
+        "pg26_files/PG2026_Logo_png.png",
+        "pg26_files/Auditoriums.jpg"
+      ],
+      "description": "Pacific Graphics (PG) is an annual international conference on computer graphics and applications. PG 2026 will be hosted at Singapore Management University.",
+      "organizer": {
+        "@type": "Organization",
+        "name": "Asia Graphics Association",
+        "url": "http://www.asiagraphics.org"
+      }
+    }
+    </script>
     <link rel="icon" href="pg26_files/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="96x96" href="pg26_files/favicon-96x96.png">
     <link rel="apple-touch-icon" href="pg26_files/apple-touch-icon.png">
@@ -24,31 +73,26 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script> 
 
     <style>
+        /* 保持原有的 Style 代码不变，直接粘贴在这里 */
         :root {
-            /* 主背景色：深灰蓝 (slate-900) */
+            /* === 主题核心颜色 === */
             --bg-main: #0F172A;
-            /* 强调色：几何黄 (amber-400) */
             --theme-accent: #FBBF24;
-            /* 辅助线条色 */
-            --line-color: #334155; /* slate-700 */
-            /* 标题字体 */
+            --line-color: #334155; 
             --font-heading: 'Nova Mono', monospace;
-            /* 正文字体 */
             --font-body: 'Roboto Mono', monospace;
         }
 
         body {
             background-color: var(--bg-main);
-            color: #E2E8F0; /* slate-200 */
+            color: #E2E8F0; 
             font-family: var(--font-body);
             overflow-x: hidden;
-            /* 建筑蓝图/结构网格背景 */
             background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
                               linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
             background-size: 40px 40px;
         }
 
-        /* 标题和结构化风格 */
         h1, h2, h3, .font-heading {
             font-family: var(--font-heading);
             letter-spacing: 0.15em;
@@ -57,7 +101,6 @@
             color: #FFFFFF;
         }
         
-        /* 导航栏 Logo 容器样式 */
         .header-logo-container {
             width: 350px; 
             height: 100px;
@@ -73,7 +116,6 @@
             filter: brightness(2) contrast(1.5) drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
         }
 
-        /* 导航栏：结构化边框和强调色 */
         .nav-link {
             position: relative;
             padding: 0.5rem 0;
@@ -95,7 +137,6 @@
         }
         .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
 
-        /* 结构化按钮风格 */
         .btn-structural {
             border: 2px solid var(--theme-accent);
             color: var(--theme-accent);
@@ -113,7 +154,6 @@
             transform: translateY(-1px);
         }
 
-        /* 委员会卡片样式 */
         .chair-card {
             display: flex;
             align-items: center;
@@ -152,51 +192,52 @@
             font-family: var(--font-body);
         }
 
-
-        /* ============================================ */
-        /* V5.7 核心样式 - 双模型容器定位 (已更新右侧容器) */
-        /* ============================================ */
-        
         #hero {
             position: relative;
             min-height: 90vh; 
             overflow: hidden; 
         }
         
-        /* 统一的 3D 模型容器样式 */
         .model-container-style {
             position: absolute; 
             z-index: 30; 
             pointer-events: none; 
-            display: none; /* 默认隐藏 */
+            display: none; 
         }
-        @media (min-width: 1024px) { /* lg */
+        @media (min-width: 1024px) { 
             .model-container-style {
-                display: block; /* 仅在大屏幕上显示 */
+                display: block; 
             }
         }
         
-        /* 左侧模型 (小尺寸，自动旋转) */
         #model-container-left {
             left: 2.5%; 
-            top: 10%; /* 垂直居中 */
+            top: 10%; 
             transform: translateY(-50%);
             width: 400px; 
             height: 400px; 
         }
         
-        /* 🚀 核心修改: 右侧模型 (大尺寸，互动拖动) */
-        #model-container-right {
-            right: 0; /* 贴紧右侧 */
-            top: 40%; /* 垂直居中 */
+/*        #model-container-right {
+            right: 0; 
+            top: 40%; 
             transform: translateY(-50%);
-            width: 50%; /* 占据右侧大片区域 */
-            height: 90vh; /* 垂直拉伸 */
-            z-index: 18; /* 低于标题 (z-index: 20)，实现重叠效果 */
-            pointer-events: auto; /* 启用鼠标事件，以便 OrbitControls 工作 */
+            width: 50%; 
+            height: 90vh; 
+            z-index: 18; 
+            pointer-events: auto; 
+        }*/
+        /* === 替换原来的 #model-container-right 样式 === */
+        #model-container-right {
+            right: 0; 
+            top: 50%; /* 修改为 50% */
+            transform: translateY(-50%);
+            width: 50%; 
+            height: 100%; /* 关键修改：从 90vh 改为 100% */
+            z-index: 18; 
+            pointer-events: auto; 
         }
 
-        /* 统一的几何装饰基类 (固定位置，非飘落) */
         .hero-geometric-decor {
             position: absolute;
             z-index: 15;
@@ -204,36 +245,23 @@
             pointer-events: none;
         }
 
-        /* 动态飘落几何图形基类 */
         .floating-decor {
             position: absolute;
             z-index: 10;
             pointer-events: none;
-            background-color: var(--theme-accent); /* 默认黄色 */
-            opacity: 0; /* 初始隐藏 */
+            background-color: var(--theme-accent); 
+            opacity: 0; 
             animation: float-fade linear infinite;
         }
 
-        /* 新增飘落动画 */
         @keyframes float-fade {
-            0% {
-                transform: translate(0, -10%) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translate(0, 100vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translate(0, -10%) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { transform: translate(0, 100vh) rotate(360deg); opacity: 0; }
         }
         
-        /* 标题和信息覆盖层保持不变 */
-        #hero-main-title {
+/*        #hero-main-title {
             position: absolute;
             top: 40%;
             left: 45%;
@@ -250,34 +278,36 @@
                 0 0 20px rgba(251, 191, 36, 0.4),
                 0 0 30px rgba(251, 191, 36, 0.2);
             animation: pulse-glow 3s infinite alternate ease-in-out;
-        }
-        /* 响应式调整标题大小 */
-        @media (min-width: 640px) { /* sm */
-            #hero-main-title { font-size: 7rem; }
-        }
-        @media (min-width: 1024px) { /* lg */
-            #hero-main-title { font-size: 10rem; } 
-        }
-        @media (min-width: 1280px) { /* xl */
-            #hero-main-title { font-size: 12rem; } 
+        }*/
+        /* === 替换原来的 #hero-main-title 样式 === */
+        #hero-main-title {
+            position: relative; /* 关键修改：从 absolute 改为 relative */
+            z-index: 20; 
+            pointer-events: none; 
+            
+            font-size: 5rem; 
+            line-height: 0.9; 
+            letter-spacing: 0.2em; 
+            text-align: center; /* 确保文字居中 */
+            
+            /* 阴影和动画保持不变 */
+            text-shadow: 
+                0 0 10px rgba(251, 191, 36, 0.6), 
+                0 0 20px rgba(251, 191, 36, 0.4),
+                0 0 30px rgba(251, 191, 36, 0.2);
+            animation: pulse-glow 3s infinite alternate ease-in-out;
         }
 
+
+        @media (min-width: 640px) { #hero-main-title { font-size: 7rem; } }
+        @media (min-width: 1024px) { #hero-main-title { font-size: 10rem; } }
+        @media (min-width: 1280px) { #hero-main-title { font-size: 12rem; } }
+
         @keyframes pulse-glow {
-            from {
-                text-shadow: 
-                    0 0 8px rgba(251, 191, 36, 0.7),
-                    0 0 15px rgba(251, 191, 36, 0.5),
-                    0 0 25px rgba(251, 191, 36, 0.3);
-            }
-            to {
-                text-shadow: 
-                    0 0 12px rgba(251, 191, 36, 0.9),
-                    0 0 25px rgba(251, 191, 36, 0.6),
-                    0 0 40px rgba(251, 191, 36, 0.4);
-            }
+            from { text-shadow: 0 0 8px rgba(251, 191, 36, 0.7), 0 0 15px rgba(251, 191, 36, 0.5), 0 0 25px rgba(251, 191, 36, 0.3); }
+            to { text-shadow: 0 0 12px rgba(251, 191, 36, 0.9), 0 0 25px rgba(251, 191, 36, 0.6), 0 0 40px rgba(251, 191, 36, 0.4); }
         }
         
-        /* 禁用 #canvas-container 的背景图像，只保留背景 */
         #hero #canvas-container {
             position: absolute;
             inset: 0; 
@@ -295,7 +325,6 @@
             filter: brightness(0.6) contrast(1.1) grayscale(0.5); 
         }
         
-        /* 其他 V2/V3 样式保持不变 */
         #scroll-progress {
             position: fixed;
             top: 80px; 
@@ -307,36 +336,7 @@
             box-shadow: 0 0 15px var(--theme-accent);
             transition: width 0.1s linear; 
         }
-        .stat-card {
-            background-color: #1E293B; 
-            border: 1px solid var(--line-color);
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .stat-card:hover {
-            border-color: var(--theme-accent);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-        .stat-value {
-            font-family: 'Nova Mono', monospace;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--theme-accent);
-            line-height: 1;
-        }
-        .stat-label {
-            font-family: 'Roboto Mono', monospace;
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            color: #FFFFFF;
-            margin-top: 0.5rem;
-            letter-spacing: 0.1em;
-        }
-        
-        /* Timeline Box Style */
+
         .date-box {
             border-left: 2px solid var(--theme-accent);
             padding-left: 1.5rem;
@@ -353,16 +353,16 @@
             box-shadow: 0 0 10px var(--theme-accent);
         }
 
+        /* === 纯净的地图样式 (无滤镜) === */
         #map {
-            height: 100%;
             width: 100%;
-            filter: grayscale(0.7) contrast(1.1) brightness(0.9);
-            border-top: 3px solid var(--theme-accent);
-            border-bottom: 3px solid var(--theme-accent);
+            height: 100%;
+            background-color: #242424; /* 默认给一个深灰色背景 */
+            z-index: 1;
         }
-
     </style>
 </head>
+
 <body>
 
     <div id="scroll-progress"></div>
@@ -374,21 +374,24 @@
             </a>
             
             <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
-                <a href="#about" class="nav-link" data-target="about">MODULE_01</a>
+                <a href="#about" class="nav-link" data-target="about">ABOUT</a>
                 <a href="#dates" class="nav-link" data-target="dates">TIMELINE</a>
                 <a href="#committee" class="nav-link" data-target="committee">COMMITTEE</a>
                 <a href="#organizers" class="nav-link" data-target="organizers">SUPPORT</a>
-                <a href="#venue" class="nav-link" data-target="venue">GRID_LOC</a>
+                <a href="#venue" class="nav-link" data-target="venue">VENUE</a>
             </nav>
 
+
+
             <a href="#register" class="btn-structural">
-                INITIATE //
+                REGISTER
             </a>
         </div>
     </header>
 
     <main class="pt-20">
-        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <!-- <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden"> -->
+            <section id="hero" class="relative min-h-[20vh] flex items-center justify-center overflow-hidden">
             
             <div id="model-container-left" class="model-container-style"></div>
             
@@ -421,16 +424,17 @@
             </h1>
         </section>
         
-        <section id="about" class="max-w-6xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
+        <!-- <section id="about" class="max-w-6xl mx-auto px-6 py-12 border-t border-[var(--line-color)]"> -->
+        <section id="about" class="max-w-6xl mx-auto px-6 py-1 border-t border-[var(--line-color)]">
             <div class="flex flex-col md:flex-row gap-12 items-start">
-                <div class="md:w-1/3 sticky top-24">
-                    <h2 class="font-heading text-4xl text-white mb-6">MODULE_01 //<br><span class="text-[var(--theme-accent)]">ABOUT_PG</span></h2>
+                <div class="md:w-1/4 sticky top-24">
+                    <h2 class="font-heading text-4xl text-white mb-6">About <br> Pacific Graphics<br></h2>
                     <div class="w-20 h-1 bg-[var(--theme-accent)] mb-6"></div>
-                    <p class="font-mono text-sm text-[var(--line-color)]">SYSTEM_DATA: ANNUAL_CONF</p>
+                    <!-- <p class="font-mono text-sm text-[var(--line-color)]">SYSTEM_DATA: ANNUAL_CONF</p> -->
                 </div>
                 <div class="md:w-2/3 space-y-6 text-lg leading-relaxed text-slate-300 bg-slate-800/30 p-8 border border-[var(--line-color)]">
                     <p>
-                        <strong class="text-white">Pacific Graphics (PG)</strong> is an annual international conference on computer graphics and applications. As a flagship conference of the <span class="text-[var(--theme-accent)]">Asia Graphics Association</span>, PG provides a premium forum for researchers, developers, and practitioners in the Pacific Rim and around the world to present and discuss new problems, solutions, and technologies in computer graphics and related areas.
+                        <strong class="text-white">Pacific Graphics (PG)</strong> is an annual international conference on computer graphics and applications.
                     </p>
                     <p>
                         In 2026, we activate the protocol in <strong class="text-white">Singapore</strong>. We invite you to join the network, exchange data, and help construct the future geometry of our field.
@@ -439,10 +443,9 @@
             </div>
         </section>
 
-        <section id="dates" class="bg-[#0F172A] py-24 border-t border-[var(--line-color)] relative">
-            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(var(--line-color) 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <section id="dates" class="py-24 border-t border-[var(--line-color)] relative">
             <div class="max-w-6xl mx-auto px-6 relative z-10">
-                <h2 class="font-heading text-4xl text-white text-center mb-16">TIMELINE_SYNC // KEY_DATES</h2>
+                <h2 class="font-heading text-4xl text-white text-center mb-16">TIMELINE</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     
@@ -1027,20 +1030,61 @@
         };
 
         // Leaflet 地图逻辑
+        // const initMap = () => {
+        //     // SMU / Ngee Ann Kongsi Auditorium 坐标
+        //     const venueLat = 1.2963;
+        //     const venueLng = 103.8502;
+
+        //     const map = L.map('map', { scrollWheelZoom: false }).setView([venueLat, venueLng], 16);
+            
+        //     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        //         attribution: '&copy; CartoDB &copy; OpenStreetMap contributors',
+        //     }).addTo(map);
+
+        //     L.marker([venueLat, venueLng]).addTo(map)
+        //         .bindPopup('<b>Ngee Ann Kongsi Auditorium</b><br>SMU School of Accountancy')
+        //         .openPopup();
+        // };
+
+        // Leaflet 地图逻辑 (最终修复版)
         const initMap = () => {
-            // SMU / Ngee Ann Kongsi Auditorium 坐标
+            const mapElement = document.getElementById('map');
+            if (!mapElement) return;
+
+            // 防止重复初始化
+            if (mapElement._leaflet_id) {
+                mapElement._leaflet_id = null;
+                mapElement.innerHTML = ""; 
+            }
+
             const venueLat = 1.2963;
             const venueLng = 103.8502;
 
-            const map = L.map('map', { scrollWheelZoom: false }).setView([venueLat, venueLng], 16);
-            
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; CartoDB &copy; OpenStreetMap contributors',
+            const map = L.map('map', {
+                center: [venueLat, venueLng],
+                zoom: 16,
+                scrollWheelZoom: false,
+                zoomControl: false
+            });
+
+            // ============================================================
+            // 🚀 关键修改：使用你提供的 OpenStreetMap 标准源
+            // ============================================================
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
             }).addTo(map);
 
             L.marker([venueLat, venueLng]).addTo(map)
-                .bindPopup('<b>Ngee Ann Kongsi Auditorium</b><br>SMU School of Accountancy')
+                .bindPopup('<b>Ngee Ann Kongsi Auditorium</b><br>SMU')
                 .openPopup();
+            
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+            // 延时刷新，确保地图渲染正确
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 500);
         };
 
         document.addEventListener('DOMContentLoaded', () => {
