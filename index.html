@@ -71,9 +71,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
 
     <style>
-        /* 保持原有的 Style 代码不变，直接粘贴在这里 */
+        /* 保持原有的 Style 代码不变 */
         :root {
             /* === 主题核心颜色 === */
             --bg-main: #0F172A;
@@ -211,33 +214,20 @@
         }
         
         #model-container-left {
-            /* ... 原有的属性保持不变 ... */
             left: 10%; 
             top: 40%;
             transform: translateY(-50%);
             width: 400px; 
             height: 400px; 
-            /* ▼▼▼ 新增这行：增加一点整体的辉光感 ▼▼▼ */
             filter: drop-shadow(0 0 15px rgba(0, 200, 255, 0.4)); 
         }
 
-
-/*        #model-container-right {
-            right: 0; 
-            top: 40%; 
-            transform: translateY(-50%);
-            width: 50%; 
-            height: 90vh; 
-            z-index: 18; 
-            pointer-events: auto; 
-        }*/
-        /* === 替换原来的 #model-container-right 样式 === */
         #model-container-right {
             right: 0; 
-            top: 50%; /* 修改为 50% */
+            top: 50%;
             transform: translateY(-50%);
             width: 50%; 
-            height: 100%; /* 关键修改：从 90vh 改为 100% */
+            height: 100%;
             z-index: 18; 
             pointer-events: auto; 
         }
@@ -265,43 +255,22 @@
             100% { transform: translate(0, 100vh) rotate(360deg); opacity: 0; }
         }
         
-/*        #hero-main-title {
-            position: absolute;
-            top: 40%;
-            left: 45%;
-            transform: translate(-50%, -50%); 
-            text-align: center;
-            z-index: 20; 
-            pointer-events: none; 
-            
-            font-size: 5rem; 
-            line-height: 0.9; 
-            letter-spacing: 0.2em; 
-            text-shadow: 
-                0 0 10px rgba(251, 191, 36, 0.6), 
-                0 0 20px rgba(251, 191, 36, 0.4),
-                0 0 30px rgba(251, 191, 36, 0.2);
-            animation: pulse-glow 3s infinite alternate ease-in-out;
-        }*/
-        /* === 替换原来的 #hero-main-title 样式 === */
         #hero-main-title {
-            position: relative; /* 关键修改：从 absolute 改为 relative */
+            position: relative;
             z-index: 20; 
             pointer-events: none; 
             
             font-size: 5rem; 
             line-height: 0.9; 
             letter-spacing: 0.2em; 
-            text-align: center; /* 确保文字居中 */
+            text-align: center;
             
-            /* 阴影和动画保持不变 */
             text-shadow: 
                 0 0 10px rgba(251, 191, 36, 0.6), 
                 0 0 20px rgba(251, 191, 36, 0.4),
                 0 0 30px rgba(251, 191, 36, 0.2);
             animation: pulse-glow 3s infinite alternate ease-in-out;
         }
-
 
         @media (min-width: 640px) { #hero-main-title { font-size: 7rem; } }
         @media (min-width: 1024px) { #hero-main-title { font-size: 10rem; } }
@@ -357,28 +326,44 @@
             box-shadow: 0 0 10px var(--theme-accent);
         }
 
+        /* =========================================
+           暴力修复：解决 Leaflet 地图不显示的问题
+           (把修复代码移到了这里，确保生效)
+           ========================================= */
+        
+        /* 1. 强制取消 Tailwind 对地图图片的样式重置 */
         .leaflet-pane img, 
         .leaflet-tile, 
         .leaflet-marker-icon, 
         .leaflet-marker-shadow {
             max-width: none !important;
             max-height: none !important;
+            width: auto !important;
+            height: auto !important;
             box-shadow: none !important;
             border: none !important;
         }
 
-        /* 2. 正确的方式：只给地图瓦片层加黑白滤镜，不影响地图容器 */
+        /* 2. 确保地图容器有背景色（防止瓦片加载慢时透出网页背景） */
+        #map {
+            background: #242424; 
+            z-index: 1;
+            isolation: isolate;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* 3. 修复缩放控件被 Tailwind 样式影响的问题 */
+        .leaflet-control-container .leaflet-routing-container-hide {
+            display: none;
+        }
+        
+        /* 4. 可选：给地图瓦片层加黑白滤镜 */
         .leaflet-tile-pane {
             filter: grayscale(100%) contrast(1.1);
         }
-        
-        /* 3. 确保地图容器层级正确 */
-        #map {
-            isolation: isolate; /* 创建新的堆叠上下文，防止外部干扰 */
-            z-index: 1;
-        }
     </style>
-
 </head>
 
 <body>
@@ -399,8 +384,6 @@
                 <a href="#venue" class="nav-link" data-target="venue">VENUE</a>
             </nav>
 
-
-
             <a href="#register" class="btn-structural">
                 REGISTER
             </a>
@@ -408,8 +391,7 @@
     </header>
 
     <main class="pt-20">
-        <!-- <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden"> -->
-            <section id="hero" class="relative min-h-[20vh] flex items-center justify-center overflow-hidden">
+        <section id="hero" class="relative min-h-[20vh] flex items-center justify-center overflow-hidden">
             
             <div id="model-container-left" class="model-container-style"></div>
             
@@ -442,13 +424,11 @@
             </h1>
         </section>
         
-        <!-- <section id="about" class="max-w-6xl mx-auto px-6 py-12 border-t border-[var(--line-color)]"> -->
         <section id="about" class="max-w-6xl mx-auto px-6 py-1 border-t border-[var(--line-color)]">
             <div class="flex flex-col md:flex-row gap-12 items-start">
                 <div class="md:w-1/4 sticky top-24">
                     <h2 class="font-heading text-4xl text-white mb-6">About <br> Pacific Graphics<br></h2>
                     <div class="w-20 h-1 bg-[var(--theme-accent)] mb-6"></div>
-                    <!-- <p class="font-mono text-sm text-[var(--line-color)]">SYSTEM_DATA: ANNUAL_CONF</p> -->
                 </div>
                 <div class="md:w-2/3 space-y-6 text-lg leading-relaxed text-slate-300 bg-slate-800/30 p-8 border border-[var(--line-color)]">
                     <p>
@@ -469,25 +449,21 @@
                     
                     <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
                         <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">ABSTRACT SUBMISSION</div>
-                        <!-- <h3 class="text-xl font-bold text-white mb-1">Abstract Deadline</h3> -->
                         <p class="text-slate-400 font-mono">TBD</p>
                     </div>
 
                     <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
                         <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">FULL SUBMISSION</div>
-                        <!-- <h3 class="text-xl font-bold text-white mb-1">Paper Deadline</h3> -->
                         <p class="text-slate-400 font-mono">TBD</p>
                     </div>
 
                     <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
                         <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">NOTIFICATION</div>
-                        <!-- <h3 class="text-xl font-bold text-white mb-1">Notification</h3> -->
                         <p class="text-slate-400 font-mono">TBD</p>
                     </div>
 
                     <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors" style="border-color: var(--theme-accent);">
                         <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">CONFERENCE</div>
-                        <!-- <h3 class="text-xl font-bold text-white mb-1">Conference</h3> -->
                         <p class="text-slate-400 font-mono">Oct 06-09, 2026</p>
                     </div>
 
@@ -496,7 +472,7 @@
         </section>
 
         <section id="committee" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
-            <h2 class="font-heading text-4xl text-white text-center mb-12">ORGANIZING CHAIRS</h2>
+            <h2 class="font-heading text-4xl text-white text-center mb-12">COMMITTEE</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                 
@@ -593,21 +569,6 @@
                         </div>
                     </div>
                 </div>
-                
-<!--                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
-                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">LOCAL_ORGANIZER //</h3>
-                    <div class="space-y-3">
-                        <div class="chair-card" style="border-bottom: none;">
-                            <img src="pg26_files/chairs/ly.jpg" alt="Long Ye" class="chair-photo w-14 h-14" />
-                            <div class="chair-info">
-                                <a href="https://longye-ai.com/" target="_blank" class="chair-name text-base">Long Ye</a>
-                                <div class="chair-affiliation text-xs">SMU - Singapore</div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
 
                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
                     <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">DEMO_CHAIR //</h3>
@@ -632,30 +593,6 @@
             </div>
         </section>
 
-
-
-<!--         <section id="organizers" class="py-24 border-t border-[var(--line-color)]">
-            <div class="max-w-6xl mx-auto px-6">
-                <h2 class="font-heading text-4xl text-white text-center mb-12">SUPPORTING ENTITIES //</h2>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center">
-                    <div class="flex justify-center p-4">
-                        <img src="pg26_files/logos/AG.png" alt="Asia Graphics Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
-                    </div>
-                    <div class="flex justify-center p-4">
-                        <img src="pg26_files/logos/SMU.png" alt="SMU Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
-                    </div>
-                    <div class="flex justify-center p-4">
-                        <img src="pg26_files/logos/NTU.png" alt="NTU Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
-                    </div>
-                    <div class="flex justify-center p-4">
-                        <img src="pg26_files/logos/NUS.png" alt="NUS Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
-                    </div>
-                        <div class="flex justify-center p-4 col-span-2 md:col-span-1">
-                        <img src="pg26_files/logos/SIGGRAPH.png" alt="SIGGRAPH Logo" class="h-16 object-contain" style="filter: brightness(2) contrast(1.5);">
-                    </div>
-                </div>
-            </div>
-        </section> -->
         <section id="organizers" class="py-24 border-t border-[var(--line-color)]">
             <div class="max-w-6xl mx-auto px-6">
                 <h2 class="font-heading text-4xl text-white text-center mb-12">ORGANIZERS & SUPPORT</h2>
@@ -668,8 +605,6 @@
                     </div>
                     <div class="text-center w-full">
                         <div class="font-heading text-lg text-white mb-2 leading-tight">Singapore Management University</div>
-<!--                         <div class="w-full h-px bg-[var(--line-color)] my-3 group-hover:bg-[var(--theme-accent)] transition-colors"></div>
-                        <div class="text-xs text-[var(--theme-accent)] font-mono uppercase tracking-widest">Host Institution</div> -->
                     </div>
                 </div>
                                     
@@ -679,8 +614,6 @@
                         </div>
                         <div class="text-center w-full">
                             <div class="font-heading text-lg text-white mb-2 leading-tight">Asia <br> Graphics</div>
-                            <!-- <div class="w-full h-px bg-[var(--line-color)] my-3 group-hover:bg-[var(--theme-accent)] transition-colors"></div> -->
-                            <!-- <div class="text-xs text-slate-400 font-mono uppercase tracking-widest">Support</div> -->
                         </div>
                     </div>
                     
@@ -690,8 +623,6 @@
                         </div>
                         <div class="text-center w-full">
                             <div class="font-heading text-lg text-white mb-2 leading-tight">Eurographics Association</div>
-                            <!-- <div class="w-full h-px bg-[var(--line-color)] my-3 group-hover:bg-[var(--theme-accent)] transition-colors"></div> -->
-                            <!-- <div class="text-xs text-slate-400 font-mono uppercase tracking-widest">Support</div> -->
                         </div>
                     </div>
 
@@ -747,16 +678,13 @@
                     <div class="grid grid-cols-1 gap-11">
                         <div class="w-full h-64 border border-[var(--line-color)] overflow-hidden shadow-2xl relative">
                             <img src="pg26_files/Auditoriums.jpg" alt="Ngee Ann Kongsi Auditorium (SMU)" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-700" />
-                            <!-- <div class="absolute top-0 right-0 bg-[var(--bg-main)] px-3 py-1 text-xs text-white border-b border-l border-[var(--line-color)] font-heading"> -->
                             <div class="absolute bottom-0 left-0 bg-[var(--bg-main)] px-3 py-1 text-xs text-[var(--theme-accent)] border-t border-r border-[var(--theme-accent)] font-heading">
-
                                 AUDITORIUM
                             </div>
                         </div>
                         <div class="w-full h-64 border border-[var(--line-color)] shadow-2xl relative group">
-                            <!-- <div id="map" class="w-full h-full filter grayscale-[0.8] contrast-125 group-hover:grayscale-0 transition-all duration-500"></div> -->
-                            <div id="map" class="w-full h-full transition-all duration-500"></div>
-                            <div class="absolute bottom-0 left-0 bg-[var(--bg-main)] px-3 py-1 text-xs text-[var(--theme-accent)] border-t border-r border-[var(--theme-accent)] font-heading">
+                            <div id="map" style="width: 100%; height: 100%; z-index: 0;"></div>
+                            <div class="absolute bottom-0 left-0 bg-[var(--bg-main)] px-3 py-1 text-xs text-[var(--theme-accent)] border-t border-r border-[var(--theme-accent)] font-heading" style="z-index: 2;">
                                 MAP
                             </div>
                         </div>
@@ -766,7 +694,6 @@
             </div>
         </section>
 
-
     </main>
     
     <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
@@ -775,23 +702,13 @@
 
     <script>
         // ============================================
-        // Three.js 3D 渲染逻辑 (双模型集成)
+        // Three.js 3D 渲染逻辑
         // ============================================
 
         const MODEL_CONFIG = [
-            { id: 'model-container-left', url: 'neon_open_sign.glb', label: 'Left Model (neon_open_sign.glb)' }, // 目标左侧模型
-            { id: 'model-container-right', url: 'Untitled.glb', label: 'Right Model (Untitled.glb)' } // 目标右侧模型
+            { id: 'model-container-left', url: 'neon_open_sign.glb', label: 'Left Model' },
+            { id: 'model-container-right', url: 'Untitled.glb', label: 'Right Model' }
         ];
-
-        // ============================================
-        // NEW: 霓虹灯牌生成器 (红字蓝框)
-        // ============================================
-        // ============================================
-        // ============================================
-        // REVISED V3: 纤细高亮霓虹灯 (修复粗糙和颜色问题)
-        // ============================================
-
-        
 
         // ============================================
         // REVISED V4: "活泼的"手绘风霓虹灯 (不规则形状 + 闪烁动画)
@@ -802,7 +719,6 @@
             
             container.innerHTML = '';
 
-            // 1. 场景初始化 (保持不变)
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
             camera.position.set(0, 0, 14);
@@ -825,25 +741,17 @@
             const signGroup = new THREE.Group();
             scene.add(signGroup);
 
-            // =========================================
-            // A. 材质 (保持 V3 的高亮通透感)
-            // =========================================
             const redNeonMat = new THREE.MeshStandardMaterial({
                 color: 0xffdddd, emissive: 0xff0000, emissiveIntensity: 4.0, roughness: 0.05, metalness: 0.0
             });
 
-            // 蓝色材质需要提取出来，因为后面动画要用到它
             const blueNeonMat = new THREE.MeshStandardMaterial({
                 color: 0xddffff, emissive: 0x00eaff, emissiveIntensity: 3.5, roughness: 0.05, metalness: 0.0
             });
 
-            // =========================================
-            // B. 外框重构：打造"手绘感"不规则路径
-            // =========================================
-            const w = 8.5 / 2; // 半宽
-            const h = 4.5 / 2; // 半高
+            const w = 8.5 / 2; 
+            const h = 4.5 / 2; 
             
-            // 定义8个基础锚点 (逆时针方向)
             let rawPoints = [
                 new THREE.Vector3(-w, h, 0),    // 左上
                 new THREE.Vector3(0, h, 0),     // 中上
@@ -855,33 +763,28 @@
                 new THREE.Vector3(-w, 0, 0)     // 左中
             ];
 
-            // 关键步骤：给每个点增加随机“抖动”，打破完美几何
-            // 抖动幅度不宜过大，否则就不像框了
             const jitter = 0.3; 
             const wobblyPoints = rawPoints.map(p => {
                 return new THREE.Vector3(
-                    p.x + (Math.random() - 0.5) * jitter, // X轴轻微抖动
-                    p.y + (Math.random() - 0.5) * jitter, // Y轴轻微抖动
-                    (Math.random() - 0.5) * 0.15          // Z轴稍微有一点点起伏，增加立体感
+                    p.x + (Math.random() - 0.5) * jitter, 
+                    p.y + (Math.random() - 0.5) * jitter, 
+                    (Math.random() - 0.5) * 0.15          
                 );
             });
 
-            // 使用 CatmullRomCurve3 用平滑曲线连接这些不规则的点
             const path3D = new THREE.CatmullRomCurve3(wobblyPoints);
-            path3D.closed = true;         // 闭合路径
-            path3D.tension = 0.5;         // 张力设置，0.5比较圆润自然
+            path3D.closed = true;
+            path3D.tension = 0.5;
 
-            // 生成管道
             const tubeRadius = 0.10;
             const frameGeo = new THREE.TubeGeometry(path3D, 128, tubeRadius, 12, true);
             const frameMesh = new THREE.Mesh(frameGeo, blueNeonMat);
             signGroup.add(frameMesh);
 
-            // =========================================
-            // C. 字体 (保持 V3 的纤细感不变)
-            // =========================================
             const fontLoader = new THREE.FontLoader();
-            fontLoader.load('pg26_files/Permanent Marker_Regular.json', (font) => {
+            // 这里假设字体文件在 correct 路径，如果你没有这个文件，请确保路径正确
+            // 如果没有，可以使用 helvetiker_bold 作为备用
+            fontLoader.load('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/optimer_bold.typeface.json', (font) => {
                 const textGeo = new THREE.TextGeometry('PG', {
                     font: font, size: 3.0, height: 0.02, curveSegments: 24,
                     bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.04, bevelOffset: 0, bevelSegments: 16
@@ -896,30 +799,22 @@
                 signGroup.position.y = yOffset;
             });
 
-            // =========================================
-            // D. 动画升级：加入闪烁效果
-            // =========================================
             let time = 0;
-            const baseIntensity = 3.5; // 基础亮度
+            const baseIntensity = 3.5; 
 
             const animate = () => {
                 requestAnimationFrame(animate);
                 time += 0.015;
 
                 if (signGroup) {
-                    // 1. 原有的缓慢摆动
-                    signGroup.rotation.y = Math.sin(time) * 0.08;
-                    // 加入一点点微小的X轴晃动，更不稳定
-                    signGroup.rotation.x = Math.cos(time * 0.7) * 0.03; 
+                    // === 方案一：360度自动旋转 ===
+                    signGroup.rotation.y += 0.01; 
+                    signGroup.rotation.x = 0; 
                 }
 
-                // 2. 新增：蓝色边框的随机闪烁
-                // 大部分时间保持高亮，偶尔随机降低亮度模拟电压不稳
-                if (Math.random() > 0.92) { // 有 8% 的概率发生闪烁
-                    // 亮度随机降低到 1.5 ~ 3.5 之间
+                if (Math.random() > 0.92) { 
                     blueNeonMat.emissiveIntensity = 1.5 + Math.random() * 2.0;
                 } else {
-                    // 恢复基础亮度，并加上微小的波动，让光看起来在“流动”
                     blueNeonMat.emissiveIntensity = baseIntensity + Math.sin(time * 10) * 0.2;
                 }
 
@@ -935,236 +830,10 @@
                 }
             });
         };
+
         // ============================================
-        // 新增：直接在代码中生成 3D 文字
+        // 增强型 3D 渲染函数 (右侧模型)
         // ============================================
-        // ============================================
-        // MODIFIED: 图形学风格 3D 文字生成器
-        // ============================================
-        const create3DText = (containerId, textContent, scaleMultiplier = 1.0, yOffset = 0.0) => {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-
-            // 1. 场景初始化
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 0, 15);
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setClearColor(0x0f172a, 0);
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.outputEncoding = THREE.sRGBEncoding;
-
-            renderer.domElement.style.position = 'absolute';
-            renderer.domElement.style.top = '0';
-            renderer.domElement.style.left = '0';
-            renderer.domElement.style.zIndex = '1';
-            container.appendChild(renderer.domElement);
-
-            // 2. 灯光 (图形学风格：冷暖对比)
-            const ambientLight = new THREE.AmbientLight(0x404040, 1.0); // 基础灰光
-            scene.add(ambientLight);
-
-            // 主光源：冷色调（科技蓝）
-            const dirLight = new THREE.DirectionalLight(0x38BDF8, 2.0);
-            dirLight.position.set(5, 5, 10);
-            scene.add(dirLight);
-
-            // 轮廓光：暖色调（品红/紫），增加边缘立体感
-            const rimLight = new THREE.PointLight(0xC026D3, 2.0, 100);
-            rimLight.position.set(-5, 0, -5);
-            scene.add(rimLight);
-
-            let textMesh = null;
-
-            // 3. 加载字体 (更换为更有现代感的 Droid Sans 字体)
-            const fontLoader = new THREE.FontLoader();
-            fontLoader.load('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/droid/droid_sans_bold.typeface.json', (font) => {
-                
-                const textGeo = new THREE.TextGeometry(textContent, {
-                    font: font,
-                    size: 3,
-                    height: 0.5,        // 稍微变薄一点，更精致
-                    curveSegments: 12,
-                    bevelEnabled: true,
-                    bevelThickness: 0.1, // 增加倒角厚度，高光更明显
-                    bevelSize: 0.05,
-                    bevelOffset: 0,
-                    bevelSegments: 5
-                });
-
-                textGeo.computeBoundingBox();
-                const centerOffset = - 0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
-                textGeo.translate(centerOffset, 0, 0);
-
-                // 4. 材质 (图形学风格：深蓝金属 + 强高光)
-                const textMaterial = new THREE.MeshStandardMaterial({ 
-                    color: 0x2563EB,    // 核心颜色：深邃的皇家蓝/科技蓝
-                    roughness: 0.2,     // 比较光滑，反射强
-                    metalness: 0.9,     // 高金属感
-                    emissive: 0x1E40AF, // 自发光微弱的深蓝，防止死黑
-                    emissiveIntensity: 0.2
-                });
-
-                // 另一种选择：线框模式 (如果你想要 Wireframe 风格，解开下面这行)
-                // textMaterial.wireframe = true; 
-
-                textMesh = new THREE.Mesh(textGeo, textMaterial);
-                
-                textMesh.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
-                textMesh.position.y = yOffset; // 应用外部传入的 Y 轴位置
-
-                scene.add(textMesh);
-            });
-
-            // 5. 动画
-            // =========================================
-            // D. 动画升级：可控的左右来回旋转
-            // =========================================
-            const animate = () => {
-                    requestAnimationFrame(animate);
-                    time += 0.01; // 时间流逝
-
-                    if (signGroup) {
-                        // === 方案一：360度自动旋转 ===
-                        // 每次增加一点角度，它就会一直转下去
-                        // 0.01 是速度，数字越大转得越快
-                        signGroup.rotation.y += 0.01; 
-                        
-                        // 取消 X 轴的摆动，让旋转更稳定
-                        signGroup.rotation.x = 0; 
-                    }
-
-                    // ... (闪烁代码保持不变) ...
-                    renderer.render(scene, camera);
-                };
-
-            window.addEventListener('resize', () => {
-                if (container) {
-                    camera.aspect = container.clientWidth / container.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(container.clientWidth, container.clientHeight);
-                }
-            });
-        };
-
-        // 可复用的模型加载和渲染函数 (自动旋转)
-        const loadModel = (containerId, modelUrl, rotationDirection = 1, scaleMultiplier = 1.0, yOffset = 0.5) => {
-            const container = document.getElementById(containerId);
-
-            if (!container) return;
-            if (!modelUrl) {
-                console.log(`⚠️ 警告: ${containerId} 模型 URL 未设置。`);
-                return;
-            }
-            
-            // 1. Scene setup
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-            camera.position.set(0, 1.5, 8); 
-            
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            // 💡 修复：强制设置清除颜色为透明
-            renderer.setClearColor(0x0f172a, 0);
-            
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.shadowMap.enabled = true;
-            renderer.domElement.style.position = 'absolute';
-            renderer.domElement.style.top = '0';
-            renderer.domElement.style.left = '0';
-            container.appendChild(renderer.domElement);
-            
-            // 2. Lighting 
-            const ambientLight = new THREE.AmbientLight(0x404040, 1.5); scene.add(ambientLight);
-            const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
-            keyLight.position.set(5, 10, 7); keyLight.castShadow = true; scene.add(keyLight);
-            const fillLight = new THREE.DirectionalLight(0xfacc15, 1.0); fillLight.position.set(-5, 2, 0); scene.add(fillLight);
-            const rimLight = new THREE.DirectionalLight(0x2563eb, 1.5); rimLight.position.set(0, 5, -10); scene.add(rimLight);
-
-            // 4. Model Loading
-            let objectToRotate = null;
-            const loader = new THREE.GLTFLoader();
-            
-            loader.load(modelUrl, (gltf) => {
-                console.log(`✅ 3D 模型 (${modelUrl}) 加载成功！`);
-                const model = gltf.scene;
-                
-
-                // === 新增代码开始: 更改颜色 ===
-                // model.traverse((child) => {
-                //     if (child.isMesh) {
-                //         // 方式 A: 强制覆盖为纯色 (例如：深蓝色)
-                //         // child.material = new THREE.MeshStandardMaterial({ color: 0x1E40AF }); 
-                        
-                //         // 方式 B: 保留光照材质，只改颜色 (推荐)
-                //         child.material.color.set(0x1E40AF); // 这里设置你想要的颜色 Hex 值
-                        
-                //         // 如果模型原来有贴图，改颜色可能会和贴图混合。
-                //         // 如果想完全去掉贴图只显示颜色，解开下面这行：
-                //         // child.material.map = null; 
-                //     }
-                // });
-
-                // 自动缩放和居中逻辑
-                const box = new THREE.Box3().setFromObject(model);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
-                
-                const maxDim = Math.max(size.x, size.y, size.z);
-                const scaleFactor = (4 / maxDim) * scaleMultiplier; // 应用缩放乘数
-
-                // 1. 缩放模型
-                model.scale.multiplyScalar(scaleFactor);
-                
-                // 2. 重新计算缩放后的中心点，并移动模型使其居中
-                box.setFromObject(model); 
-                box.getCenter(center);
-                
-                // 3. 最终居中定位
-                model.position.x += (model.position.x - center.x);
-                model.position.y += (model.position.y - center.y);
-                model.position.y += yOffset; // 稍微抬高一点
-
-                scene.add(model);
-                objectToRotate = model;
-                renderer.domElement.style.zIndex = '1';
-
-            }, 
-            undefined, 
-            (error) => {
-                console.error(`❌ 3D 模型 (${modelUrl}) 加载出错！`, error);
-                const errorMesh = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshStandardMaterial({ color: 0xff0000, wireframe: true }));
-                errorMesh.position.y = 1;
-                scene.add(errorMesh);
-                objectToRotate = errorMesh;
-            });
-
-            // 5. Animation
-            const animate = () => {
-                requestAnimationFrame(animate);
-                if (objectToRotate) {
-                    objectToRotate.rotation.y += (0.005 * rotationDirection); // 自动旋转
-                }
-                renderer.render(scene, camera);
-            };
-            animate();
-
-            // 6. Resize
-            window.addEventListener('resize', () => {
-                if (container) {
-                    camera.aspect = container.clientWidth / container.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(container.clientWidth, container.clientHeight);
-                }
-            });
-        };
-        
-        // ============================================
-        // 增强型 3D 渲染函数 (占地面积大, 鼠标拖动旋转)
-        // ============================================
-
         const loadInteractiveModel = (containerId, modelUrl, scaleMultiplier = 2.5, yOffset = 0.0) => {
             const container = document.getElementById(containerId);
 
@@ -1174,203 +843,80 @@
                 return;
             }
             
-            // 1. Scene & Renderer setup
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-            camera.position.set(0, 0, 10); // 调整相机位置，以便容纳更大的模型
+            camera.position.set(0, 0, 10); 
             
-            // const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            // // 强制设置清除颜色为透明
-            // renderer.setClearColor(0x0f172a, 0); 
-            
-            // renderer.setSize(container.clientWidth, container.clientHeight);
-            // renderer.setPixelRatio(window.devicePixelRatio);
-            // renderer.shadowMap.enabled = true;
-            
-
-
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setClearColor(0x0f172a, 0); 
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.shadowMap.enabled = true;
-
-            // === 关键修复 1: 开启 sRGB 颜色校正，还原真实色彩 ===
-            // 注意：你用的是 Three.js r128，语法是 outputEncoding
             renderer.outputEncoding = THREE.sRGBEncoding; 
-            // 开启色调映射，防止高光过曝，更有电影感
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.0;
 
-
-            // 设置 Canvas 样式
             renderer.domElement.style.position = 'absolute';
             renderer.domElement.style.top = '0';
             renderer.domElement.style.left = '0';
-            renderer.domElement.style.zIndex = '1'; // 确保模型在容器内正确分层
+            renderer.domElement.style.zIndex = '1'; 
 
             container.appendChild(renderer.domElement);
 
-            // 2. Lighting (使用环境光和主题色)
-            // const ambientLight = new THREE.AmbientLight(0x404040, 3); scene.add(ambientLight);
-            // const keyLight = new THREE.DirectionalLight(0xffffff, 3.0);
-            // keyLight.position.set(5, 10, 7); keyLight.castShadow = true; scene.add(keyLight);
-            // const fillLight = new THREE.DirectionalLight(0xfacc15, 1.5); fillLight.position.set(-5, 2, 0); scene.add(fillLight);
-            
-
-            // === 关键修复 2: 使用更自然的室外光照方案 ===
-
-            // 移除原来的灯光，改用 HemisphereLight (半球光) 模拟天光和地光
-            // 参数：天空颜色(浅蓝), 地面颜色(深灰), 强度
             const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2.0); 
             hemiLight.position.set(0, 20, 0);
             scene.add(hemiLight);
 
-            // 主平行光 (模拟太阳)，纯白色
             const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
             dirLight.position.set(5, 10, 7);
             dirLight.castShadow = true;
             scene.add(dirLight);
 
-            // (原来的黄色 fillLight 和蓝色 rimLight 建议删掉，或者是把颜色改成纯白，否则会偏色)
-
-            // // 3. Orbit Controls (轨道控制器) - 核心功能
-            // const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            // controls.enableDamping = true; // 启用阻尼（平滑效果）
-            // controls.dampingFactor = 0.05;
-            // controls.minDistance = 5;      // 最小缩放距离
-            // controls.maxDistance = 20;     // 最大缩放距离
-            // controls.autoRotate = false;   // 禁用自动旋转
-            
-            // 3. Orbit Controls (轨道控制器)
-            // const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            // controls.enableDamping = true; // 启用阻尼
-            // controls.dampingFactor = 0.05;
-
-            // ... 在 loadInteractiveModel 函数内 ...
-
             const controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
             controls.enableZoom = false; 
-
-            // === 新增代码：锁定上下视角 ===
-            // 将最小和最大极角都设为 PI/2 (90度)，强制相机只能在水平面上移动
             controls.minPolarAngle = Math.PI / 2; 
             controls.maxPolarAngle = Math.PI / 2;
-
-
-            // === 修改这里：禁用缩放 ===
-            controls.enableZoom = false;  // <--- 添加这一行，禁止鼠标滚轮缩放
-
-            // 如果你也不希望用户拖动平移模型（只能旋转），可以把下面这行也加上：
-            // controls.enablePan = false; 
-
             controls.autoRotate = false;
 
-            // 4. Model Loading
             let objectToRotate = null;
             const loader = new THREE.GLTFLoader();
             
             loader.load(modelUrl, (gltf) => {
-                console.log(`✅ 3D 互动模型 (${modelUrl}) 加载成功！`);
                 const model = gltf.scene;
-                
-
-                // === 新增代码开始: 更改颜色 ===
-                // model.traverse((child) => {
-                //     if (child.isMesh) {
-                //         // 方式 A: 强制覆盖为纯色 (例如：深蓝色)
-                //         // child.material = new THREE.MeshStandardMaterial({ color: 0x1E40AF }); 
-                        
-                //         // 方式 B: 保留光照材质，只改颜色 (推荐)
-                //         child.material.color.set(0x1E40AF); // 这里设置你想要的颜色 Hex 值
-                        
-                //         // 如果模型原来有贴图，改颜色可能会和贴图混合。
-                //         // 如果想完全去掉贴图只显示颜色，解开下面这行：
-                //         // child.material.map = null; 
-                //     }
-                // });
-
-
-                // 自动缩放和居中逻辑
                 const box = new THREE.Box3().setFromObject(model);
                 const center = box.getCenter(new THREE.Vector3());
                 const size = box.getSize(new THREE.Vector3());
-                
-                // 目标尺寸为 6 个单位宽 (更大)
                 const maxDim = Math.max(size.x, size.y, size.z);
                 const baseScaleFactor = 5 / maxDim; 
                 
-                // 1. 缩放模型
                 model.scale.multiplyScalar(baseScaleFactor * scaleMultiplier); 
                 
-                // 2. 重新计算缩放后的中心点，并移动模型使其居中
                 box.setFromObject(model); 
                 box.getCenter(center);
                 
-                // 3. 最终居中定位
                 model.position.x -= center.x;
                 model.position.y -= center.y;
                 model.position.z -= center.z;
-
-                model.position.y += yOffset; // 应用垂直偏移
+                model.position.y += yOffset; 
 
                 scene.add(model);
                 objectToRotate = model;
-
-            }, 
-            undefined, // 进度回调 (可选)
-            (error) => {
+            }, undefined, (error) => {
                 console.error(`❌ 3D 互动模型 (${modelUrl}) 加载出错！`, error);
-                const errorMesh = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshStandardMaterial({ color: 0xff0000, wireframe: true }));
-                errorMesh.position.y = 1;
-                scene.add(errorMesh);
-                objectToRotate = errorMesh;
             });
-
-            // 5. Animation
-            // const animate = () => {
-            //     requestAnimationFrame(animate);
-            //     if (objectToRotate) {
-            //         objectToRotate.rotation.y += (0.0005 * 1); // 自动旋转
-            //         objectToRotate.rotation.x += (0.0005 * 1);
-            //     }
-            //     renderer.render(scene, camera);
-            // };
-            // animate();
-
-            // ... 在 loadInteractiveModel 函数底部 ...
 
             const animate = () => {
                 requestAnimationFrame(animate);
                 if (objectToRotate) {
-                    // === 修改这里 ===
-                    objectToRotate.rotation.y += (0.0005 * 1); // 保留这行 (左右旋转)
-                    
-                    // 注释掉或删除下面这行 (这行会导致模型上下翻滚)
-                    // objectToRotate.rotation.x += (0.0005 * 1); 
+                    objectToRotate.rotation.y += (0.0005 * 1); 
                 }
-                
-                // 如果启用了阻尼 (enableDamping: true)，必须加这行
                 controls.update(); 
-                
                 renderer.render(scene, camera);
             };
             animate();
 
-
-            // // 5. Animation (使用 controls.update())
-            // const animate = () => {
-            //     requestAnimationFrame(animate);
-                
-            //     controls.update(); // 更新控制器
-                
-            //     renderer.render(scene, camera);
-            // };
-            // animate();
-
-            // 6. Resize
             window.addEventListener('resize', () => {
                 if (container) {
                     camera.aspect = container.clientWidth / container.clientHeight;
@@ -1380,98 +926,61 @@
             });
         };
 
-        // Leaflet 地图逻辑
-        // const initMap = () => {
-        //     // SMU / Ngee Ann Kongsi Auditorium 坐标
-        //     const venueLat = 1.2963;
-        //     const venueLng = 103.8502;
-
-        //     const map = L.map('map', { scrollWheelZoom: false }).setView([venueLat, venueLng], 16);
-            
-        //     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        //         attribution: '&copy; CartoDB &copy; OpenStreetMap contributors',
-        //     }).addTo(map);
-
-        //     L.marker([venueLat, venueLng]).addTo(map)
-        //         .bindPopup('<b>Ngee Ann Kongsi Auditorium</b><br>SMU School of Accountancy')
-        //         .openPopup();
-        // };
-
-        // Leaflet 地图逻辑 (最终修复版)
         // ============================================
         // Leaflet 地图逻辑 (修复版)
         // ============================================
         const initMap = () => {
             const mapElement = document.getElementById('map');
-            if (!mapElement) return;
-
-            // 彻底清理（防止 React/Vue 或热重载环境下的重复绑定）
-            if (mapElement._leaflet_id) {
-                mapElement._leaflet_id = null;
-                mapElement.innerHTML = "";
+            
+            // 1. 检查元素是否存在
+            if (!mapElement) {
+                console.error("❌ 错误：找不到 id 为 map 的元素！");
+                return;
             }
 
+            // 2. 清理旧实例
+            if (mapElement._leaflet_id) {
+                mapElement.innerHTML = "";
+                mapElement._leaflet_id = null;
+            }
+
+            // 3. SMU 坐标
             const venueLat = 1.2963;
             const venueLng = 103.8502;
 
-            // 初始化
+            // 4. 创建地图对象
             const map = L.map('map', {
                 center: [venueLat, venueLng],
                 zoom: 16,
-                zoomControl: false,      // 隐藏左上角默认控件
-                scrollWheelZoom: false   // 禁止滚轮缩放，防止页面滚动卡顿
+                zoomControl: false, // 暂时隐藏控件，排除干扰
+                attributionControl: false // 暂时隐藏版权，排除干扰
             });
 
-            // 加载地图 (使用 OSM)
+            // 5. 加载标准 OSM 图层
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors',
                 maxZoom: 19
             }).addTo(map);
 
-            // 手动修复图标路径 (Tailwind 环境下偶尔丢失)
-            const iconUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
-            const shadowUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png';
-            const iconDefault = L.icon({
-                iconUrl: iconUrl,
-                shadowUrl: shadowUrl,
-                iconAnchor: [12, 41] // 修正图标对齐位置
-            });
-
-            L.marker([venueLat, venueLng], { icon: iconDefault }).addTo(map)
-                .bindPopup('<b>SMU School of Accountancy</b><br>Ngee Ann Kongsi Auditorium')
+            // 6. 添加一个简单的标记
+            L.marker([venueLat, venueLng]).addTo(map)
+                .bindPopup("<b>SMU</b><br>Venue Location")
                 .openPopup();
 
-            // 将缩放控件移到右下角，美观
-            L.control.zoom({ position: 'bottomright' }).addTo(map);
-            
-            // 强制刷新一次尺寸，解决容器可能未完全撑开导致地图只有一小块的问题
-            setTimeout(() => { map.invalidateSize(); }, 300);
+            // 7. 强制刷新尺寸 (关键！)
+            // 有时候容器渲染慢，地图不知道自己多大，需要踹一脚
+            setTimeout(() => {
+                map.invalidateSize();
+                console.log("✅ 地图尺寸已刷新");
+            }, 500);
         };
-
         
         document.addEventListener('DOMContentLoaded', () => {
-            // 左侧模型
-            // loadModel(
-            //     'model-container-left', 
-            //     MODEL_CONFIG[0].url, 
-            //     1,    // 顺时针
-            //     1.0,  // 较小尺寸 (默认)
-            //     -0.5  // 稍微向下移 
-            // );
             
-            // 左侧模型 (现在显示 3D 文字 "PG")
-            // create3DText(
-            //     'model-container-left', // 容器 ID
-            //     'PG',                   // 要显示的文字内容
-            //     1.2,                    // 缩放倍数 (根据需要调整)
-            //     -1.8                    // Y轴偏移量，让它居中
-            // );
             createNeonSign(
                 'model-container-left', // 容器 ID
-                0.75,                    // 整体缩放大小 (1.1 倍)
-                0.0                     // Y轴偏移 (0.0 表示在容器内居中)
+                0.75,                     // 整体缩放大小
+                0.0                     // Y轴偏移
             );
-
 
             // 右侧模型
             loadInteractiveModel(
