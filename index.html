@@ -7,7 +7,9 @@
     <title>Pacific Graphics 2026 (PG2026) - Singapore | International Conference on Computer Graphics</title>
     
     <meta name="description" content="Pacific Graphics 2026 (PG 2026) will be held in Singapore from Oct 20-23, 2026. Hosted by SMU, it is a flagship conference of the Asia Graphics Association on computer graphics and applications.">
+    
     <meta name="keywords" content="Pacific Graphics 2026, PG2026, Computer Graphics, Conference, Singapore, SMU, Asia Graphics, Rendering, Visualization, Animation">
+    
     <meta name="author" content="Pacific Graphics 2026 Committee">
     <meta name="copyright" content="Pacific Graphics 2026">
     <meta name="robots" content="index, follow"> <meta property="og:type" content="website">
@@ -20,6 +22,43 @@
     <meta name="twitter:description" content="Annual international conference on computer graphics and applications.">
     <meta name="twitter:image" content="pg26_files/share-preview.png">
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Pacific Graphics 2026",
+      "startDate": "2026-10-20",
+      "endDate": "2026-10-23",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Ngee Ann Kongsi Auditorium",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "60 Stamford Rd",
+          "addressLocality": "Singapore",
+          "postalCode": "178900",
+          "addressCountry": "SG"
+        }
+      },
+      "image": [
+        "pg26_files/PG2026_Logo_png.png",
+        "pg26_files/Auditoriums.jpg"
+      ],
+      "description": "Pacific Graphics (PG) is an annual international conference on computer graphics and applications. PG 2026 will be hosted at Singapore Management University.",
+      "organizer": {
+        "@type": "Organization",
+        "name": "Asia Graphics Association",
+        "url": "http://www.asiagraphics.org"
+      }
+    }
+    </script>
+    <link rel="icon" href="pg26_files/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="96x96" href="pg26_files/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="pg26_files/apple-touch-icon.png">
+    <meta name="theme-color" content="#4f46e5">
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,16 +66,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Nova+Mono:wght@400;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxTlZBo=" crossorigin=""></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script> 
+    
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
 
     <style>
+        /* 保持原有的 Style 代码不变 */
         :root {
+            /* === 主题核心颜色 === */
             --bg-main: #0F172A;
             --theme-accent: #FBBF24;
             --line-color: #334155; 
@@ -53,36 +95,6 @@
                               linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
             background-size: 40px 40px;
         }
-
-        /* === [CRITICAL FIX] Leaflet Map Fixes === */
-        /* 强制取消 Tailwind 对地图图片的样式重置 */
-        .leaflet-pane img, 
-        .leaflet-tile, 
-        .leaflet-marker-icon, 
-        .leaflet-marker-shadow {
-            max-width: none !important;
-            max-height: none !important;
-            width: auto !important;
-            height: auto !important;
-            box-shadow: none !important;
-            border: none !important;
-        }
-        
-        /* 确保地图容器有背景色和正确的层级 */
-        #map {
-            background: #242424; 
-            z-index: 1;
-            isolation: isolate;
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* 给地图加一点灰度滤镜，配合暗色主题 */
-        .leaflet-tile-pane {
-            filter: grayscale(100%) contrast(1.1) brightness(0.8);
-        }
-        /* === End Map Fixes === */
 
         h1, h2, h3, .font-heading {
             font-family: var(--font-heading);
@@ -247,10 +259,12 @@
             position: relative;
             z-index: 20; 
             pointer-events: none; 
+            
             font-size: 5rem; 
             line-height: 0.9; 
             letter-spacing: 0.2em; 
             text-align: center;
+            
             text-shadow: 
                 0 0 10px rgba(251, 191, 36, 0.6), 
                 0 0 20px rgba(251, 191, 36, 0.4),
@@ -310,6 +324,44 @@
             height: 10px;
             background-color: var(--theme-accent);
             box-shadow: 0 0 10px var(--theme-accent);
+        }
+
+        /* =========================================
+           暴力修复：解决 Leaflet 地图不显示的问题
+           (把修复代码移到了这里，确保生效)
+           ========================================= */
+        
+        /* 1. 强制取消 Tailwind 对地图图片的样式重置 */
+        .leaflet-pane img, 
+        .leaflet-tile, 
+        .leaflet-marker-icon, 
+        .leaflet-marker-shadow {
+            max-width: none !important;
+            max-height: none !important;
+            width: auto !important;
+            height: auto !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* 2. 确保地图容器有背景色（防止瓦片加载慢时透出网页背景） */
+        #map {
+            background: #242424; 
+            z-index: 1;
+            isolation: isolate;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* 3. 修复缩放控件被 Tailwind 样式影响的问题 */
+        .leaflet-control-container .leaflet-routing-container-hide {
+            display: none;
+        }
+        
+        /* 4. 可选：给地图瓦片层加黑白滤镜 */
+        .leaflet-tile-pane {
+            filter: grayscale(100%) contrast(1.1);
         }
     </style>
 </head>
@@ -420,7 +472,7 @@
         </section>
 
         <section id="committee" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
-            <h2 class="font-heading text-4xl text-white text-center mb-12">ORGANIZING CHAIRS</h2>
+            <h2 class="font-heading text-4xl text-white text-center mb-12">COMMITTEE</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                 
@@ -595,12 +647,12 @@
                             <p>
                                 Pacific Graphics 2026 will be hosted at the <strong class="text-white">Ngee Ann Kongsi Auditorium</strong>, located within Singapore Management University (SMU) in the heart of Singapore's central business district.
                             </p>
-                            <p>
+<!--                             <p>
                                 Singapore provides convenient international transport links, diverse accommodation options, and a vibrant tech and research ecosystem for conference participants.
-                            </p>
+                            </p> -->
                         </div>
                         
-     <!--                    <div class="mt-8 bg-[#1E293B] border border-[var(--line-color)] p-6 relative overflow-hidden group hover:border-[var(--theme-accent)] transition-colors duration-300">
+<!--                         <div class="mt-8 bg-[#1E293B] border border-[var(--line-color)] p-6 relative overflow-hidden group hover:border-[var(--theme-accent)] transition-colors duration-300">
                             <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--theme-accent)]"></div>
                             
                             <h3 class="font-heading text-[var(--theme-accent)] text-lg mb-4 flex items-center gap-2">
@@ -609,11 +661,11 @@
                             <ul class="space-y-3 text-slate-300 font-mono text-sm">
                                 <li class="flex items-start gap-3">
                                     <span class="text-[var(--theme-accent)] mt-1">►</span>
-                                    <span><strong class="text-white">MRT:</strong> Downtown Line (DT17) - Bus Station (5 min walk)</span>
+                                    <span><strong class="text-white">MRT:</strong> Downtown Line (DT17) - Bugis Station (5 min walk)</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <span class="text-[var(--theme-accent)] mt-1">►</span>
-                                    <span><strong class="text-white">MRT:</strong> East-West Line (EW12) - Bus Station (8 min walk)</span>
+                                    <span><strong class="text-white">MRT:</strong> East-West Line (EW12) - Bugis Station (8 min walk)</span>
                                 </li>
                                 <li class="flex items-start gap-3">
                                     <span class="text-[var(--theme-accent)] mt-1">►</span>
@@ -645,7 +697,7 @@
     </main>
     
     <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
-        <p>© 2025 PG 2026. ALL RIGHTS RESERVED.</p>
+        <p>© 2025 PG 2026. ALL RIGHTS RESERVED. // DESIGNED FOR STRUCTURAL RIGOR & GEOMETRIC CLARITY // PROTOCOL V5.8</p>
     </footer>
 
     <script>
@@ -732,7 +784,7 @@
             const fontLoader = new THREE.FontLoader();
             // 这里假设字体文件在 correct 路径，如果你没有这个文件，请确保路径正确
             // 如果没有，可以使用 helvetiker_bold 作为备用
-            fontLoader.load('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/optimer_bold.typeface.json', (font) => {
+            fontLoader.load('pg26_files/Permanent Marker_Regular.json', (font) => {
                 const textGeo = new THREE.TextGeometry('PG', {
                     font: font, size: 3.0, height: 0.02, curveSegments: 24,
                     bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.04, bevelOffset: 0, bevelSegments: 16
@@ -874,9 +926,9 @@
             });
         };
 
-        // // ============================================
-        // // Leaflet 地图逻辑 (修复版)
-        // // ============================================
+        // ============================================
+        // Leaflet 地图逻辑 (修复版)
+        // ============================================
         // const initMap = () => {
         //     const mapElement = document.getElementById('map');
             
@@ -938,7 +990,7 @@
                 0.0   // 居中
             );
             
-            // initMap(); // 初始化地图
+            initMap(); // 初始化地图
             
             // 滚动进度条逻辑
             const updateScrollProgress = () => {
