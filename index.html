@@ -68,12 +68,22 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxTlZBo=" crossorigin=""></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script> 
     
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
+ -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+    "imports": {
+      "three": "https://unpkg.com/three@0.154.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/"
+    }
+    }
+    </script>
 
     <style>
         /* 保持原有的 Style 代码不变 */
@@ -485,117 +495,126 @@
         <section id="committee" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
             <h2 class="font-heading text-4xl text-white text-center mb-12">COMMITTEE</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
                 
                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
-                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">CONF_CHAIRS //</h3>
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">CONFERENCE CHAIRS</h3>
                     <div class="space-y-3">
                         <div class="chair-card">
-                            <img src="pg26_files/chairs/sfh.jpg" alt="Shengfeng He" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/sfh.jpg" alt="Shengfeng He" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://shengfenghe.github.io/" target="_blank" class="chair-name text-base">Shengfeng He</a>
-                                <div class="chair-affiliation text-xs">Singapore Management University</div>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
                             </div>
                         </div>
                         <div class="chair-card">
-                            <img src="pg26_files/chairs/njm.jpg" alt="Niloy Mitra" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/njm.jpg" alt="Niloy Mitra" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="http://www0.cs.ucl.ac.uk/staff/n.mitra/" target="_blank" class="chair-name text-base">Niloy Mitra</a>
-                                <div class="chair-affiliation text-xs">University College London</div>
+                                <div class="chair-affiliation text-s">University College London</div>
                             </div>
                         </div>
                         <div class="chair-card" style="border-bottom: none;">
-                            <img src="pg26_files/chairs/holly.webp" alt="Holly Rushmeier" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/holly.webp" alt="Holly Rushmeier" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://graphics.cs.yale.edu/people/holly-rushmeier/" target="_blank" class="chair-name text-base">Holly Rushmeier</a>
-                                <div class="chair-affiliation text-xs">Yale University</div>
+                                <div class="chair-affiliation text-s">Yale University</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
+
                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
-                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">PROGRAM_CHAIRS //</h3>
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">PROGRAM CHAIRS</h3>
                     <div class="space-y-3">
                         <div class="chair-card">
-                            <img src="pg26_files/chairs/yh.jpg" alt="Ying He" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/yh.jpg" alt="Ying He" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://personal.ntu.edu.sg/yhe/" target="_blank" class="chair-name text-base">Ying He</a>
-                                <div class="chair-affiliation text-xs">Nanyang Technological University</div>
+                                <div class="chair-affiliation text-s">Nanyang Technological University</div>
                             </div>
                         </div>
                         <div class="chair-card">
-                            <img src="pg26_files/chairs/nils.jpeg" alt="Nils Thuerey" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/nils.jpeg" alt="Nils Thuerey" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://www.professoren.tum.de/en/thuerey-nils" target="_blank" class="chair-name text-base">Nils Thuerey</a>
-                                <div class="chair-affiliation text-xs">Technical University of Munich</div>
+                                <div class="chair-affiliation text-s">Technical University of Munich</div>
                             </div>
                         </div>
                         <div class="chair-card" style="border-bottom: none;">
-                            <img src="pg26_files/chairs/ljl.jpg" alt="Lingjie Liu" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/ljl.jpg" alt="Lingjie Liu" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://lingjie0206.github.io//" target="_blank" class="chair-name text-base">Lingjie Liu</a>
-                                <div class="chair-affiliation text-xs">University of Pennsylvania</div>
+                                <div class="chair-affiliation text-s">University of Pennsylvania</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                
                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
-                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">ORG_CHAIRS //</h3>
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">ORGINATION CHAIRS</h3>
                     <div class="space-y-3">
                         <div class="chair-card">
-                            <img src="pg26_files/chairs/bz.jpg" alt="Bin Zhu" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/bz.jpg" alt="Bin Zhu" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://faculty.smu.edu.sg/profile/bin-zhu-7716" target="_blank" class="chair-name text-base">Bin Zhu</a>
-                                <div class="chair-affiliation text-xs">Singapore Management University</div>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
                             </div>
                         </div>
                         <div class="chair-card" style="border-bottom: none;">
-                            <img src="pg26_files/chairs/yyx.jpg" alt="Yangyang Xu" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/yyx.jpg" alt="Yangyang Xu" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://cnnlstm.github.io/" target="_blank" class="chair-name text-base">Yangyang Xu</a>
-                                <div class="chair-affiliation text-xs">Harbin Institute of Technology, Shenzhen</div>
+                                <div class="chair-affiliation text-s">Harbin Institute of Technology, Shenzhen</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/cx.jpg" alt="Cheng Xu" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://cschengxu.github.io//" target="_blank" class="chair-name text-base">Cheng Xu</a>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
-                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">POSTER_CHAIRS //</h3>
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">POSTER CHAIRS</h3>
                     <div class="space-y-3">
                         <div class="chair-card">
-                            <img src="pg26_files/chairs/nxz.jpg" alt="Nanxuan Zhao" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/nxz.jpg" alt="Nanxuan Zhao" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://www.nxzhao.com//" target="_blank" class="chair-name text-base">Nanxuan Zhao</a>
-                                <div class="chair-affiliation text-xs">Adobe</div>
+                                <div class="chair-affiliation text-s">Adobe</div>
                             </div>
                         </div>
                         <div class="chair-card" style="border-bottom: none;">
-                            <img src="pg26_files/chairs/xy.png" alt="Xin Yang" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/xy.png" alt="Xin Yang" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://xinyangdut.github.io/" target="_blank" class="chair-name text-base">Xin Yang</a>
-                                <div class="chair-affiliation text-xs">Dalian University of Technology</div>
+                                <div class="chair-affiliation text-s">Dalian University of Technology</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
-                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">DEMO_CHAIR //</h3>
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">DEMO CHAIRS</h3>
                     <div class="space-y-3">
                         <div class="chair-card" style="border-bottom: none;">
-                            <img src="pg26_files/chairs/jnl.png" alt="Jiannan Li" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/jnl.png" alt="Jiannan Li" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
                                 <a href="https://jchrisli.github.io/" target="_blank" class="chair-name text-base">Jiannan Li</a>
-                                <div class="chair-affiliation text-xs">Singapore Management University</div>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
                             </div>
                         </div>
                         <div class="chair-card" style="border-bottom: none;">
-                            <img src="pg26_files/chairs/adundar.jpeg" alt="Ayşegül Dündar" class="chair-photo w-14 h-14" />
+                            <img src="pg26_files/chairs/adundar.jpeg" alt="Aysegul Dundar" class="chair-photo w-28 h-28" />
                             <div class="chair-info">
-                                <a href="https://www.cs.bilkent.edu.tr/~adundar//" target="_blank" class="chair-name text-base">Ayşegül Dündar</a>
-                                <div class="chair-affiliation text-xs">Bilkent University</div>
+                                <a href="https://www.cs.bilkent.edu.tr/~adundar//" target="_blank" class="chair-name text-base">Aysegul Dundar</a>
+                                <div class="chair-affiliation text-s">Bilkent University</div>
                             </div>
                         </div>
                     </div>
@@ -711,851 +730,165 @@
         <p>© 2025 PG 2026. ALL RIGHTS RESERVED.</p>
     </footer>
 
-    <script>
-        // ============================================
-        // Three.js 3D 渲染逻辑
-        // ============================================
 
-        const MODEL_CONFIG = [
-            { id: 'model-container-left', url: 'neon_open_sign.glb', label: 'Left Model' },
-            { id: 'model-container-right', url: 'Untitled.glb', label: 'Right Model' }
-        ];
+<script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    // 引入 RGBELoader 用于加载环境贴图 (让冰块反射看起来更真实)
+    import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
-        // ============================================
-        // REVISED V4: "活泼的"手绘风霓虹灯 (不规则形状 + 闪烁动画)
-        // ============================================
-        // const createNeonSign = (containerId, scaleMultiplier = 1.0, yOffset = 0.0) => {
-        //     const container = document.getElementById(containerId);
-        //     if (!container) return;
-            
-        //     container.innerHTML = '';
+    const loadInteractiveModel = (containerId, modelUrl, scaleMultiplier = 2.5, yOffset = 0.0) => {
+        const container = document.getElementById(containerId);
+        if (!container) return;
 
-        //     const scene = new THREE.Scene();
-        //     const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-        //     camera.position.set(0, 0, 14);
+        const scene = new THREE.Scene();
 
-        //     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        //     renderer.setClearColor(0x0f172a, 0);
-        //     renderer.setSize(container.clientWidth, container.clientHeight);
-        //     renderer.setPixelRatio(window.devicePixelRatio);
-        //     renderer.outputEncoding = THREE.sRGBEncoding;
+        const camera = new THREE.PerspectiveCamera(30, container.clientWidth / container.clientHeight, 0.1, 100);
+        camera.position.set(0, 1, 10);
+        camera.lookAt(0, -2, 0);
 
-        //     renderer.domElement.style.position = 'absolute';
-        //     renderer.domElement.style.top = '0';
-        //     renderer.domElement.style.left = '0';
-        //     renderer.domElement.style.zIndex = '20';
-        //     container.appendChild(renderer.domElement);
-
-        //     const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-        //     scene.add(ambientLight);
-
-        //     const signGroup = new THREE.Group();
-        //     scene.add(signGroup);
-
-        //     const redNeonMat = new THREE.MeshStandardMaterial({
-        //         color: 0xffdddd, emissive: 0xff0000, emissiveIntensity: 4.0, roughness: 0.05, metalness: 0.0
-        //     });
-
-        //     const blueNeonMat = new THREE.MeshStandardMaterial({
-        //         color: 0xddffff, emissive: 0x00eaff, emissiveIntensity: 3.5, roughness: 0.05, metalness: 0.0
-        //     });
-
-        //     const w = 8.5 / 2; 
-        //     const h = 4.5 / 2; 
-            
-        //     let rawPoints = [
-        //         new THREE.Vector3(-w, h, 0),    // 左上
-        //         new THREE.Vector3(0, h, 0),     // 中上
-        //         new THREE.Vector3(w, h, 0),     // 右上
-        //         new THREE.Vector3(w, 0, 0),     // 右中
-        //         new THREE.Vector3(w, -h, 0),    // 右下
-        //         new THREE.Vector3(0, -h, 0),    // 中下
-        //         new THREE.Vector3(-w, -h, 0),   // 左下
-        //         new THREE.Vector3(-w, 0, 0)     // 左中
-        //     ];
-
-        //     const jitter = 0.3; 
-        //     const wobblyPoints = rawPoints.map(p => {
-        //         return new THREE.Vector3(
-        //             p.x + (Math.random() - 0.5) * jitter, 
-        //             p.y + (Math.random() - 0.5) * jitter, 
-        //             (Math.random() - 0.5) * 0.15          
-        //         );
-        //     });
-
-        //     const path3D = new THREE.CatmullRomCurve3(wobblyPoints);
-        //     path3D.closed = true;
-        //     path3D.tension = 0.5;
-
-        //     const tubeRadius = 0.10;
-        //     const frameGeo = new THREE.TubeGeometry(path3D, 128, tubeRadius, 12, true);
-        //     const frameMesh = new THREE.Mesh(frameGeo, blueNeonMat);
-        //     signGroup.add(frameMesh);
-
-        //     const fontLoader = new THREE.FontLoader();
-        //     // 这里假设字体文件在 correct 路径，如果你没有这个文件，请确保路径正确
-        //     // 如果没有，可以使用 helvetiker_bold 作为备用
-        //     fontLoader.load('pg26_files/Permanent Marker_Regular.json', (font) => {
-        //         const textGeo = new THREE.TextGeometry('PG', {
-        //             font: font, size: 3.0, height: 0.02, curveSegments: 24,
-        //             bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.04, bevelOffset: 0, bevelSegments: 16
-        //         });
-        //         textGeo.center(); 
-        //         const textMesh = new THREE.Mesh(textGeo, redNeonMat);
-        //         textMesh.position.y -= 0.1; 
-        //         textMesh.position.z = 0.02;
-        //         signGroup.add(textMesh);
-
-        //         signGroup.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
-        //         signGroup.position.y = yOffset;
-        //     });
-
-        //     let time = 0;
-        //     const baseIntensity = 3.5; 
-
-        //     const animate = () => {
-        //         requestAnimationFrame(animate);
-        //         time += 0.015;
-
-        //         if (signGroup) {
-        //             // === 方案一：360度自动旋转 ===
-        //             signGroup.rotation.y += 0.01; 
-        //             signGroup.rotation.x = 0; 
-        //         }
-
-        //         if (Math.random() > 0.92) { 
-        //             blueNeonMat.emissiveIntensity = 1.5 + Math.random() * 2.0;
-        //         } else {
-        //             blueNeonMat.emissiveIntensity = baseIntensity + Math.sin(time * 10) * 0.2;
-        //         }
-
-        //         renderer.render(scene, camera);
-        //     };
-        //     animate();
-
-        //     window.addEventListener('resize', () => {
-        //         if (container) {
-        //             camera.aspect = container.clientWidth / container.clientHeight;
-        //             camera.updateProjectionMatrix();
-        //             renderer.setSize(container.clientWidth, container.clientHeight);
-        //         }
-        //     });
-        // };
-
-// ============================================
-// REVISED V5: 终极物理拟真霓虹灯 (双层玻璃 + 卡扣 + 电极)
-// ============================================
-const createNeonSign = (containerId, scaleMultiplier = 1.0, yOffset = 0.0) => {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = '';
-
-    // 1. 场景初始化
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.set(0, 0, 13); // 稍微拉近一点欣赏细节
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setClearColor(0x0f172a, 0);
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    // 开启物理透明度支持
-    renderer.transmission = true; 
-
-    renderer.domElement.style.position = 'absolute';
-    renderer.domElement.style.top = '0';
-    renderer.domElement.style.left = '0';
-    renderer.domElement.style.zIndex = '20';
-    container.appendChild(renderer.domElement);
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-    scene.add(ambientLight);
-    
-    // 加个强光照亮玻璃壳的反射
-    const spotLight = new THREE.SpotLight(0xffffff, 1.0);
-    spotLight.position.set(10, 10, 20);
-    scene.add(spotLight);
-
-    const signGroup = new THREE.Group();
-    scene.add(signGroup);
-
-    // =========================================
-    // A. 高级材质库
-    // =========================================
-    
-    // 1. 内部发光芯 (极亮)
-    const coreMatRed = new THREE.MeshBasicMaterial({ color: 0xffaaaa }); // 基础白红
-    const coreMatBlue = new THREE.MeshBasicMaterial({ color: 0xaaffff }); // 基础白蓝
-
-    // 2. 外部玻璃壳 (物理拟真)
-    const glassMatRed = new THREE.MeshPhysicalMaterial({
-        color: 0xff0000,
-        emissive: 0xff0000,
-        emissiveIntensity: 2.0, // 自发光让玻璃通透
-        metalness: 0.0,
-        roughness: 0.1,
-        transmission: 0.6,      // 透光率 (关键!)
-        thickness: 0.2,         // 玻璃厚度
-        transparent: true,
-        opacity: 0.8
-    });
-
-    const glassMatBlue = new THREE.MeshPhysicalMaterial({
-        color: 0x0088ff,
-        emissive: 0x0088ff,
-        emissiveIntensity: 2.0,
-        metalness: 0.0,
-        roughness: 0.1,
-        transmission: 0.6,
-        thickness: 0.2,
-        transparent: true,
-        opacity: 0.8
-    });
-
-    // 3. 配件材质
-    const bracketMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.8 }); // 黑色塑料卡扣
-    const electrodeMat = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8, roughness: 0.2 }); // 金属电极
-
-    // =========================================
-    // B. 通用生成器函数 (生成管子+玻璃+卡扣+电极)
-    // =========================================
-    const createAdvancedTube = (path, matCore, matGlass) => {
-        const group = new THREE.Group();
-
-        // 1. 内芯 (细管)
-        const coreGeo = new THREE.TubeGeometry(path, 128, 0.04, 8, false); // 细
-        const coreMesh = new THREE.Mesh(coreGeo, matCore);
-        group.add(coreMesh);
-
-        // 2. 玻璃壳 (粗管)
-        const glassGeo = new THREE.TubeGeometry(path, 128, 0.11, 16, false); // 粗
-        const glassMesh = new THREE.Mesh(glassGeo, matGlass);
-        group.add(glassMesh);
-
-        // 3. 自动生成卡扣 (Brackets) - 沿着路径每隔一段距离放一个
-        const points = path.getPoints(128); // 获取路径上的点
-        const bracketCount = 6; // 卡扣数量
-        const step = Math.floor(points.length / bracketCount);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setClearColor(0x000000, 0); 
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        // 使用 ACESFilmic 色调映射处理高光，防止过曝
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
         
-        for(let i = step; i < points.length - step; i += step) {
-            const point = points[i];
-            const tangent = path.getTangentAt(i / points.length); // 获取切线方向
-            
-            // 创建一个小黑环
-            const bracketGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.1, 12);
-            const bracket = new THREE.Mesh(bracketGeo, bracketMat);
-            
-            bracket.position.copy(point);
-            bracket.lookAt(point.clone().add(tangent)); // 让圆柱朝向切线方向
-            bracket.rotateX(Math.PI / 2); // 修正圆柱默认朝向
-            
-            // 稍微往后挪一点，贴在"墙"上
-            bracket.position.z -= 0.05; 
-            
-            group.add(bracket);
-        }
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.top = '0';
+        renderer.domElement.style.left = '0';
+        renderer.domElement.style.zIndex = '10';
+        renderer.domElement.style.pointerEvents = 'none'; 
+        container.appendChild(renderer.domElement);
 
-        // 4. 生成两端的电极 (Electrodes)
-        const startPoint = points[0];
-        const endPoint = points[points.length - 1];
+        // ==========================================
+        // 关键点 A：冰冷系灯光布局
+        // ==========================================
+        // 使用冷色调（蓝、白、青）的强光来强调冰的质感
         
-        const electrodeGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.2, 12);
+        // 1. 主光源 (冷白)
+        const mainLight = new THREE.DirectionalLight(0xffffff, 1.0);
+        mainLight.position.set(5, 5, 5);
+        scene.add(mainLight);
+
+        // 2. 强力侧逆光 (冰蓝) - 勾勒边缘
+        const rimLightBlue = new THREE.SpotLight(0x00ffff, 20.0);
+        rimLightBlue.position.set(-5, 5, -5);
+        rimLightBlue.angle = Math.PI / 3;
+        rimLightBlue.penumbra = 0.5;
+        scene.add(rimLightBlue);
+
+        // 3. 底部补光 (深蓝) - 增加冰冷氛围
+        const bottomLight = new THREE.PointLight(0x0055ff, 10.0);
+        bottomLight.position.set(0, -5, 2);
+        scene.add(bottomLight);
         
-        const elec1 = new THREE.Mesh(electrodeGeo, electrodeMat);
-        elec1.position.copy(startPoint);
-        elec1.lookAt(points[1]); 
-        elec1.rotateX(Math.PI / 2);
-        group.add(elec1);
+        // 4. 环境光
+        scene.add(new THREE.AmbientLight(0x444444));
 
-        const elec2 = new THREE.Mesh(electrodeGeo, electrodeMat);
-        elec2.position.copy(endPoint);
-        elec2.lookAt(points[points.length - 2]);
-        elec2.rotateX(Math.PI / 2); // 修正方向，反向看前一个点
-        group.add(elec2);
-
-        return group;
-    };
-
-    // =========================================
-    // C. 构建外框 (手绘风格路径)
-    // =========================================
-    const w = 8.5 / 2; const h = 4.5 / 2;
-    // 注意：这里我们故意把闭合路径(closed)设为 false，并在底部留个缺口，模拟真实灯管
-    const rawPoints = [
-        new THREE.Vector3(-0.5, -h, 0),   // 底部缺口右侧起点
-        new THREE.Vector3(w, -h, 0),      // 右下
-        new THREE.Vector3(w, 0, 0),       // 右中
-        new THREE.Vector3(w, h, 0),       // 右上
-        new THREE.Vector3(0, h, 0),       // 顶中
-        new THREE.Vector3(-w, h, 0),      // 左上
-        new THREE.Vector3(-w, 0, 0),      // 左中
-        new THREE.Vector3(-w, -h, 0),     // 左下
-        new THREE.Vector3(-0.8, -h, 0)    // 底部缺口左侧终点
-    ];
-    // 增加一点点随机抖动
-    const jitter = 0.2;
-    const wobblyPoints = rawPoints.map(p => new THREE.Vector3(p.x + (Math.random()-0.5)*jitter, p.y + (Math.random()-0.5)*jitter, (Math.random()-0.5)*0.1));
-    const framePath = new THREE.CatmullRomCurve3(wobblyPoints);
-    framePath.closed = false; // 关键：不闭合，留出电极位置
-    
-    const frameObj = createAdvancedTube(framePath, coreMatBlue, glassMatBlue);
-    signGroup.add(frameObj);
-
-    // === 关键修复 2: 灯光大幅减弱 ===
-    
-    // 半球光 (模拟环境漫反射)
-    // 强度从 2.0 降为 0.6，防止物体被照得发白
-    // 颜色改为微暖色 (天空蓝 + 地面褐)，增加层次感
-    const hemiLight = new THREE.HemisphereLight(0xeef0ff, 0x444444, 0.6); 
-    hemiLight.position.set(0, 20, 0); 
-    scene.add(hemiLight);
-
-    // 主平行光 (模拟太阳)
-    // 强度从 2.5 降为 1.2
-    const dirLight = new THREE.DirectionalLight(0xffffee, 1.2); 
-    dirLight.position.set(5, 10, 7);
-    dirLight.castShadow = true;
-    
-    // 优化阴影质量，避免产生锯齿，让画面更干净
-    dirLight.shadow.mapSize.width = 1024;
-    dirLight.shadow.mapSize.height = 1024;
-    dirLight.shadow.bias = -0.0001;
-    
-    scene.add(dirLight);
-
-    // 补光 (侧面光，很弱，防止背光面死黑)
-    const fillLight = new THREE.DirectionalLight(0xccccff, 0.5);
-    fillLight.position.set(-5, 0, -5);
-    scene.add(fillLight);
-
-    let objectToRotate = null;
-    const loader = new THREE.GLTFLoader();
-    
-    // =========================================
-    // D. 构建 PG 字体 (通过加载 Font 生成 Mesh 再提取路径)
-    // =========================================
-    // 注意：由于TextGeometry生成的是Mesh，要把它变成线框路径比较复杂。
-    // 这里我们用一个简化的替代方案：仍然用 TextGeometry 但使用双层材质模拟。
-    const fontLoader = new THREE.FontLoader();
-    fontLoader.load('pg26_files/Permanent Marker_Regular.json', (font) => {
-        
-        // 1. 内芯文字
-        const coreGeo = new THREE.TextGeometry('PG', {
-            font: font, size: 3.0, height: 0.02, curveSegments: 12,
-            bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.01, bevelSegments: 3
-        });
-        coreGeo.center();
-        const coreMesh = new THREE.Mesh(coreGeo, coreMatRed);
-        coreMesh.position.z = 0.02; // 稍微靠前
-
-        // 2. 玻璃外壳文字 (比内芯大一圈)
-        const glassGeo = new THREE.TextGeometry('PG', {
-            font: font, size: 3.0, height: 0.08, curveSegments: 24, // 更厚
-            bevelEnabled: true, bevelThickness: 0.08, bevelSize: 0.06, bevelSegments: 8 // 更大倒角
-        });
-        glassGeo.center();
-        const glassMesh = new THREE.Mesh(glassGeo, glassMatRed);
-        
-        // 组合文字
-        const textGroup = new THREE.Group();
-        textGroup.add(coreMesh);
-        textGroup.add(glassMesh);
-        
-        textGroup.position.y -= 0.1;
-        signGroup.add(textGroup);
-
-        // 缩放和定位
-        signGroup.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);
-        signGroup.position.y = yOffset;
-    });
-
-    // =========================================
-    // E. 动画 (呼吸灯 + 旋转)
-    // =========================================
-    let time = 0;
-    const animate = () => {
-        requestAnimationFrame(animate);
-        time += 0.02;
-
-        if (signGroup) {
-            // 自动旋转
-            signGroup.rotation.y += 0.005; 
-        }
-
-        // 模拟电流不稳的闪烁
-        const flicker = 0.8 + Math.random() * 0.4; // 0.8 ~ 1.2
-        const breathe = 1.0 + Math.sin(time * 2) * 0.2; // 呼吸
-        
-        // 更新材质强度 (模拟光)
-        glassMatRed.emissiveIntensity = 2.0 * flicker;
-        glassMatBlue.emissiveIntensity = 2.0 * breathe; // 蓝色呼吸，红色闪烁，更有层次
-
-        renderer.render(scene, camera);
-    };
-    animate();
-
-    window.addEventListener('resize', () => {
-        if (container) {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        }
-    });
-};
-
-        // ============================================
-        // 增强型 3D 渲染函数 (右侧模型)
-        // ============================================
-        // const loadInteractiveModel = (containerId, modelUrl, scaleMultiplier = 2.5, yOffset = 0.0) => {
-        //     const container = document.getElementById(containerId);
-
-        //     if (!container) return;
-        //     if (!modelUrl) {
-        //         console.log(`⚠️ 警告: ${containerId} 模型 URL 未设置。`);
-        //         return;
-        //     }
-            
-        //     const scene = new THREE.Scene();
-        //     const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-        //     camera.position.set(0, 0, 10); 
-            
-        //     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        //     renderer.setClearColor(0x0f172a, 0); 
-        //     renderer.setSize(container.clientWidth, container.clientHeight);
-        //     renderer.setPixelRatio(window.devicePixelRatio);
-        //     renderer.shadowMap.enabled = true;
-        //     renderer.outputEncoding = THREE.sRGBEncoding; 
-        //     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        //     renderer.toneMappingExposure = 1.0;
-
-        //     renderer.domElement.style.position = 'absolute';
-        //     renderer.domElement.style.top = '0';
-        //     renderer.domElement.style.left = '0';
-        //     renderer.domElement.style.zIndex = '1'; 
-
-        //     container.appendChild(renderer.domElement);
-
-        //     const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2.0); 
-        //     hemiLight.position.set(0, 20, 0);
-        //     scene.add(hemiLight);
-
-        //     const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
-        //     dirLight.position.set(5, 10, 7);
-        //     dirLight.castShadow = true;
-        //     scene.add(dirLight);
-
-        //     const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        //     controls.enableDamping = true;
-        //     controls.dampingFactor = 0.05;
-        //     controls.enableZoom = false; 
-        //     controls.minPolarAngle = Math.PI / 2; 
-        //     controls.maxPolarAngle = Math.PI / 2;
-        //     controls.autoRotate = false;
-
-        //     let objectToRotate = null;
-        //     const loader = new THREE.GLTFLoader();
-            
-        //     loader.load(modelUrl, (gltf) => {
-        //         const model = gltf.scene;
-        //         const box = new THREE.Box3().setFromObject(model);
-        //         const center = box.getCenter(new THREE.Vector3());
-        //         const size = box.getSize(new THREE.Vector3());
-        //         const maxDim = Math.max(size.x, size.y, size.z);
-        //         const baseScaleFactor = 5 / maxDim; 
-                
-        //         model.scale.multiplyScalar(baseScaleFactor * scaleMultiplier); 
-                
-        //         box.setFromObject(model); 
-        //         box.getCenter(center);
-                
-        //         model.position.x -= center.x;
-        //         model.position.y -= center.y;
-        //         model.position.z -= center.z;
-        //         model.position.y += yOffset; 
-
-        //         scene.add(model);
-        //         objectToRotate = model;
-        //     }, undefined, (error) => {
-        //         console.error(`❌ 3D 互动模型 (${modelUrl}) 加载出错！`, error);
-        //     });
-
-        //     const animate = () => {
-        //         requestAnimationFrame(animate);
-        //         if (objectToRotate) {
-        //             objectToRotate.rotation.y += (0.0005 * 1); 
-        //         }
-        //         controls.update(); 
-        //         renderer.render(scene, camera);
-        //     };
-        //     animate();
-
-        //     window.addEventListener('resize', () => {
-        //         if (container) {
-        //             camera.aspect = container.clientWidth / container.clientHeight;
-        //             camera.updateProjectionMatrix();
-        //             renderer.setSize(container.clientWidth, container.clientHeight);
-        //         }
-        //     });
-        // };
-
-
-        // ============================================
-        // 增强型 3D 渲染函数 (右侧模型 - 纯展示模式)
-        // ============================================
-        // const loadInteractiveModel = (containerId, modelUrl, scaleMultiplier = 2.5, yOffset = 0.0) => {
-        //     const container = document.getElementById(containerId);
-
-        //     if (!container) return;
-        //     if (!modelUrl) {
-        //         console.log(`⚠️ 警告: ${containerId} 模型 URL 未设置。`);
-        //         return;
-        //     }
-            
-        //     const scene = new THREE.Scene();
-            
-        //     // 1. 调整相机位置以获得"俯瞰感"
-        //     // 原来是 (0, 0, 10) 正视
-        //     // 改为 (0, 5, 10): Y轴抬高到 5，获得俯视角度
-        //     const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 100);
-        //     camera.position.set(0, 1, 10); 
-        //     // 让相机视线看向模型中心偏下的位置，确保模型在视野中央
-        //     camera.lookAt(0, -2, 0); 
-            
-        //     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        //     renderer.setClearColor(0x0f172a, 0); 
-        //     renderer.setSize(container.clientWidth, container.clientHeight);
-        //     renderer.setPixelRatio(window.devicePixelRatio);
-        //     renderer.shadowMap.enabled = true;
-        //     renderer.outputEncoding = THREE.sRGBEncoding; 
-        //     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        //     renderer.toneMappingExposure = 1.0;
-
-        //     renderer.domElement.style.position = 'absolute';
-        //     renderer.domElement.style.top = '0';
-        //     renderer.domElement.style.left = '0';
-        //     renderer.domElement.style.zIndex = '1'; 
-        //     // 关键：CSS 层面禁止鼠标事件，彻底禁用所有交互
-        //     renderer.domElement.style.pointerEvents = 'none';
-
-
-
-        //     container.appendChild(renderer.domElement);
-
-        //     const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2.0); 
-        //     hemiLight.position.set(0, 20, 0); 
-        //     scene.add(hemiLight);
-
-        //     const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
-        //     dirLight.position.set(5, 10, 7);
-        //     dirLight.castShadow = true;
-        //     scene.add(dirLight);
-
-        //     // 2. 移除 OrbitControls
-        //     // 既然不需要交互，就不需要创建 controls 对象了，节省资源
-        //     // const controls = new THREE.OrbitControls(...) // 删除这部分
-
-        //     let objectToRotate = null;
-        //     const loader = new THREE.GLTFLoader();
-            
-        //     loader.load(modelUrl, (gltf) => {
-        //         const model = gltf.scene;
-        //         const box = new THREE.Box3().setFromObject(model);
-        //         const center = box.getCenter(new THREE.Vector3());
-        //         const size = box.getSize(new THREE.Vector3());
-        //         const maxDim = Math.max(size.x, size.y, size.z);
-        //         const baseScaleFactor = 5 / maxDim; 
-                
-        //         model.scale.multiplyScalar(baseScaleFactor * scaleMultiplier); 
-                
-        //         box.setFromObject(model); 
-        //         box.getCenter(center);
-                
-        //         // 3. 调整模型位置
-        //         // yOffset - 2.0: 额外向下移动 2 个单位，配合俯瞰视角
-        //         model.position.x -= center.x;
-        //         model.position.y -= center.y;
-        //         model.position.z -= center.z;
-        //         model.position.y += (yOffset - 2.0); 
-
-        //         scene.add(model);
-        //         objectToRotate = model;
-        //     }, undefined, (error) => {
-        //         console.error(`❌ 3D 互动模型 (${modelUrl}) 加载出错！`, error);
-        //     });
-
-        //     const animate = () => {
-        //         requestAnimationFrame(animate);
-        //         if (objectToRotate) {
-        //             // 保持缓慢自动旋转
-        //             objectToRotate.rotation.y += 0.0005; 
-        //         }
-        //         // controls.update(); // 删除这行
-        //         renderer.render(scene, camera);
-        //     };
-        //     animate();
-
-        //     window.addEventListener('resize', () => {
-        //         if (container) {
-        //             camera.aspect = container.clientWidth / container.clientHeight;
-        //             camera.updateProjectionMatrix();
-        //             renderer.setSize(container.clientWidth, container.clientHeight);
-        //         }
-        //     });
-        // };
-
-// ============================================
-        // 增强型 3D 渲染函数 (右侧模型 - 修复过曝/发白问题)
-        // ============================================
-        const loadInteractiveModel = (containerId, modelUrl, scaleMultiplier = 2.5, yOffset = 0.0) => {
-            const container = document.getElementById(containerId);
-
-            if (!container) return;
-            if (!modelUrl) {
-                console.log(`⚠️ 警告: ${containerId} 模型 URL 未设置。`);
-                return;
-            }
-            
-            const scene = new THREE.Scene();
-            
-            // 1. 相机位置 (保持俯瞰视角)
-            const camera = new THREE.PerspectiveCamera(30, container.clientWidth / container.clientHeight, 0.1, 100);
-            camera.position.set(0, 1, 10); 
-            camera.lookAt(0, -2, 0); 
-            
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setClearColor(0x0f172a, 0); 
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap; // 更柔和的阴影
-            
-            // === 关键修复 1: 渲染器色彩管理 ===
-            renderer.outputEncoding = THREE.sRGBEncoding; 
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            // 降低曝光度！原来是 1.0，现在降到 0.85，防止过亮
-            renderer.toneMappingExposure = 0.85; 
-
-            renderer.domElement.style.position = 'absolute';
-            renderer.domElement.style.top = '0';
-            renderer.domElement.style.left = '0';
-            renderer.domElement.style.zIndex = '1'; 
-            renderer.domElement.style.pointerEvents = 'none'; // 禁用交互
-
-            container.appendChild(renderer.domElement);
-
-            // === 关键修复 2: 灯光大幅减弱 ===
-            
-            // 半球光 (模拟环境漫反射)
-            // 强度从 2.0 降为 0.6，防止物体被照得发白
-            // 颜色改为微暖色 (天空蓝 + 地面褐)，增加层次感
-            const hemiLight = new THREE.HemisphereLight(0xeef0ff, 0x444444, 0.6); 
-            hemiLight.position.set(0, 20, 0); 
-            scene.add(hemiLight);
-
-            // 主平行光 (模拟太阳)
-            // 强度从 2.5 降为 1.2
-            const dirLight = new THREE.DirectionalLight(0xffffee, 1.2); 
-            dirLight.position.set(5, 10, 7);
-            dirLight.castShadow = true;
-            
-            // 优化阴影质量，避免产生锯齿，让画面更干净
-            dirLight.shadow.mapSize.width = 1024;
-            dirLight.shadow.mapSize.height = 1024;
-            dirLight.shadow.bias = -0.0001;
-            
-            scene.add(dirLight);
-
-            // 补光 (侧面光，很弱，防止背光面死黑)
-            const fillLight = new THREE.DirectionalLight(0xccccff, 0.5);
-            fillLight.position.set(-5, 0, -5);
-            scene.add(fillLight);
-
-            let objectToRotate = null;
-            const loader = new THREE.GLTFLoader();
-            
-            loader.load(modelUrl, (gltf) => {
-                const model = gltf.scene;
-                
-                // === 关键修复 3: 遍历模型，防止材质过于光滑导致反光太强 ===
-                model.traverse((child) => {
-                    if (child.isMesh) {
-                        child.castShadow = true;
-                        child.receiveShadow = true;
-                        
-                        // 如果材质太亮，可以在这里手动压暗一点
-                        if (child.material) {
-                            // 稍微增加粗糙度，减少那种“塑料反光”的感觉，让颜色更实
-                            child.material.roughness = 0.7; 
-                            child.material.metalness = 0.1;
-                        }
-                    }
-                });
-
-                const box = new THREE.Box3().setFromObject(model);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
-                const maxDim = Math.max(size.x, size.y, size.z);
-                const baseScaleFactor = 5 / maxDim; 
-                
-                model.scale.multiplyScalar(baseScaleFactor * scaleMultiplier); 
-                
-                box.setFromObject(model); 
-                box.getCenter(center);
-                
-                // 位置调整
-                model.position.x -= center.x;
-                model.position.y -= center.y;
-                model.position.z -= center.z;
-                model.position.y += (yOffset - 2.0); 
-
-                scene.add(model);
-                objectToRotate = model;
-            }, undefined, (error) => {
-                console.error(`❌ 3D 模型加载出错`, error);
+        // ==========================================
+        // 关键点 B：加载环境贴图 (HDR)
+        // ==========================================
+        // 冰块需要反射环境才能看起来真实。我们加载一个简单的 HDR 环境。
+        new RGBELoader()
+            .setPath('https://threejs.org/examples/textures/equirectangular/') // 使用 three.js 官方示例资源
+            .load('royal_esplanade_1k.hdr', function (texture) {
+                texture.mapping = THREE.EquirectangularReflectionMapping;
+                // scene.background = texture; // 如果想看背景就解开这行
+                scene.environment = texture; // 将其设置为环境贴图用于反射
             });
 
+
+        // ==========================================
+        // 关键点 C：磨砂冰晶材质 (Frosted Ice Material)
+        // ==========================================
+        
+        const loader = new GLTFLoader();
+        
+        loader.load(modelUrl, (gltf) => {
+            const model = gltf.scene;
+
+            const frostedIceMaterial = new THREE.MeshPhysicalMaterial({
+                // === 基础色 ===
+                color: 0xddeeff,         // 极淡的冰蓝色
+
+                // === 1. 核心：粗糙的物理属性 ===
+                metalness: 0.0,          // 非金属
+                roughness: 0.03,         // 【关键】高粗糙度！模拟磨砂结霜表面，不再是光滑玻璃
+
+                // === 2. 半透明冰块 ===
+                transmission: 1,       // 透光，但不是全透，有浑浊感
+                ior: 1.31,               // 真实冰的折射率
+                thickness: 3.0,          // 厚度感
+                attenuationColor: 0xaaccff, // 内部光线衰减为冰蓝色
+                attenuationDistance: 5.0,
+
+                // === 3. 模拟冰霜表面的复杂光感 (Sheen & Clearcoat) ===
+                // Sheen (光泽层): 模拟表面细小的冰晶反光，在边缘产生白色的绒毛感
+                sheen: 1.0,
+                sheenRoughness: 0.8,
+                sheenColor: 0xffffff,
+
+                // Clearcoat (清漆层): 在粗糙表面上再加一层微湿的冰膜反射层
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.0,
+
+                // === 4. 自发光 (冰冷内核) ===
+                emissive: 0x66aaff,      // 内部透出冷光
+                emissiveIntensity: 0.6,
+
+                side: THREE.DoubleSide,  // 双面渲染增加体积感
+                transparent: true
+            });
+
+            model.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = frostedIceMaterial;
+                }
+            });
+
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const maxDim = Math.max(box.getSize(new THREE.Vector3()).x, box.getSize(new THREE.Vector3()).y, box.getSize(new THREE.Vector3()).z);
+            const baseScaleFactor = 5 / maxDim; 
+            
+            model.scale.multiplyScalar(baseScaleFactor * scaleMultiplier); 
+            box.setFromObject(model); 
+            box.getCenter(center);
+            model.position.x -= center.x;
+            model.position.y -= center.y;
+            model.position.z -= center.z;
+            model.position.y += (yOffset - 2.0); 
+
+            scene.add(model);
+            
             const animate = () => {
                 requestAnimationFrame(animate);
-                if (objectToRotate) {
-                    objectToRotate.rotation.y += 0.0005; // 保持自动旋转
-                }
+                if (model) model.rotation.y += 0.002; // 缓慢旋转
                 renderer.render(scene, camera);
             };
             animate();
 
-            window.addEventListener('resize', () => {
-                if (container) {
-                    camera.aspect = container.clientWidth / container.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(container.clientWidth, container.clientHeight);
-                }
-            });
-        };
-
-        // ============================================
-        // Leaflet 地图逻辑 (修复版)
-        // ============================================
-        // const initMap = () => {
-        //     const mapElement = document.getElementById('map');
-            
-        //     // 1. 检查元素是否存在
-        //     if (!mapElement) {
-        //         console.error("❌ 错误：找不到 id 为 map 的元素！");
-        //         return;
-        //     }
-
-        //     // 2. 清理旧实例
-        //     if (mapElement._leaflet_id) {
-        //         mapElement.innerHTML = "";
-        //         mapElement._leaflet_id = null;
-        //     }
-
-        //     // 3. SMU 坐标
-        //     const venueLat = 1.2963;
-        //     const venueLng = 103.8502;
-
-        //     // 4. 创建地图对象
-        //     const map = L.map('map', {
-        //         center: [venueLat, venueLng],
-        //         zoom: 16,
-        //         zoomControl: false, // 暂时隐藏控件，排除干扰
-        //         attributionControl: false // 暂时隐藏版权，排除干扰
-        //     });
-
-        //     // 5. 加载标准 OSM 图层
-        //     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //         maxZoom: 19
-        //     }).addTo(map);
-
-        //     // 6. 添加一个简单的标记
-        //     L.marker([venueLat, venueLng]).addTo(map)
-        //         .bindPopup("<b>SMU</b><br>Venue Location")
-        //         .openPopup();
-
-        //     // 7. 强制刷新尺寸 (关键！)
-        //     // 有时候容器渲染慢，地图不知道自己多大，需要踹一脚
-        //     setTimeout(() => {
-        //         map.invalidateSize();
-        //         console.log("✅ 地图尺寸已刷新");
-        //     }, 500);
-        // };
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // createNeonSign(
-            //     'model-container-left', // 容器 ID
-            //     0.75,                     // 整体缩放大小
-            //     0.0                     // Y轴偏移
-            // );
-
-            // 右侧模型
-            loadInteractiveModel(
-                'model-container-right', 
-                MODEL_CONFIG[1].url, 
-                1,  // 放大模型尺寸
-                0.0   // 居中
-            );
-            
-            initMap(); // 初始化地图
-            
-            // 滚动进度条逻辑
-            const updateScrollProgress = () => {
-                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = window.scrollY;
-                const progress = (scrolled / scrollableHeight) * 100;
-                document.getElementById('scroll-progress').style.width = progress + '%';
-            };
-            
-            window.addEventListener('scroll', updateScrollProgress);
-            updateScrollProgress(); // 首次加载时调用
+        }, undefined, (error) => {
+            console.error('Error:', error);
         });
 
-        // ============================================
-        // 7. COUNTDOWN TIMER LOGIC
-        // ============================================
-        const initCountdown = () => {
-            // 设置会议目标日期 (这里设为 2026年10月20日)
-            const targetDate = new Date("October 20, 2026 09:00:00").getTime();
+        window.addEventListener('resize', () => {
+            if (container) {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+        });
+    };
 
-            const updateTimer = () => {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
+    // 启动
+    loadInteractiveModel('model-container-right', 'Untitled.glb', 0.5, 0.0);
+    
+</script>
 
-                if (distance < 0) {
-                    // 如果时间到了，显示 "STARTED"
-                    document.getElementById("countdown-timer").innerHTML = 
-                        '<div class="text-3xl text-[var(--theme-accent)] font-heading border px-6 py-2 border-[var(--theme-accent)]">CONFERENCE STARTED</div>';
-                    return;
-                }
 
-                // 计算时间单位
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // 更新 DOM (补零逻辑)
-                const pad = (num) => String(num).padStart(2, '0');
-                
-                // 只有当元素存在时才更新（防止报错）
-                const elDays = document.getElementById("cd-days");
-                if (elDays) {
-                    elDays.innerText = String(days).padStart(3, '0'); // 天数用3位显示
-                    document.getElementById("cd-hours").innerText = pad(hours);
-                    document.getElementById("cd-minutes").innerText = pad(minutes);
-                    document.getElementById("cd-seconds").innerText = pad(seconds);
-                }
-            };
-
-            // 立即运行一次，然后每秒更新
-            updateTimer();
-            setInterval(updateTimer, 1000);
-        };
-        
-        // 记得调用它！
-        initCountdown();
-
-    </script>
 </body>
 </html>
