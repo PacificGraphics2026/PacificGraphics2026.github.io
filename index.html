@@ -7,58 +7,7 @@
     <title>Pacific Graphics 2026 (PG2026) - Singapore | International Conference on Computer Graphics</title>
     
     <meta name="description" content="Pacific Graphics 2026 (PG 2026) will be held in Singapore from Oct 20-23, 2026. Hosted by SMU, it is a flagship conference of the Asia Graphics Association on computer graphics and applications.">
-    <meta name="google-site-verification" content="66oKkSVtdAjqUHLSe4J8OyiKGkRCzIQH2caRe6uimKY" />
-    <meta name="keywords" content="Pacific Graphics 2026, PG2026, Computer Graphics, Conference, Singapore, SMU, Asia Graphics, Rendering, Visualization, Animation">
     
-    <meta name="author" content="Pacific Graphics 2026 Committee">
-    <meta name="copyright" content="Pacific Graphics 2026">
-    <meta name="robots" content="index, follow"> <meta property="og:type" content="website">
-    <meta property="og:title" content="Pacific Graphics 2026 - Singapore">
-    <meta property="og:description" content="The 34th Pacific Conference on Computer Graphics and Applications. Join us in Singapore, Oct 20-23, 2026.">
-    <meta property="og:image" content="pg26_files/share-preview.png"> <meta property="og:url" content="https://pacificgraphics2026.github.io/"> <meta property="og:site_name" content="PG 2026">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Pacific Graphics 2026 Singapore">
-    <meta name="twitter:description" content="Annual international conference on computer graphics and applications.">
-    <meta name="twitter:image" content="pg26_files/share-preview.png">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Event",
-      "name": "Pacific Graphics 2026",
-      "startDate": "2026-10-20",
-      "endDate": "2026-10-23",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "location": {
-        "@type": "Place",
-        "name": "Ngee Ann Kongsi Auditorium",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "60 Stamford Rd",
-          "addressLocality": "Singapore",
-          "postalCode": "178900",
-          "addressCountry": "SG"
-        }
-      },
-      "image": [
-        "pg26_files/PG2026_Logo_png.png",
-        "pg26_files/Auditoriums.jpg"
-      ],
-      "description": "Pacific Graphics (PG) is an annual international conference on computer graphics and applications. PG 2026 will be hosted at Singapore Management University.",
-      "organizer": {
-        "@type": "Organization",
-        "name": "Asia Graphics Association",
-        "url": "http://www.asiagraphics.org"
-      }
-    }
-    </script>
-    <link rel="icon" href="pg26_files/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="96x96" href="pg26_files/favicon-96x96.png">
-    <link rel="apple-touch-icon" href="pg26_files/apple-touch-icon.png">
-    <meta name="theme-color" content="#4f46e5">
-
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,25 +17,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxTlZBo=" crossorigin=""></script>
     
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script> 
-    
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FontLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/TextGeometry.js"></script>
- -->
-    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-    <script type="importmap">
-    {
-    "imports": {
-      "three": "https://unpkg.com/three@0.154.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/"
-    }
-    }
-    </script>
-
     <style>
-        /* 保持原有的 Style 代码不变 */
         :root {
             /* === 主题核心颜色 === */
             --bg-main: #0F172A;
@@ -101,6 +32,7 @@
             color: #E2E8F0; 
             font-family: var(--font-body);
             overflow-x: hidden;
+            /* 保持原有的网格背景 */
             background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
                               linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -209,60 +141,8 @@
             position: relative;
             min-height: 90vh; 
             overflow: hidden; 
-        }
-        
-        .model-container-style {
-            position: absolute; 
-            z-index: 30; 
-            pointer-events: none; 
-            display: none; 
-        }
-        @media (min-width: 1024px) { 
-            .model-container-style {
-                display: block; 
-            }
-        }
-        
-        #model-container-left {
-            left: 10%; 
-            top: 40%;
-            transform: translateY(-50%);
-            width: 400px; 
-            height: 400px; 
-            filter: drop-shadow(0 0 15px rgba(0, 200, 255, 0.4)); 
-        }
-
-        #model-container-right {
-            right: 20; 
-            top: 55%;
-            transform: translateY(-50%);
-            width: 50%; 
-            height: 100%;
-            z-index: 18; 
-            pointer-events: auto; 
-        }
-
-        .hero-geometric-decor {
-            position: absolute;
-            z-index: 15;
-            filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
-            pointer-events: none;
-        }
-
-        .floating-decor {
-            position: absolute;
-            z-index: 10;
-            pointer-events: none;
-            background-color: var(--theme-accent); 
-            opacity: 0; 
-            animation: float-fade linear infinite;
-        }
-
-        @keyframes float-fade {
-            0% { transform: translate(0, -10%) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.3; }
-            100% { transform: translate(0, 100vh) rotate(360deg); opacity: 0; }
+            /* 确保 Grid 背景在 Hero 后面可见 */
+            background: transparent;
         }
         
         #hero-main-title {
@@ -291,21 +171,41 @@
             to { text-shadow: 0 0 12px rgba(251, 191, 36, 0.9), 0 0 25px rgba(251, 191, 36, 0.6), 0 0 40px rgba(251, 191, 36, 0.4); }
         }
         
+        /* 修改背景容器样式 
+           使其无缝融合
+        */
         #hero #canvas-container {
             position: absolute;
             inset: 0; 
             border: none; 
             box-shadow: none; 
-            background-color: transparent; 
-            opacity: 0.6; 
-            filter: brightness(0.7) contrast(1.2); 
-            max-width: none;
+            background-color: var(--bg-main); /* 避免图片加载前透明 */
             width: 100%;
             height: 100%;
+            z-index: 0;
         }
+        
         #hero #canvas-container img {
-            opacity: 0.4; 
-            filter: brightness(0.6) contrast(1.1) grayscale(0.5); 
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 关键：填满容器 */
+            object-position: center;
+            opacity: 0.6; /* 稍微降低不透明度，让文字更清晰 */
+            /* 稍微调暗一点，以配合科技感，并突出前景文字 */
+            filter: brightness(0.8) contrast(1.1); 
+        }
+        
+        /* 新增：底部融合渐变层 */
+        .hero-gradient-mask {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px; /* 渐变高度 */
+            /* 从透明过渡到网页背景色，实现无缝融合 */
+            background: linear-gradient(to bottom, transparent 0%, var(--bg-main) 100%);
+            z-index: 5;
+            pointer-events: none;
         }
         
         #scroll-progress {
@@ -336,12 +236,6 @@
             box-shadow: 0 0 10px var(--theme-accent);
         }
 
-        /* =========================================
-           暴力修复：解决 Leaflet 地图不显示的问题
-           (把修复代码移到了这里，确保生效)
-           ========================================= */
-        
-        /* 1. 强制取消 Tailwind 对地图图片的样式重置 */
         .leaflet-pane img, 
         .leaflet-tile, 
         .leaflet-marker-icon, 
@@ -354,7 +248,6 @@
             border: none !important;
         }
 
-        /* 2. 确保地图容器有背景色（防止瓦片加载慢时透出网页背景） */
         #map {
             background: #242424; 
             z-index: 1;
@@ -364,12 +257,10 @@
             height: 100%;
         }
         
-        /* 3. 修复缩放控件被 Tailwind 样式影响的问题 */
         .leaflet-control-container .leaflet-routing-container-hide {
             display: none;
         }
         
-        /* 4. 可选：给地图瓦片层加黑白滤镜 */
         .leaflet-tile-pane {
             filter: grayscale(100%) contrast(1.1);
         }
@@ -403,11 +294,12 @@
     <main class="pt-20">
     <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
             
-            <div id="model-container-left" class="model-container-style"></div>
-            <div id="model-container-right" class="model-container-style"></div>
             <div id="canvas-container" class="rounded-none overflow-hidden">
-                <img id="fallback-image" src="pg26_files/image_828e5f.jpg" alt="Pacific Graphics 2026" class="w-full h-full object-cover" />
+                <img id="fallback-image" src="pg26_files/pg26_bg.png" alt="Pacific Graphics 2026 Singapore" />
             </div>
+
+            <div class="hero-gradient-mask"></div>
+
             <div class="relative z-20 flex flex-col items-center justify-center w-full">
 
                 <h1 id="hero-main-title" class="mb-8"> PACIFIC<br>
@@ -440,9 +332,7 @@
                 </div>
             </div>
             
-
-
-            </section>
+    </section>
 
         
         <section id="about" class="max-w-6xl mx-auto px-6 py-1 border-t border-[var(--line-color)]">
@@ -452,13 +342,6 @@
                     <div class="w-20 h-1 bg-[var(--theme-accent)] mb-6"></div>
                 </div>
                 <div class="md:w-2/3 space-y-6 text-lg leading-relaxed text-slate-300 bg-slate-800/30 p-8 border border-[var(--line-color)]">
-<!--                     <p>
-                        <strong class="text-white">Pacific Graphics (PG)</strong> is an annual international conference on computer graphics and applications.
-                    </p>
-                    <p>
-                        In 2026, we activate the protocol in <strong class="text-white">Singapore</strong>. We invite you to join the network, exchange data, and help construct the future geometry of our field.
-                    </p>
- -->
                     <p>
                     The 34th Pacific Conference on Computer Graphics and Applications <strong class="text-white">(Pacific Graphics 2026)</strong> will be held in Singapore. 
                     </p>
@@ -493,7 +376,7 @@
 
                     <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors" style="border-color: var(--theme-accent);">
                         <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">CONFERENCE</div>
-                        <p class="text-slate-400 font-mono">Oct 06-09, 2026</p>
+                        <p class="text-slate-400 font-mono">Oct 20-23, 2026</p>
                     </div>
 
                 </div>
@@ -639,10 +522,10 @@
                     
                 <div class="flex flex-col items-center gap-4 p-8 bg-[#1E293B] border border-[var(--line-color)] hover:border-[var(--theme-accent)] hover:shadow-[0_0_20px_rgba(251,191,36,0.15)] transition-all duration-300 group">
                     <div class="h-24 w-full flex items-center justify-center p-4 bg-white border border-slate-700/50 mb-2">
-                        <img src="pg26_files/smu.svg" alt="SMU" class="h-full w-auto object-contain filter brightness(1.5) contrast(1.1)" />
+                        <img src="pg26_files/smu.png" alt="SMU" class="h-full w-auto object-contain filter brightness(1.5) contrast(1.1)" />
                     </div>
                     <div class="text-center w-full">
-                        <div class="font-heading text-lg text-white mb-2 leading-tight">Singapore Management University</div>
+                        <div class="font-heading text-lg text-white mb-2 leading-tight">School of Computing and Information Systems, SMU</div>
                     </div>
                 </div>
                                     
@@ -683,34 +566,10 @@
 
                         <div class="text-slate-300 space-y-4 text-lg font-light leading-relaxed">
                             <p>
-                                Pacific Graphics 2026 will be hosted at the <strong class="text-white">Ngee Ann Kongsi Auditorium</strong>, located within Singapore Management University (SMU) in the heart of Singapore's central business district.
+                                Pacific Graphics 2026 will be hosted by School of Computing and Information Systems, Singapore Management University, at the <strong class="text-white">Ngee Ann Kongsi Auditorium</strong>, located within SMU in the heart of Singapore's central business district.
                             </p>
-<!--                             <p>
-                                Singapore provides convenient international transport links, diverse accommodation options, and a vibrant tech and research ecosystem for conference participants.
-                            </p> -->
                         </div>
                         
-<!--                         <div class="mt-8 bg-[#1E293B] border border-[var(--line-color)] p-6 relative overflow-hidden group hover:border-[var(--theme-accent)] transition-colors duration-300">
-                            <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--theme-accent)]"></div>
-                            
-                            <h3 class="font-heading text-[var(--theme-accent)] text-lg mb-4 flex items-center gap-2">
-                                > INITIATE_NAVIGATION //
-                            </h3>
-                            <ul class="space-y-3 text-slate-300 font-mono text-sm">
-                                <li class="flex items-start gap-3">
-                                    <span class="text-[var(--theme-accent)] mt-1">►</span>
-                                    <span><strong class="text-white">MRT:</strong> Downtown Line (DT17) - Bugis Station (5 min walk)</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="text-[var(--theme-accent)] mt-1">►</span>
-                                    <span><strong class="text-white">MRT:</strong> East-West Line (EW12) - Bugis Station (8 min walk)</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="text-[var(--theme-accent)] mt-1">►</span>
-                                    <span><strong class="text-white">ADDRESS:</strong> 81 Victoria Street, Singapore 188065</span>
-                                </li>
-                            </ul>
-                        </div> -->
                     </div>
                     
                     <div class="grid grid-cols-1 gap-11">
@@ -720,12 +579,6 @@
                                 AUDITORIUM
                             </div>
                         </div>
-<!--                         <div class="w-full h-64 border border-[var(--line-color)] shadow-2xl relative group">
-                            <div id="map" style="width: 100%; height: 100%; z-index: 0;"></div>
-                            <div class="absolute bottom-0 left-0 bg-[var(--bg-main)] px-3 py-1 text-xs text-[var(--theme-accent)] border-t border-r border-[var(--theme-accent)] font-heading" style="z-index: 2;">
-                                MAP
-                            </div>
-                        </div> -->
                     </div>
 
                 </div>
@@ -737,166 +590,81 @@
     <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
         <p>© 2025 PG 2026. ALL RIGHTS RESERVED.</p>
     </footer>
+<script>
+    /* =========================================
+       1. 倒计时逻辑 (Countdown Timer)
+       ========================================= */
+    const targetDate = new Date("October 20, 2026 00:00:00").getTime();
 
+    const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
 
-<script type="module">
-    import * as THREE from 'three';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-    // 引入 RGBELoader 用于加载环境贴图 (让冰块反射看起来更真实)
-    import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+        // 如果已经过了日期，全显示0
+        if (distance < 0) {
+            document.getElementById("cd-days").innerText = "00";
+            document.getElementById("cd-hours").innerText = "00";
+            document.getElementById("cd-minutes").innerText = "00";
+            document.getElementById("cd-seconds").innerText = "00";
+            return;
+        }
 
-    const loadInteractiveModel = (containerId, modelUrl, scaleMultiplier = 2.5, yOffset = 0.0) => {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+        // 计算天、时、分、秒
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        const scene = new THREE.Scene();
+        // 补零函数 (例如 9 -> 09)
+        const pad = (n) => n < 10 ? '0' + n : n;
+        const padDays = (n) => n < 10 ? '00' + n : (n < 100 ? '0' + n : n); // 天数补成三位数
 
-        const camera = new THREE.PerspectiveCamera(30, container.clientWidth / container.clientHeight, 0.1, 100);
-        camera.position.set(0, 1, 10);
-        camera.lookAt(0, -2, 0);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setClearColor(0x000000, 0); 
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        // 使用 ACESFilmic 色调映射处理高光，防止过曝
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.0;
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-        
-        renderer.domElement.style.position = 'absolute';
-        renderer.domElement.style.top = '0';
-        renderer.domElement.style.left = '0';
-        renderer.domElement.style.zIndex = '10';
-        renderer.domElement.style.pointerEvents = 'none'; 
-        container.appendChild(renderer.domElement);
-
-        // ==========================================
-        // 关键点 A：冰冷系灯光布局
-        // ==========================================
-        // 使用冷色调（蓝、白、青）的强光来强调冰的质感
-        
-        // 1. 主光源 (冷白)
-        const mainLight = new THREE.DirectionalLight(0xffffff, 1.0);
-        mainLight.position.set(5, 5, 5);
-        scene.add(mainLight);
-
-        // 2. 强力侧逆光 (冰蓝) - 勾勒边缘
-        const rimLightBlue = new THREE.SpotLight(0x00ffff, 20.0);
-        rimLightBlue.position.set(-5, 5, -5);
-        rimLightBlue.angle = Math.PI / 3;
-        rimLightBlue.penumbra = 0.5;
-        scene.add(rimLightBlue);
-
-        // 3. 底部补光 (深蓝) - 增加冰冷氛围
-        const bottomLight = new THREE.PointLight(0x0055ff, 10.0);
-        bottomLight.position.set(0, -5, 2);
-        scene.add(bottomLight);
-        
-        // 4. 环境光
-        scene.add(new THREE.AmbientLight(0x444444));
-
-        // ==========================================
-        // 关键点 B：加载环境贴图 (HDR)
-        // ==========================================
-        // 冰块需要反射环境才能看起来真实。我们加载一个简单的 HDR 环境。
-        new RGBELoader()
-            .setPath('https://threejs.org/examples/textures/equirectangular/') // 使用 three.js 官方示例资源
-            .load('royal_esplanade_1k.hdr', function (texture) {
-                texture.mapping = THREE.EquirectangularReflectionMapping;
-                // scene.background = texture; // 如果想看背景就解开这行
-                scene.environment = texture; // 将其设置为环境贴图用于反射
-            });
-
-
-        // ==========================================
-        // 关键点 C：磨砂冰晶材质 (Frosted Ice Material)
-        // ==========================================
-        
-        const loader = new GLTFLoader();
-        
-        loader.load(modelUrl, (gltf) => {
-            const model = gltf.scene;
-
-            const frostedIceMaterial = new THREE.MeshPhysicalMaterial({
-                // === 基础色 ===
-                color: 0xddeeff,         // 极淡的冰蓝色
-
-                // === 1. 核心：粗糙的物理属性 ===
-                metalness: 0.0,          // 非金属
-                roughness: 0.03,         // 【关键】高粗糙度！模拟磨砂结霜表面，不再是光滑玻璃
-
-                // === 2. 半透明冰块 ===
-                transmission: 1,       // 透光，但不是全透，有浑浊感
-                ior: 1.31,               // 真实冰的折射率
-                thickness: 3.0,          // 厚度感
-                attenuationColor: 0xaaccff, // 内部光线衰减为冰蓝色
-                attenuationDistance: 5.0,
-
-                // === 3. 模拟冰霜表面的复杂光感 (Sheen & Clearcoat) ===
-                // Sheen (光泽层): 模拟表面细小的冰晶反光，在边缘产生白色的绒毛感
-                sheen: 1.0,
-                sheenRoughness: 0.8,
-                sheenColor: 0xffffff,
-
-                // Clearcoat (清漆层): 在粗糙表面上再加一层微湿的冰膜反射层
-                clearcoat: 1.0,
-                clearcoatRoughness: 0.0,
-
-                // === 4. 自发光 (冰冷内核) ===
-                emissive: 0x66aaff,      // 内部透出冷光
-                emissiveIntensity: 0.6,
-
-                side: THREE.DoubleSide,  // 双面渲染增加体积感
-                transparent: true
-            });
-
-            model.traverse((child) => {
-                if (child.isMesh) {
-                    child.material = frostedIceMaterial;
-                }
-            });
-
-            const box = new THREE.Box3().setFromObject(model);
-            const center = box.getCenter(new THREE.Vector3());
-            const maxDim = Math.max(box.getSize(new THREE.Vector3()).x, box.getSize(new THREE.Vector3()).y, box.getSize(new THREE.Vector3()).z);
-            const baseScaleFactor = 5 / maxDim; 
-            
-            model.scale.multiplyScalar(baseScaleFactor * scaleMultiplier); 
-            box.setFromObject(model); 
-            box.getCenter(center);
-            model.position.x -= center.x;
-            model.position.y -= center.y;
-            model.position.z -= center.z;
-            model.position.y += (yOffset - 2.0); 
-
-            scene.add(model);
-            
-            const animate = () => {
-                requestAnimationFrame(animate);
-                if (model) model.rotation.y += 0.002; // 缓慢旋转
-                renderer.render(scene, camera);
-            };
-            animate();
-
-        }, undefined, (error) => {
-            console.error('Error:', error);
-        });
-
-        window.addEventListener('resize', () => {
-            if (container) {
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            }
-        });
+        // 更新 DOM
+        document.getElementById("cd-days").innerText = padDays(days);
+        document.getElementById("cd-hours").innerText = pad(hours);
+        document.getElementById("cd-minutes").innerText = pad(minutes);
+        document.getElementById("cd-seconds").innerText = pad(seconds);
     };
 
-    // 启动
-    loadInteractiveModel('model-container-right', 'Untitled.glb', 0.4, 0.0);
+    // 每秒刷新一次
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // 初始化立即执行一次
+
+
+    /* =========================================
+       2. 顶部滚动进度条 (Scroll Progress Bar)
+       ========================================= */
+    window.onscroll = function() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("scroll-progress").style.width = scrolled + "%";
+    };
     
+    /* =========================================
+       3. 导航栏高亮 (Active Nav Link)
+       ========================================= */
+    // 简单的滚动监听，高亮当前所在的 Section 对应的导航
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 150)) { // 150px 偏移量
+                current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.dataset.target === current) {
+                link.classList.add("active");
+            }
+        });
+    });
 </script>
-
-
-</body>
+    </body>
 </html>
