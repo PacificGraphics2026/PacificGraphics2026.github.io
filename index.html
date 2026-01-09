@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en" style="scroll-behavior: smooth; scroll-padding-top: 100px;">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,12 +14,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nova+Mono:wght@400;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
         :root {
-            /* === 主题核心颜色 === */
             --bg-main: #0F172A;
             --theme-accent: #FBBF24;
             --line-color: #334155; 
@@ -32,7 +31,6 @@
             color: #E2E8F0; 
             font-family: var(--font-body);
             overflow-x: hidden;
-            /* 保持原有的网格背景 */
             background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
                               linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -47,18 +45,17 @@
         }
         
         .header-logo-container {
-            width: 350px; 
+            width: 250px; 
             height: 100px;
             overflow: hidden;
             display: flex;
             align-items: center;
+            margin-right: 2rem;
         }
+
         .header-logo-container img {
             filter: brightness(1.5) contrast(1.2); 
             transition: filter 0.3s;
-        }
-        .header-logo-container img:hover {
-            filter: brightness(2) contrast(1.5) drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
         }
 
         .nav-link {
@@ -67,16 +64,16 @@
             transition: color 0.3s;
             letter-spacing: 0.05em;
         }
-        .nav-link:hover { color: var(--theme-accent); }
-        .nav-link::after, .nav-link.active::after {
+        .nav-link:hover, .nav-link.active { color: var(--theme-accent); } 
+        
+        .nav-link::after {
             content: '';
             position: absolute;
             width: 100%;
             height: 2px;
             bottom: -2px;
             left: 0;
-            background-color: transparent;
-            border-bottom: 2px solid var(--theme-accent);
+            background-color: var(--theme-accent);
             transform: scaleX(0);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -90,185 +87,45 @@
             font-size: 1.125rem;
             padding: 0.5rem 2rem;
             transition: all 0.3s ease;
-            box-shadow: 0 0 0 rgba(251, 191, 36, 0.5);
         }
         .btn-structural:hover { 
             background-color: var(--theme-accent);
             color: var(--bg-main); 
             box-shadow: 0 0 15px rgba(251, 191, 36, 0.7);
-            transform: translateY(-1px);
         }
 
         .chair-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
+            display: flex; align-items: center; gap: 1rem; padding: 1rem 0;
             border-bottom: 1px dashed var(--line-color);
-            transition: background-color 0.3s;
-        }
-        .chair-card:hover {
-            background-color: #1E293B; 
-        }
-        .chair-card:last-child {
-            border-bottom: none;
         }
         .chair-photo {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            object-fit: cover;
+            width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
             border: 2px solid var(--theme-accent);
-            box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-        }
-        .chair-name {
-            font-family: var(--font-heading);
-            color: #FFFFFF;
-            transition: color 0.2s;
-            letter-spacing: 0.05em;
-        }
-        .chair-name:hover {
-            color: var(--theme-accent);
-            text-decoration: underline;
-        }
-        .chair-affiliation {
-            font-size: 0.875rem;
-            color: var(--line-color);
-            font-family: var(--font-body);
+            background-color: #1e293b;
         }
 
-        #hero {
-            position: relative;
-            min-height: 90vh; 
-            overflow: hidden; 
-            /* 确保 Grid 背景在 Hero 后面可见 */
-            background: transparent;
-        }
-        
         #hero-main-title {
-            position: relative;
-            z-index: 20; 
-            pointer-events: none; 
-            
-            font-size: 5rem; 
-            line-height: 0.9; 
-            letter-spacing: 0.2em; 
-            text-align: center;
-            
-            text-shadow: 
-                0 0 10px rgba(251, 191, 36, 0.6), 
-                0 0 20px rgba(251, 191, 36, 0.4),
-                0 0 30px rgba(251, 191, 36, 0.2);
+            font-size: 5rem; text-align: center; z-index: 20;
             animation: pulse-glow 3s infinite alternate ease-in-out;
         }
-
-        @media (min-width: 640px) { #hero-main-title { font-size: 7rem; } }
         @media (min-width: 1024px) { #hero-main-title { font-size: 10rem; } }
-        @media (min-width: 1280px) { #hero-main-title { font-size: 12rem; } }
 
         @keyframes pulse-glow {
-            from { text-shadow: 0 0 8px rgba(251, 191, 36, 0.7), 0 0 15px rgba(251, 191, 36, 0.5), 0 0 25px rgba(251, 191, 36, 0.3); }
-            to { text-shadow: 0 0 12px rgba(251, 191, 36, 0.9), 0 0 25px rgba(251, 191, 36, 0.6), 0 0 40px rgba(251, 191, 36, 0.4); }
+            from { text-shadow: 0 0 8px rgba(251, 191, 36, 0.7); }
+            to { text-shadow: 0 0 12px rgba(251, 191, 36, 0.9); }
         }
-        
-        /* 修改背景容器样式 
-           使其无缝融合
-        */
-        #hero #canvas-container {
-            position: absolute;
-            inset: 0; 
-            border: none; 
-            box-shadow: none; 
-            background-color: var(--bg-main); /* 避免图片加载前透明 */
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-        
-        #hero #canvas-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 关键：填满容器 */
-            object-position: center;
-            opacity: 0.6; /* 稍微降低不透明度，让文字更清晰 */
-            /* 稍微调暗一点，以配合科技感，并突出前景文字 */
-            filter: brightness(0.8) contrast(1.1); 
-        }
-        
-        /* 新增：底部融合渐变层 */
-        .hero-gradient-mask {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 250px; /* 渐变高度 */
-            /* 从透明过渡到网页背景色，实现无缝融合 */
-            background: linear-gradient(to bottom, transparent 0%, var(--bg-main) 100%);
-            z-index: 5;
-            pointer-events: none;
-        }
-        
+
         #scroll-progress {
-            position: fixed;
-            top: 80px; 
-            left: 0;
-            height: 3px;
-            width: 0%;
-            background-color: var(--theme-accent);
-            z-index: 100;
-            box-shadow: 0 0 15px var(--theme-accent);
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background-color: var(--theme-accent); z-index: 100;
             transition: width 0.1s linear; 
         }
 
-        .date-box {
-            border-left: 2px solid var(--theme-accent);
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        .date-box::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 0;
-            width: 10px;
-            height: 10px;
-            background-color: var(--theme-accent);
-            box-shadow: 0 0 10px var(--theme-accent);
-        }
-
-        .leaflet-pane img, 
-        .leaflet-tile, 
-        .leaflet-marker-icon, 
-        .leaflet-marker-shadow {
-            max-width: none !important;
-            max-height: none !important;
-            width: auto !important;
-            height: auto !important;
-            box-shadow: none !important;
-            border: none !important;
-        }
-
-        #map {
-            background: #242424; 
-            z-index: 1;
-            isolation: isolate;
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .leaflet-control-container .leaflet-routing-container-hide {
-            display: none;
-        }
-        
-        .leaflet-tile-pane {
-            filter: grayscale(100%) contrast(1.1);
-        }
+        #map { width: 100%; height: 400px; filter: grayscale(100%) invert(90%); }
     </style>
 </head>
 
 <body>
-
     <div id="scroll-progress"></div>
 
     <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
@@ -278,111 +135,135 @@
             </a>
             
             <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
-                <a href="#about" class="nav-link" data-target="about">ABOUT</a>
-                <a href="#dates" class="nav-link" data-target="dates">TIMELINE</a>
-                <a href="#committee" class="nav-link" data-target="committee">COMMITTEE</a>
-                <a href="#organizers" class="nav-link" data-target="organizers">SUPPORT</a>
-                <a href="#venue" class="nav-link" data-target="venue">VENUE</a>
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#dates" class="nav-link">TIMELINE</a>
+                <a href="#topics" class="nav-link">TOPICS</a>
+                <a href="#papers" class="nav-link">TRACKS</a>
+                <a href="#submission-info" class="nav-link">SUBMISSION</a>
+                <a href="#committee" class="nav-link">COMMITTEE</a>
+                <a href="#organizers" class="nav-link">SUPPORT</a>
+                <a href="#venue" class="nav-link">VENUE</a>
             </nav>
 
-            <a href="#register" class="btn-structural">
-                REGISTER
-            </a>
+            <!-- <a href="#submission-info" class="btn-structural">REGISTER</a> -->
         </div>
     </header>
 
     <main class="pt-20">
-    <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-            
-            <div id="canvas-container" class="rounded-none overflow-hidden">
-                <img id="fallback-image" src="pg26_files/pg26_bg.png" alt="Pacific Graphics 2026 Singapore" />
+        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+            <div id="canvas-container" class="absolute inset-0 z-0">
+                <img src="pg26_files/pg26_bg.png" alt="BG" class="w-full h-full object-cover opacity-60 brightness-75" />
             </div>
-
-            <div class="hero-gradient-mask"></div>
-
-            <div class="relative z-20 flex flex-col items-center justify-center w-full">
-
-                <h1 id="hero-main-title" class="mb-8"> PACIFIC<br>
-                    <span class="text-[var(--theme-accent)]">GRAPHICS</span><br>
-                    2026
-                </h1>
-
-                <div id="countdown-wrapper" class="flex flex-wrap justify-center gap-4 md:gap-8 animate-fade-in-up">
-                    
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-3 md:p-5 rounded backdrop-blur-md min-w-[80px] md:min-w-[110px] shadow-lg">
-                        <span id="cd-days" class="text-2xl md:text-4xl font-bold text-white font-mono">000</span>
-                        <span class="text-[10px] md:text-xs text-[var(--theme-accent)] tracking-[0.2em] mt-1 border-t border-slate-500 w-full text-center pt-1">DAYS</span>
+            <div class="relative z-20 flex flex-col items-center">
+                <h1 id="hero-main-title"> PACIFIC<br><span class="text-[var(--theme-accent)]">GRAPHICS</span><br>2026</h1>
+                <div id="countdown-wrapper" class="flex flex-wrap justify-center gap-4 mt-12">
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-5 rounded min-w-[110px]">
+                        <span id="cd-days" class="text-4xl font-bold text-white font-mono">000</span>
+                        <span class="text-xs text-[var(--theme-accent)] pt-1">DAYS</span>
                     </div>
-
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-3 md:p-5 rounded backdrop-blur-md min-w-[80px] md:min-w-[110px] shadow-lg">
-                        <span id="cd-hours" class="text-2xl md:text-4xl font-bold text-white font-mono">00</span>
-                        <span class="text-[10px] md:text-xs text-slate-400 tracking-[0.2em] mt-1 border-t border-slate-500 w-full text-center pt-1">HRS</span>
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-5 rounded min-w-[110px]">
+                        <span id="cd-hours" class="text-4xl font-bold text-white font-mono">00</span>
+                        <span class="text-xs text-slate-400 pt-1">HRS</span>
                     </div>
-
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-3 md:p-5 rounded backdrop-blur-md min-w-[80px] md:min-w-[110px] shadow-lg">
-                        <span id="cd-minutes" class="text-2xl md:text-4xl font-bold text-white font-mono">00</span>
-                        <span class="text-[10px] md:text-xs text-slate-400 tracking-[0.2em] mt-1 border-t border-slate-500 w-full text-center pt-1">MIN</span>
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-5 rounded min-w-[110px]">
+                        <span id="cd-minutes" class="text-4xl font-bold text-white font-mono">00</span>
+                        <span class="text-xs text-slate-400 pt-1">MIN</span>
                     </div>
-
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-[var(--theme-accent)] p-3 md:p-5 rounded backdrop-blur-md min-w-[80px] md:min-w-[110px] shadow-[0_0_20px_rgba(251,191,36,0.3)]">
-                        <span id="cd-seconds" class="text-2xl md:text-4xl font-bold text-[var(--theme-accent)] font-mono">00</span>
-                        <span class="text-[10px] md:text-xs text-[var(--theme-accent)] tracking-[0.2em] mt-1 border-t border-[var(--theme-accent)] w-full text-center pt-1">SEC</span>
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-[var(--theme-accent)] p-5 rounded min-w-[110px]">
+                        <span id="cd-seconds" class="text-4xl font-bold text-[var(--theme-accent)] font-mono">00</span>
+                        <span class="text-xs text-[var(--theme-accent)] pt-1">SEC</span>
                     </div>
-
                 </div>
             </div>
-            
-    </section>
+        </section>
 
-        
-        <section id="about" class="max-w-6xl mx-auto px-6 py-1 border-t border-[var(--line-color)]">
+        <section id="about" class="max-w-6xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
             <div class="flex flex-col md:flex-row gap-12 items-start">
                 <div class="md:w-1/4 sticky top-24">
-                    <h2 class="font-heading text-4xl text-white mb-6">About <br> Pacific Graphics<br></h2>
-                    <div class="w-20 h-1 bg-[var(--theme-accent)] mb-6"></div>
+                    <h2 class="text-4xl text-white mb-6">About <br> Pacific Graphics</h2>
+                    <div class="w-20 h-1 bg-[var(--theme-accent)]"></div>
                 </div>
-                <div class="md:w-2/3 space-y-6 text-lg leading-relaxed text-slate-300 bg-slate-800/30 p-8 border border-[var(--line-color)]">
-                    <p>
-                    The 34th Pacific Conference on Computer Graphics and Applications <strong class="text-white">(Pacific Graphics 2026)</strong> will be held in Singapore. 
-                    </p>
-                    <p>
-                    As the flagship annual conference of the Asia Graphics Association, it provides a premium global forum for researchers and practitioners to present and discuss the latest innovations, problems, and technologies in computer graphics.
-                    </p>
-
+                <div class="md:w-2/3 space-y-6 text-lg text-slate-300 bg-slate-800/30 p-8 border border-[var(--line-color)]">
+                    <p>The 34th Pacific Conference on Computer Graphics and Applications <strong class="text-white">(Pacific Graphics 2026)</strong> will be held in Singapore from October 20 to 23, 2026.</p>
+                    <p>Pacific Graphics is the annual flagship conference of the Asia Graphics Association. As a highly-regarded international event, it provides a premium platform for researchers and practitioners to share the latest advances in computer graphics and interactive techniques.</p>
+                    <p>Hosted by <strong class="text-white">Singapore Management University (SMU)</strong>, the conference will feature high-quality paper presentations, keynote speeches by world-renowned scholars, and various networking opportunities in the heart of Singapore.</p>
                 </div>
             </div>
         </section>
 
-        <section id="dates" class="py-24 border-t border-[var(--line-color)] relative">
-            <div class="max-w-6xl mx-auto px-6 relative z-10">
-                <h2 class="font-heading text-4xl text-white text-center mb-16">TIMELINE</h2>
-                
+        <section id="dates" class="py-24 border-t border-[var(--line-color)]">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-4xl text-white text-center mb-16 uppercase">Timeline (AoE)</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    
-                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
-                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">ABSTRACT SUBMISSION</div>
-                        <p class="text-slate-400 font-mono">TBD</p>
+                    <div class="bg-[#1E293B] p-6 border-l-2 border-amber-500">
+                        <div class="text-amber-500 text-sm">ABSTRACT DUE</div>
+                        <p class="text-xl">June 1, 2026</p>
                     </div>
-
-                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
-                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">FULL SUBMISSION</div>
-                        <p class="text-slate-400 font-mono">TBD</p>
+                    <div class="bg-[#1E293B] p-6 border-l-2 border-amber-500">
+                        <div class="text-amber-500 text-sm">PAPER SUBMISSION</div>
+                        <p class="text-xl">June 8, 2026</p>
                     </div>
-
-                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors">
-                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">NOTIFICATION</div>
-                        <p class="text-slate-400 font-mono">TBD</p>
+                    <div class="bg-[#1E293B] p-6 border-l-2 border-amber-500">
+                        <div class="text-amber-500 text-sm">DECISION</div>
+                        <p class="text-xl">July 31, 2026</p>
                     </div>
-
-                    <div class="bg-[#1E293B] p-6 border border-[var(--line-color)] date-box hover:bg-slate-800 transition-colors" style="border-color: var(--theme-accent);">
-                        <div class="font-heading text-sm text-[var(--theme-accent)] mb-2">CONFERENCE</div>
-                        <p class="text-slate-400 font-mono">Oct 06-09, 2026</p>
+                    <div class="bg-amber-500/20 p-6 border-l-2 border-amber-500">
+                        <div class="text-white text-sm font-bold">CONFERENCE</div>
+                        <p class="text-xl text-amber-500 font-bold">Oct 20-23, 2026</p>
                     </div>
-
                 </div>
             </div>
         </section>
 
+        <section id="topics" class="max-w-6xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/4">
+                    <h2 class="text-4xl text-white">Topics</h2>
+                    <div class="w-20 h-1 bg-[var(--theme-accent)] mt-4"></div>
+                </div>
+                <div class="md:w-2/3 bg-slate-800/30 p-8 border border-[var(--line-color)]">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-y-3 list-disc list-inside text-slate-300 font-mono">
+                        <li>Modeling and shape analysis</li>
+                        <li>Rendering and illumination</li>
+                        <li>Animation and simulation</li>
+                        <li>Imaging and computational photography</li>
+                        <li>Visualization and HCI</li>
+                        <li>Geometric Deep Learning</li>
+                        <li>VR / AR / Mixed Reality</li>
+                        <li>Fabrication and 3D printing</li>
+                        <li>Image and video processing</li>
+                        <li>Physically-based modeling</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="papers" class="py-24 border-t border-[var(--line-color)]">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-4xl text-white text-center mb-12">PAPER TRACKS</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                    <div class="bg-[#1E293B] p-8 border border-[var(--line-color)]">
+                        <h3 class="text-xl text-[var(--theme-accent)] mb-4 uppercase">Journal Papers</h3>
+                        <p class="text-slate-300">Accepted journal track papers will be published in a special issue of <strong class="text-white">Computer Graphics Forum (CGF)</strong>, the journal of the Eurographics Association.</p>
+                    </div>
+                    <div class="bg-[#1E293B] p-8 border border-[var(--line-color)]">
+                        <h3 class="text-xl text-[var(--theme-accent)] mb-4 uppercase">Conference Papers</h3>
+                        <p class="text-slate-300">Accepted conference track papers will be published by the <strong class="text-white">Eurographics Digital Library</strong> and presented at the conference.</p>
+                    </div>
+                </div>
+                <div id="submission-info" class="bg-slate-800/30 p-10 border border-[var(--line-color)]">
+                    <h3 class="text-2xl text-white mb-6 uppercase underline decoration-amber-500 underline-offset-8">Submission Process</h3>
+                    <ul class="space-y-4 text-slate-300 list-disc list-inside font-mono">
+                        <li>All submissions must be original and not concurrently under review elsewhere.</li>
+                        <li>Submit via SRM system: <a href="https://srmv2.eg.org/" class="text-amber-500 underline hover:text-white transition-colors">srmv2.eg.org</a></li>
+                        <li>Reviewing process: Double-blind.</li>
+                        <li>Submission length: 7–12 pages (excluding references).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+ 
         <section id="committee" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
             <h2 class="font-heading text-4xl text-white text-center mb-12">COMMITTEE</h2>
             
@@ -586,9 +467,9 @@
         </section>
 
     </main>
-    
+   
     <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
-        <p>© 2025 PG 2026. ALL RIGHTS RESERVED.</p>
+        <p>© PG 2026. ALL RIGHTS RESERVED.</p>
     </footer>
 <script>
     /* =========================================
