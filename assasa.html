@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth; scroll-padding-top: 100px;">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Pacific Graphics 2026 (PG2026) - Singapore | International Conference on Computer Graphics</title>
+    
+    <meta name="description" content="Pacific Graphics 2026 (PG 2026) will be held in Singapore from Oct 6-9, 2026. Hosted by SMU, it is a flagship conference of the Asia Graphics Association on computer graphics and applications.">
+    
+    <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="pg26_files/favicon.ico">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Mono:wght@400;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <style>
+        :root {
+            --bg-main: #0F172A;
+            --theme-accent: #FBBF24;
+            --line-color: #334155; 
+            --font-heading: 'Nova Mono', monospace;
+            --font-body: 'Roboto Mono', monospace;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: #E2E8F0; 
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: var(--font-heading);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        
+        .header-logo-container {
+            width: 250px; 
+            height: 100px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            margin-right: 2rem;
+        }
+
+        .header-logo-container img {
+            filter: brightness(1.5) contrast(1.2); 
+            transition: filter 0.3s;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+            letter-spacing: 0.05em;
+        }
+        .nav-link:hover, .nav-link.active { color: var(--theme-accent); } 
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--theme-accent);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+        .btn-structural {
+            border: 2px solid var(--theme-accent);
+            color: var(--theme-accent);
+            background-color: transparent;
+            font-family: var(--font-heading);
+            font-size: 1.125rem;
+            padding: 0.5rem 2rem;
+            transition: all 0.3s ease;
+        }
+        .btn-structural:hover { 
+            background-color: var(--theme-accent);
+            color: var(--bg-main); 
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.7);
+        }
+
+        .chair-card {
+            display: flex; align-items: center; gap: 1rem; padding: 1rem 0;
+            border-bottom: 1px dashed var(--line-color);
+        }
+        .chair-photo {
+            width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+            border: 2px solid var(--theme-accent);
+            background-color: #1e293b;
+        }
+
+        #hero-main-title {
+            font-size: 5rem; text-align: center; z-index: 20;
+            animation: pulse-glow 3s infinite alternate ease-in-out;
+        }
+        @media (min-width: 1024px) { #hero-main-title { font-size: 10rem; } }
+
+        @keyframes pulse-glow {
+            from { text-shadow: 0 0 8px rgba(251, 191, 36, 0.7); }
+            to { text-shadow: 0 0 12px rgba(251, 191, 36, 0.9); }
+        }
+
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background-color: var(--theme-accent); z-index: 100;
+            transition: width 0.1s linear; 
+        }
+
+        #map { width: 100%; height: 400px; filter: grayscale(100%) invert(90%); }
+    </style>
+</head>
+
+<body>
+    <div id="scroll-progress"></div>
+
+    <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
+        <div class="max-w-7xl mx-auto px-10 h-30 flex items-center justify-between">
+            <a href="#hero" class="header-logo-container">
+                <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
+            </a>
+            
+<!--             <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#dates" class="nav-link">TIMELINE</a>
+                <a href="#topics" class="nav-link">TOPICS</a>
+                <a href="#papers" class="nav-link">TRACKS</a>
+                <a href="#submission-info" class="nav-link">SUBMISSION</a>
+                <a href="#committee" class="nav-link">COMMITTEE</a>
+                <a href="#organizers" class="nav-link">SUPPORT</a>
+                <a href="#venue" class="nav-link">VENUE</a>
+            </nav> -->
+            <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#cfp" class="nav-link">CALL FOR PAPERS</a> 
+                <a href="#dates" class="nav-link">TIMELINE</a>
+                <a href="#committee" class="nav-link">COMMITTEE</a>
+                <a href="#organizers" class="nav-link">SUPPORT</a>
+                <a href="#venue" class="nav-link">VENUE</a>
+            </nav>
+
+            <!-- <a href="#submission-info" class="btn-structural">REGISTER</a> -->
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+            <div id="canvas-container" class="absolute inset-0 z-0">
+                <img src="pg26_files/pg26_bg.png" alt="BG" class="w-full h-full object-cover opacity-60 brightness-75" />
+            </div>
+            <div class="relative z-20 flex flex-col items-center">
+                <h1 id="hero-main-title"> PACIFIC<br><span class="text-[var(--theme-accent)]">GRAPHICS</span><br>2026</h1>
+                <div id="countdown-wrapper" class="flex flex-wrap justify-center gap-4 mt-12">
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-5 rounded min-w-[110px]">
+                        <span id="cd-days" class="text-4xl font-bold text-white font-mono">000</span>
+                        <span class="text-xs text-[var(--theme-accent)] pt-1">DAYS</span>
+                    </div>
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-5 rounded min-w-[110px]">
+                        <span id="cd-hours" class="text-4xl font-bold text-white font-mono">00</span>
+                        <span class="text-xs text-slate-400 pt-1">HRS</span>
+                    </div>
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 p-5 rounded min-w-[110px]">
+                        <span id="cd-minutes" class="text-4xl font-bold text-white font-mono">00</span>
+                        <span class="text-xs text-slate-400 pt-1">MIN</span>
+                    </div>
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-[var(--theme-accent)] p-5 rounded min-w-[110px]">
+                        <span id="cd-seconds" class="text-4xl font-bold text-[var(--theme-accent)] font-mono">00</span>
+                        <span class="text-xs text-[var(--theme-accent)] pt-1">SEC</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="max-w-6xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                <div class="md:w-1/4 sticky top-24">
+                    <h2 class="text-4xl text-white mb-6">About <br> Pacific Graphics</h2>
+                    <div class="w-20 h-1 bg-[var(--theme-accent)]"></div>
+                </div>
+                <div class="md:w-2/3 space-y-6 text-lg text-slate-300 bg-slate-800/30 p-8 border border-[var(--line-color)]">
+                    <p>Pacific Graphics is the annual flagship conference of the Asia Graphics Association. As a highly-regarded international event, it provides a premium platform for researchers and practitioners to share the latest advances in computer graphics and interactive techniques.</p>
+                    <p>The 34th Pacific Conference on Computer Graphics and Applications <strong class="text-white">(Pacific Graphics 2026)</strong> will be held in Singapore from October 6 to 9, 2026.</p>
+
+                    <!-- <p>Hosted by <strong class="text-white">Singapore Management University (SMU)</strong>, the conference will feature high-quality paper presentations, keynote speeches by world-renowned scholars, and various networking opportunities in the heart of Singapore.</p> -->
+                </div>
+            </div>
+        </section>
+
+<section id="cfp" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
+    
+    <div class="text-center mb-16">
+        <h2 class="text-5xl text-white font-heading mb-6">CALL FOR PAPERS</h2>
+        <div class="w-32 h-1 bg-[var(--theme-accent)] mx-auto"></div>
+    </div>
+
+    <div class="mb-16">
+        <div class="prose prose-invert max-w-none text-slate-300 text-lg leading-relaxed font-light">
+            <p class="mb-6">
+                We welcome original, unpublished submissions in all areas of computer graphics and its applications. The topics include (but are not limited to) <span class="text-[var(--theme-accent)] font-mono">modeling, rendering, animation, imaging, visualization, human-computer interaction, and graphics systems</span>.
+            </p>
+            <p>
+                Pacific Graphics 2026 will have two integrated paper tracks: <strong>Journal (Computer Graphics Forum)</strong> and <strong>Conference</strong>:
+            </p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-10 mb-20">
+        
+        <div class="bg-[#1E293B] border-l-4 border-[var(--theme-accent)] p-10 shadow-2xl relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                <span class="text-9xl font-heading text-white">J</span>
+            </div>
+            <h3 class="text-2xl text-white font-bold mb-4 font-heading tracking-wider">JOURNAL PAPERS</h3>
+            <p class="text-slate-300 text-lg leading-relaxed">
+                Journal Papers containing high-quality original and unpublished results are solicited for the journal track, and will be published in a special issue of <strong class="text-white">Computer Graphics Forum (CGF)</strong>, the journal of the Eurographics Association, in print and online in 2026. Each paper is recommended to be 10-12 pages in length.
+            </p>
+        </div>
+
+        <div class="bg-[#1E293B] border-l-4 border-slate-600 p-10 shadow-2xl relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                <span class="text-9xl font-heading text-white">C</span>
+            </div>
+            <h3 class="text-2xl text-white font-bold mb-4 font-heading tracking-wider">CONFERENCE PAPERS</h3>
+            <p class="text-slate-300 text-lg leading-relaxed">
+                Conference Papers are expected to present novel and unpublished research advancing computer graphics and applications. However, the evidence supporting these advances might not be as comprehensive as expected for Journal Papers. Papers accepted to this track will be published in the <strong class="text-white">PG2026 proceedings in the EG digital library</strong>. Each paper is recommended to be 7-8 pages in length, not including bibliography and figure-only pages.
+            </p>
+        </div>
+    </div>
+
+    <div class="mb-20">
+        <h3 class="text-3xl text-white font-heading text-center mb-10 uppercase">Poster and Demo Sessions</h3>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            
+            <div class="border border-dashed border-slate-500 p-8 rounded bg-slate-800/20 flex flex-col justify-center">
+                <p class="text-slate-300 text-lg leading-relaxed mb-4">
+                    The submissions in the <strong class="text-white">demo session</strong> are encouraged to showcase the latest in graphics, interaction, and immersive tech — from displays and capture to robotics, AI, AR, entertainment, and the arts. 
+                </p>
+                <p class="text-[var(--theme-accent)] italic text-lg font-light border-l-2 border-[var(--theme-accent)] pl-4">
+                    "Where will emerging technologies take us next? Experience AR, VR, MR, projection mapping, and multi-sensory tools reshaping how we work, play, and solve real-world challenges."
+                </p>
+            </div>
+
+            <div class="bg-[#1E293B] p-8 border border-[var(--line-color)] shadow-lg">
+                <h4 class="text-xl text-white font-bold mb-6 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-[var(--theme-accent)] rounded-full"></span>
+                    Submission Requirements
+                </h4>
+                <ul class="space-y-4 text-slate-300 font-mono text-sm md:text-base">
+                    <li class="flex items-start gap-3">
+                        <span class="text-[var(--theme-accent)]">➤</span>
+                        <span>In addition, the conference will also include posters/demos sessions.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-[var(--theme-accent)]">➤</span>
+                        <span><strong>Length:</strong> The poster/demo paper should be no more than <strong>2 pages</strong>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-[var(--theme-accent)]">➤</span>
+                        <span><strong>Review:</strong> The submission will be reviewed by the committee members and need to be <strong>anonymized</strong>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-[var(--theme-accent)]">➤</span>
+                        <span>All posters/demos should be submitted through <a href="#" class="text-white underline hover:text-[var(--theme-accent)]">SRM system for posters and demos</a>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-[var(--theme-accent)]">➤</span>
+                        <span>A LaTeX-template is available at: <a href="#" class="text-white underline hover:text-[var(--theme-accent)]">LaTeX-template</a>.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-slate-800/30 border border-[var(--line-color)] p-10 md:p-14 rounded-sm">
+        <h3 class="text-2xl text-white font-bold mb-8 font-heading text-center border-b border-slate-700 pb-4">MAIN PAPER SUBMISSION & REVIEW</h3>
+        
+        <div class="space-y-6 text-slate-300 text-lg leading-relaxed text-justify">
+            <p>
+                All papers should be submitted through the <a href="https://srmv2.eg.org/" class="text-[var(--theme-accent)] underline underline-offset-4 hover:text-white transition-colors">SRM system</a> for papers. A laTex-template is available at: <a href="#" class="text-[var(--theme-accent)] underline underline-offset-4 hover:text-white transition-colors">LaTex-template</a>.
+            </p>
+            <p>
+                At submission time, authors can indicate if their submission should be considered for the Journal track only or for both tracks. The review process, deadline, and committee are the same for both tracks.
+            </p>
+            <p>
+                The review process is <strong>doubly anonymous</strong>. Each paper receives reviews from the committee and external tertiary reviewers. Authors will have opportunities to address reviewers' concerns in a rebuttal period after the first cycle of reviewing before decisions are made.
+            </p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-6 mt-12 justify-center">
+            <a href="https://srmv2.eg.org/" target="_blank" class="btn-structural text-center group relative overflow-hidden">
+                <span class="relative z-10">GO TO SRM SYSTEM</span>
+            </a>
+            <a href="#" class="px-8 py-3 border border-slate-500 text-slate-300 hover:text-white hover:border-white transition-all duration-300 text-center font-heading text-lg">
+                DOWNLOAD TEMPLATE
+            </a>
+        </div>
+    </div>
+
+</section>
+
+        <section id="dates" class="py-24 border-t border-[var(--line-color)]">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-4xl text-white text-center mb-16 uppercase">Timeline (AoE)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-[#1E293B] p-6 border-l-2 border-amber-500">
+                        <div class="text-amber-500 text-sm">ABSTRACT DUE</div>
+                        <p class="text-xl">June 1, 2026</p>
+                    </div>
+                    <div class="bg-[#1E293B] p-6 border-l-2 border-amber-500">
+                        <div class="text-amber-500 text-sm">PAPER SUBMISSION</div>
+                        <p class="text-xl">June 8, 2026</p>
+                    </div>
+                    <div class="bg-[#1E293B] p-6 border-l-2 border-amber-500">
+                        <div class="text-amber-500 text-sm">DECISION</div>
+                        <p class="text-xl">July 31, 2026</p>
+                    </div>
+                    <div class="bg-amber-500/20 p-6 border-l-2 border-amber-500">
+                        <div class="text-white text-sm font-bold">CONFERENCE</div>
+                        <p class="text-xl text-amber-500 font-bold">Oct 6-9, 2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+ 
+        <section id="committee" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
+            <h2 class="font-heading text-4xl text-white text-center mb-12">COMMITTEE</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
+                
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">CONFERENCE CHAIRS</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/sfh.jpg" alt="Shengfeng He" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://shengfenghe.github.io/" target="_blank" class="chair-name text-base">Shengfeng He</a>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
+                            </div>
+                        </div>
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/njm.jpg" alt="Niloy Mitra" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="http://www0.cs.ucl.ac.uk/staff/n.mitra/" target="_blank" class="chair-name text-base">Niloy Mitra</a>
+                                <div class="chair-affiliation text-s">University College London</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/holly.webp" alt="Holly Rushmeier" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://graphics.cs.yale.edu/people/holly-rushmeier/" target="_blank" class="chair-name text-base">Holly Rushmeier</a>
+                                <div class="chair-affiliation text-s">Yale University</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">PROGRAM CHAIRS</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/yh.jpg" alt="Ying He" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://personal.ntu.edu.sg/yhe/" target="_blank" class="chair-name text-base">Ying He</a>
+                                <div class="chair-affiliation text-s">Nanyang Technological University</div>
+                            </div>
+                        </div>
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/nils.jpeg" alt="Nils Thuerey" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://www.professoren.tum.de/en/thuerey-nils" target="_blank" class="chair-name text-base">Nils Thuerey</a>
+                                <div class="chair-affiliation text-s">Technical University of Munich</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/ljl.jpg" alt="Lingjie Liu" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://lingjie0206.github.io//" target="_blank" class="chair-name text-base">Lingjie Liu</a>
+                                <div class="chair-affiliation text-s">University of Pennsylvania</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">ORGINATION CHAIRS</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/bz.jpg" alt="Bin Zhu" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://faculty.smu.edu.sg/profile/bin-zhu-7716" target="_blank" class="chair-name text-base">Bin Zhu</a>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/yyx.jpg" alt="Yangyang Xu" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://cnnlstm.github.io/" target="_blank" class="chair-name text-base">Yangyang Xu</a>
+                                <div class="chair-affiliation text-s">Harbin Institute of Technology, Shenzhen</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/cx.jpg" alt="Cheng Xu" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://cschengxu.github.io//" target="_blank" class="chair-name text-base">Cheng Xu</a>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">POSTER CHAIRS</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card">
+                            <img src="pg26_files/chairs/nxz.jpg" alt="Nanxuan Zhao" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://www.nxzhao.com//" target="_blank" class="chair-name text-base">Nanxuan Zhao</a>
+                                <div class="chair-affiliation text-s">Adobe</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/xy.png" alt="Xin Yang" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://xinyangdut.github.io/" target="_blank" class="chair-name text-base">Xin Yang</a>
+                                <div class="chair-affiliation text-s">Dalian University of Technology</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#1E293B] p-5 rounded-none border border-[var(--line-color)] shadow-2xl hover:border-[var(--theme-accent)] transition-colors duration-300">
+                    <h3 class="text-lg font-heading text-[var(--theme-accent)] mb-3">DEMO CHAIRS</h3>
+                    <div class="space-y-3">
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/jnl.png" alt="Jiannan Li" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://jchrisli.github.io/" target="_blank" class="chair-name text-base">Jiannan Li</a>
+                                <div class="chair-affiliation text-s">Singapore Management University</div>
+                            </div>
+                        </div>
+                        <div class="chair-card" style="border-bottom: none;">
+                            <img src="pg26_files/chairs/adundar.jpeg" alt="Aysegul Dundar" class="chair-photo w-28 h-28" />
+                            <div class="chair-info">
+                                <a href="https://www.cs.bilkent.edu.tr/~adundar//" target="_blank" class="chair-name text-base">Aysegul Dundar</a>
+                                <div class="chair-affiliation text-s">Bilkent University</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="organizers" class="py-24 border-t border-[var(--line-color)]">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="font-heading text-4xl text-white text-center mb-12">ORGANIZERS & SUPPORT</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                    
+                <div class="flex flex-col items-center gap-4 p-8 bg-[#1E293B] border border-[var(--line-color)] hover:border-[var(--theme-accent)] hover:shadow-[0_0_20px_rgba(251,191,36,0.15)] transition-all duration-300 group">
+                    <div class="h-24 w-full flex items-center justify-center p-4 bg-white border border-slate-700/50 mb-2">
+                        <img src="pg26_files/smu.png" alt="SMU" class="h-full w-auto object-contain filter brightness(1.5) contrast(1.1)" />
+                    </div>
+                    <div class="text-center w-full">
+                        <div class="font-heading text-lg text-white mb-2 leading-tight">School of Computing and Information Systems, SMU</div>
+                    </div>
+                </div>
+                                    
+                <div class="flex flex-col items-center gap-4 p-8 bg-[#1E293B] border border-[var(--line-color)] hover:border-[var(--theme-accent)] hover:shadow-[0_0_20px_rgba(251,191,36,0.15)] transition-all duration-300 group">
+                    <div class="h-24 w-full flex items-center justify-center p-4 bg-white border border-slate-700/50 mb-2">
+                            <img src="pg26_files/ag.png" alt="Pacific Graphics Society" class="h-full w-auto object-contain filter brightness(1.5) contrast(1.1)" />
+                        </div>
+                        <div class="text-center w-full">
+                            <div class="font-heading text-lg text-white mb-2 leading-tight">Asia <br> Graphics</div>
+                        </div>
+                    </div>
+                    
+                <div class="flex flex-col items-center gap-4 p-8 bg-[#1E293B] border border-[var(--line-color)] hover:border-[var(--theme-accent)] hover:shadow-[0_0_20px_rgba(251,191,36,0.15)] transition-all duration-300 group">
+                    <div class="h-24 w-full flex items-center justify-center p-4 bg-white border border-slate-700/50 mb-2">
+                            <img src="pg26_files/eg.jpg" alt="Eurographics" class="h-full w-auto object-contain filter brightness(1.5) contrast(1.1)" />
+                        </div>
+                        <div class="text-center w-full">
+                            <div class="font-heading text-lg text-white mb-2 leading-tight">Eurographics Association</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="venue" class="py-24 border-t border-[var(--line-color)]">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="font-heading text-4xl text-white text-center mb-12">VENUE</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-[var(--theme-accent)] pl-6">
+                            <h3 class="text-2xl font-bold text-white font-heading">Ngee Ann Kongsi Auditorium</h3>
+                            <p class="text-[var(--theme-accent)] font-mono text-sm mt-1">Singapore Management University (SMU)</p>
+                        </div>
+
+                        <div class="text-slate-300 space-y-4 text-lg font-light leading-relaxed">
+                            <p>
+                                Pacific Graphics 2026 will be hosted by School of Computing and Information Systems, Singapore Management University, at the <strong class="text-white">Ngee Ann Kongsi Auditorium</strong>, located within SMU in the heart of Singapore's central business district.
+                            </p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-11">
+                        <div class="w-full h-64 border border-[var(--line-color)] overflow-hidden shadow-2xl relative">
+                            <img src="pg26_files/Auditoriums.png" alt="Ngee Ann Kongsi Auditorium (SMU)" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-700" />
+                            <div class="absolute bottom-0 left-0 bg-[var(--bg-main)] px-3 py-1 text-xs text-[var(--theme-accent)] border-t border-r border-[var(--theme-accent)] font-heading">
+                                AUDITORIUM
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="past-conferences" class="py-24 border-t border-[var(--line-color)] relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] font-heading text-white/[0.02] pointer-events-none select-none whitespace-nowrap">
+                HISTORY
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <h2 class="font-heading text-3xl text-white text-center mb-12 uppercase tracking-widest">
+                    <span class="text-[var(--theme-accent)]"></span> Past Conferences
+                </h2>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-6 font-mono text-sm">
+
+    <a href="https://pg2025.nccu.edu.tw/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2025</span>
+        <span class="text-slate-400 group-hover:text-white">Taipei</span>
+    </a>
+
+    <a href="http://pg2024.hsu.edu.cn/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2024</span>
+        <span class="text-slate-400 group-hover:text-white">Huangshan</span>
+    </a>
+
+    <a href="https://pg2023.org/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2023</span>
+        <span class="text-slate-400 group-hover:text-white">Daejeon</span>
+    </a>
+
+    <a href="http://pg2022.org/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2022</span>
+        <span class="text-slate-400 group-hover:text-white">Kyoto</span>
+    </a>
+
+    <a href="http://pg2021.org/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block whitespace-nowrap">2020/21</span>
+        <span class="text-slate-400 group-hover:text-white">Wellington</span>
+    </a>
+
+    <a href="http://pg19.org/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2019</span>
+        <span class="text-slate-400 group-hover:text-white">Seoul</span>
+    </a>
+
+    <a href="http://sweb.cityu.edu.hk/pg2018/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2018</span>
+        <span class="text-slate-400 group-hover:text-white">Hong Kong</span>
+    </a>
+
+    <a href="http://www.siggraph.org.tw/pg2017/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2017</span>
+        <span class="text-slate-400 group-hover:text-white">Taipei</span>
+    </a>
+
+    <a href="https://indico.oist.jp/indico/event/0/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2016</span>
+        <span class="text-slate-400 group-hover:text-white">Okinawa</span>
+    </a>
+
+    <a href="http://cg.cs.tsinghua.edu.cn/pg2015/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2015</span>
+        <span class="text-slate-400 group-hover:text-white">Beijing</span>
+    </a>
+
+    <a href="http://graphics.ewha.ac.kr/PG14/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2014</span>
+        <span class="text-slate-400 group-hover:text-white">Seoul</span>
+    </a>
+
+    <a href="http://www.pg2013.org/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2013</span>
+        <span class="text-slate-400 group-hover:text-white">Singapore</span>
+    </a>
+
+    <a href="http://sweb.cityu.edu.hk/pg2012/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2012</span>
+        <span class="text-slate-400 group-hover:text-white">Hong Kong</span>
+    </a>
+
+    <a href="http://graphics.csie.ncku.edu.tw/PG2011/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2011</span>
+        <span class="text-slate-400 group-hover:text-white">Kaohsiung</span>
+    </a>
+
+    <a href="http://www.zjucadcg.cn/pg2010/Organization.html" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2010</span>
+        <span class="text-slate-400 group-hover:text-white">Hangzhou</span>
+    </a>
+
+    <a href="http://cg.postech.ac.kr/pg2009/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2009</span>
+        <span class="text-slate-400 group-hover:text-white">Jeju</span>
+    </a>
+
+    <a href="http://www.pg08.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2008</span>
+        <span class="text-slate-400 group-hover:text-white">Tokyo</span>
+    </a>
+
+    <a href="http://mm.cse.wustl.edu/pg07/index.php" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2007</span>
+        <span class="text-slate-400 group-hover:text-white">Maui</span>
+    </a>
+
+    <a href="http://graphics.im.ntu.edu.tw/pg2006/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2006</span>
+        <span class="text-slate-400 group-hover:text-white">Taipei</span>
+    </a>
+
+    <a href="http://www.fst.umac.mo/pg2005/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2005</span>
+        <span class="text-slate-400 group-hover:text-white">Macau</span>
+    </a>
+
+    <a href="http://graphics.snu.ac.kr/pg2004/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2004</span>
+        <span class="text-slate-400 group-hover:text-white">Seoul</span>
+    </a>
+
+    <a href="http://pg2003.cpsc.ucalgary.ca/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2003</span>
+        <span class="text-slate-400 group-hover:text-white">Canmore</span>
+    </a>
+
+    <a href="http://cg.cs.tsinghua.edu.cn/pg2002/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2002</span>
+        <span class="text-slate-400 group-hover:text-white">Beijing</span>
+    </a>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2001</span>
+        <span class="text-slate-400 group-hover:text-white">Tokyo</span>
+    </div>
+
+    <a href="http://www.csis.hku.hk/pg2000/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">2000</span>
+        <span class="text-slate-400 group-hover:text-white">Hong Kong</span>
+    </a>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">1999</span>
+        <span class="text-slate-400 group-hover:text-white">Seoul</span>
+    </div>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">1998</span>
+        <span class="text-slate-400 group-hover:text-white">Singapore</span>
+    </div>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">1997</span>
+        <span class="text-slate-400 group-hover:text-white">Seoul</span>
+    </div>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">1996</span>
+        <span class="text-slate-400 group-hover:text-white">Taipei</span>
+    </div>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">1995</span>
+        <span class="text-slate-400 group-hover:text-white">Seoul</span>
+    </div>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">1994</span>
+        <span class="text-slate-400 group-hover:text-white">Beijing</span>
+    </div>
+
+    <div class="flex items-center gap-3 p-2 hover:bg-slate-800/50 transition-colors border-b border-slate-800 hover:border-[var(--theme-accent)] group cursor-default">
+        <span class="text-[var(--theme-accent)] font-bold group-hover:scale-110 transition-transform inline-block">1993</span>
+        <span class="text-slate-400 group-hover:text-white">Seoul</span>
+    </div>
+
+</div>
+            </div>
+        </section>
+
+    </main>
+   
+    <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
+        <p>© PG 2026. ALL RIGHTS RESERVED.</p>
+    </footer>
+<script>
+    /* =========================================
+       1. 倒计时逻辑 (Countdown Timer)
+       ========================================= */
+    const targetDate = new Date("October 06, 2026 00:00:00").getTime();
+
+    const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        // 如果已经过了日期，全显示0
+        if (distance < 0) {
+            document.getElementById("cd-days").innerText = "00";
+            document.getElementById("cd-hours").innerText = "00";
+            document.getElementById("cd-minutes").innerText = "00";
+            document.getElementById("cd-seconds").innerText = "00";
+            return;
+        }
+
+        // 计算天、时、分、秒
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // 补零函数 (例如 9 -> 09)
+        const pad = (n) => n < 10 ? '0' + n : n;
+        const padDays = (n) => n < 10 ? '00' + n : (n < 100 ? '0' + n : n); // 天数补成三位数
+
+        // 更新 DOM
+        document.getElementById("cd-days").innerText = padDays(days);
+        document.getElementById("cd-hours").innerText = pad(hours);
+        document.getElementById("cd-minutes").innerText = pad(minutes);
+        document.getElementById("cd-seconds").innerText = pad(seconds);
+    };
+
+    // 每秒刷新一次
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // 初始化立即执行一次
+
+
+    /* =========================================
+       2. 顶部滚动进度条 (Scroll Progress Bar)
+       ========================================= */
+    window.onscroll = function() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("scroll-progress").style.width = scrolled + "%";
+    };
+    
+    /* =========================================
+       3. 导航栏高亮 (Active Nav Link)
+       ========================================= */
+    // 简单的滚动监听，高亮当前所在的 Section 对应的导航
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 150)) { // 150px 偏移量
+                current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.dataset.target === current) {
+                link.classList.add("active");
+            }
+        });
+    });
+</script>
+    </body>
+</html>
