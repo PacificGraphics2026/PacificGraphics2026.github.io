@@ -47,11 +47,11 @@
             </a>
             <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
                 <a href="index.html#about" class="nav-link">ABOUT</a>
+                <a href="index.html#dates" class="nav-link">TIMELINE</a>
                 <a href="cfp.html" class="nav-link">CFP</a> 
-                <a href="timeline.html" class="nav-link">TIMELINE</a>
                 <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
                 <a href="index.html#committee" class="nav-link">COMMITTEE</a>
-                <a href="support.html" class="nav-link">SUPPORT</a>
+                <a href="index.html#organizers" class="nav-link">SUPPORT</a>
                 <a href="venue.html" class="nav-link">VENUE</a>
                 <a href="history.html" class="nav-link">HISTORY</a>
             </nav>
@@ -160,10 +160,8 @@
         navLinks.forEach((link) => {
             link.classList.remove("active");
             const linkHref = link.getAttribute("href");
-            if (linkHref.includes(currentPath) && currentPath !== "index.html") {
-                link.classList.add("active");
-            } else if ((currentPath === "index.html" || currentPath === "") && linkHref.includes("index.html")) {
-                if (window.location.hash && linkHref.includes(window.location.hash)) { link.classList.add("active"); }
+            if (currentPath !== "index.html" && currentPath !== "") {
+                if (linkHref.includes(currentPath)) link.classList.add("active");
             }
         });
     </script>
