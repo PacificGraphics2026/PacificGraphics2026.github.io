@@ -3,81 +3,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pacific Graphics 2026 (PG2026) - Singapore | International Conference on Computer Graphics</title>
-    <meta name="description" content="Pacific Graphics 2026 (PG 2026) will be held in Singapore from Oct 6-9, 2026. Hosted by SMU, it is a flagship conference of the Asia Graphics Association on computer graphics and applications.">
+    <title>Pacific Graphics 2026 (PG2026) - Singapore</title>
     <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
-    <link rel="shortcut icon" type="image/png" href="pg26_files/favicon.ico">
-
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <style>
         #canvas-container { position: absolute; inset: 0; z-index: 0; overflow: hidden; display: flex; }
         .design-card {
-            background-color: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--line-color);
-            border-top: 4px solid var(--theme-accent); 
-            border-radius: 1.5rem; 
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            overflow: hidden;
+            background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid var(--line-color);
+            border-top: 4px solid var(--theme-accent); border-radius: 1.5rem; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease; overflow: hidden;
         }
-        .design-card:hover {
-            border-color: rgba(0, 255, 255, 0.4);
-            box-shadow: 0 10px 40px -10px rgba(0, 255, 255, 0.15);
-            transform: translateY(-4px);
-        }
-        #canvas-container img {
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 95%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 50%, transparent 95%, transparent 100%);
-            transform: scale(1.05); 
-        }
-        #canvas-container::after {
-            background-color: var(--bg-main); 
-            opacity: var(--overlay-opacity, 0);
-            z-index: 2; 
-            pointer-events: none;
-            transition: opacity 0.1s linear;
-        }
-        :root {
-            --bg-main: #06111D; 
-            --theme-accent: #00FFFF; 
-            --line-color: #1A2233; 
-            --font-heading: 'Montserrat', sans-serif;
-            --font-body: 'Montserrat', sans-serif;
-        }
-        .bg-glow-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            background: radial-gradient(circle at 20% 20%, #06111D 0%, #030910 50%, #120F2E 100%);
-            filter: blur(100px);
-        }
-        body {
-            color: #E2E8F0; 
-            font-family: var(--font-body);
-            overflow-x: hidden; position: relative;
-        }
+        .design-card:hover { border-color: rgba(0, 255, 255, 0.4); box-shadow: 0 10px 40px -10px rgba(0, 255, 255, 0.15); transform: translateY(-4px); }
+        #canvas-container img { mask-image: linear-gradient(to bottom, black 50%, transparent 95%, transparent 100%); transform: scale(1.05); }
+        :root { --bg-main: #06111D; --theme-accent: #00FFFF; --line-color: #1A2233; --font-heading: 'Montserrat', sans-serif; --font-body: 'Montserrat', sans-serif; }
+        body { color: #E2E8F0; font-family: var(--font-body); overflow-x: hidden; position: relative; }
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
-                              linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px), linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
             background-size: 40px 40px; z-index: -2; opacity: 0.2;
         }
-        h1, h2, h3, .font-heading {
-            font-family: var(--font-heading); letter-spacing: 0.15em; line-height: 1.1; font-weight: 700; color: #FFFFFF;
-        }
+        h1, h2, h3, h4, h5, .font-heading { font-family: var(--font-heading); letter-spacing: 0.15em; line-height: 1.1; font-weight: 700; color: #FFFFFF; }
         .header-logo-container { width: 250px; height: 100px; overflow: hidden; display: flex; align-items: center; margin-right: 2rem; }
         .header-logo-container img { filter: brightness(1.5) contrast(1.2); transition: filter 0.3s; }
         .nav-link { position: relative; padding: 0.5rem 0; transition: color 0.3s; letter-spacing: 0.05em; }
         .nav-link:hover, .nav-link.active { color: var(--theme-accent); } 
-        .nav-link::after {
-            content: ''; position: absolute; width: 100%; height: 2px; bottom: -2px; left: 0;
-            background-color: var(--theme-accent); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+        .nav-link::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: -2px; left: 0; background-color: var(--theme-accent); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
         .chair-card { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px dashed var(--line-color); }
         .chair-photo { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--theme-accent); background-color: #1e293b; }
@@ -101,12 +53,12 @@
             <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
                 <a href="index.html#about" class="nav-link">ABOUT</a>
                 <a href="cfp.html" class="nav-link">CFP</a> 
-                <a href="index.html#dates" class="nav-link">TIMELINE</a>
+                <a href="timeline.html" class="nav-link">TIMELINE</a>
                 <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
                 <a href="index.html#committee" class="nav-link">COMMITTEE</a>
-                <a href="index.html#organizers" class="nav-link">SUPPORT</a>
+                <a href="support.html" class="nav-link">SUPPORT</a>
                 <a href="venue.html" class="nav-link">VENUE</a>
-                <a href="index.html#history" class="nav-link">HISTORY</a>
+                <a href="history.html" class="nav-link">HISTORY</a>
             </nav>
         </div>
     </header>
@@ -150,42 +102,6 @@
                 <div class="flex-1 design-card p-10 md:p-12 space-y-6 text-lg text-slate-300 font-light leading-relaxed text-justify">
                     <p>Pacific Graphics is the annual flagship conference of the Asia Graphics Association. As a highly-regarded international event, it provides a premium platform for researchers and practitioners to share the latest advances in computer graphics and interactive techniques.</p>
                     <p>The 34th Pacific Conference on Computer Graphics and Applications <strong class="text-white font-medium drop-shadow-md">(Pacific Graphics 2026)</strong> will be held in Singapore from October 6 to 9, 2026.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="dates" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
-            <div class="text-center mb-10 flex flex-col items-center">
-                <h2 class="font-heading text-4xl text-white tracking-wider uppercase mb-6">TIMELINE (AoE)</h2>
-            </div>
-            <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="design-card py-4 px-6 flex flex-col justify-center group relative overflow-hidden">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="w-2 h-2 bg-slate-600 rounded-full group-hover:bg-[var(--theme-accent)] group-hover:shadow-[0_0_10px_var(--theme-accent)] transition-all duration-300 shrink-0"></span>
-                        <div class="text-slate-400 group-hover:text-[var(--theme-accent)] text-xs font-bold tracking-widest uppercase font-heading transition-colors duration-300">ABSTRACT DUE</div>
-                    </div>
-                    <p class="text-xl text-white font-medium pl-4">June 1, 2026</p>
-                </div>
-                <div class="design-card py-4 px-6 flex flex-col justify-center group relative overflow-hidden">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="w-2 h-2 bg-slate-600 rounded-full group-hover:bg-[var(--theme-accent)] group-hover:shadow-[0_0_10px_var(--theme-accent)] transition-all duration-300 shrink-0"></span>
-                        <div class="text-slate-400 group-hover:text-[var(--theme-accent)] text-xs font-bold tracking-widest uppercase font-heading transition-colors duration-300">PAPER SUBMISSION</div>
-                    </div>
-                    <p class="text-xl text-white font-medium pl-4">June 8, 2026</p>
-                </div>
-                <div class="design-card py-4 px-6 flex flex-col justify-center group relative overflow-hidden">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="w-2 h-2 bg-slate-600 rounded-full group-hover:bg-[var(--theme-accent)] group-hover:shadow-[0_0_10px_var(--theme-accent)] transition-all duration-300 shrink-0"></span>
-                        <div class="text-slate-400 group-hover:text-[var(--theme-accent)] text-xs font-bold tracking-widest uppercase font-heading transition-colors duration-300">PAPER DECISION</div>
-                    </div>
-                    <p class="text-xl text-white font-medium pl-4">July 31, 2026</p>
-                </div>
-                <div class="design-card py-4 px-6 flex flex-col justify-center group relative overflow-hidden border-[var(--theme-accent)] shadow-[0_0_15px_rgba(0,255,255,0.15)] bg-[var(--theme-accent)]/5">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="w-2 h-2 bg-[var(--theme-accent)] rounded-full shadow-[0_0_10px_var(--theme-accent)] shrink-0"></span>
-                        <div class="text-white text-xs font-bold tracking-widest uppercase font-heading">CONFERENCE</div>
-                    </div>
-                    <p class="text-xl text-[var(--theme-accent)] font-bold pl-4">Oct 6-9, 2026</p>
                 </div>
             </div>
         </section>
@@ -354,78 +270,6 @@
                 </div>
             </div>
         </section>
-
-        <section id="organizers" class="py-24 border-t border-[var(--line-color)]">
-            <div class="max-w-6xl mx-auto px-6">
-                <h2 class="font-heading text-4xl text-white text-center mb-12 tracking-wider">ORGANIZERS & SUPPORT</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                    <div class="design-card flex flex-col items-center gap-4 p-8 group">
-                        <div class="h-24 w-full flex items-center justify-center p-4 bg-white/95 rounded-xl mb-2 transition-transform duration-500 group-hover:scale-105 shadow-inner">
-                            <img src="pg26_files/smu.png" alt="SMU" class="h-full w-auto object-contain filter brightness(1.1)" />
-                        </div>
-                        <div class="text-center w-full flex-1 flex items-center justify-center mt-2">
-                            <div class="font-heading text-lg text-white leading-tight">School of Computing and Information Systems, SMU</div>
-                        </div>
-                    </div>
-                    <div class="design-card flex flex-col items-center gap-4 p-8 group">
-                        <div class="h-24 w-full flex items-center justify-center p-4 bg-white/95 rounded-xl mb-2 transition-transform duration-500 group-hover:scale-105 shadow-inner">
-                            <img src="pg26_files/ag.png" alt="Pacific Graphics Society" class="h-full w-auto object-contain filter brightness(1.1)" />
-                        </div>
-                        <div class="text-center w-full flex-1 flex items-center justify-center mt-2">
-                            <div class="font-heading text-lg text-white leading-tight">Asia <br> Graphics</div>
-                        </div>
-                    </div>
-                    <div class="design-card flex flex-col items-center gap-4 p-8 group">
-                        <div class="h-24 w-full flex items-center justify-center p-4 bg-white/95 rounded-xl mb-2 transition-transform duration-500 group-hover:scale-105 shadow-inner">
-                            <img src="pg26_files/eg.jpg" alt="Eurographics" class="h-full w-auto object-contain filter brightness(1.1)" />
-                        </div>
-                        <div class="text-center w-full flex-1 flex items-center justify-center mt-2">
-                            <div class="font-heading text-lg text-white leading-tight">Eurographics Association</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="history" class="max-w-5xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
-            <div class="text-center mb-10 flex flex-col items-center">
-                <h2 class="font-heading text-4xl text-white tracking-wider uppercase mb-6">HISTORY</h2>
-                <div class="flex flex-wrap justify-center gap-x-3 gap-y-4 font-mono text-xs max-w-6xl mx-auto">
-                    <a href="https://pg2025.nccu.edu.tw/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2025</span><span class="text-slate-400 group-hover:text-white">Taipei</span></a>
-                    <a href="http://pg2024.hsu.edu.cn/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2024</span><span class="text-slate-400 group-hover:text-white">Huangshan</span></a>
-                    <a href="https://pg2023.org/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2023</span><span class="text-slate-400 group-hover:text-white">Daejeon</span></a>
-                    <a href="http://pg2022.org/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2022</span><span class="text-slate-400 group-hover:text-white">Kyoto</span></a>
-                    <a href="http://pg2021.org/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2020/21</span><span class="text-slate-400 group-hover:text-white">Wellington</span></a>
-                    <a href="http://pg19.org/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2019</span><span class="text-slate-400 group-hover:text-white">Seoul</span></a>
-                    <a href="http://sweb.cityu.edu.hk/pg2018/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2018</span><span class="text-slate-400 group-hover:text-white">Hong Kong</span></a>
-                    <a href="http://www.siggraph.org.tw/pg2017/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2017</span><span class="text-slate-400 group-hover:text-white">Taipei</span></a>
-                    <a href="https://indico.oist.jp/indico/event/0/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2016</span><span class="text-slate-400 group-hover:text-white">Okinawa</span></a>
-                    <a href="http://cg.cs.tsinghua.edu.cn/pg2015/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2015</span><span class="text-slate-400 group-hover:text-white">Beijing</span></a>
-                    <a href="http://graphics.ewha.ac.kr/PG14/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2014</span><span class="text-slate-400 group-hover:text-white">Seoul</span></a>
-                    <a href="http://www.pg2013.org/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2013</span><span class="text-slate-400 group-hover:text-white">Singapore</span></a>
-                    <a href="http://sweb.cityu.edu.hk/pg2012/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2012</span><span class="text-slate-400 group-hover:text-white">Hong Kong</span></a>
-                    <a href="http://graphics.csie.ncku.edu.tw/PG2011/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2011</span><span class="text-slate-400 group-hover:text-white">Kaohsiung</span></a>
-                    <a href="http://www.zjucadcg.cn/pg2010/Organization.html" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2010</span><span class="text-slate-400 group-hover:text-white">Hangzhou</span></a>
-                    <a href="http://cg.postech.ac.kr/pg2009/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2009</span><span class="text-slate-400 group-hover:text-white">Jeju</span></a>
-                    <a href="http://www.pg08.com/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2008</span><span class="text-slate-400 group-hover:text-white">Tokyo</span></a>
-                    <a href="http://mm.cse.wustl.edu/pg07/index.php" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2007</span><span class="text-slate-400 group-hover:text-white">Maui</span></a>
-                    <a href="http://graphics.im.ntu.edu.tw/pg2006/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2006</span><span class="text-slate-400 group-hover:text-white">Taipei</span></a>
-                    <a href="http://www.fst.umac.mo/pg2005/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2005</span><span class="text-slate-400 group-hover:text-white">Macau</span></a>
-                    <a href="http://graphics.snu.ac.kr/pg2004/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2004</span><span class="text-slate-400 group-hover:text-white">Seoul</span></a>
-                    <a href="http://pg2003.cpsc.ucalgary.ca/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2003</span><span class="text-slate-400 group-hover:text-white">Canmore</span></a>
-                    <a href="http://cg.cs.tsinghua.edu.cn/pg2002/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2002</span><span class="text-slate-400 group-hover:text-white">Beijing</span></a>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">2001</span><span class="text-slate-500">Tokyo</span></div>
-                    <a href="http://www.csis.hku.hk/pg2000/" target="_blank" class="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-[var(--theme-accent)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/5 transition-all duration-300 group"><span class="font-bold text-[var(--theme-accent)] mr-1">2000</span><span class="text-slate-400 group-hover:text-white">Hong Kong</span></a>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">1999</span><span class="text-slate-500">Seoul</span></div>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">1998</span><span class="text-slate-500">Singapore</span></div>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">1997</span><span class="text-slate-500">Seoul</span></div>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">1996</span><span class="text-slate-500">Taipei</span></div>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">1995</span><span class="text-slate-500">Seoul</span></div>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">1994</span><span class="text-slate-500">Beijing</span></div>
-                    <div class="px-4 py-2 bg-white/5 border border-white/10 rounded-full cursor-default"><span class="font-bold text-[var(--theme-accent)]/60 mr-1">1993</span><span class="text-slate-500">Seoul</span></div>
-                </div>
-            </div>
-        </section>
     </main>
     
     <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
@@ -440,10 +284,8 @@
                 const now = new Date().getTime();
                 const distance = targetDate - now;
                 if (distance < 0) {
-                    cdDays.innerText = "00";
-                    document.getElementById("cd-hours").innerText = "00";
-                    document.getElementById("cd-minutes").innerText = "00";
-                    document.getElementById("cd-seconds").innerText = "00";
+                    cdDays.innerText = "00"; document.getElementById("cd-hours").innerText = "00";
+                    document.getElementById("cd-minutes").innerText = "00"; document.getElementById("cd-seconds").innerText = "00";
                     return;
                 }
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -452,13 +294,10 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 const pad = (n) => n < 10 ? '0' + n : n;
                 const padDays = (n) => n < 10 ? '00' + n : (n < 100 ? '0' + n : n);
-                cdDays.innerText = padDays(days);
-                document.getElementById("cd-hours").innerText = pad(hours);
-                document.getElementById("cd-minutes").innerText = pad(minutes);
-                document.getElementById("cd-seconds").innerText = pad(seconds);
+                cdDays.innerText = padDays(days); document.getElementById("cd-hours").innerText = pad(hours);
+                document.getElementById("cd-minutes").innerText = pad(minutes); document.getElementById("cd-seconds").innerText = pad(seconds);
             };
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
+            setInterval(updateCountdown, 1000); updateCountdown();
         }
 
         const navLinks = document.querySelectorAll(".nav-link");
@@ -468,25 +307,20 @@
 
         window.addEventListener("scroll", () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            
             if (scrollProgress) {
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
                 scrollProgress.style.width = scrolled + "%";
             }
-
             if (canvasContainer && heroSection) {
                 const heroHeight = heroSection.offsetHeight;
                 let scrollRatio = winScroll / (heroHeight * 0.8);
                 scrollRatio = Math.max(0, Math.min(1, scrollRatio));
                 const bgImage = canvasContainer.querySelector('img');
                 if (bgImage) {
-                    const targetOpacity = 0.6 - (0.6 * scrollRatio);
-                    const targetBlur = scrollRatio * 10;
-                    const targetOverlayOpacity = scrollRatio * 0.6;
-                    bgImage.style.opacity = targetOpacity;
-                    bgImage.style.filter = `blur(${targetBlur}px)`;
-                    canvasContainer.style.setProperty('--overlay-opacity', targetOverlayOpacity);
+                    bgImage.style.opacity = 0.6 - (0.6 * scrollRatio);
+                    bgImage.style.filter = `blur(${scrollRatio * 10}px)`;
+                    canvasContainer.style.setProperty('--overlay-opacity', scrollRatio * 0.6);
                 }
             }
         });
@@ -495,9 +329,7 @@
         navLinks.forEach((link) => {
             link.classList.remove("active");
             const linkHref = link.getAttribute("href");
-            if (currentPath === "cfp.html" && linkHref.includes("cfp.html")) {
-                link.classList.add("active");
-            } else if (currentPath === "venue.html" && linkHref.includes("venue.html")) {
+            if (linkHref.includes(currentPath) && currentPath !== "index.html") {
                 link.classList.add("active");
             } else if ((currentPath === "index.html" || currentPath === "") && linkHref.includes("index.html")) {
                 if (window.location.hash && linkHref.includes(window.location.hash)) {

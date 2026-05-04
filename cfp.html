@@ -5,41 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Call For Papers | Pacific Graphics 2026 (PG2026)</title>
     <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
-    <link rel="shortcut icon" type="image/png" href="pg26_files/favicon.ico">
-
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         .design-card {
-            background-color: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--line-color);
-            border-top: 4px solid var(--theme-accent); 
-            border-radius: 1.5rem; 
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            overflow: hidden;
+            background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid var(--line-color);
+            border-top: 4px solid var(--theme-accent); border-radius: 1.5rem; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); transition: all 0.3s ease;
         }
-        .design-card:hover {
-            border-color: rgba(0, 255, 255, 0.4);
-            box-shadow: 0 10px 40px -10px rgba(0, 255, 255, 0.15);
-            transform: translateY(-4px);
-        }
-        :root {
-            --bg-main: #06111D; 
-            --theme-accent: #00FFFF; 
-            --line-color: #1A2233; 
-            --font-heading: 'Montserrat', sans-serif;
-            --font-body: 'Montserrat', sans-serif;
-        }
+        .design-card:hover { border-color: rgba(0, 255, 255, 0.4); box-shadow: 0 10px 40px -10px rgba(0, 255, 255, 0.15); transform: translateY(-4px); }
+        :root { --bg-main: #06111D; --theme-accent: #00FFFF; --line-color: #1A2233; --font-heading: 'Montserrat', sans-serif; --font-body: 'Montserrat', sans-serif; }
         body { color: #E2E8F0; font-family: var(--font-body); overflow-x: hidden; position: relative; }
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px),
-                              linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px), linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
             background-size: 40px 40px; z-index: -2; opacity: 0.2;
         }
         h1, h2, h3, h4, h5, .font-heading { font-family: var(--font-heading); letter-spacing: 0.15em; line-height: 1.1; font-weight: 700; color: #FFFFFF; }
@@ -69,12 +48,12 @@
             <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
                 <a href="index.html#about" class="nav-link">ABOUT</a>
                 <a href="cfp.html" class="nav-link">CFP</a> 
-                <a href="index.html#dates" class="nav-link">TIMELINE</a>
+                <a href="timeline.html" class="nav-link">TIMELINE</a>
                 <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
                 <a href="index.html#committee" class="nav-link">COMMITTEE</a>
-                <a href="index.html#organizers" class="nav-link">SUPPORT</a>
+                <a href="support.html" class="nav-link">SUPPORT</a>
                 <a href="venue.html" class="nav-link">VENUE</a>
-                <a href="index.html#history" class="nav-link">HISTORY</a>
+                <a href="history.html" class="nav-link">HISTORY</a>
             </nav>
         </div>
     </header>
@@ -181,10 +160,10 @@
         navLinks.forEach((link) => {
             link.classList.remove("active");
             const linkHref = link.getAttribute("href");
-            if (currentPath === "cfp.html" && linkHref.includes("cfp.html")) {
+            if (linkHref.includes(currentPath) && currentPath !== "index.html") {
                 link.classList.add("active");
-            } else if (currentPath === "venue.html" && linkHref.includes("venue.html")) {
-                link.classList.add("active");
+            } else if ((currentPath === "index.html" || currentPath === "") && linkHref.includes("index.html")) {
+                if (window.location.hash && linkHref.includes(window.location.hash)) { link.classList.add("active"); }
             }
         });
     </script>
