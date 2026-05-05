@@ -45,7 +45,7 @@
             </a>
             <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
                 <a href="index.html#about" class="nav-link">ABOUT</a>
-                <a href="index.html#dates" class="nav-link">TIMELINE</a>
+                <!-- <a href="index.html#dates" class="nav-link">TIMELINE</a> -->
                 <a href="cfp.html" class="nav-link">CFP</a> 
                 <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
                 <a href="index.html#committee" class="nav-link">COMMITTEE</a>
@@ -63,7 +63,8 @@
         </div>
 
         <section class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+            <!-- 上半部分：文字介绍 和 场地图片 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-10">
                 <!-- 左侧：文字介绍 -->
                 <div class="design-card p-10 flex flex-col justify-center group">
                     <div class="border-l-4 border-[var(--theme-accent)] pl-6 mb-8 drop-shadow-[0_0_8px_rgba(0,255,255,0.3)]">
@@ -75,14 +76,22 @@
                     </div>
                 </div>
                 
-                <!-- 右侧：Google Map 插件 -->
-                <div class="design-card p-2 group flex flex-col min-h-[350px]">
-                    <iframe src="https://maps.google.com/maps?q=Singapore%20Management%20University%20School%20of%20Computing&t=m&z=15&output=embed&iwloc=near" 
-                            width="100%" height="100%" 
-                            style="border:0; border-radius: 1.25rem; min-height: 350px;" 
-                            allowfullscreen="" loading="lazy">
-                    </iframe>
+                <!-- 右侧：恢复的场地图片 -->
+                <div class="design-card p-3 group flex flex-col">
+                    <div class="relative w-full h-full min-h-[320px] rounded-xl overflow-hidden">
+                        <img src="pg26_files/Auditoriums.png" alt="Ngee Ann Kongsi Auditorium (SMU)" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                        <div class="absolute bottom-5 left-5 bg-[#06111D]/70 backdrop-blur-md px-4 py-2 text-xs text-[var(--theme-accent)] border border-[var(--theme-accent)] rounded-lg font-heading tracking-widest shadow-[0_0_15px_rgba(0,255,255,0.2)]">AUDITORIUM</div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- 下半部分：宽版 Google Map 插件 -->
+            <div class="design-card p-2 group flex flex-col w-full min-h-[400px]">
+                <iframe src="https://maps.google.com/maps?q=Singapore%20Management%20University%20School%20of%20Computing&t=m&z=15&output=embed&iwloc=near" 
+                        width="100%" height="100%" 
+                        style="border:0; border-radius: 1.25rem; min-height: 400px;" 
+                        allowfullscreen="" loading="lazy">
+                </iframe>
             </div>
         </section>
     </main>
