@@ -43,13 +43,22 @@
             <a href="index.html#hero" class="header-logo-container">
                 <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
             </a>
-            <nav class="hidden md:flex gap-10 text-lg uppercase text-white" id="main-nav">
+            <nav class="hidden md:flex gap-10 text-lg uppercase text-white items-center" id="main-nav">
                 <a href="index.html#about" class="nav-link">ABOUT</a>
-                <a href="cfp.html" class="nav-link">CALLS</a> 
-                <a href="timeline.html" class="nav-link">TIMELINE</a>
+                
+                <div class="relative group py-4">
+                    <a href="#" class="nav-link active flex items-center gap-1 cursor-pointer">CALLS 
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                        <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
+                        <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
+                    </div>
+                </div>
+
                 <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
                 <a href="index.html#committee" class="nav-link">COMMITTEE</a>
-                <a href="support.html" class="nav-link">SUPPORT</a>
+                <a href="index.html#organizers" class="nav-link">SUPPORT</a>
                 <a href="venue.html" class="nav-link">VENUE</a>
                 <a href="history.html" class="nav-link">HISTORY</a>
             </nav>
