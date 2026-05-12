@@ -41,20 +41,23 @@
     <div id="scroll-progress"></div>
 
     <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
-        <div class="max-w-7xl mx-auto px-30 h-30 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
             <a href="index.html#hero" class="header-logo-container">
                 <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
             </a>
             <nav class="hidden md:flex gap-10 text-lg uppercase text-white items-center" id="main-nav">
                 <a href="index.html#about" class="nav-link">ABOUT</a>
                 
-                <div class="relative group py-4">
-                    <a href="#" class="nav-link active flex items-center gap-1 cursor-pointer">CALLS 
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <div class="relative group z-[100]">
+                    <a class="nav-link active flex items-center gap-1 cursor-pointer py-2">
+                        CALLS 
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
-                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
-                        <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
-                        <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
+                    <div class="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div class="bg-[#06111D]/95 backdrop-blur-md border border-[var(--theme-accent)] rounded-xl shadow-[0_10px_30px_rgba(0,255,255,0.15)] overflow-hidden">
+                            <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-200 hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/10 transition-colors border-b border-[var(--line-color)] tracking-wider font-heading">CALL FOR PAPERS</a>
+                            <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-200 hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent)]/10 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
+                        </div>
                     </div>
                 </div>
 
@@ -67,7 +70,7 @@
         </div>
     </header>
 
-    <main class="pt-32 pb-20">
+    <main class="pt-36 pb-20">
         <div class="text-center mb-16">
             <h1 class="text-5xl text-white font-heading mb-6 tracking-widest uppercase">Call For Papers</h1>
             <div class="w-32 h-1 bg-[var(--theme-accent)] mx-auto rounded-full shadow-[0_0_15px_var(--theme-accent)]"></div>
@@ -104,7 +107,7 @@
 
                 <div class="border-t border-slate-700/50 pt-10 mt-12">
                     <h3 class="text-2xl font-bold mb-4 tracking-wider font-heading text-[#D4AF37]">
-                        IMPORTANT DATES <span class="text-sm font-normal tracking-normal text-[#FDE047]">(AoE)</span>
+                        IMPORTANT DATES, AoE
                     </h3>
                     <ul class="text-[17px] text-white font-light tracking-wide space-y-0">
                         <li class="flex justify-between items-center py-3 border-b border-white/20 hover:bg-white/5 px-2 transition-colors">
@@ -161,9 +164,13 @@
                     <li class="flex items-start gap-4"><span class="text-[var(--theme-accent)] mt-1">➤</span><span><strong>Length:</strong> The poster/demo paper should be no more than <strong class="text-white">2 pages</strong>.</span></li>
                     <li class="flex items-start gap-4"><span class="text-[var(--theme-accent)] mt-1">➤</span><span><strong>Review:</strong> The submission will be reviewed by the committee members and need to be <strong class="text-white">anonymized</strong>.</span></li>
                     <li class="flex items-start gap-4"><span class="text-[var(--theme-accent)] mt-1">➤</span><span><strong>Publication:</strong> All the accepted submissions will be archived in the <strong class="text-white">EG digital library</strong>.</span></li>
+                    <li class="flex items-start gap-4"><span class="text-[var(--theme-accent)] mt-1">➤</span><span>All posters/demos should be submitted through <a href="https://srmv2.eg.org/COMFy/Conference/PG_2026C/" target="_blank" class="text-[var(--theme-accent)] underline underline-offset-4 decoration-slate-600 hover:decoration-[var(--theme-accent)] hover:text-white transition-all">SRM system for posters and demos</a>.</span></li>
+                    <li class="flex items-start gap-4"><span class="text-[var(--theme-accent)] mt-1">➤</span><span>A LaTeX-template is available at: <a href="egPublStyle-PG2026.zip" download="egPublStyle-PG2026.zip" class="text-[var(--theme-accent)] underline underline-offset-4 decoration-slate-600 hover:decoration-[var(--theme-accent)] hover:text-white transition-all">LaTeX-template</a>.</span></li>
                 </ul>
                 <div class="border-t border-slate-700/50 pt-8">
-                    <h5 class="text-sm text-slate-400 font-bold mb-6 tracking-widest uppercase font-heading">Poster & Demo Important Dates (AoE)</h5>
+                    <h3 class="text-2xl font-bold mb-4 tracking-wider font-heading text-[#D4AF37]">
+                        IMPORTANT DATES, AoE
+                    </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="bg-[#0F172A]/40 border border-[var(--line-color)] rounded-xl py-4 px-6 flex flex-col justify-center hover:border-[var(--theme-accent)] transition-all duration-300 group/date">
                             <div class="text-slate-400 group-hover/date:text-[var(--theme-accent)] text-xs font-bold tracking-widest uppercase font-heading mb-1 transition-colors">SUBMISSION DUE</div>
