@@ -30,6 +30,18 @@
         .nav-link { position: relative; padding: 0.5rem 0; transition: color 0.3s; letter-spacing: 0.05em; }
         .nav-link:hover, .nav-link.active { color: var(--theme-accent); } 
         .nav-link::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: -2px; left: 0; background-color: var(--theme-accent); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        /* 新增：鱼尾狮全息投影特效 */
+        .hologram-video {
+            /* 滤除黑色背景，保留高光线条 */
+            mix-blend-mode: screen;
+            /* 增加一点青色发光光晕 */
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.3));
+            /* 底部透明渐变，让鱼尾狮仿佛从背景中浮现，不显得突兀 */
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            /* 确保视频不会遮挡文字的鼠标点击事件 */
+            pointer-events: none; 
+        }
         .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
         .chair-card { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px dashed var(--line-color); }
         .chair-photo { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--theme-accent); background-color: #1e293b; }
@@ -43,6 +55,18 @@
     <div class="fixed inset-0 z-[-1] bg-[var(--bg-main)]">
         <img src="pg26_files/pg26_bg3.jpg" alt="BG" class="w-full h-full object-cover opacity-20 brightness-75" />
     </div>
+
+    <div class="fixed inset-0 z-[-1] flex items-center justify-center pointer-events-none mt-12">
+        <video 
+            src="pg26_files/Merlion.webm" 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            class="h-[60vh] md:h-[75vh] w-auto object-contain hologram-video transform scale-90 opacity-60 transition-opacity duration-700">
+        </video>
+    </div>
+    
     <div id="scroll-progress"></div>
 
     <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
@@ -73,41 +97,55 @@
     </header>
 
     <main class="pt-20">
+
+
         <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-            <div id="canvas-container">
-                <img src="pg26_files/pg26_bg3.jpg" alt="BG" class="brightness-50" />
+            <div id="canvas-container" class="absolute inset-0 z-0 w-full h-full">
+                <img src="pg26_files/pg26_bg3.jpg" alt="BG" class="w-full h-full object-cover brightness-50" />
             </div>
+
+<!--             <div class="absolute inset-0 z-10 flex items-center justify-center mt-12 overflow-hidden pointer-events-none">
+                <video 
+                    src="pg26_files/Merlion.webm" 
+                    autoplay 
+                    loop 
+                    muted 
+                    playsinline 
+                    class="h-[75vh] md:h-[90vh] w-auto object-contain hologram-video opacity-85 scale-75 hover:opacity-100 transition-opacity duration-700">
+                </video>
+            </div>
+ -->
             <div class="relative z-20 flex flex-col items-center">
                 <h1 id="hero-main-title"> PACIFIC<br><span class="text-[var(--theme-accent)]">GRAPHICS</span><br>2026</h1>
                 
                 <div id="countdown-wrapper" class="flex flex-wrap justify-center gap-4 mt-12">
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px]">
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px] backdrop-blur-sm">
                         <span id="cd-days" class="text-4xl font-bold text-white font-mono">000</span>
                         <span class="text-xs text-[var(--theme-accent)] pt-1">DAYS</span>
                     </div>
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px]">
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px] backdrop-blur-sm">
                         <span id="cd-hours" class="text-4xl font-bold text-white font-mono">00</span>
                         <span class="text-xs text-slate-400 pt-1">HRS</span>
                     </div>
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px]">
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-slate-600 border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px] backdrop-blur-sm">
                         <span id="cd-minutes" class="text-4xl font-bold text-white font-mono">00</span>
                         <span class="text-xs text-slate-400 pt-1">MIN</span>
                     </div>
-                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-[var(--theme-accent)] border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px]">
+                    <div class="flex flex-col items-center bg-[#0F172A]/80 border border-[var(--theme-accent)] border-t-[3px] border-t-[var(--theme-accent)] p-5 rounded-2xl min-w-[110px] shadow-[0_0_15px_rgba(0,255,255,0.2)] backdrop-blur-sm">
                         <span id="cd-seconds" class="text-4xl font-bold text-[var(--theme-accent)] font-mono">00</span>
                         <span class="text-xs text-[var(--theme-accent)] pt-1">SEC</span>
                     </div>
                 </div>
 
-                <!-- 增加的日期和地点展示块 -->
-                <div class="mt-10 flex flex-col md:flex-row items-center gap-3 md:gap-4 text-lg md:text-xl font-heading tracking-widest text-white bg-[#0F172A]/60 backdrop-blur-md px-8 py-3 rounded-full border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                <div class="mt-10 flex flex-col md:flex-row items-center gap-3 md:gap-4 text-lg md:text-xl font-heading tracking-widest text-white bg-[#0F172A]/80 backdrop-blur-md px-8 py-3 rounded-full border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.5)] z-20">
                     <span>OCTOBER 6-9, 2026</span>
                     <span class="hidden md:inline-block w-2 h-2 rounded-full bg-[var(--theme-accent)] shadow-[0_0_10px_var(--theme-accent)]"></span>
                     <span class="text-[var(--theme-accent)]">SINGAPORE</span>
                 </div>
-
             </div>
         </section>
+
+
 
         <section id="about" class="max-w-6xl mx-auto px-6 py-24 border-t border-[var(--line-color)]">
             <div class="flex flex-col md:flex-row gap-12 lg:gap-20 items-start">
