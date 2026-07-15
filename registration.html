@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth; scroll-padding-top: 100px;">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration | Pacific Graphics 2026 (PG2026)</title>
+    <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .design-card {
+            background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid var(--line-color);
+            border-top: 4px solid var(--theme-accent); border-radius: 1.5rem; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); transition: all 0.3s ease;
+        }
+        .design-card:hover { border-color: rgba(0, 255, 255, 0.4); box-shadow: 0 10px 40px -10px rgba(0, 255, 255, 0.15); transform: translateY(-4px); }
+        :root { --bg-main: #06111D; --theme-accent: #00FFFF; --line-color: #1A2233; --font-heading: 'Montserrat', sans-serif; --font-body: 'Montserrat', sans-serif; }
+        body { color: #E2E8F0; font-family: var(--font-body); overflow-x: hidden; position: relative; }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px), linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+            background-size: 40px 40px; z-index: -2; opacity: 0.2;
+        }
+        h1, h2, h3, h4, h5, .font-heading { font-family: var(--font-heading); letter-spacing: 0.15em; line-height: 1.1; font-weight: 700; color: #FFFFFF; }
+        .header-logo-container { width: 250px; height: 100px; overflow: hidden; display: flex; align-items: center; margin-right: 2rem; }
+        .header-logo-container img { filter: brightness(1.5) contrast(1.2); transition: filter 0.3s; }
+        .nav-link { position: relative; padding: 0.5rem 0; transition: color 0.3s; letter-spacing: 0.05em; }
+        .nav-link:hover, .nav-link.active { color: var(--theme-accent); } 
+        .nav-link::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: -2px; left: 0; background-color: var(--theme-accent); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+        .btn-primary {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
+            border: 1px solid var(--theme-accent); color: var(--bg-main); background: var(--theme-accent);
+            font-family: var(--font-heading); font-size: 1rem; font-weight: 700; padding: 0.95rem 2rem;
+            border-radius: 9999px; letter-spacing: 0.12em; text-transform: uppercase;
+            transition: all 0.3s ease; box-shadow: 0 0 24px rgba(0,255,255,0.18);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(0,255,255,0.35); background: #fff; border-color: #fff; }
+        .notice-item { display: flex; gap: 0.9rem; align-items: flex-start; padding: 1rem 0; border-bottom: 1px dashed var(--line-color); }
+        .notice-item:last-child { border-bottom: 0; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background-color: var(--theme-accent); z-index: 100; transition: width 0.1s linear; }
+    </style>
+</head>
+
+<body>
+    <div class="fixed inset-0 z-[-1] bg-[var(--bg-main)]">
+        <img src="pg26_files/pg26_bg3.jpg" alt="BG" class="w-full h-full object-cover opacity-20 brightness-75" />
+    </div>
+    <div id="scroll-progress"></div>
+
+    <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
+        <div class="max-w-7xl mx-auto px-30 h-30 flex items-center justify-between">
+            <a href="index.html#hero" class="header-logo-container">
+                <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
+            </a>
+            <nav class="hidden md:flex gap-10 text-lg uppercase text-white items-center" id="main-nav">
+                <a href="index.html#about" class="nav-link">ABOUT</a>
+                
+                <div class="relative group py-4">
+                    <a href="#" class="nav-link active flex items-center gap-1 cursor-pointer">CALLS 
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                        <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
+                        <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
+                    </div>
+                </div>
+
+                <a href="registration.html" class="nav-link active">REGISTRATION</a>
+                <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
+                <a href="index.html#committee" class="nav-link">COMMITTEE</a>
+                <a href="index.html#organizers" class="nav-link">SUPPORT</a>
+                <a href="venue.html" class="nav-link">VENUE</a>
+                <a href="history.html" class="nav-link">HISTORY</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 min-h-[80vh]">
+        <div class="text-center mb-14 px-6">
+            <h1 class="text-5xl text-white font-heading mb-6 tracking-widest uppercase">Registration</h1>
+            <div class="w-32 h-1 bg-[var(--theme-accent)] mx-auto rounded-full shadow-[0_0_15px_var(--theme-accent)]"></div>
+        </div>
+
+        <section class="max-w-6xl mx-auto px-6">
+            <div class="design-card p-8 md:p-12 text-center mb-10">
+                <p class="text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-4xl mx-auto mb-5">
+                    Welcome to the registration page for Pacific Graphics 2026. Please enable pop-ups in your browser before beginning registration and read each section carefully.
+                </p>
+                <p class="text-slate-400 leading-relaxed mb-8">
+                    All fees are in Singapore dollars and include 9% Singapore GST. The final amount may differ by one cent due to GST computation. Payment is accepted only by 3D Secure Visa or Mastercard.
+                </p>
+                <a href="https://eventregistration.smu.edu.sg/event/f45ab73a-d9f7-4751-bd98-84ea7abe3883/register"
+                   target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    Start Registration
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h6m0 0v6m0-6L10 16M5 5h5M5 5v14h14v-5" />
+                    </svg>
+                </a>
+                <p class="text-slate-500 text-sm mt-5">Registration is handled through the official SMU event registration system.</p>
+            </div>
+
+            <div class="mb-12">
+                <h2 class="text-3xl text-white font-heading text-center mb-8 tracking-wider uppercase">Registration Fees</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="design-card p-8 md:p-10">
+                        <div class="text-[var(--theme-accent)] text-sm font-bold tracking-widest uppercase mb-2">Early Registration</div>
+                        <h3 class="text-2xl mb-7">By September 15, 2026</h3>
+                        <div class="space-y-4 text-slate-300">
+                            <div class="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Standard AG Member</span><strong class="text-white">S$1,050.00</strong></div>
+                            <div class="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Standard Non-Member</span><strong class="text-white">S$1,150.00</strong></div>
+                            <div class="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Student AG Member</span><strong class="text-white">S$700.00</strong></div>
+                            <div class="flex justify-between gap-4"><span>Student Non-Member</span><strong class="text-white">S$800.01</strong></div>
+                        </div>
+                    </div>
+                    <div class="design-card p-8 md:p-10">
+                        <div class="text-[var(--theme-accent)] text-sm font-bold tracking-widest uppercase mb-2">Regular Registration</div>
+                        <h3 class="text-2xl mb-7">From September 16, 2026</h3>
+                        <div class="space-y-4 text-slate-300">
+                            <div class="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Standard AG Member</span><strong class="text-white">S$1,150.00</strong></div>
+                            <div class="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Standard Non-Member</span><strong class="text-white">S$1,250.00</strong></div>
+                            <div class="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Student AG Member</span><strong class="text-white">S$800.01</strong></div>
+                            <div class="flex justify-between gap-4"><span>Student Non-Member</span><strong class="text-white">S$900.00</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-slate-500 text-sm mt-5">All registration cut-off dates follow Singapore Time (GMT+8).</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="design-card p-8 md:p-10">
+                    <h2 class="text-2xl text-white font-heading mb-6 tracking-wider uppercase">Authors of Accepted Papers</h2>
+                    <div class="space-y-5 text-slate-300 leading-relaxed">
+                        <p>At least one author of every accepted conference paper, journal paper, poster paper, demo paper, and every invited TVCG presentation must complete a <strong class="text-white">Standard registration by September 15, 2026</strong>.</p>
+                        <p>Each accepted contribution requires a distinct Standard registration. One registration may cover only one paper or one invited TVCG presentation.</p>
+                        <p>Papers without a valid accompanying registration may be excluded from the proceedings.</p>
+                        <p class="text-[var(--theme-accent)] font-semibold">Authors must select the “Standard” registration type. Student registration cannot cover an accepted or invited paper.</p>
+                    </div>
+                </div>
+
+                <div class="design-card p-8 md:p-10">
+                    <h2 class="text-2xl text-white font-heading mb-6 tracking-wider uppercase">Registration Includes</h2>
+                    <div class="text-slate-300 leading-relaxed">
+                        <div class="notice-item"><span class="mt-2 w-2 h-2 rounded-full bg-[var(--theme-accent)] shrink-0"></span><p>Conference access for all four days, from Tuesday, October 6 to Friday, October 9, 2026.</p></div>
+                        <div class="notice-item"><span class="mt-2 w-2 h-2 rounded-full bg-[var(--theme-accent)] shrink-0"></span><p>Lunches and coffee breaks throughout the four conference days.</p></div>
+                        <div class="notice-item"><span class="mt-2 w-2 h-2 rounded-full bg-[var(--theme-accent)] shrink-0"></span><p>Welcome Reception on Tuesday, October 6, 2026.</p></div>
+                        <div class="notice-item"><span class="mt-2 w-2 h-2 rounded-full bg-[var(--theme-accent)] shrink-0"></span><p>Banquet Dinner on Thursday, October 8, 2026.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="design-card p-8 md:p-10 mb-10">
+                <h2 class="text-2xl text-white font-heading mb-6 tracking-wider uppercase">Refund Policy</h2>
+                <ol class="list-decimal pl-6 space-y-4 text-slate-300 leading-relaxed">
+                    <li>Author registration is non-refundable.</li>
+                    <li>Student registration is not valid for covering an accepted or invited paper.</li>
+                    <li>A 50% refund may be granted for cancellation requests submitted by September 1, 2026, 11:59 PM Singapore Time (GMT+8).</li>
+                    <li>Refund requests must be emailed to <a href="mailto:pacificgraphics@smu.edu.sg" class="text-[var(--theme-accent)] hover:text-white underline underline-offset-4">pacificgraphics@smu.edu.sg</a> for consideration.</li>
+                    <li>Approved refunds will be processed approximately three months after the conference.</li>
+                </ol>
+            </div>
+
+            <div class="design-card p-8 md:p-10 text-center">
+                <h2 class="text-2xl text-white font-heading mb-5 tracking-wider uppercase">Student Eligibility</h2>
+                <p class="text-slate-300 leading-relaxed max-w-3xl mx-auto mb-8">
+                    Student rates are available only to attendees enrolled in full-time study who can provide evidence of their student status.
+                </p>
+                <a href="https://eventregistration.smu.edu.sg/event/f45ab73a-d9f7-4751-bd98-84ea7abe3883/register"
+                   target="_blank" rel="noopener noreferrer" class="btn-primary">Register Now</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
+        <p>© PG 2026. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll(".nav-link");
+        const scrollProgress = document.getElementById("scroll-progress");
+
+        window.addEventListener("scroll", () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            if (scrollProgress) {
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                scrollProgress.style.width = scrolled + "%";
+            }
+        });
+
+        const currentPath = window.location.pathname.split("/").pop() || "index.html";
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            const linkHref = link.getAttribute("href");
+            if (linkHref.includes(currentPath) && currentPath !== "index.html") {
+                link.classList.add("active");
+            } else if ((currentPath === "index.html" || currentPath === "") && linkHref.includes("index.html")) {
+                if (window.location.hash && linkHref.includes(window.location.hash)) { link.classList.add("active"); }
+            }
+        });
+    </script>
+</body>
+</html>
