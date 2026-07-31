@@ -70,7 +70,15 @@
                 <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
                 <a href="index.html#committee" class="nav-link">COMMITTEE</a>
                 <a href="index.html#organizers" class="nav-link">SUPPORT</a>
-                <a href="venue.html" class="nav-link">VENUE</a>
+                <div class="relative group py-4">
+                    <a href="#" class="nav-link flex items-center gap-1 cursor-pointer">ATTEND
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute left-0 top-full mt-[-10px] w-48 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                        <a href="venue.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">VENUE</a>
+                        <a href="hotels.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">HOTELS</a>
+                    </div>
+                </div>
                 <a href="history.html" class="nav-link">HISTORY</a>
             </nav>
         </div>
@@ -131,8 +139,8 @@
                 <div class="design-card p-8 md:p-10">
                     <h2 class="text-2xl text-white font-heading mb-6 tracking-wider uppercase">Authors of Accepted Papers</h2>
                     <div class="space-y-5 text-slate-300 leading-relaxed">
-                        <p>At least one author of every accepted conference paper, journal paper, poster paper, demo paper, and every invited TVCG presentation must complete a <strong class="text-white">Standard registration by September 15, 2026</strong>.</p>
-                        <p>Each accepted contribution requires a distinct Standard registration. One registration may cover only one paper or one invited TVCG presentation.</p>
+                        <p>At least one author of every accepted conference paper, journal paper, poster paper, demo paper, and every invited TVCG/CGF presentation must complete a <strong class="text-white">Standard registration by September 15, 2026</strong>.</p>
+                        <p>Each accepted contribution requires a distinct Standard registration. One registration may cover only one paper or one invited TVCG/CGF presentation.</p>
                         <p>Papers without a valid accompanying registration may be excluded from the proceedings.</p>
                         <p class="text-[var(--theme-accent)] font-semibold">Authors must select the “Standard” registration type. Student registration cannot cover an accepted or invited paper.</p>
                     </div>

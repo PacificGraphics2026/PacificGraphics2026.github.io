@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth; scroll-padding-top: 100px;">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotels | Pacific Graphics 2026 (PG2026)</title>
+    <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .design-card {
+            background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid var(--line-color);
+            border-top: 4px solid var(--theme-accent); border-radius: 1.5rem; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); transition: all 0.3s ease;
+        }
+        .design-card:hover { border-color: rgba(0, 255, 255, 0.4); box-shadow: 0 10px 40px -10px rgba(0, 255, 255, 0.15); transform: translateY(-4px); }
+        :root { --bg-main: #06111D; --theme-accent: #00FFFF; --line-color: #1A2233; --font-heading: 'Montserrat', sans-serif; --font-body: 'Montserrat', sans-serif; }
+        body { color: #E2E8F0; font-family: var(--font-body); overflow-x: hidden; position: relative; }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(to right, var(--line-color) 1px, transparent 1px), linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+            background-size: 40px 40px; z-index: -2; opacity: 0.2;
+        }
+        h1, h2, h3, h4, h5, .font-heading { font-family: var(--font-heading); letter-spacing: 0.15em; line-height: 1.1; font-weight: 700; color: #FFFFFF; }
+        .header-logo-container { width: 250px; height: 100px; overflow: hidden; display: flex; align-items: center; margin-right: 2rem; }
+        .header-logo-container img { filter: brightness(1.5) contrast(1.2); transition: filter 0.3s; }
+        .nav-link { position: relative; padding: 0.5rem 0; transition: color 0.3s; letter-spacing: 0.05em; }
+        .nav-link:hover, .nav-link.active { color: var(--theme-accent); }
+        .nav-link::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: -2px; left: 0; background-color: var(--theme-accent); transform: scaleX(0); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+        .hotel-photo { height: 16rem; width: 100%; object-fit: cover; transition: transform 0.7s ease, opacity 0.3s ease; }
+        .hotel-card:hover .hotel-photo { transform: scale(1.08); opacity: 1; }
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background-color: var(--theme-accent); z-index: 100; transition: width 0.1s linear; }
+    </style>
+</head>
+
+<body>
+    <div class="fixed inset-0 z-[-1] bg-[var(--bg-main)]">
+        <img src="pg26_files/pg26_bg3.jpg" alt="BG" class="w-full h-full object-cover opacity-20 brightness-75" />
+    </div>
+    <div id="scroll-progress"></div>
+
+    <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
+        <div class="max-w-7xl mx-auto px-30 h-30 flex items-center justify-between">
+            <a href="index.html#hero" class="header-logo-container">
+                <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
+            </a>
+            <nav class="hidden md:flex gap-10 text-lg uppercase text-white items-center" id="main-nav">
+                <a href="index.html#about" class="nav-link">ABOUT</a>
+
+                <div class="relative group py-4">
+                    <a href="#" class="nav-link flex items-center gap-1 cursor-pointer">CALLS
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                        <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
+                        <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
+                    </div>
+                </div>
+
+                <a href="registration.html" class="nav-link">REGISTRATION</a>
+                <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
+                <a href="index.html#committee" class="nav-link">COMMITTEE</a>
+                <a href="index.html#organizers" class="nav-link">SUPPORT</a>
+                <div class="relative group py-4">
+                    <a href="#" class="nav-link active flex items-center gap-1 cursor-pointer">ATTEND
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute left-0 top-full mt-[-10px] w-48 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                        <a href="venue.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">VENUE</a>
+                        <a href="hotels.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">HOTELS</a>
+                    </div>
+                </div>
+                <a href="history.html" class="nav-link">HISTORY</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 min-h-[80vh]">
+        <div class="text-center mb-10 px-6">
+            <h1 class="text-5xl text-white font-heading mb-6 tracking-widest uppercase">Hotels</h1>
+            <div class="w-32 h-1 bg-[var(--theme-accent)] mx-auto rounded-full shadow-[0_0_15px_var(--theme-accent)]"></div>
+            <p class="max-w-3xl mx-auto mt-8 text-slate-300 text-lg leading-relaxed font-light">Special accommodation offers are available for Pacific Graphics 2026 participants. Please contact each hotel directly and quote the conference where indicated.</p>
+        </div>
+
+        <section class="max-w-6xl mx-auto px-6">
+            <div class="mb-10 rounded-xl border border-[var(--theme-accent)]/30 bg-[var(--theme-accent)]/5 px-6 py-4 text-center text-sm text-slate-300">
+                Rates are in Singapore dollars. <span class="text-white font-semibold">++</span> indicates applicable taxes and service charge are additional.
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <article class="design-card hotel-card overflow-hidden flex flex-col">
+                    <div class="overflow-hidden">
+                        <img src="pg26_files/hotels/hotel-waterloo.jpg" alt="Hotel Waterloo Singapore" class="hotel-photo opacity-85" />
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h2 class="text-2xl mb-3 tracking-wide">Hotel Waterloo</h2>
+                        <p class="text-[var(--theme-accent)] text-sm font-semibold mb-6">78 Waterloo St, Singapore 189870</p>
+                        <div class="space-y-5 text-slate-300 text-sm leading-relaxed flex-1">
+                            <div>
+                                <p class="text-white font-semibold mb-1">Room types</p>
+                                <p>Superior Double / Superior Twin</p>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold mb-1">Conference rates</p>
+                                <p>S$190++ with breakfast</p>
+                                <p>S$170++ room only</p>
+                                <p class="mt-2 text-amber-200">8–11 October 2026 (Singapore F1 period): S$100++ surcharge per room, per night</p>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold mb-1">Cancellation</p>
+                                <p>Free cancellation more than 3 days before arrival.</p>
+                            </div>
+                        </div>
+                        <div class="pt-6 mt-6 border-t border-white/10">
+                            <p class="text-xs text-slate-400 mb-4">Use the subject “Pacific Graphics 2026” and include guest name, stay dates, room type, and breakfast preference.</p>
+                            <a href="mailto:houmanpoh@gphl.com.sg,booking@gphl.com.sg?subject=Pacific%20Graphics%202026" class="inline-flex items-center justify-center w-full px-4 py-3 rounded-lg border border-[var(--theme-accent)] text-[var(--theme-accent)] font-semibold text-sm hover:bg-[var(--theme-accent)] hover:text-[#06111D] transition-colors">EMAIL TO BOOK</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="design-card hotel-card overflow-hidden flex flex-col">
+                    <div class="overflow-hidden">
+                        <img src="pg26_files/hotels/lyf-funan.jpg" alt="lyf Funan Singapore" class="hotel-photo opacity-85" />
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h2 class="text-2xl mb-3 tracking-wide">lyf Bugis &amp; lyf Funan</h2>
+                        <p class="text-[var(--theme-accent)] text-sm font-semibold mb-6">Bugis: 200 Middle Road, Singapore 188980<br>Funan: 67 Hill St, Level 4, Singapore 179370</p>
+                        <div class="space-y-5 text-slate-300 text-sm leading-relaxed flex-1">
+                            <div>
+                                <p class="text-white font-semibold mb-1">Room types</p>
+                                <p>Nano Queen / Nano King (lyf Bugis)</p>
+                                <p>One of a Kind (lyf Funan), inclusive of 1 breakfast</p>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold mb-1">Conference rate</p>
+                                <p>15% off Best Available Rates (dynamic rates).</p>
+                                <p class="mt-2 text-amber-200">Minimum stay: 2 nights</p>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold mb-1">Cancellation</p>
+                                <p class="text-rose-200">Non-cancellable and non-amendable.</p>
+                            </div>
+                        </div>
+                        <div class="pt-6 mt-6 border-t border-white/10">
+                            <p class="text-xs text-slate-400 mb-4">Booking link will be provided shortly. In the meantime, email with promotional code <span class="text-white font-semibold">PACIFIC2026</span>.</p>
+                            <a href="mailto:tasmin.chong@the-ascott.com?subject=Pacific%20Graphics%202026" class="inline-flex items-center justify-center w-full px-4 py-3 rounded-lg border border-[var(--theme-accent)] text-[var(--theme-accent)] font-semibold text-sm hover:bg-[var(--theme-accent)] hover:text-[#06111D] transition-colors">EMAIL TO BOOK</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="design-card hotel-card overflow-hidden flex flex-col">
+                    <div class="overflow-hidden">
+                        <img src="pg26_files/hotels/rendezvous-hotel.jpg" alt="Rendezvous Hotel Singapore" class="hotel-photo opacity-85" />
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <h2 class="text-2xl mb-3 tracking-wide">Rendezvous Hotel</h2>
+                        <p class="text-[var(--theme-accent)] text-sm font-semibold mb-6">9 Bras Basah Road, Singapore 189559</p>
+                        <div class="space-y-5 text-slate-300 text-sm leading-relaxed flex-1">
+                            <div>
+                                <p class="text-white font-semibold mb-1">Room type</p>
+                                <p>Deluxe Room</p>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold mb-1">Conference rates</p>
+                                <p>4–8 October 2026: S$205++ with 1 breakfast</p>
+                                <p>8–12 October 2026 (F1 period): S$630++ with 1 breakfast</p>
+                            </div>
+                            <div class="rounded-lg border border-rose-400/50 bg-rose-500/10 p-4">
+                                <p class="text-rose-100 font-semibold mb-1">Booking-link notice</p>
+                                <p class="text-rose-100">Bookings made through the booking link are non-refundable and non-cancellable.</p>
+                            </div>
+                        </div>
+                        <div class="pt-6 mt-6 border-t border-white/10">
+                            <p class="text-xs text-slate-400 mb-4">Booking link will be provided shortly. In the meantime, email and quote “Pacific Graphics 2026”. Cut-off date: <span class="text-white font-semibold">8 September 2026</span>.</p>
+                            <a href="mailto:darryllee@fareast.com?subject=Pacific%20Graphics%202026" class="inline-flex items-center justify-center w-full px-4 py-3 rounded-lg border border-[var(--theme-accent)] text-[var(--theme-accent)] font-semibold text-sm hover:bg-[var(--theme-accent)] hover:text-[#06111D] transition-colors">EMAIL TO BOOK</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-[var(--line-color)] py-8 text-center text-sm text-[var(--line-color)] font-body tracking-wider">
+        <p>© PG 2026. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll(".nav-link");
+        const scrollProgress = document.getElementById("scroll-progress");
+
+        window.addEventListener("scroll", () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            if (scrollProgress) {
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                scrollProgress.style.width = scrolled + "%";
+            }
+        });
+
+        const currentPath = window.location.pathname.split("/").pop() || "index.html";
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            const linkHref = link.getAttribute("href");
+            if (currentPath !== "index.html" && currentPath !== "") {
+                if (linkHref.includes(currentPath)) link.classList.add("active");
+            }
+        });
+    </script>
+</body>
+</html>
