@@ -37,39 +37,42 @@
         <img src="pg26_files/pg26_bg3.jpg" alt="BG" class="w-full h-full object-cover opacity-20 brightness-75" />
     </div>
     <div id="scroll-progress"></div>
-
     <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
-        <div class="max-w-7xl mx-auto px-30 h-30 flex items-center justify-between">
-            <a href="index.html#hero" class="header-logo-container">
+        <div class="w-full xl:w-fit max-w-full mx-auto px-5 h-24 flex items-center justify-between xl:justify-center">
+            <a href="index.html#hero" class="header-logo-container" style="width:210px;height:96px;margin-right:1rem;flex-shrink:0;">
                 <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
             </a>
-            <nav class="hidden md:flex gap-10 text-lg uppercase text-white items-center" id="main-nav">
-                <a href="index.html#about" class="nav-link">ABOUT</a>
-                
+
+            <a href="program.html" class="xl:hidden ml-auto inline-flex items-center rounded-full border border-[var(--theme-accent)] px-4 py-2 text-sm font-bold tracking-[0.14em] text-[var(--theme-accent)]">PROGRAM</a>
+
+            <nav class="hidden xl:flex ml-4 gap-2 2xl:gap-5 text-[0.95rem] 2xl:text-lg font-semibold uppercase text-white items-center" id="main-nav" aria-label="Main navigation">
+                <a href="index.html#about" data-nav="about" class="nav-link">ABOUT</a>
+
                 <div class="relative group py-4">
-                    <a href="#" class="nav-link active flex items-center gap-1 cursor-pointer">CALLS 
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </a>
-                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                    <a href="cfp.html" data-nav="calls" class="nav-link flex items-center gap-1">CALLS
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
                         <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
                         <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
                     </div>
                 </div>
 
-                <a href="registration.html" class="nav-link active">REGISTRATION</a>
-                <a href="index.html#keynotes" class="nav-link">KEYNOTES</a>
-                <a href="index.html#committee" class="nav-link">COMMITTEE</a>
-                <a href="index.html#organizers" class="nav-link">SUPPORT</a>
+                <a href="program.html" data-nav="program" class="nav-link">PROGRAM</a>
+                <a href="registration.html" data-nav="registration" class="nav-link">REGISTRATION</a>
+                <a href="index.html#keynotes" data-nav="keynotes" class="nav-link">KEYNOTES</a>
+                <a href="index.html#committee" data-nav="committee" class="nav-link">COMMITTEE</a>
+                <a href="support.html" data-nav="support" class="nav-link">SUPPORT</a>
+
                 <div class="relative group py-4">
-                    <a href="#" class="nav-link flex items-center gap-1 cursor-pointer">ATTEND
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </a>
-                    <div class="absolute left-0 top-full mt-[-10px] w-48 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                    <a href="venue.html" data-nav="attend" class="nav-link flex items-center gap-1">ATTEND
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+                    <div class="absolute right-0 top-full mt-[-10px] w-48 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
                         <a href="venue.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">VENUE</a>
                         <a href="hotels.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">HOTELS</a>
                     </div>
                 </div>
-                <a href="history.html" class="nav-link">HISTORY</a>
+
+                <a href="history.html" data-nav="history" class="nav-link active" aria-current="page">HISTORY</a>
             </nav>
         </div>
     </header>
@@ -143,6 +146,42 @@
                 if (linkHref.includes(currentPath)) link.classList.add("active");
             }
         });
+    </script>
+    <script>
+        (() => {
+            const syncNavigationState = () => {
+                const page = window.location.pathname.split('/').pop() || 'index.html';
+                const sectionByPage = {
+                    'cfp.html': 'calls',
+                    'sponsorships.html': 'calls',
+                    'program.html': 'program',
+                    'registration.html': 'registration',
+                    'support.html': 'support',
+                    'venue.html': 'attend',
+                    'hotels.html': 'attend',
+                    'history.html': 'history'
+                };
+                let activeSection = sectionByPage[page];
+
+                if (page === 'index.html' || page === '') {
+                    activeSection = {
+                        '#about': 'about',
+                        '#keynotes': 'keynotes',
+                        '#committee': 'committee'
+                    }[window.location.hash] || 'about';
+                }
+
+                document.querySelectorAll('[data-nav]').forEach((link) => {
+                    const isActive = link.dataset.nav === activeSection;
+                    link.classList.toggle('active', isActive);
+                    if (isActive) link.setAttribute('aria-current', 'page');
+                    else link.removeAttribute('aria-current');
+                });
+            };
+
+            syncNavigationState();
+            window.addEventListener('hashchange', syncNavigationState);
+        })();
     </script>
 </body>
 </html>

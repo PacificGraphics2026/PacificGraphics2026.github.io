@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior:smooth;scroll-padding-top:110px;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program | Pacific Graphics 2026 (PG2026)</title>
+  <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #06111D;
+      --theme-accent: #00FFFF;
+      --line-color: #1A2233;
+      --text-dark: #172033;
+      --muted-dark: #64748B;
+      --card-border: #E2E8F0;
+      --soft-bg: #F8FAFC;
+      --font: 'Montserrat', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: #E2E8F0;
+      background: var(--bg-main);
+      font-family: var(--font);
+      line-height: 1.55;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(to right, var(--line-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line-color) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: .20;
+      pointer-events: none;
+    }
+
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background: var(--bg-main);
+      overflow: hidden;
+    }
+
+    .site-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .20;
+      filter: brightness(.75);
+    }
+
+    a { color: inherit; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(6,17,29,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line-color);
+    }
+
+    .header-inner {
+      width: min(1280px, calc(100% - 36px));
+      min-height: 100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      min-width: 220px;
+    }
+
+    .brand img {
+      display: block;
+      width: 240px;
+      max-height: 90px;
+      object-fit: contain;
+      filter: brightness(1.45) contrast(1.15);
+    }
+
+    .header-logo-container img {
+      filter: brightness(1.5) contrast(1.2);
+      transition: filter .3s;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: .5rem 0;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: .05em;
+      transition: color .3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active { color: var(--theme-accent); }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background: var(--theme-accent);
+      transform: scaleX(0);
+      transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after { transform: scaleX(1); }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 28px;
+      font-size: .80rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .nav a {
+      position: relative;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 0;
+    }
+
+    .nav a:hover,
+    .nav a.active { color: var(--theme-accent); }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 1px;
+      height: 2px;
+      background: var(--theme-accent);
+      transform: scaleX(0);
+      transition: transform .3s ease;
+    }
+
+    .nav a:hover::after,
+    .nav a.active::after { transform: scaleX(1); }
+
+    main {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 150px 0 82px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--theme-accent);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font);
+      letter-spacing: .12em;
+      line-height: 1.12;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      color: #fff;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      text-transform: uppercase;
+    }
+
+    .accent-rule {
+      width: 120px;
+      height: 4px;
+      margin: 0 auto 22px;
+      background: var(--theme-accent);
+      border-radius: 99px;
+      box-shadow: 0 0 16px rgba(0,255,255,.85);
+    }
+
+    .intro {
+      max-width: 860px;
+      margin: 0 auto;
+      color: #CBD5E1;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    .venue-line {
+      margin-top: 13px;
+      color: #94A3B8;
+      font-size: .9rem;
+    }
+
+    .venue-line a {
+      color: var(--theme-accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,255,255,.45);
+    }
+
+    /* Brighter white-card visual language, matching the sponsorship page. */
+    .program-shell {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 22px 60px -22px rgba(0,0,0,.60);
+      overflow: hidden;
+      border-top: 5px solid var(--theme-accent);
+    }
+
+    .program-scroll { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      min-width: 1030px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      color: var(--text-dark);
+    }
+
+    th, td {
+      border-right: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+    }
+
+    th:last-child, td:last-child { border-right: 0; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+
+    thead th {
+      padding: 22px 18px;
+      background: #F1FBFC;
+      color: #0F172A;
+      text-align: left;
+      font-size: .95rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    thead th:first-child {
+      width: 112px;
+      background: #E8F9FB;
+      color: #0F7784;
+    }
+
+    .day-date {
+      display: block;
+      margin-top: 5px;
+      color: #00AFC4;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .period {
+      padding: 20px 14px;
+      background: #F8FAFC;
+      color: #0891A2;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 16px;
+      background: #fff;
+    }
+
+    .slot {
+      position: relative;
+      margin: 0 0 12px;
+      padding: 10px 2px 14px;
+      border-bottom: 1px dashed #D8E1E9;
+    }
+
+    .slot:last-child {
+      margin-bottom: 0;
+      padding-bottom: 4px;
+      border-bottom: 0;
+    }
+
+    .slot-time {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted-dark);
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+
+    .slot-title {
+      display: block;
+      color: #111827;
+      font-size: .90rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .slot-subtitle {
+      display: block;
+      margin-top: 5px;
+      color: #64748B;
+      font-size: .76rem;
+      line-height: 1.45;
+    }
+
+    .featured {
+      margin: 0 0 12px;
+      padding: 13px 14px;
+      border: 1px solid #CBEFF2;
+      border-top: 4px solid #00B9DE;
+      border-radius: 14px;
+      background: #F4FDFF;
+      box-shadow: 0 8px 22px -18px rgba(15,23,42,.55);
+    }
+
+    .featured .slot-time { color: #008FA6; }
+
+    .award-talk {
+      background: #FFFBEB;
+      border-color: #FDE9A6;
+      border-top-color: #D4AF37;
+    }
+
+    .award-talk .slot-time { color: #A87900; }
+
+    .poster {
+      background: #F0FDF4;
+      border-color: #C7EFD2;
+      border-top-color: #00A879;
+    }
+
+    .poster .slot-time { color: #07805E; }
+
+    .social {
+      background: #FAF5FF;
+      border-color: #E8D4FA;
+      border-top-color: #9B6AE8;
+    }
+
+    .social .slot-time { color: #7850BF; }
+
+    .transport {
+      background: #FFF7ED;
+      border-color: #FED7AA;
+      border-top-color: #F59E0B;
+    }
+
+    .transport .slot-time { color: #B45309; }
+
+    .dome {
+      background: #EFF6FF;
+      border-color: #CFE1FF;
+      border-top-color: #3B82F6;
+    }
+
+    .dome .slot-time { color: #2563EB; }
+
+    .event-link {
+      display: inline-block;
+      margin-top: 8px;
+      color: #008FA6;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+
+    .footer {
+      margin-top: 46px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line-color);
+      color: #64748B;
+      text-align: center;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .site-header { position: relative; }
+      .header-inner { min-height: auto; padding: 10px 0; }
+      .brand img { width: 190px; }
+      .nav { display: none; }
+      main { padding-top: 126px; }
+    }
+
+    @media (max-width: 600px) {
+      main { width: min(100% - 20px, 1240px); }
+      h1 { font-size: 2.25rem; }
+      .program-shell { border-radius: 16px; }
+      td { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-bg" aria-hidden="true">
+    <img src="pg26_files/pg26_bg3.jpg" alt="">
+  </div>
+    <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
+        <div class="w-full xl:w-fit max-w-full mx-auto px-5 h-24 flex items-center justify-between xl:justify-center">
+            <a href="index.html#hero" class="header-logo-container" style="width:210px;height:96px;margin-right:1rem;flex-shrink:0;">
+                <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
+            </a>
+
+            <a href="program.html" class="xl:hidden ml-auto inline-flex items-center rounded-full border border-[var(--theme-accent)] px-4 py-2 text-sm font-bold tracking-[0.14em] bg-[var(--theme-accent)] text-[#06111D]" aria-current="page">PROGRAM</a>
+
+            <nav class="hidden xl:flex ml-4 gap-2 2xl:gap-5 text-[0.95rem] 2xl:text-lg font-semibold uppercase text-white items-center" id="main-nav" aria-label="Main navigation">
+                <a href="index.html#about" data-nav="about" class="nav-link">ABOUT</a>
+
+                <div class="relative group py-4">
+                    <a href="cfp.html" data-nav="calls" class="nav-link flex items-center gap-1">CALLS
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                        <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
+                        <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
+                    </div>
+                </div>
+
+                <a href="program.html" data-nav="program" class="nav-link active" aria-current="page">PROGRAM</a>
+                <a href="registration.html" data-nav="registration" class="nav-link">REGISTRATION</a>
+                <a href="index.html#keynotes" data-nav="keynotes" class="nav-link">KEYNOTES</a>
+                <a href="index.html#committee" data-nav="committee" class="nav-link">COMMITTEE</a>
+                <a href="support.html" data-nav="support" class="nav-link">SUPPORT</a>
+
+                <div class="relative group py-4">
+                    <a href="venue.html" data-nav="attend" class="nav-link flex items-center gap-1">ATTEND
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+                    <div class="absolute right-0 top-full mt-[-10px] w-48 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
+                        <a href="venue.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">VENUE</a>
+                        <a href="hotels.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">HOTELS</a>
+                    </div>
+                </div>
+
+                <a href="history.html" data-nav="history" class="nav-link">HISTORY</a>
+            </nav>
+        </div>
+    </header>
+
+  <main id="program">
+    <section class="hero">
+      <span class="eyebrow">October 6–9, 2026 · Singapore</span>
+      <h1 class="text-5xl md:text-6xl">Program</h1>
+      <div class="accent-rule"></div>
+      <p class="intro">
+        Tentative program at a glance for Pacific Graphics 2026. Detailed paper titles, session themes,
+        chairs, and presentation schedules will be announced after the technical program is finalized.
+      </p>
+      <p class="venue-line">
+        Main venue: <strong>Ngee Ann Kongsi Auditorium, Singapore Management University</strong> ·
+        <a href="venue.html">Venue &amp; social events</a>
+      </p>
+    </section>
+
+    <section class="program-shell" aria-label="Pacific Graphics 2026 tentative program">
+      <div class="program-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Tuesday<span class="day-date">Oct 6</span></th>
+              <th>Wednesday<span class="day-date">Oct 7</span></th>
+              <th>Thursday<span class="day-date">Oct 8</span></th>
+              <th>Friday<span class="day-date">Oct 9</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="period" scope="row">Morning</th>
+              <td>
+                <div class="slot">
+                  <span class="slot-time">08:30</span>
+                  <span class="slot-title">Registration</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">09:20–09:40</span>
+                  <span class="slot-title">Opening</span>
+                </div>
+                <div class="slot featured">
+                  <span class="slot-time">09:40–10:40</span>
+                  <span class="slot-title">Keynote · Marc Alexa</span>
+                  <span class="slot-subtitle">TU Berlin</span>
+                </div>
+                <div class="slot featured poster">
+                  <span class="slot-time">10:40–11:00</span>
+                  <span class="slot-title">Coffee Break</span>
+                </div>
+                <div class="slot featured award-talk">
+                  <span class="slot-time">11:00–12:00</span>
+                  <span class="slot-title">AG Award Talk · Baoquan Chen</span>
+                  <span class="slot-subtitle">One-hour award talk</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot">
+                  <span class="slot-time">08:30</span>
+                  <span class="slot-title">Registration</span>
+                </div>
+                <div class="slot featured">
+                  <span class="slot-time">09:10–10:20</span>
+                  <span class="slot-title">Keynote · Ziwei Liu</span>
+                  <span class="slot-subtitle">Nanyang Technological University</span>
+                </div>
+                <div class="slot featured poster">
+                  <span class="slot-time">10:20–10:40</span>
+                  <span class="slot-title">Coffee Break</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">10:40–12:00</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot">
+                  <span class="slot-time">08:30</span>
+                  <span class="slot-title">Registration</span>
+                </div>
+                <div class="slot featured">
+                  <span class="slot-time">09:10–10:20</span>
+                  <span class="slot-title">Keynote · Adriana Schulz</span>
+                  <span class="slot-subtitle">Brown University</span>
+                </div>
+                <div class="slot featured poster">
+                  <span class="slot-time">10:20–10:40</span>
+                  <span class="slot-title">Coffee Break</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">10:40–12:00</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot">
+                  <span class="slot-time">08:30</span>
+                  <span class="slot-title">Registration</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">09:00–10:20</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+                <div class="slot featured poster">
+                  <span class="slot-time">10:20–10:40</span>
+                  <span class="slot-title">Coffee Break</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">10:40–12:00</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="period" scope="row">Noon</th>
+              <td>
+                <div class="slot">
+                  <span class="slot-time">12:20–13:30</span>
+                  <span class="slot-title">Lunch</span>
+                </div>
+              </td>
+              <td>
+                <div class="slot">
+                  <span class="slot-time">12:20–13:30</span>
+                  <span class="slot-title">Lunch</span>
+                </div>
+              </td>
+              <td>
+                <div class="slot">
+                  <span class="slot-time">12:20–13:30</span>
+                  <span class="slot-title">Lunch</span>
+                </div>
+              </td>
+              <td>
+                <div class="slot">
+                  <span class="slot-time">12:10–12:30</span>
+                  <span class="slot-title">Closing</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="period" scope="row">Afternoon</th>
+              <td>
+                <div class="slot">
+                  <span class="slot-time">13:30–15:10</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+                <div class="slot featured poster">
+                  <span class="slot-time">15:10–15:40</span>
+                  <span class="slot-title">Coffee Break &amp; Poster</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">15:40–17:20</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot">
+                  <span class="slot-time">13:30–15:10</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+                <div class="slot featured poster">
+                  <span class="slot-time">15:10–15:40</span>
+                  <span class="slot-title">Coffee Break &amp; Poster</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">15:40–17:20</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot">
+                  <span class="slot-time">13:30–15:30</span>
+                  <span class="slot-title">Paper Sessions</span>
+                </div>
+                <div class="slot featured poster">
+                  <span class="slot-time">15:30–16:00</span>
+                  <span class="slot-title">Coffee Break &amp; Poster</span>
+                </div>
+                <div class="slot">
+                  <span class="slot-time">16:00–16:40</span>
+                  <span class="slot-title">Paper Sessions</span>
+                  <span class="slot-subtitle">Program concludes in time for the banquet shuttle.</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot">
+                  <span class="slot-title">Conference concludes after Closing</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <th class="period" scope="row">Evening</th>
+              <td>
+                <div class="slot featured social">
+                  <span class="slot-time">18:30</span>
+                  <span class="slot-title">Welcome Reception</span>
+                  <span class="slot-subtitle">Jyu Gae Bistro, Lazada One · Buffet, free-flow drinks &amp; live band</span>
+                  <a class="event-link" href="venue.html">Event details →</a>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot">
+                  <span class="slot-title">No official social event scheduled</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot featured transport">
+                  <span class="slot-time">17:00</span>
+                  <span class="slot-title">Shuttle Bus to Gardens by the Bay</span>
+                  <span class="slot-subtitle">Departs from the conference venue at SMU.</span>
+                </div>
+                <div class="slot featured social">
+                  <span class="slot-time">17:30–19:30</span>
+                  <span class="slot-title">Banquet Dinner &amp; Best Paper Awards</span>
+                  <span class="slot-subtitle">Waterview Room, Gardens by the Bay · Best Paper Awards will be presented during the banquet.</span>
+                  <a class="event-link" href="venue.html">Event details →</a>
+                </div>
+                <div class="slot featured dome">
+                  <span class="slot-time">19:30 onward</span>
+                  <span class="slot-title">Gardens by the Bay Domes</span>
+                  <span class="slot-subtitle">Conference attendees may visit the Domes after the banquet. PG2026 will provide the required wristband.</span>
+                </div>
+              </td>
+
+              <td>
+                <div class="slot"><span class="slot-title">—</span></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+
+    <div class="footer">© PG 2026 · Pacific Graphics 2026</div>
+  </main>
+    <script>
+        (() => {
+            const syncNavigationState = () => {
+                const page = window.location.pathname.split('/').pop() || 'index.html';
+                const sectionByPage = {
+                    'cfp.html': 'calls',
+                    'sponsorships.html': 'calls',
+                    'program.html': 'program',
+                    'registration.html': 'registration',
+                    'support.html': 'support',
+                    'venue.html': 'attend',
+                    'hotels.html': 'attend',
+                    'history.html': 'history'
+                };
+                let activeSection = sectionByPage[page];
+
+                if (page === 'index.html' || page === '') {
+                    activeSection = {
+                        '#about': 'about',
+                        '#keynotes': 'keynotes',
+                        '#committee': 'committee'
+                    }[window.location.hash] || 'about';
+                }
+
+                document.querySelectorAll('[data-nav]').forEach((link) => {
+                    const isActive = link.dataset.nav === activeSection;
+                    link.classList.toggle('active', isActive);
+                    if (isActive) link.setAttribute('aria-current', 'page');
+                    else link.removeAttribute('aria-current');
+                });
+            };
+
+            syncNavigationState();
+            window.addEventListener('hashchange', syncNavigationState);
+        })();
+    </script>
+</body>
+</html>
