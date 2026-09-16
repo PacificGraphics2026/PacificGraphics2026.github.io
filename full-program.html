@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pacific Graphics 2026 program with searchable papers, posters and presentation formats.">
+  <title>Full Program | Pacific Graphics 2026 (PG2026)</title>
+  <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #06111D;
+      --bg-card: rgba(15, 23, 42, 0.72);
+      --bg-card-strong: rgba(15, 23, 42, 0.92);
+      --accent: #00FFFF;
+      --accent-soft: rgba(0, 255, 255, 0.10);
+      --gold: #D4AF37;
+      --purple: #b9a3ff;
+      --line: #1A2233;
+      --line-bright: rgba(148, 163, 184, 0.26);
+      --text: #E2E8F0;
+      --muted: #94A3B8;
+      --white: #FFFFFF;
+      --shadow: 0 16px 40px -16px rgba(0,0,0,.7);
+      --font: 'Montserrat', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 112px; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg-main);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.55;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        linear-gradient(to right, var(--line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: .20;
+      pointer-events: none;
+    }
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: var(--bg-main);
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .site-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .18;
+      filter: brightness(.72) saturate(.9);
+    }
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      z-index: 1000;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(0,255,255,.7);
+    }
+
+    button, input, select { font: inherit; }
+    a { color: var(--accent); }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(6,17,29,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header-inner {
+      width: min(1400px, calc(100% - 2.5rem));
+      min-height: 108px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .header-logo-container {
+      width: 235px;
+      height: 88px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+    .header-logo-container img {
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+      filter: brightness(1.35) contrast(1.15);
+    }
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 1.45rem;
+      text-transform: uppercase;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+    }
+    .nav-link {
+      position: relative;
+      padding: .55rem 0;
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color .25s ease;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+    .page-hero {
+      width: min(1400px, calc(100% - 2.5rem));
+      margin: 0 auto;
+      padding: 156px 0 2.4rem;
+      text-align: center;
+    }
+    .hero-kicker {
+      margin: 0 0 .9rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: .8rem;
+      font-weight: 600;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: var(--font);
+      color: var(--white);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.7rem, 6vw, 4.6rem);
+      line-height: 1;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .hero-line {
+      width: 8rem;
+      height: 4px;
+      margin: 1.4rem auto 1.25rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 15px rgba(0,255,255,.75);
+    }
+    .subtitle {
+      margin: 0 auto;
+      max-width: 72rem;
+      color: #CBD5E1;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: .015em;
+    }
+
+    main, footer {
+      width: min(1460px, calc(100% - 2.5rem));
+      margin: 0 auto;
+    }
+    main { padding: 0 0 5rem; }
+
+    .filters {
+      position: sticky;
+      top: 120px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(15rem, 2fr) repeat(3, minmax(9rem, 1fr)) auto;
+      gap: .8rem;
+      align-items: end;
+      padding: 1rem;
+      border: 1px solid var(--line-bright);
+      border-top: 3px solid var(--accent);
+      border-radius: 1rem;
+      background: rgba(6,17,29,.94);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    label {
+      display: grid;
+      gap: .4rem;
+      color: var(--muted);
+      font-size: .69rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    input, select {
+      width: 100%;
+      min-height: 2.75rem;
+      padding: .65rem .78rem;
+      color: var(--text);
+      border: 1px solid #334155;
+      border-radius: .6rem;
+      background: rgba(15,23,42,.92);
+      font-size: .88rem;
+    }
+    input::placeholder { color: #64748B; }
+    select option { background: #0F172A; color: var(--text); }
+    input:hover, select:hover, input:focus, select:focus { border-color: rgba(0,255,255,.65); }
+    .reset {
+      min-height: 2.75rem;
+      padding: .65rem 1.1rem;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(0,255,255,.04);
+      font-weight: 700;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .reset:hover {
+      color: var(--bg-main);
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(0,255,255,.32);
+    }
+    .results-line {
+      min-height: 1.6rem;
+      margin: .85rem .25rem 0;
+      color: var(--muted);
+      font-size: .82rem;
+      letter-spacing: .03em;
+    }
+
+    .day { margin-top: 2.6rem; }
+    .day-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      padding: 0 .15rem .85rem;
+      border-bottom: 1px solid var(--line-bright);
+    }
+    .day-heading h2 {
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      line-height: 1.1;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .day-heading h2 > span {
+      margin-left: .6rem;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      white-space: nowrap;
+    }
+    .day-heading > span {
+      color: var(--muted);
+      font-size: .76rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .timeline { display: grid; gap: .9rem; margin-top: 1rem; }
+
+    .common-event {
+      display: grid;
+      grid-template-columns: 8.2rem minmax(0, 1fr) minmax(12rem, auto);
+      gap: 1rem;
+      align-items: center;
+      min-height: 3.9rem;
+      padding: .85rem 1rem;
+      border: 1px solid var(--line-bright);
+      border-left: 3px solid var(--accent);
+      border-radius: .85rem;
+      background: rgba(15,23,42,.62);
+      backdrop-filter: blur(10px);
+    }
+    .common-event .time {
+      color: var(--accent);
+      font-size: .82rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .common-event strong { color: var(--white); font-size: .93rem; letter-spacing: .025em; }
+    .common-event .location { color: var(--muted); font-size: .76rem; text-align: right; }
+    .common-event.break { border-left-color: var(--gold); background: rgba(57,45,14,.22); }
+    .common-event.break .time { color: #F6D77A; }
+    .common-event.social { border-left-color: #5EE7A1; background: rgba(17,55,42,.26); }
+    .common-event.social .time { color: #80F3B9; }
+    .common-event.plenary { background: rgba(15,23,42,.72); }
+
+    .parallel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: start;
+    }
+    .session {
+      overflow: hidden;
+      border: 1px solid var(--line-bright);
+      border-top: 4px solid var(--accent);
+      border-radius: 1rem;
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+    .session:hover { border-color: rgba(0,255,255,.36); box-shadow: 0 16px 48px -18px rgba(0,255,255,.15); }
+    .session.room-a { border-top-color: var(--accent); }
+    .session.room-b { border-top-color: var(--purple); }
+    .session.poster { border-top-color: var(--gold); }
+    .session-head {
+      padding: 1rem 1.05rem .9rem;
+      background: rgba(15,23,42,.82);
+      border-bottom: 1px solid var(--line-bright);
+    }
+    .session-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem .75rem;
+      color: var(--muted);
+      font-size: .69rem;
+      font-weight: 600;
+      letter-spacing: .035em;
+      text-transform: uppercase;
+    }
+    .session-meta .code { color: var(--accent); font-weight: 800; letter-spacing: .11em; }
+    .room-b .session-meta .code { color: var(--purple); }
+    .poster .session-meta .code { color: var(--gold); }
+    .session-track { color: #F8FAFC; font-weight: 700; }
+    .session h3 {
+      margin: .5rem 0 0;
+      color: var(--white);
+      font-size: .98rem;
+      line-height: 1.4;
+      font-weight: 650;
+      letter-spacing: .045em;
+    }
+    .paper-list { list-style: none; margin: 0; padding: 0; }
+    .paper {
+      display: grid;
+      grid-template-columns: 7.4rem minmax(0, 1fr);
+      gap: .9rem;
+      padding: .9rem 1.05rem;
+      border-bottom: 1px solid rgba(148,163,184,.14);
+      background: rgba(6,17,29,.15);
+      transition: background .2s ease;
+    }
+    .paper:hover { background: rgba(255,255,255,.025); }
+    .paper:last-child { border-bottom: 0; }
+    .paper.untimed { grid-template-columns: minmax(0, 1fr); }
+    .paper.poster-paper { grid-template-columns: 5rem minmax(0, 1fr); }
+    .poster-board {
+      color: #F1D071;
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+    .poster-board small {
+      display: block;
+      margin-bottom: .2rem;
+      color: var(--muted);
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .poster-track { margin: 0 0 .3rem; color: #F1D071; font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+    .poster-note { margin: .45rem 0 0; color: var(--muted); font-size: .75rem; }
+    .paper-reference { margin: .5rem 0 0; color: var(--muted); font-size: .72rem; line-height: 1.45; }
+    .paper-reference a { text-decoration-thickness: 1px; text-underline-offset: .16em; }
+    .paper[id] { scroll-margin-top: 180px; }
+    .untimed-group { border-top: 1px solid var(--line-bright); background: rgba(2,6,23,.26); }
+    .untimed-heading {
+      margin: 0;
+      padding: .72rem 1.05rem .3rem;
+      color: #C4B5FD;
+      font-size: .67rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .invited-type {
+      margin: 0 0 .4rem;
+      color: var(--accent);
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .paper-time {
+      color: #CBD5E1;
+      font-size: .78rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .02em;
+    }
+    .paper-time small { display: block; margin-top: .18rem; color: #64748B; font-size: .66rem; font-weight: 600; }
+    .paper h4 {
+      margin: 0;
+      color: #F8FAFC;
+      font-size: .88rem;
+      line-height: 1.45;
+      font-weight: 600;
+      letter-spacing: .008em;
+    }
+    .paper-byline { margin: .38rem 0 0; color: var(--muted); font-size: .75rem; font-weight: 300; }
+    .paper-id { color: var(--accent); font-weight: 700; }
+    .room-b .paper-id { color: #C4B5FD; }
+    .poster .paper-id { color: #F1D071; }
+    .badges { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.5rem;
+      padding: .18rem .42rem;
+      border: 1px solid rgba(196,181,253,.42);
+      border-radius: 999px;
+      color: #DDD6FE;
+      background: rgba(91,61,137,.22);
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .badge.video { color: #DDD6FE; }
+    .empty {
+      padding: 2rem;
+      border: 1px dashed #334155;
+      border-radius: 1rem;
+      color: var(--muted);
+      background: rgba(15,23,42,.62);
+      text-align: center;
+    }
+
+    footer {
+      width: 100%;
+      padding: 2rem 1.5rem 2.5rem;
+      border-top: 1px solid var(--line);
+      color: #64748B;
+      text-align: center;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    footer p { margin: .3rem 0; }
+    footer a { color: #94A3B8; }
+
+    @media (max-width: 1180px) {
+      .site-header-inner { min-height: 96px; }
+      .header-logo-container { width: 190px; height: 78px; }
+      .main-nav { gap: .85rem; font-size: .72rem; }
+      .page-hero { padding-top: 136px; }
+      .filters { top: 106px; }
+    }
+    @media (max-width: 980px) {
+      .site-header { position: static; }
+      .site-header-inner { min-height: auto; padding: .7rem 0; flex-direction: column; gap: .35rem; }
+      .main-nav { justify-content: center; gap: .55rem 1rem; padding-bottom: .5rem; }
+      .page-hero { padding-top: 2.8rem; }
+      .filters { top: 0; grid-template-columns: 1fr 1fr; }
+      .filters .search { grid-column: 1 / -1; }
+      .parallel-grid { grid-template-columns: 1fr; }
+      .paper[id] { scroll-margin-top: 6rem; }
+    }
+    @media (max-width: 680px) {
+      .site-header-inner, .page-hero, main { width: min(100% - 1rem, 1460px); }
+      .header-logo-container { width: 175px; height: 68px; }
+      .main-nav { display: none; }
+      .page-hero { padding-top: 2.1rem; }
+      h1 { font-size: 2.25rem; letter-spacing: .11em; }
+      .subtitle { font-size: .86rem; }
+      .filters { position: static; grid-template-columns: 1fr; }
+      .filters .search { grid-column: auto; }
+      .day-heading { align-items: flex-start; flex-direction: column; gap: .4rem; }
+      .day-heading h2 > span { display: block; margin: .45rem 0 0; }
+      .common-event { grid-template-columns: 1fr; gap: .2rem; }
+      .common-event .location { text-align: left; }
+      .paper { grid-template-columns: 1fr; gap: .35rem; }
+      .paper.poster-paper { grid-template-columns: 3.8rem minmax(0, 1fr); gap: .65rem; }
+      .paper-time small { display: inline; margin-left: .4rem; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      body::before, .site-bg, #scroll-progress, .site-header { display: none !important; }
+      .page-hero { padding: 0 0 1rem; color: #111; }
+      .page-hero h1, .day-heading h2, .session h3, .paper h4, .common-event strong { color: #111 !important; }
+      .filters, .results-line, .reset { display: none !important; }
+      main { width: 100%; padding: .5rem 0; }
+      .day { break-before: page; }
+      .day:first-child { break-before: auto; }
+      .session, .common-event { box-shadow: none; background: #fff; border-color: #bbb; break-inside: avoid; }
+      .paper { background: #fff; border-color: #ddd; break-inside: avoid; }
+      .paper-byline, .session-meta, .paper-time, .location { color: #444 !important; }
+    }
+  
+
+    /* Brighter schedule treatment: keep PG2026 dark identity, lighten working content */
+    body { background: #0A1A28; }
+    .site-bg { background: #0A1A28; }
+    .site-bg img { opacity: .24; filter: brightness(.92) saturate(1.02); }
+    body::before { opacity: .12; }
+    .subtitle { color: #E2E8F0; }
+
+    .filters {
+      border: 1px solid rgba(203,213,225,.96);
+      border-top: 4px solid #00C8D7;
+      background: rgba(248,250,252,.98);
+      box-shadow: 0 18px 46px -22px rgba(2,6,23,.72);
+      backdrop-filter: blur(18px);
+    }
+    .filters label { color: #475569; }
+    .filters input, .filters select {
+      color: #0F172A;
+      border-color: #CBD5E1;
+      background: #FFFFFF;
+      box-shadow: inset 0 1px 1px rgba(15,23,42,.03);
+    }
+    .filters input::placeholder { color: #94A3B8; }
+    .filters select option { background: #FFFFFF; color: #0F172A; }
+    .filters input:hover, .filters select:hover,
+    .filters input:focus, .filters select:focus {
+      border-color: #00AFC0;
+      box-shadow: 0 0 0 3px rgba(0,200,215,.10);
+    }
+    .filters .reset {
+      color: #FFFFFF;
+      border-color: #087E8B;
+      background: #087E8B;
+      box-shadow: 0 6px 16px -10px rgba(8,126,139,.9);
+    }
+    .filters .reset:hover { color: #FFFFFF; border-color: #066B76; background: #066B76; }
+    .results-line { color: #CBD5E1; }
+
+    .common-event {
+      border-color: rgba(203,213,225,.92);
+      background: rgba(248,250,252,.94);
+      box-shadow: 0 10px 28px -22px rgba(2,6,23,.75);
+    }
+    .common-event .time { color: #087E8B; }
+    .common-event strong { color: #0F172A; }
+    .common-event .location { color: #64748B; }
+    .common-event.break { border-left-color: #C99718; background: rgba(255,249,230,.97); }
+    .common-event.break .time { color: #946B05; }
+    .common-event.social { border-left-color: #269968; background: rgba(237,249,242,.97); }
+    .common-event.social .time { color: #18784E; }
+    .common-event.plenary { background: rgba(242,248,250,.97); }
+
+    .session {
+      border-color: rgba(203,213,225,.96);
+      background: rgba(248,250,252,.97);
+      box-shadow: 0 14px 36px -22px rgba(2,6,23,.72);
+      backdrop-filter: blur(10px);
+    }
+    .session:hover {
+      border-color: rgba(14,165,183,.55);
+      box-shadow: 0 18px 42px -22px rgba(0,170,190,.35);
+    }
+    .session.room-a { border-top-color: #00AFC0; }
+    .session.room-b { border-top-color: #8067C9; }
+    .session.poster { border-top-color: #C99718; }
+    .session-head {
+      background: linear-gradient(180deg, rgba(240,249,250,.98), rgba(248,250,252,.98));
+      border-bottom-color: #DCE5EA;
+    }
+    .session-meta { color: #64748B; }
+    .session-meta .code { color: #087E8B; }
+    .room-b .session-meta .code { color: #6C52B5; }
+    .poster .session-meta .code { color: #946B05; }
+    .session-track { color: #334155; }
+    .session h3 { color: #142536; }
+
+    .paper {
+      border-bottom-color: #E5EBEF;
+      background: rgba(255,255,255,.96);
+    }
+    .paper:hover { background: #F5FAFB; }
+    .paper h4 { color: #172536; }
+    .paper-byline { color: #64748B; }
+    .paper-time { color: #334155; }
+    .paper-time small { color: #94A3B8; }
+    .paper-id { color: #087E8B; }
+    .room-b .paper-id { color: #6C52B5; }
+    .poster .paper-id { color: #946B05; }
+    .invited-type { color: #087E8B; }
+    .paper-reference { color: #64748B; }
+    .paper-reference a { color: #087E8B; }
+
+    .poster-board { color: #946B05; }
+    .poster-board small { color: #7C8794; }
+    .poster-track { color: #946B05; }
+    .poster-note { color: #64748B; }
+
+    .untimed-group { border-top-color: #DCE5EA; background: #F6F8FA; }
+    .untimed-heading { color: #6C52B5; }
+    .badge {
+      color: #634BAA;
+      border-color: #CFC5EB;
+      background: #F1EDFA;
+    }
+    .badge.video { color: #634BAA; }
+    .empty {
+      color: #64748B;
+      border-color: #CBD5E1;
+      background: rgba(248,250,252,.96);
+    }
+
+    @media (max-width: 680px) {
+      .filters { background: rgba(248,250,252,.99); }
+    }
+</style>
+  <link rel="stylesheet" href="pg26_files/site-navigation.css">
+  <script src="pg26_files/site-navigation.js" defer></script>
+</head>
+<body class="pg-program-page pg-full-program">
+  <div class="site-bg" aria-hidden="true"><img src="pg26_files/pg26_bg3.jpg" alt=""></div>
+  <div id="scroll-progress" aria-hidden="true"></div>
+  <header class="pg-site-header">
+    <div class="pg-header-inner">
+      <a class="pg-brand" href="index.html#hero" aria-label="Pacific Graphics 2026 home"><img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" width="210" height="96"></a>
+      <nav class="pg-desktop-nav" id="main-nav" aria-label="Main navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="calls">Calls<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div></details>
+<details class="pg-nav-group"><summary class="pg-nav-link active" data-nav="program" aria-current="page">Program<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="program.html">Program-at-a-Glance</a><a href="full-program.html" aria-current="page">Full Program</a><a href="index.html#committee">Committee</a></div></details>
+<a class="pg-nav-link" data-nav="presenters" href="presenter-instructions.html">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="attend">Attend<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="venue.html">Venue</a><a href="hotels.html">Hotels</a></div></details>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav>
+      <details class="pg-mobile-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<div class="pg-mobile-group"><span class="" data-nav="calls">Calls</span><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div>
+<div class="pg-mobile-group"><span class="active" data-nav="program">Program</span><a href="program.html">Program-at-a-Glance</a><a href="full-program.html" aria-current="page">Full Program</a><a href="index.html#committee">Committee</a></div>
+<a class="pg-nav-link" data-nav="presenters" href="presenter-instructions.html">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<div class="pg-mobile-group"><span class="" data-nav="attend">Attend</span><a href="venue.html">Venue</a><a href="hotels.html">Hotels</a></div>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav></details>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <p class="hero-kicker">October 6–9, 2026 · Singapore</p>
+    <h1>Full Program</h1>
+    <div class="hero-line" aria-hidden="true"></div>
+    <p class="subtitle">All times are Singapore Time (SGT). Search by paper ID, title, author or topic.</p>
+  
+    <nav class="pg-section-links" aria-label="Program and presenter pages"><a href="program.html">Program-at-a-Glance</a><a href="full-program.html" aria-current="page">Full Program</a><a href="presenter-instructions.html">Presenter Instructions</a></nav>
+  </section>
+
+  <main>
+
+    <section class="filters" aria-label="Program filters">
+      <label class="search">Search
+        <input id="search" type="search" autocomplete="off" placeholder="Paper ID, title, author or topic">
+      </label>
+      <label>Day
+        <select id="day-filter">
+          <option value="all">All days</option>
+          <option value="2026-10-06">Tue, Oct 6</option>
+          <option value="2026-10-07">Wed, Oct 7</option>
+          <option value="2026-10-08">Thu, Oct 8</option>
+          <option value="2026-10-09">Fri, Oct 9</option>
+        </select>
+      </label>
+      <label>Track
+        <select id="track-filter">
+          <option value="all">All tracks</option>
+          <option value="Journal">Journal</option>
+          <option value="Invited">Invited</option>
+          <option value="Conference">Conference</option>
+          <option value="Poster">Poster</option>
+        </select>
+      </label>
+      <label>Presentation format
+        <select id="status-filter">
+          <option value="all">All formats</option>
+          <option value="VIDEO PRESENTATION">Video Presentations (Non-In-Person)</option>
+        </select>
+      </label>
+      <button class="reset" id="reset" type="button">Reset</button>
+    </section>
+    <p class="results-line" id="results-line" aria-live="polite"></p>
+    <div id="program"></div>
+  </main>
+
+  <footer>
+    <p>Updated 16 September 2026</p>
+    <p>© PG 2026 · Pacific Graphics 2026</p>
+  </footer>
+
+  <script id="program-data" type="application/json">{"includeAllPapers":true,"posterCapacity":{"total":60,"assigned":10},"oral":[{"date":"2026-10-06","day":"Tue","session":"A1","room":"Ngee Ann Kongsi Auditorium","theme":"Computational imaging, color and optical reconstruction","start":"13:30","end":"13:50","duration":20,"untimed":false,"track":"Invited","id":"INV-10","title":"Splat-based Metal Artifact Reduction in Cone-Beam CT via Polychromatic Modeling","authors":"Kiseok Choi, Inchul Kim, Jaemin Cho, Hyeongjun Cho, Min H. Kim","format":"CGF Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A1","room":"Ngee Ann Kongsi Auditorium","theme":"Computational imaging, color and optical reconstruction","start":"13:50","end":"14:10","duration":20,"untimed":false,"track":"Invited","id":"INV-04","title":"Spectral Image Rendering of Fluorescent Objects Using a Conventional Renderer","authors":"Shoji Tominaga, Giuseppe Claudio Guarnera, Ryo Ohtera","format":"TVCG Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A1","room":"Ngee Ann Kongsi Auditorium","theme":"Computational imaging, color and optical reconstruction","start":"14:10","end":"14:30","duration":20,"untimed":false,"track":"Journal","id":"paper1277","title":"Physics-Guided ADMM-Inspired Deep Unrolling for Phase Unwrapping","authors":"xin yuan, Zheyu Shi, Xiaodong Wang, yufei dou, zongfang liu, xiongfei su","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A1","room":"Ngee Ann Kongsi Auditorium","theme":"Computational imaging, color and optical reconstruction","start":"14:30","end":"14:50","duration":20,"untimed":false,"track":"Journal","id":"paper1416","title":"PASTEL: Palette-Affinity Soft Color Segmentation with Texture-Preserving Editing Layers","authors":"QICHEN XIE, Zhou Yanghong, Tracy Mok, Cheung NM Man","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A1","room":"Ngee Ann Kongsi Auditorium","theme":"Computational imaging, color and optical reconstruction","start":"14:50","end":"15:10","duration":20,"untimed":false,"track":"Journal","id":"paper1281","title":"Beyond Horizontal Refinement: Extending Quadtree Tall Cells with Adaptive Optical Layers","authors":"Takashi Kanai, Fumiya Narita","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B1","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":"13:30","end":"13:45","duration":15,"untimed":false,"track":"Conference","id":"paper1063","title":"LayoutShop: Content-Constrained Exploratory Design of Creative Article Layout","authors":"Pengfei Xu, Jialuo Li","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B1","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":"13:45","end":"14:00","duration":15,"untimed":false,"track":"Conference","id":"paper1075","title":"Multimodal Generative Steganography via Language and Diffusion Models","authors":"Keqin Chen, Wenqing Guo, Fuqiang Wang, Jianqiang Zhang, He Zhu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B1","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":"14:00","end":"14:15","duration":15,"untimed":false,"track":"Conference","id":"paper1342","title":"StructureLDM: A Latent Diffusion Model for Sketch-based Structural Analysis","authors":"Wanchao SU, Deng Yu, Liu Yujie, Lin Jiao, guangtao liu, Zhumin Chen","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B1","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":"14:15","end":"14:30","duration":15,"untimed":false,"track":"Conference","id":"paper1070","title":"Computational Reconfigurable Garments","authors":"Peng Song, Haoyu Tang, Yixuan He, Kan Chen","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B1","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":"14:30","end":"14:45","duration":15,"untimed":false,"track":"Conference","id":"paper1149","title":"CT2Yarn: Yarn-Level Reconstruction of Crochet from Computed Tomography","authors":"Nobuyuki Umetani, CHANG LUO","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B1","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":"14:45","end":"15:00","duration":15,"untimed":false,"track":"Conference","id":"paper1475","title":"GeoTopoDiff: Hybrid Diffusion for Geometry-Topology Coupled Vector Floorplan Generation","authors":"Liping Zheng, Wenming Wu, Gaofeng Zhang, Mengle Zhan, Sizhe Hu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B1","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1107","title":"Understanding Cinematography Styles with Generative Modeling of Camera Behaviors","authors":"Xiaosong Yang, Ying Cao, Wang Pengjie, Yingjie Xi, Jinhe Na, He Rui, Boyuan Cheng, Gui Jing","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-06","day":"Tue","session":"A2","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"15:40","end":"16:00","duration":20,"untimed":false,"track":"Journal","id":"paper1045","title":"Learning Discrete Riemannian Metric for Problem Aware Meshing","authors":"Jin Huang, Hujun Bao, Xiaohu Zhang, Yiyang Jin","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A2","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"16:00","end":"16:20","duration":20,"untimed":false,"track":"Journal","id":"paper1120","title":"Angle-Based Metric Adaptation for Quadrangulation","authors":"Hujun Bao, Jin Huang, Shuang Wu, Yijun Xu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A2","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"16:20","end":"16:40","duration":20,"untimed":false,"track":"Journal","id":"paper1182","title":"Blended Chart Surfaces: A Seamless Explicit Representation for Smooth Surface Fitting","authors":"Romy Williamson, Niloy Mitra","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A2","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"16:40","end":"17:00","duration":20,"untimed":false,"track":"Journal","id":"paper1193","title":"Real-Time Bijective Planar Mappings","authors":"Kai Hormann, Craig Gotsman, Qingjun Chang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A2","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"17:00","end":"17:20","duration":20,"untimed":false,"track":"Journal","id":"paper1449","title":"Neural Toroidal Patch: Analytic Bases Matter More Than Their Form or the Network Architecture","authors":"Youngjin Park, Jinyoung Choi","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A2","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"17:20","end":"17:40","duration":20,"untimed":false,"track":"Journal","id":"paper1131","title":"Q-MAGIC: Quad-only Mesh Autoregressive Generation via Singularity-Aware Circular Relative Offset Tokenization","authors":"Wang Weimin, Na Lei, Zezeng Li, Yuming Zhao, Xiang Wu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"A2","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"17:40","end":"18:00","duration":20,"untimed":false,"track":"Journal","id":"paper1417","title":"Curvature-matched 5-axis CNC machining using non-circular toroidal cutters","authors":"Pengbo Bo, Michal Bizzarri, Michael Barton, Kinga Kruppa","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"15:40","end":"15:55","duration":15,"untimed":false,"track":"Conference","id":"paper1065","title":"Avatar-DiT: Parametric Multi-View Rendering for Interactive Humans using Multi-modal DiT","authors":"Dingkun Yan, Haoran Xie, Fangyuan Tu, Erwin Wu, Yichen Peng, Shuai Tan, Bo zheng, You Zhou, Zhengqing Li","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"15:55","end":"16:10","duration":15,"untimed":false,"track":"Conference","id":"paper1100","title":"Personalized FACS Tracker for 3D Head Avatar from Monocular Video","authors":"Seungyong Lee, Wonjong Jang, Gwangjin Ju","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"16:10","end":"16:25","duration":15,"untimed":false,"track":"Conference","id":"paper1116","title":"DiffAnyPose: Generalized Humanoid Pose Estimation with Diffusion Transformers","authors":"Bo Zhou, Yan Gong, Yiren Song, Xingxi Yin, Xikang Chen, Yicheng Li","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"16:25","end":"16:40","duration":15,"untimed":false,"track":"Conference","id":"paper1139","title":"Motion Gesture Generation Using Large Language Models under Data Sparsity","authors":"Jongmin Kim, HANYOUNG JANG, Seong Uk Kim, Kyeongpil Kang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"16:40","end":"16:55","duration":15,"untimed":false,"track":"Conference","id":"paper1263","title":"Flexible Motion Generation from Language and Style References","authors":"Daniel Holden, Joseph Teran, Kai Lan, Bodie Criswell, Briana Fedkiw, Zhan Zhang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"16:55","end":"17:10","duration":15,"untimed":false,"track":"Conference","id":"paper1423","title":"Towards Synthesized and Editable Motion In-Betweening Through Part-Wise Phase Representation","authors":"Jingbo Wang, Bo Dai, Minyue Dai, bin ji, ke fan, Haoran Xu, Haoyu Zhao, Junting Dong","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"17:10","end":"17:25","duration":15,"untimed":false,"track":"Conference","id":"paper1463","title":"Robust Interactive Collision of Signed Distance Fields using Stochastic Simplex Optimization","authors":"Sheldon Andrews, Chris Giles","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"17:25","end":"17:40","duration":15,"untimed":false,"track":"Conference","id":"paper1179","title":"SpectrumGS: Spectrum-Driven 3D Gaussian Splatting for 4D Reconstruction","authors":"Chengjie Niu, Siqi Bai, Jintao Liu, Wenting Liu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"17:40","end":"17:55","duration":15,"untimed":false,"track":"Conference","id":"paper1083","title":"Inverse Rig Optimization from Line Drawings","authors":"Yuki Koyama, Zihao Zhu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1350","title":"SAGM: Semantic Alignment-Guided Masked Motion Modeling","authors":"Yong Hu, Xukun Shen, xueyang zhou, Pengfei Zhou","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1493","title":"P2GDiff-Agent: Audio-Intent Decoupled Diffusion for Slide-Based Virtual Teacher Gesture Generation","authors":"Juncong Lin, Hanli Zhao, Long Huang, Shibin Yu, Jinhan Lin","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-06","day":"Tue","session":"B2","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1248","title":"WATCH:World-aware Allied Trajectory and pose reConstruction for Camera and Human","authors":"Xiu Li, zhongyuan hu, jiazhi shu, ronghui li, yu lu, zijiao zeng, qijun ying","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"A3","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":"10:30","end":"10:50","duration":20,"untimed":false,"track":"Journal","id":"paper1028","title":"PropGesture: Few-shot Co-speech Gesture Synthesis for Handheld Props","authors":"Sung-Hee Lee, Jiho Kang, Jihun Shin, Junghoon Choi","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A3","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":"10:50","end":"11:10","duration":20,"untimed":false,"track":"Journal","id":"paper1091","title":"Adaptive Reference Refinement for Physics-based Motion Retargeting","authors":"Young Min Kim, Seungbin Jeong","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A3","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":"11:10","end":"11:30","duration":20,"untimed":false,"track":"Journal","id":"paper1286","title":"MGAvatar: Mesh-Bound Gaussians for Head Avatar Geometry and Appearance Modeling","authors":"Xiaohu Guo, Zhonggui Chen, Baorong Yang, Lei Shi, Zhiyang Deng, Xiao Dong, Sen Peng","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A3","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":"11:30","end":"11:50","duration":20,"untimed":false,"track":"Journal","id":"paper1433","title":"STITCH: Structure Tensor Informed Topologically Coherent Hair Reconstruction","authors":"Reinhard Klein, Patrick Stotko, Markus Plack, Hannah Droege, Alireza Vafaei, Jan Spindler","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A3","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":"11:50","end":"12:10","duration":20,"untimed":false,"track":"Invited","id":"INV-07","title":"FaceIt: Real-Time On-Device Identity-Preserving Portrait Animation","authors":"Marek Dvorožňák, Daniel Sýkora, Cassidy Curtis, Brian Curless, Yunyingying Xu, Zhongwen Zhou, Olga Sorkine-Hornung, David Salesin","format":"CGF Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A3","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":null,"end":null,"duration":null,"untimed":true,"track":"Journal","id":"paper1143","title":"Dream4D: Lifting Camera-Controlled I2V towards Spatiotemporally Consistent 4D Generation","authors":"YuJie Xing, Xiaoyan Liu, Kangrui Li, Jiaxin Liu, Yuehao Song","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"A3","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":null,"end":null,"duration":null,"untimed":true,"track":"Journal","id":"paper1170","title":"CamLoop4D: Controllable 4D Scene Generation by Closing the Camera Loop between Generation and Reconstruction","authors":"Junhao Chen, Hao Li","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":"10:30","end":"10:45","duration":15,"untimed":false,"track":"Conference","id":"paper1054","title":"GSPotential: Camera Potential Field for Sparse-View 3D Gaussian Splatting","authors":"Xiaohui Liang, Zhiying Leng, Zeyuan An, Yanghang Xiao, Yijun Feng","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":"10:45","end":"11:00","duration":15,"untimed":false,"track":"Conference","id":"paper1398","title":"TruncGradGS: Improved 3D Gaussian Splatting via Truncated Gradient Updates","authors":"Binh-Son Hua, Theo Morales, Robin Atkins, Nhat-Quynh Le-Pham","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":"11:00","end":"11:15","duration":15,"untimed":false,"track":"Conference","id":"paper1426","title":"GS²: Gradient-Shaped Gaussian Hybrids for Entropy-Modeled 3DGS Compression","authors":"Juyong Zhang, Jiahao Zhang, Chubang Liang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":"11:15","end":"11:30","duration":15,"untimed":false,"track":"Conference","id":"paper1548","title":"Laplacian Frequency Hierarchies for Efficient 3D Gaussian Splatting Training","authors":"Yang Yixiong, Sisheng Zhang, Qingsong Yan, Shaohuai Shi, Qiang Wang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":"11:30","end":"11:45","duration":15,"untimed":false,"track":"Conference","id":"paper1226","title":"Real-Time Object Composition in 3D Gaussian Splatting via Physics-Driven Light Transport Factorization","authors":"Sheng Li, Zhangjin Huang, Junke Zhu, Du Boyan, Haochuan Dang, Ang Li, Jixiang Hu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":"11:45","end":"12:00","duration":15,"untimed":false,"track":"Conference","id":"paper1401","title":"UPGS: Unified Pose-aware Gaussian Splatting for Dynamic Scene Deblurring","authors":"Longguang Wang, Zhijing Wu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1009","title":"GTS: Gaussian Transmittance Splatting for Efficient Neural Inverse Rendering and Relighting with Shadows","authors":"Ravi Ramamoorthi, Jia-Mu Sun","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"B3","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1098","title":"TileGS: Tile-Local Depth Binning for Gaussian Splatting Rasterization","authors":"Juho Kannala, Wei Tan, Matias Turkulainen, Hamed Tavakoli, Lauri Ilola","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"A4","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":"13:30","end":"13:50","duration":20,"untimed":false,"track":"Invited","id":"INV-05","title":"Pro-DG: Procedural Diffusion Guidance for Architectural Facade Generation","authors":"Aleksander Plocharski, Jan Swidzinski, Przemyslaw Musialski","format":"CGF Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A4","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":"13:50","end":"14:10","duration":20,"untimed":false,"track":"Journal","id":"paper1020","title":"A Study of the Design Space of Motion and Disocclusion Control in Video Generation","authors":"Adrien Bousseau, Niloy Mitra, Changjian Li, ANRAN QI","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A4","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":"14:10","end":"14:30","duration":20,"untimed":false,"track":"Journal","id":"paper1121","title":"Function-Aware Regional Injection for Training-Free Image Editing","authors":"Xiao-Ming Fu, Siyuan Xing","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A4","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":"14:30","end":"14:50","duration":20,"untimed":false,"track":"Journal","id":"paper1137","title":"Telligram: Text-Driven Calligram Generation with Diffusion-Guided Skeleton Optimization","authors":"Pengfei Xu, Tianci Shi","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A4","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":"14:50","end":"15:10","duration":20,"untimed":false,"track":"Journal","id":"paper1269","title":"Image Vectorization with Generalized Coons Patches","authors":"Kai Hormann, Chongyang Deng, Kaikai Qin, Yan Jing","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A4","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":null,"end":null,"duration":null,"untimed":true,"track":"Journal","id":"paper1026","title":"EvoGS: Modeling Deformation Evolution for Dynamic Gaussian Splatting","authors":"Wei Dong, Han Zhou, Jun Chen, Shahram Shirani","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"A4","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":null,"end":null,"duration":null,"untimed":true,"track":"Journal","id":"paper1156","title":"A Frequency-Decomposed Residual Learning Framework for Volume Data Neural Representation","authors":"Huijie Zhang, Weiyang Liu, Zhaohan Lv, Yiming Lin","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"B4","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":"13:30","end":"13:45","duration":15,"untimed":false,"track":"Conference","id":"paper1119","title":"DReSG: Diffusion Residuals for Stylized Gaussian Splatting","authors":"Zhongliang Liu, Yang Li, Wenjie Liu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B4","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":"13:45","end":"14:00","duration":15,"untimed":false,"track":"Conference","id":"paper1126","title":"ChronoFuseGS: Multi-Temporal Gaussian Fusion with Per-Splat Persistence and Change Visualization","authors":"Peter Kán, Hannes Kaufmann, Diana Marin, Tobias Batik","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B4","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":"14:00","end":"14:15","duration":15,"untimed":false,"track":"Conference","id":"paper1364","title":"ChildSplat: Anchor-Child Semantic Gaussian Representation for 3D Object Segmentation and Editing","authors":"Zhangjin Huang, Junke Zhu, Du Boyan, Haochuan Dang, Siyuan Zhang, Jinshuo Wang, Lu Zou","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B4","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":"14:15","end":"14:30","duration":15,"untimed":false,"track":"Conference","id":"paper1585","title":"GeoPlanEdit: MLLM-Planned Multi-Keyframe 3D Gaussian Editing via Geometry-Aware Propagation","authors":"Feng Bo","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B4","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":"14:30","end":"14:45","duration":15,"untimed":false,"track":"Conference","id":"paper1178","title":"Self-Evolving Scene Memory: Inheritance, Growth, and Consolidation for Continual 3D Gaussian Splatting","authors":"xu wenjin, Jiongyang Li, wang shaoqian, Wei Shuang, wang qiang, zijian zhao, jianing du","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B4","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":"14:45","end":"15:00","duration":15,"untimed":false,"track":"Conference","id":"paper1010","title":"ELAMP-Track: Existence-Localization Decoupling and Asymmetric Memory Pruning for Zero-Shot Multi-Object Tracking","authors":"Tao Wu, Yongqiang Zhang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B4","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1172","title":"MorphGS: Morphing Gaussian Splatting via Cross-Level Interpolation","authors":"Bai Haiyang, Hongshen Lv, Songzhi Su, MingYuan Huang, Zongqing Li","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-07","day":"Wed","session":"A5","room":"Ngee Ann Kongsi Auditorium","theme":"Neural rendering and Gaussian scene representations","start":"15:40","end":"16:00","duration":20,"untimed":false,"track":"Invited","id":"INV-01","title":"Geometry-Aware Scene Configurations for Novel-View Synthesis","authors":"Minkwan Kim, Changwoon Choi, Young Min Kim","format":"TVCG Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A5","room":"Ngee Ann Kongsi Auditorium","theme":"Neural rendering and Gaussian scene representations","start":"16:00","end":"16:20","duration":20,"untimed":false,"track":"Invited","id":"INV-08","title":"TraM-NeRF: Tracing Mirror and Near-Perfect Specular Reflections through Neural Radiance Fields","authors":"Leif Van Holland, Ruben Bliersbach, Jan U. Müller, Patrick Stotko, Reinhard Klein","format":"CGF Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A5","room":"Ngee Ann Kongsi Auditorium","theme":"Neural rendering and Gaussian scene representations","start":"16:20","end":"16:40","duration":20,"untimed":false,"track":"Journal","id":"paper1260","title":"Camera Splatting for Continuous View Optimization","authors":"Seungyong Lee, Hyomin Kim, Gahye Lee, Hyejeong Yoon, Jooeun Son, Gwangjin Ju","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A5","room":"Ngee Ann Kongsi Auditorium","theme":"Neural rendering and Gaussian scene representations","start":"16:40","end":"17:00","duration":20,"untimed":false,"track":"Journal","id":"paper1333","title":"Reliability-Aware Adaptive Gaussian Propagation for Low-Texture Dynamic Outdoor Scenes","authors":"Xiaoqun Wu, Yumeng Cao","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"A5","room":"Ngee Ann Kongsi Auditorium","theme":"Neural rendering and Gaussian scene representations","start":"17:00","end":"17:20","duration":20,"untimed":false,"track":"Journal","id":"paper1411","title":"LiteTex-GS: Fast and Lightweight Texturing for Gaussian Splatting","authors":"Lei Ma, Hong Rao, Liwen Hu, Zhiwei Li, Yijia Guo, yishi lu, shengbo chen","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B5","room":"SOA Seminar Room 2-2","theme":"Geometry processing and shape correspondence","start":"15:40","end":"16:00","duration":20,"untimed":false,"track":"Journal","id":"paper1040","title":"An electrostatic field driven method for point orientation","authors":"Yuanfeng Zhou, Guangshun Wei, Ma Long, Jiaze Li, Zihan Wang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B5","room":"SOA Seminar Room 2-2","theme":"Geometry processing and shape correspondence","start":"16:00","end":"16:20","duration":20,"untimed":false,"track":"Journal","id":"paper1378","title":"Construction of Simple Quadrangulations of the Sphere at Skeletal Joints","authors":"Q Youn Hong, Suil Hwang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B5","room":"SOA Seminar Room 2-2","theme":"Geometry processing and shape correspondence","start":"16:20","end":"16:40","duration":20,"untimed":false,"track":"Journal","id":"paper1195","title":"Cage-based dynamic mesh compression","authors":"Kai Hormann, Libor Váša, Filip Hácha, Zuzana Káčereková, Navdeep Singh Bedi","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B5","room":"SOA Seminar Room 2-2","theme":"Geometry processing and shape correspondence","start":"16:40","end":"17:00","duration":20,"untimed":false,"track":"Journal","id":"paper1167","title":"Bijective Shape Correspondence through Nonlinear Spectral Embedding Alignment","authors":"Zhongke Wu, Xingce Wang, Jianhui Liu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-07","day":"Wed","session":"B5","room":"SOA Seminar Room 2-2","theme":"Geometry processing and shape correspondence","start":"17:00","end":"17:20","duration":20,"untimed":false,"track":"Journal","id":"paper1273","title":"WPDv2: Implicit-Assisted Poisson-Disk Resampling with Sharp Feature Preservation","authors":"Yong-Jin Liu, Zhongke Wu, Chenlei Lv, Junli ZHAO, Baodong Wang, Xinbin Sun","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A6","room":"Ngee Ann Kongsi Auditorium","theme":"Appearance modeling, rendering and image restoration","start":"10:30","end":"10:50","duration":20,"untimed":false,"track":"Invited","id":"INV-02","title":"SharpEdge: Edge Feature Surface Reconstruction from Space Curves","authors":"Xue Yu, Alla Sheffer, Nathan Carr, Yotam Gingold","format":"CGF Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A6","room":"Ngee Ann Kongsi Auditorium","theme":"Appearance modeling, rendering and image restoration","start":"10:50","end":"11:10","duration":20,"untimed":false,"track":"Journal","id":"paper1095","title":"OrnaStyler: Ornament-Aware Latent Editing for Content-Preserving 3D Stylization","authors":"Tomohiro Aizawa, Chunzhi Gu, Shigeru Kuriyama","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A6","room":"Ngee Ann Kongsi Auditorium","theme":"Appearance modeling, rendering and image restoration","start":"11:10","end":"11:30","duration":20,"untimed":false,"track":"Journal","id":"paper1302","title":"Prompt-Conditioned Cue Matching for Black-Box Procedural Material Fitting","authors":"Christoph Garth, Runzhou Mao, Juraj Fulir","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A6","room":"Ngee Ann Kongsi Auditorium","theme":"Appearance modeling, rendering and image restoration","start":"11:30","end":"11:50","duration":20,"untimed":false,"track":"Journal","id":"paper1369","title":"Physically Based Rendering in the Latent Space","authors":"Binh-Son Hua, Adrien Gruson, Vuk Radovanovic, Vishesh Gupta","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A6","room":"Ngee Ann Kongsi Auditorium","theme":"Appearance modeling, rendering and image restoration","start":"11:50","end":"12:10","duration":20,"untimed":false,"track":"Journal","id":"paper1136","title":"Unveiling Silent Hill with HeteroDiff: Dense Haze Removal via Heterogeneous Diffusion","authors":"Shengfeng He, Xiao Lv, Ying YANG, Bin Zhu, Tao Xiang, Chuan Ma","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B6","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":"10:30","end":"10:45","duration":15,"untimed":false,"track":"Conference","id":"paper1152","title":"Efficient Context Scale Expansion Method for Large-scale Scene Point Clouds Based on Context Sharing","authors":"Zhengxing Sun, shoutong Luo, Yunhan Sun, Yi Wang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B6","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":"10:45","end":"11:00","duration":15,"untimed":false,"track":"Conference","id":"paper1320","title":"Structured Spectral Neural Radiance Fields for Sparse-View Iridescent Reconstruction","authors":"Edgar Simo-Serra, Bixuan Chen","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B6","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":"11:00","end":"11:15","duration":15,"untimed":false,"track":"Conference","id":"paper1332","title":"ViRiC: Ring-aware Cylinder Completion Guided by V-shaped Geometric Cues from Sparse LiDAR Point Clouds","authors":"Chu Luo, Weize Xie, Zhen Li, Shiyou Chen, Junyang Chen","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B6","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":"11:15","end":"11:30","duration":15,"untimed":false,"track":"Conference","id":"paper1413","title":"GeoTopoBRep: Geometry-Aware Multi-View Reconstruction of Editable CAD B-reps","authors":"Juyong Zhang, Yudong Guo, Pengxiang Wang, Chumeng Niu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B6","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":"11:30","end":"11:45","duration":15,"untimed":false,"track":"Conference","id":"paper1322","title":"Locality-Aware Block-Parallel GPU Subdivision for Large Hexahedral Meshes","authors":"Weihua Tong, Zhangjin Huang, Junke Zhu, Xiaoying Ding, Siyuan Zhang, Zhumin Yuan","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B6","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":"11:45","end":"12:00","duration":15,"untimed":false,"track":"Conference","id":"paper1235","title":"GShell: Geometry-First Reconstruction of Refractive Shells and Enclosed Objects with Gaussian Splatting","authors":"Aimin Hao, Yang Gao, Peng Yu, Hang Xu, Xueguang Xie","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B6","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1214","title":"CrossMambaStereo: Confidence-Guided State Propagation for Stereo Matching","authors":"Hongchao Chen, Yanbing Xue, Jing Cai","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-08","day":"Thu","session":"A7","room":"Ngee Ann Kongsi Auditorium","theme":"Simulation, geometry and numerical methods","start":"13:30","end":"13:50","duration":20,"untimed":false,"track":"Invited","id":"INV-03","title":"DIQ-MPM: Dual Interface Quadrature MPM for Simulating Large Deformation and Fluid-Solid Coupling","authors":"Kangrui Zhang, Ruihong Cen, Siyan Zhu, Ruoyan Chen, Bo Ren","format":"TVCG Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A7","room":"Ngee Ann Kongsi Auditorium","theme":"Simulation, geometry and numerical methods","start":"13:50","end":"14:10","duration":20,"untimed":false,"track":"Invited","id":"INV-12","title":"Register-Efficient Linear-Time Evaluation in the Bernstein Basis","authors":"Gábor Valasek, Anna Lili Horváth","format":"CGF Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A7","room":"Ngee Ann Kongsi Auditorium","theme":"Simulation, geometry and numerical methods","start":"14:10","end":"14:30","duration":20,"untimed":false,"track":"Journal","id":"paper1109","title":"Mastering Multi-State Dynamics: Continuum Damage and Viscoplastic MPM for RL-Based Dexterous Manipulation","authors":"Yusen Feng, Luan Shangbo","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A7","room":"Ngee Ann Kongsi Auditorium","theme":"Simulation, geometry and numerical methods","start":"14:30","end":"14:50","duration":20,"untimed":false,"track":"Journal","id":"paper1444","title":"Recovering Projective Dynamics: Strain-Based ADMM for Cosserat Rod Simulation","authors":"Bo Ren, Kangrui Zhang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A7","room":"Ngee Ann Kongsi Auditorium","theme":"Simulation, geometry and numerical methods","start":"14:50","end":"15:10","duration":20,"untimed":false,"track":"Journal","id":"paper1087","title":"Scalable Capacity-Constrained Power Diagrams via Compressed Optimal Assignment","authors":"Changhe Tu, Shiqing Xin, Shuangmin Chen, Yunqi Yang, Jiantao Song","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B7","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":"13:30","end":"13:45","duration":15,"untimed":false,"track":"Conference","id":"paper1002","title":"TAME: Topic-Aware Mixture-of-Experts for Image Aesthetics Assessment with Semantic Routing and Noise-Robust Weak Supervision","authors":"qingshi ma, min jiang, ronghua huang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B7","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":"13:45","end":"14:00","duration":15,"untimed":false,"track":"Conference","id":"paper1132","title":"LFFEO: A Low-Frequency Fourier Exposure Operator with Attentive Detail Refinement for Image Exposure Correction","authors":"Shengjun Liu, Xinru Liu, Kexin Liu, ZhiPeng Xiao, kai lei, Gang Yang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B7","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":"14:00","end":"14:15","duration":15,"untimed":false,"track":"Conference","id":"paper1133","title":"ReWarp: Relation-Aware Deformation Modeling for Document Image Dewarping","authors":"Xin Zheng, Jiajie Li, Qian Yin, Qiuli Zhang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B7","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":"14:15","end":"14:30","duration":15,"untimed":false,"track":"Conference","id":"paper1222","title":"Phase-Conditioned Decoupled Mamba for Underwater Image Enhancement with Noise-Resistant Structural Priors","authors":"Zhi Zeng, Yibin Tian, Zhang Zhiyuan, Yun Huang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B7","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":"14:30","end":"14:45","duration":15,"untimed":false,"track":"Conference","id":"paper1123","title":"IRW-Stitcher: Iterative Residual Weighting for Reliability-Aware Mesh Warping in Image Stitching","authors":"Haoran Li, Cong Yang, Zeyd Boukhers, Yan Ke, Wei Sui, John See","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B7","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":"14:45","end":"15:00","duration":15,"untimed":false,"track":"Conference","id":"paper1218","title":"Atmosphere-Aware Intrinsic Decomposition from a Single Terrain Image with Latent Diffusion Models","authors":"Syuhei Sato, Shun Tatsukawa","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B7","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1373","title":"FQD-R1: Fine-Grained Quality Decision via Ambiguity-Aware Memory and Saliency-Grounded Reasoning","authors":"Tian Qiu, Baoliang Chen, Jiaye Chen, Jieyu Zhan","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-08","day":"Thu","session":"A8","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":"15:40","end":"15:55","duration":15,"untimed":false,"track":"Conference","id":"paper1366","title":"FaceWalker: Rotation-Invariant Mesh Understanding via Bidirectional Face-Based Random Walks","authors":"Weihua Tong, Zhangjin Huang, Junke Zhu, Haochuan Dang, Jinshuo Wang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A8","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":"15:55","end":"16:10","duration":15,"untimed":false,"track":"Conference","id":"paper1577","title":"PONG: Test-Time Ping-Pong Propagation for 3D Object Retrieval","authors":"Xinwei He, Hui Wang, qianru Han, yansong Zheng, meiyan Li","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A8","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":"16:10","end":"16:25","duration":15,"untimed":false,"track":"Conference","id":"paper1365","title":"HG-CrackMamba: Hypergraph-Conditioned Mamba for Topology-Preserving Crack Segmentation","authors":"Ma Rongyang, Zhu Yong, Wu Mincheng, Wen Lianhui, Wen Zhenyu, Zhang Siyi","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A8","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":"16:25","end":"16:40","duration":15,"untimed":false,"track":"Conference","id":"paper1436","title":"GMMPP: Generalizable Multimodal Model for Pixel-level Pressure Perception across Diverse Embodiments","authors":"Xinrong Chen, Yawen Liu, xinkang zhang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"A8","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1030","title":"Zero-Shot 3D Visual Grounding via Multi-Level Geometric Consensus","authors":"Feifei Xu, Zhimin Ma, yuhang Zhu, Yuchi Zhuo, Dongyang Li, Guoxiang Wu","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-08","day":"Thu","session":"A8","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1261","title":"TPT-MSL: Tucker-Prompt Tuning with Text-Aligned Multimodal Subject Learning for Efficient Subject-Driven Customization","authors":"Jiawen Luo, Huazhong Liu, Jihong Ding, Jing Guo","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-08","day":"Thu","session":"A8","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1264","title":"Dual-Utility Generative Adversarial Data Augmentation with Dynamic Data Valuation for Single Domain Generalization","authors":"Jiawen Luo, Huazhong Liu, Jihong Ding, Jingyi Wang, Shiyou Wang, Wenjian Zhu","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-08","day":"Thu","session":"B8","room":"SOA Seminar Room 2-2","theme":"Geometry processing and interactive modeling","start":"15:40","end":"15:55","duration":15,"untimed":false,"track":"Conference","id":"paper1014","title":"Segment Any Geometric Texture of 3D Meshes","authors":"Hui Huang, Weidan Xiong, Kaijie Qu, Rongyu Xiong, Shunqi Fan, Shihao Feng","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B8","room":"SOA Seminar Room 2-2","theme":"Geometry processing and interactive modeling","start":"15:55","end":"16:10","duration":15,"untimed":false,"track":"Conference","id":"paper1088","title":"AlphaPrint: Learning Toward Time-Optimal Toolpath Sequencing","authors":"Changhe Tu, Manyi Li, Haisen Zhao, Peng-Shuai Wang, pengfei wang, Yang Wang, Hao Xu, Lujiaoyang Fu, Pengjie Ge, Shuo Wang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B8","room":"SOA Seminar Room 2-2","theme":"Geometry processing and interactive modeling","start":"16:10","end":"16:25","duration":15,"untimed":false,"track":"Conference","id":"paper1448","title":"Triangle-Aware Geometry Images for Stable Pixel-Triangle Correspondence","authors":"Yin Mengxiao, Qin Kunkui","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-08","day":"Thu","session":"B8","room":"SOA Seminar Room 2-2","theme":"Geometry processing and interactive modeling","start":"16:25","end":"16:40","duration":15,"untimed":false,"track":"Conference","id":"paper1157","title":"ImplicitDrag: Drag-Based Editing of Differentiable Implicits","authors":"Adrien Bousseau, Daniel Ritchie, Siddhartha Chaudhuri, Marzia Riso, Henro Kriel, Aamen Muharram","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A9","room":"Ngee Ann Kongsi Auditorium","theme":"Scene perception and reconstruction","start":"09:00","end":"09:20","duration":20,"untimed":false,"track":"Journal","id":"paper1041","title":"FlySeek: Visibility-Aware Viewpoint Planning for Adversarial Target Pursuit in Complex 3D Scenes","authors":"Jiazheng Wen, Huanyu Liu, Junbao Li, Haipeng Guo, Hao Fang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A9","room":"Ngee Ann Kongsi Auditorium","theme":"Scene perception and reconstruction","start":"09:20","end":"09:40","duration":20,"untimed":false,"track":"Journal","id":"paper1058","title":"Fidelity-preserved Visual Proxy Construction using Architectural Semantics","authors":"Yu-Chi Lai, wen-kai Tai, Yan-Lin Chen, Shih-Syun Lin, Zhong-Qi Cai, Bo-Yuan Jiang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A9","room":"Ngee Ann Kongsi Auditorium","theme":"Scene perception and reconstruction","start":"09:40","end":"10:00","duration":20,"untimed":false,"track":"Invited","id":"INV-11","title":"Spectrum Alignment for Robust 3D Point Cloud Correspondences Estimation","authors":"Deepanshu Singh Solanki, Rajendra Nagar","format":"TVCG Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A9","room":"Ngee Ann Kongsi Auditorium","theme":"Scene perception and reconstruction","start":"10:00","end":"10:20","duration":20,"untimed":false,"track":"Journal","id":"paper1301","title":"OmniIndoor3D: Comprehensive Indoor 3D Reconstruction","authors":"Wei Xiaobao, Zhang Xiaoan, Hao Wang, Ying Li, Qingpo Wuwu, Jiajun Cao, Shanghang Zhang, Ming Lu, Wenzhao Zheng","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A9","room":"Ngee Ann Kongsi Auditorium","theme":"Scene perception and reconstruction","start":null,"end":null,"duration":null,"untimed":true,"track":"Journal","id":"paper1047","title":"PanoLoop: Yaw-Invariant Loop Closure for Feed-Forward Panoramic SLAM","authors":"Shiming Song, dianxi Shi, Yuanze Wang, Yongjun Zhang, Yuetian Wang, Haikuo Peng, Mengzhu Wang, Chunping Qiu","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]},{"date":"2026-10-09","day":"Fri","session":"B9","room":"SOA Seminar Room 2-2","theme":"Graphics acceleration and dynamic simulation","start":"09:00","end":"09:20","duration":20,"untimed":false,"track":"Journal","id":"paper1397","title":"HLoD: Screen-Space Hierarchical Level-of-Detail Traversal for 3D Gaussian Splatting","authors":"Reinhard Klein, Jan U. Müller, Jakob Sommer","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B9","room":"SOA Seminar Room 2-2","theme":"Graphics acceleration and dynamic simulation","start":"09:20","end":"09:40","duration":20,"untimed":false,"track":"Journal","id":"paper1520","title":"Refit Always---Precomputed Ensembles of Bounding Volume Hierarchies for Parametric Animations","authors":"Carsten Dachsbacher, Jean-Marc Thiery, Reiner Dolp","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B9","room":"SOA Seminar Room 2-2","theme":"Graphics acceleration and dynamic simulation","start":"09:40","end":"10:00","duration":20,"untimed":false,"track":"Journal","id":"paper1451","title":"Wide SOBB Hierarchies for Ray Tracing of Dynamic Scenes","authors":"Jiří Bittner, Martin Káčerik, Tereza Hlavová","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B9","room":"SOA Seminar Room 2-2","theme":"Graphics acceleration and dynamic simulation","start":"10:00","end":"10:20","duration":20,"untimed":false,"track":"Journal","id":"paper1239","title":"Projective Affine Body Dynamics for Multibody Systems","authors":"Chenfanfu Jiang, Xiaowei He, Yuzhong Guo, Yin Yang, Zimeng Ye, Hongan Wang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A10","room":"Ngee Ann Kongsi Auditorium","theme":"Visual analytics, segmentation and anomaly detection","start":"10:50","end":"11:10","duration":20,"untimed":false,"track":"Invited","id":"INV-09","title":"Exploring MLLMs Perception of Network Visualization Principles","authors":"Jacob Miller, Markus Wallinger, Ludwig Felder, Timo Brand, Henry Förster, Johannes Zink, Chunyang Chen, Stephen Kobourov","format":"TVCG Invited Presentation","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A10","room":"Ngee Ann Kongsi Auditorium","theme":"Visual analytics, segmentation and anomaly detection","start":"11:10","end":"11:30","duration":20,"untimed":false,"track":"Journal","id":"paper1158","title":"Hierarchical Visual Feature Fusion for Robust Out-of-Distribution Detection under Semantic and Image-Level Covariate Shifts","authors":"Keke Tang, Shengfeng He, Xiao Lv, Bin Zhu, Tao Xiang, Chuan Ma, Chao Hou, Ziyong Du","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A10","room":"Ngee Ann Kongsi Auditorium","theme":"Visual analytics, segmentation and anomaly detection","start":"11:30","end":"11:50","duration":20,"untimed":false,"track":"Journal","id":"paper1544","title":"PCAD-Flow: Point Clouds Anomaly Detection via Normalizing Flow","authors":"Mao Aihua, Chengzhi Ye, Kaiyuan Xu","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"A10","room":"Ngee Ann Kongsi Auditorium","theme":"Visual analytics, segmentation and anomaly detection","start":"11:50","end":"12:10","duration":20,"untimed":false,"track":"Journal","id":"paper1380","title":"Text-Inspired Feature Refinement for Few-Shot 3D Point Cloud Semantic Segmentation","authors":"Fan Zhong, Yong Zhao, Zihan Tang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B10","room":"SOA Seminar Room 2-2","theme":"Rendering, optics and inference acceleration","start":"10:50","end":"11:05","duration":15,"untimed":false,"track":"Conference","id":"paper1048","title":"Volumetric Simulation and Rendering of Heat-induced Optical Turbulence at Interactive Rates","authors":"Nianyi Li, Suren Jayasuriya, Jinwei Ye, Wanqi Yuan, Huaijin Chen, Ethan Chung, Man Luo","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B10","room":"SOA Seminar Room 2-2","theme":"Rendering, optics and inference acceleration","start":"11:05","end":"11:20","duration":15,"untimed":false,"track":"Conference","id":"paper1210","title":"MG-Cache: Multi-Granularity Caching for Accelerating Diffusion Transformer Inference","authors":"Zesen Chen, xu youxuan, Li Shigang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B10","room":"SOA Seminar Room 2-2","theme":"Rendering, optics and inference acceleration","start":"11:20","end":"11:35","duration":15,"untimed":false,"track":"Conference","id":"paper1455","title":"Outgoing-Direction-Aware Neural Importance Sampling for Many Lights","authors":"Yi Li, Jianghan Wang","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B10","room":"SOA Seminar Room 2-2","theme":"Rendering, optics and inference acceleration","start":"11:35","end":"11:50","duration":15,"untimed":false,"track":"Conference","id":"paper1497","title":"Interactive Fourier Optical Diffraction Shading of Complex, Fabricated Quasi-Periodic Nanostructures","authors":"Daljit Singh Dhillon, Parisha Joshi","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B10","room":"SOA Seminar Room 2-2","theme":"Rendering, optics and inference acceleration","start":"11:50","end":"12:05","duration":15,"untimed":false,"track":"Conference","id":"paper1425","title":"Real-Time Spectral Photoelasticity via Stochastic Hero-Wavelength Ray Marching and Stress-Aware Temporal Reprojection","authors":"Namit Bhutani, Tathagata Ray, Sumanta Pattanaik","format":"Oral talk","attendance":"","badges":[]},{"date":"2026-10-09","day":"Fri","session":"B10","room":"SOA Seminar Room 2-2","theme":"Rendering, optics and inference acceleration","start":null,"end":null,"duration":null,"untimed":true,"track":"Conference","id":"paper1472","title":"Online Hash-Grid Split Learning for Light-Tree Sampling","authors":"Lijun Yin, Zhe Ge","format":"Prerecorded video","attendance":"Video presentation","badges":["VIDEO PRESENTATION"]}],"posters":[{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":1,"track":"Poster","isPoster":true,"id":"poster1004","title":"True Scene-Linear HDR 3D Gaussian Splatting: Neural-Free Game-Engine-Ready HDR Novel View Synthesis","authors":"Ziyang Zhang, Hajime Uchimura, Kentaro Suzuki","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-06","session":"P1","start":"15:10","end":"15:40","board":1,"room":"SMU Connexion"}},{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":2,"track":"Poster","isPoster":true,"id":"poster1010","title":"From Text to Cinematic Manga Pages via Narrative Planning, Comic Layout Representation, and Anchor-First Rendering","authors":"Peiying Chiang, Hsiang Hung","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-06","session":"P1","start":"15:10","end":"15:40","board":2,"room":"SMU Connexion"}},{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":3,"track":"Poster","isPoster":true,"id":"poster1012","title":"Synthetic Instinct: Behavior-Conditioned Generative Environments in XR","authors":"Xiaomeng Wan, Shuo Yan","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-06","session":"P1","start":"15:10","end":"15:40","board":3,"room":"SMU Connexion"}},{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":4,"track":"Poster","isPoster":true,"id":"poster1016","title":"Echoes of Sancai : A Gesture-Based Holographic Performance Inspired by the Tang Sancai Camel with Musicians","authors":"Xiaohe Peng, Huantong Xian, Likun Zhao, Yong Hu","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-06","session":"P1","start":"15:10","end":"15:40","board":4,"room":"SMU Connexion"}},{"date":"2026-10-07","day":"Wed","session":"P2","room":"SMU Connexion","theme":"Computational fabrication and structural simulation","start":"15:10","end":"15:40","board":1,"track":"Poster","isPoster":true,"id":"poster1005","title":"CAD-compatible Modeling of TPMS Lattice Structures","authors":"Jiayi Li, Mengchan Liu, Zhaoyun Liu, Xiaoxiao Du, Gang Zhao","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-07","session":"P2","start":"15:10","end":"15:40","board":1,"room":"SMU Connexion"}},{"date":"2026-10-07","day":"Wed","session":"P2","room":"SMU Connexion","theme":"Computational fabrication and structural simulation","start":"15:10","end":"15:40","board":2,"track":"Poster","isPoster":true,"id":"poster1007","title":"An Isogeometric Framework for Smooth Contact of Hyperelastic shell structures","authors":"Mengchan Liu, Zhaoyun Liu, Jiayi Li, Xiaoxiao Du, Gang Zhao","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-07","session":"P2","start":"15:10","end":"15:40","board":2,"room":"SMU Connexion"}},{"date":"2026-10-07","day":"Wed","session":"P2","room":"SMU Connexion","theme":"Computational fabrication and structural simulation","start":"15:10","end":"15:40","board":3,"track":"Poster","isPoster":true,"id":"poster1009","title":"Physics-Informed Isogeometric Neural Networks for Prediction of Thin-Walled Structures","authors":"Zhaoyun Liu, Mengchan Liu, Jiayi Li, Haodong Shen, Xiaoxiao Du, Yuzui Liu, Gang Zhao","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-07","session":"P2","start":"15:10","end":"15:40","board":3,"room":"SMU Connexion"}},{"date":"2026-10-08","day":"Thu","session":"P3","room":"SMU Connexion","theme":"Vector, surface and rendering systems","start":"15:10","end":"15:40","board":1,"track":"Poster","isPoster":true,"id":"poster1018","title":"A Spatio-Temporal Acceleration Framework for Order-Independent Transparency","authors":"Grigoris Tsopouridis, Christos Georgiou-Mousses, Aris Panagiotidis, Andreas-Alexandros Vasilakis, Tobias Alexander Franke, Aleksei Gorbonosov, Andrei Astapov, Ioannis Fudos","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-08","session":"P3","start":"15:10","end":"15:40","board":1,"room":"SMU Connexion"}},{"date":"2026-10-08","day":"Thu","session":"P3","room":"SMU Connexion","theme":"Vector, surface and rendering systems","start":"15:10","end":"15:40","board":2,"track":"Poster","isPoster":true,"id":"poster1019","title":"Evaluating Constrained Iterative Refinement for SVG Generation with Off-the-Shelf VLMs","authors":"Matthew Perlman, James Beetham, Niels Lobo, Amrit Bedi, Mubarak Shah","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-08","session":"P3","start":"15:10","end":"15:40","board":2,"room":"SMU Connexion"}},{"date":"2026-10-08","day":"Thu","session":"P3","room":"SMU Connexion","theme":"Vector, surface and rendering systems","start":"15:10","end":"15:40","board":3,"track":"Poster","isPoster":true,"id":"poster1024","title":"Geometry-Aware Representation Learning for Native NURBS Surfaces","authors":"Shuming Zhang, Gwen Guan, Pingan Tan, Xiaodong Wang, Zhidong Guan","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"posterAssignment":{"date":"2026-10-08","session":"P3","start":"15:10","end":"15:40","board":3,"room":"SMU Connexion"}}],"posterAssignments":[{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":1,"track":"Poster","isPoster":true,"id":"poster1004","title":"True Scene-Linear HDR 3D Gaussian Splatting: Neural-Free Game-Engine-Ready HDR Novel View Synthesis","authors":"Ziyang Zhang, Hajime Uchimura, Kentaro Suzuki","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":2,"track":"Poster","isPoster":true,"id":"poster1010","title":"From Text to Cinematic Manga Pages via Narrative Planning, Comic Layout Representation, and Anchor-First Rendering","authors":"Peiying Chiang, Hsiang Hung","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":3,"track":"Poster","isPoster":true,"id":"poster1012","title":"Synthetic Instinct: Behavior-Conditioned Generative Environments in XR","authors":"Xiaomeng Wan, Shuo Yan","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-06","day":"Tue","session":"P1","room":"SMU Connexion","theme":"Generative graphics, novel views and immersive media","start":"15:10","end":"15:40","board":4,"track":"Poster","isPoster":true,"id":"poster1016","title":"Echoes of Sancai : A Gesture-Based Holographic Performance Inspired by the Tang Sancai Camel with Musicians","authors":"Xiaohe Peng, Huantong Xian, Likun Zhao, Yong Hu","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-07","day":"Wed","session":"P2","room":"SMU Connexion","theme":"Computational fabrication and structural simulation","start":"15:10","end":"15:40","board":1,"track":"Poster","isPoster":true,"id":"poster1005","title":"CAD-compatible Modeling of TPMS Lattice Structures","authors":"Jiayi Li, Mengchan Liu, Zhaoyun Liu, Xiaoxiao Du, Gang Zhao","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-07","day":"Wed","session":"P2","room":"SMU Connexion","theme":"Computational fabrication and structural simulation","start":"15:10","end":"15:40","board":2,"track":"Poster","isPoster":true,"id":"poster1007","title":"An Isogeometric Framework for Smooth Contact of Hyperelastic shell structures","authors":"Mengchan Liu, Zhaoyun Liu, Jiayi Li, Xiaoxiao Du, Gang Zhao","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-07","day":"Wed","session":"P2","room":"SMU Connexion","theme":"Computational fabrication and structural simulation","start":"15:10","end":"15:40","board":3,"track":"Poster","isPoster":true,"id":"poster1009","title":"Physics-Informed Isogeometric Neural Networks for Prediction of Thin-Walled Structures","authors":"Zhaoyun Liu, Mengchan Liu, Jiayi Li, Haodong Shen, Xiaoxiao Du, Yuzui Liu, Gang Zhao","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-08","day":"Thu","session":"P3","room":"SMU Connexion","theme":"Vector, surface and rendering systems","start":"15:10","end":"15:40","board":1,"track":"Poster","isPoster":true,"id":"poster1018","title":"A Spatio-Temporal Acceleration Framework for Order-Independent Transparency","authors":"Grigoris Tsopouridis, Christos Georgiou-Mousses, Aris Panagiotidis, Andreas-Alexandros Vasilakis, Tobias Alexander Franke, Aleksei Gorbonosov, Andrei Astapov, Ioannis Fudos","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-08","day":"Thu","session":"P3","room":"SMU Connexion","theme":"Vector, surface and rendering systems","start":"15:10","end":"15:40","board":2,"track":"Poster","isPoster":true,"id":"poster1019","title":"Evaluating Constrained Iterative Refinement for SVG Generation with Off-the-Shelf VLMs","authors":"Matthew Perlman, James Beetham, Niels Lobo, Amrit Bedi, Mubarak Shah","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false},{"date":"2026-10-08","day":"Thu","session":"P3","room":"SMU Connexion","theme":"Vector, surface and rendering systems","start":"15:10","end":"15:40","board":3,"track":"Poster","isPoster":true,"id":"poster1024","title":"Geometry-Aware Representation Learning for Native NURBS Surfaces","authors":"Shuming Zhang, Gwen Guan, Pingan Tan, Xiaodong Wang, Zhidong Guan","format":"Poster","oralDate":"","oralSession":"","oralStart":"","oralEnd":"","oralRoom":"","attendance":"","badges":[],"duration":null,"untimed":false}],"sessions":[{"code":"A1","date":"2026-10-06","room":"Ngee Ann Kongsi Auditorium","theme":"Computational imaging, color and optical reconstruction","start":"13:30","end":"15:10","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":100,"spareMinutes":0,"timedCount":5,"untimedCount":0},{"code":"B1","date":"2026-10-06","room":"SOA Seminar Room 2-2","theme":"Creative design, fabrication and generative graphics","start":"13:30","end":"15:10","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":90,"spareMinutes":10,"timedCount":6,"untimedCount":1},{"code":"A2","date":"2026-10-06","room":"Ngee Ann Kongsi Auditorium","theme":"Geometry processing, surface modeling and fabrication","start":"15:40","end":"18:10","trackCategory":"Journal","trackLabel":"Journal","scheduledMinutes":140,"spareMinutes":10,"timedCount":7,"untimedCount":0},{"code":"B2","date":"2026-10-06","room":"SOA Seminar Room 2-2","theme":"Human motion, avatars and dynamic scenes","start":"15:40","end":"18:10","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":135,"spareMinutes":15,"timedCount":9,"untimedCount":3},{"code":"A3","date":"2026-10-07","room":"Ngee Ann Kongsi Auditorium","theme":"Digital humans, motion and 4D generation","start":"10:30","end":"12:10","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":100,"spareMinutes":0,"timedCount":5,"untimedCount":2},{"code":"B3","date":"2026-10-07","room":"SOA Seminar Room 2-2","theme":"Gaussian splatting: reconstruction, rendering and efficiency","start":"10:30","end":"12:10","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":90,"spareMinutes":10,"timedCount":6,"untimedCount":2},{"code":"A4","date":"2026-10-07","room":"Ngee Ann Kongsi Auditorium","theme":"Generative media and neural representations","start":"13:30","end":"15:10","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":100,"spareMinutes":0,"timedCount":5,"untimedCount":2},{"code":"B4","date":"2026-10-07","room":"SOA Seminar Room 2-2","theme":"Dynamic scene representations, tracking and editing","start":"13:30","end":"15:10","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":90,"spareMinutes":10,"timedCount":6,"untimedCount":1},{"code":"A5","date":"2026-10-07","room":"Ngee Ann Kongsi Auditorium","theme":"Neural rendering and Gaussian scene representations","start":"15:40","end":"17:20","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":100,"spareMinutes":0,"timedCount":5,"untimedCount":0},{"code":"B5","date":"2026-10-07","room":"SOA Seminar Room 2-2","theme":"Geometry processing and shape correspondence","start":"15:40","end":"17:20","trackCategory":"Journal","trackLabel":"Journal","scheduledMinutes":100,"spareMinutes":0,"timedCount":5,"untimedCount":0},{"code":"A6","date":"2026-10-08","room":"Ngee Ann Kongsi Auditorium","theme":"Appearance modeling, rendering and image restoration","start":"10:30","end":"12:10","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":100,"spareMinutes":0,"timedCount":5,"untimedCount":0},{"code":"B6","date":"2026-10-08","room":"SOA Seminar Room 2-2","theme":"3D reconstruction, geometry and CAD","start":"10:30","end":"12:10","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":90,"spareMinutes":10,"timedCount":6,"untimedCount":1},{"code":"A7","date":"2026-10-08","room":"Ngee Ann Kongsi Auditorium","theme":"Simulation, geometry and numerical methods","start":"13:30","end":"15:10","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":100,"spareMinutes":0,"timedCount":5,"untimedCount":0},{"code":"B7","date":"2026-10-08","room":"SOA Seminar Room 2-2","theme":"Image enhancement, quality and restoration","start":"13:30","end":"15:10","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":90,"spareMinutes":10,"timedCount":6,"untimedCount":1},{"code":"A8","date":"2026-10-08","room":"Ngee Ann Kongsi Auditorium","theme":"Multimodal perception and 3D understanding","start":"15:40","end":"16:40","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":60,"spareMinutes":0,"timedCount":4,"untimedCount":3},{"code":"B8","date":"2026-10-08","room":"SOA Seminar Room 2-2","theme":"Geometry processing and interactive modeling","start":"15:40","end":"16:40","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":60,"spareMinutes":0,"timedCount":4,"untimedCount":0},{"code":"A9","date":"2026-10-09","room":"Ngee Ann Kongsi Auditorium","theme":"Scene perception and reconstruction","start":"09:00","end":"10:20","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":80,"spareMinutes":0,"timedCount":4,"untimedCount":1},{"code":"B9","date":"2026-10-09","room":"SOA Seminar Room 2-2","theme":"Graphics acceleration and dynamic simulation","start":"09:00","end":"10:20","trackCategory":"Journal","trackLabel":"Journal","scheduledMinutes":80,"spareMinutes":0,"timedCount":4,"untimedCount":0},{"code":"A10","date":"2026-10-09","room":"Ngee Ann Kongsi Auditorium","theme":"Visual analytics, segmentation and anomaly detection","start":"10:50","end":"12:10","trackCategory":"Journal","trackLabel":"Journal & Invited","scheduledMinutes":80,"spareMinutes":0,"timedCount":4,"untimedCount":0},{"code":"B10","date":"2026-10-09","room":"SOA Seminar Room 2-2","theme":"Rendering, optics and inference acceleration","start":"10:50","end":"12:10","trackCategory":"Conference","trackLabel":"Conference","scheduledMinutes":75,"spareMinutes":5,"timedCount":5,"untimedCount":1}],"posterSessions":[{"code":"PM1","date":"2026-10-06","theme":"Poster session","room":"SMU Connexion","start":"10:40","end":"11:10","unallocated":true},{"code":"P1","date":"2026-10-06","theme":"Generative graphics, novel views and immersive media","room":"SMU Connexion","boardCapacity":20,"start":"15:10","end":"15:40"},{"code":"PM2","date":"2026-10-07","theme":"Poster session","room":"SMU Connexion","start":"10:00","end":"10:30","unallocated":true},{"code":"P2","date":"2026-10-07","theme":"Computational fabrication and structural simulation","room":"SMU Connexion","boardCapacity":20,"start":"15:10","end":"15:40"},{"code":"PM3","date":"2026-10-08","theme":"Poster session","room":"SMU Connexion","start":"10:00","end":"10:30","unallocated":true},{"code":"P3","date":"2026-10-08","theme":"Vector, surface and rendering systems","room":"SMU Connexion","boardCapacity":20,"start":"15:10","end":"15:40"}],"agenda":[{"date":"2026-10-06","start":"08:30","end":"","type":"Registration","title":"Registration opens","location":"Conference venue","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-06","start":"09:20","end":"09:40","type":"Plenary","title":"Opening","location":"Ngee Ann Kongsi Auditorium","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-06","start":"09:40","end":"10:40","type":"Keynote","title":"Keynote: Marc Alexa, TU Berlin","location":"Ngee Ann Kongsi Auditorium","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-06","start":"10:40","end":"11:10","type":"Coffee break and poster","title":"Coffee break and poster","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":"PM1"},{"date":"2026-10-06","start":"11:10","end":"12:10","type":"Award talk","title":"AG Award Talk: Baoquan Chen, Peking University","location":"Ngee Ann Kongsi Auditorium","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-06","start":"12:10","end":"13:30","type":"Meal","title":"Lunch","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-06","start":"13:30","end":"15:10","type":"Parallel paper sessions","title":"","location":"","roomACode":"A1","roomBCode":"B1","posterCode":""},{"date":"2026-10-06","start":"15:10","end":"15:40","type":"Coffee break and poster","title":"Coffee break and poster","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":"P1"},{"date":"2026-10-06","start":"15:40","end":"18:10","type":"Parallel paper sessions","title":"","location":"","roomACode":"A2","roomBCode":"B2","posterCode":""},{"date":"2026-10-06","start":"18:30","end":"","type":"Social","title":"Welcome reception","location":"Jyu Gae Bistro, Lazada One","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-07","start":"08:30","end":"","type":"Registration","title":"Registration opens","location":"Conference venue","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-07","start":"09:00","end":"10:00","type":"Keynote","title":"Keynote: Ziwei Liu, Nanyang Technological University","location":"Ngee Ann Kongsi Auditorium","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-07","start":"10:00","end":"10:30","type":"Coffee break and poster","title":"Coffee break and poster","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":"PM2"},{"date":"2026-10-07","start":"10:30","end":"12:10","type":"Parallel paper sessions","title":"","location":"","roomACode":"A3","roomBCode":"B3","posterCode":""},{"date":"2026-10-07","start":"12:10","end":"13:30","type":"Meal","title":"Lunch","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-07","start":"13:30","end":"15:10","type":"Parallel paper sessions","title":"","location":"","roomACode":"A4","roomBCode":"B4","posterCode":""},{"date":"2026-10-07","start":"15:10","end":"15:40","type":"Coffee break and poster","title":"Coffee break and poster","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":"P2"},{"date":"2026-10-07","start":"15:40","end":"17:20","type":"Parallel paper sessions","title":"","location":"","roomACode":"A5","roomBCode":"B5","posterCode":""},{"date":"2026-10-08","start":"08:30","end":"","type":"Registration","title":"Registration opens","location":"Conference venue","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-08","start":"09:00","end":"10:00","type":"Keynote","title":"Keynote: Adriana Schulz, Brown University","location":"Ngee Ann Kongsi Auditorium","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-08","start":"10:00","end":"10:30","type":"Coffee break and poster","title":"Coffee break and poster","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":"PM3"},{"date":"2026-10-08","start":"10:30","end":"12:10","type":"Parallel paper sessions","title":"","location":"","roomACode":"A6","roomBCode":"B6","posterCode":""},{"date":"2026-10-08","start":"12:10","end":"13:30","type":"Meal","title":"Lunch","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-08","start":"13:30","end":"15:10","type":"Parallel paper sessions","title":"","location":"","roomACode":"A7","roomBCode":"B7","posterCode":""},{"date":"2026-10-08","start":"15:10","end":"15:40","type":"Coffee break and poster","title":"Coffee break and poster","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":"P3"},{"date":"2026-10-08","start":"15:40","end":"16:40","type":"Parallel paper sessions","title":"","location":"","roomACode":"A8","roomBCode":"B8","posterCode":""},{"date":"2026-10-08","start":"17:00","end":"","type":"Transport","title":"Shuttle bus to Gardens by the Bay","location":"Departs from the SMU conference venue","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-08","start":"17:30","end":"19:30","type":"Social","title":"Banquet dinner and Best Paper Awards","location":"Waterview Room, Gardens by the Bay","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-08","start":"19:30","end":"","type":"Social","title":"Gardens by the Bay Domes","location":"From 19:30; PG 2026 wristband required","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-09","start":"08:30","end":"","type":"Registration","title":"Registration opens","location":"Conference venue","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-09","start":"09:00","end":"10:20","type":"Parallel paper sessions","title":"","location":"","roomACode":"A9","roomBCode":"B9","posterCode":""},{"date":"2026-10-09","start":"10:20","end":"10:50","type":"Coffee break","title":"Coffee break","location":"SMU Connexion","roomACode":"","roomBCode":"","posterCode":""},{"date":"2026-10-09","start":"10:50","end":"12:10","type":"Parallel paper sessions","title":"","location":"","roomACode":"A10","roomBCode":"B10","posterCode":""},{"date":"2026-10-09","start":"12:10","end":"12:30","type":"Plenary","title":"Closing","location":"Ngee Ann Kongsi Auditorium","roomACode":"","roomBCode":"","posterCode":""}]}</script>
+  <script>
+    const data = JSON.parse(document.getElementById("program-data").textContent);
+    const search = document.getElementById("search");
+    const dayFilter = document.getElementById("day-filter");
+    const trackFilter = document.getElementById("track-filter");
+    const statusFilter = document.getElementById("status-filter");
+    const reset = document.getElementById("reset");
+    const program = document.getElementById("program");
+    const resultsLine = document.getElementById("results-line");
+    const posterAssignments = data.posterAssignments;
+    const items = [...data.oral, ...posterAssignments];
+    const totalPapers = new Set([...data.oral, ...data.posters].map((item) => item.id)).size;
+    const oralById = new Map(data.oral.map((item) => [item.id, item]));
+    const dayNames = {
+      "2026-10-06": ["Tuesday", "October 6"],
+      "2026-10-07": ["Wednesday", "October 7"],
+      "2026-10-08": ["Thursday", "October 8"],
+      "2026-10-09": ["Friday", "October 9"],
+    };
+
+    const escapeHtml = (value) => String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+    const badgeClass = (badge) => ({
+      "VIDEO PRESENTATION": "video",
+    }[badge] ?? "");
+
+    const isActiveFilter = () => search.value.trim() || trackFilter.value !== "all" || statusFilter.value !== "all";
+
+    const matches = (item) => {
+      if (dayFilter.value !== "all" && item.date !== dayFilter.value) return false;
+      if (trackFilter.value === "Poster" && !item.isPoster) return false;
+      if (!["all", "Poster"].includes(trackFilter.value) && item.track !== trackFilter.value) return false;
+      if (statusFilter.value !== "all" && !item.badges.includes(statusFilter.value)) return false;
+      const query = search.value.trim().toLocaleLowerCase();
+      if (!query) return true;
+      return [item.id, item.title, item.authors, item.theme, item.track, item.format, item.session, item.room,
+        item.isPoster ? 'Poster ' + item.board : '', ...item.badges]
+        .join(" ")
+        .toLocaleLowerCase()
+        .includes(query);
+    };
+
+    const renderBadges = (badges) => badges.length
+      ? '<div class="badges">' + badges.map((badge) => '<span class="badge ' + badgeClass(badge) + '">' + escapeHtml(badge) + '</span>').join("") + '</div>'
+      : "";
+
+    const paperAnchor = (kind, id) => kind + '-' + encodeURIComponent(id);
+    const shortDate = (date) => {
+      const names = dayNames[date];
+      return names ? names[0].slice(0, 3) + ', ' + names[1].replace('October', 'Oct') : date;
+    };
+    const referenceLink = (target, text) => '<a href="#' + escapeHtml(target) + '" data-paper-target="' + escapeHtml(target) + '">' + escapeHtml(text) + '</a>';
+    const renderPosterReference = (item) => {
+      const assignment = item.posterAssignment;
+      if (!assignment) return '';
+      const text = ['Poster ' + assignment.board, shortDate(assignment.date), assignment.session,
+        assignment.start + '–' + assignment.end, assignment.room].filter(Boolean).join(' · ');
+      return '<p class="paper-reference">' + referenceLink(paperAnchor('poster', item.id), text) + '</p>';
+    };
+    const renderOralReference = (item) => {
+      const oral = oralById.get(item.id);
+      if (!oral || oral.untimed) return '';
+      const text = ['Oral presentation', shortDate(oral.date), oral.session,
+        oral.start + '–' + oral.end, oral.room].filter(Boolean).join(' · ');
+      return '<p class="paper-reference">' + referenceLink(paperAnchor('oral', item.id), text) + '</p>';
+    };
+    const renderPaper = (item) => {
+      if (item.isPoster) {
+        return '<li class="paper poster-paper" id="' + escapeHtml(paperAnchor('poster', item.id)) + '" tabindex="-1">'
+          + '<div class="poster-board"><small>Poster</small>#' + escapeHtml(item.board) + '</div>'
+          + '<div>'
+          + (item.track !== 'Poster' ? '<p class="poster-track">' + escapeHtml(item.track) + ' paper</p>' : '')
+          + '<h4>' + escapeHtml(item.title) + '</h4>'
+          + '<p class="paper-byline"><span class="paper-id">' + escapeHtml(item.id) + '</span> · ' + escapeHtml(item.authors) + '</p>'
+          + renderOralReference(item)
+          + '</div></li>';
+      }
+      const timing = item.untimed ? '' : escapeHtml(item.start) + '–' + escapeHtml(item.end) + '<small>' + escapeHtml(item.duration) + ' min</small>';
+      return '<li class="paper' + (item.untimed ? ' untimed' : '') + '" id="' + escapeHtml(paperAnchor('oral', item.id)) + '" tabindex="-1">'
+        + (timing ? '<div class="paper-time">' + timing + '</div>' : '')
+        + '<div>'
+        + (item.track === 'Invited' ? '<p class="invited-type">' + escapeHtml(item.format) + '</p>' : '')
+        + '<h4>' + escapeHtml(item.title) + '</h4>'
+        + '<p class="paper-byline"><span class="paper-id">' + escapeHtml(item.id) + '</span> · ' + escapeHtml(item.authors) + '</p>'
+        + renderBadges(item.badges)
+        + renderPosterReference(item)
+        + '</div>'
+        + '</li>';
+    };
+
+    const renderSession = (code) => {
+      const meta = data.sessions.find((session) => session.code === code);
+      const rows = data.oral.filter((item) => item.session === code && matches(item));
+      if (!rows.length) return "";
+      const timedRows = rows.filter((item) => !item.untimed);
+      const untimedRows = rows.filter((item) => item.untimed);
+      const roomClass = code.startsWith("A") ? "room-a" : "room-b";
+      return '<section class="session ' + roomClass + '" id="session-' + escapeHtml(code) + '">'
+        + '<div class="session-head">'
+        + '<div class="session-meta"><span class="code">' + escapeHtml(meta.code) + '</span>' + (meta.trackLabel ? '<span class="session-track">' + escapeHtml(meta.trackLabel) + '</span>' : '') + '<span>' + escapeHtml(meta.start) + '–' + escapeHtml(meta.end) + '</span><span>' + escapeHtml(meta.room) + '</span><span>' + meta.timedCount + ' Presentation' + (meta.timedCount === 1 ? '' : 's') + '</span></div>'
+        + '<h3>' + escapeHtml(meta.theme) + '</h3>'
+        + '</div>'
+        + (timedRows.length ? '<ol class="paper-list">' + timedRows.map(renderPaper).join("") + '</ol>' : '')
+        + (untimedRows.length ? '<div class="untimed-group"><p class="untimed-heading">Video Presentations (Non-In-Person)</p><ul class="paper-list">' + untimedRows.map(renderPaper).join('') + '</ul></div>' : '')
+        + '</section>';
+    };
+
+    const renderPosterSession = (code) => {
+      const meta = data.posterSessions.find((session) => session.code === code);
+      const allRows = posterAssignments.filter((item) => item.session === code);
+      const rows = allRows.filter(matches);
+      const unallocated = Boolean(meta?.unallocated) && allRows.length === 0;
+      if (!rows.length && !unallocated) return "";
+      if (unallocated && isActiveFilter()) return "";
+      const count = rows.length ? '<span>' + rows.length + ' poster' + (rows.length === 1 ? '' : 's') + '</span>' : '';
+      return '<section class="session poster" id="session-' + escapeHtml(code) + '">'
+        + '<div class="session-head">'
+        + '<div class="session-meta"><span class="code">' + escapeHtml(meta.code) + '</span><span>' + escapeHtml(meta.start) + '–' + escapeHtml(meta.end) + '</span><span>' + escapeHtml(meta.room ?? rows[0]?.room) + '</span>' + count + '</div>'
+        + '<h3>' + escapeHtml(meta.theme) + '</h3>'
+        + '</div>'
+        + (rows.length ? '<ol class="paper-list">' + rows.map(renderPaper).join("") + '</ol>' : '')
+        + '</section>';
+    };
+
+    const renderCommonEvent = (event) => {
+      const kind = ["Break", "Meal", "Coffee break", "Coffee break and poster"].includes(event.type)
+        ? "break"
+        : ["Social", "Transport"].includes(event.type)
+          ? "social"
+          : "plenary";
+      const time = event.end ? event.start + '–' + event.end : 'From ' + event.start;
+      return '<div class="common-event ' + kind + '">'
+        + '<div class="time">' + escapeHtml(time) + '</div>'
+        + '<div><strong>' + escapeHtml(event.title) + '</strong></div>'
+        + '<div class="location">' + escapeHtml(event.location) + '</div>'
+        + '</div>';
+    };
+
+    const render = () => {
+      const matchedItems = items.filter(matches);
+      const matchedPapers = new Set(matchedItems.map((item) => item.id)).size;
+      resultsLine.textContent = 'Showing ' + matchedPapers + ' of ' + totalPapers + ' papers';
+      const sections = [];
+      for (const date of Object.keys(dayNames)) {
+        if (dayFilter.value !== "all" && dayFilter.value !== date) continue;
+        const eventHtml = [];
+        for (const event of data.agenda.filter((entry) => entry.date === date)) {
+          if (event.type === "Parallel paper sessions") {
+            const roomA = renderSession(event.roomACode);
+            const roomB = renderSession(event.roomBCode);
+            if (roomA || roomB) eventHtml.push('<div class="parallel-grid">' + roomA + roomB + '</div>');
+          } else if (event.posterCode) {
+            const posters = renderPosterSession(event.posterCode);
+            if (posters) {
+              if (!isActiveFilter()) eventHtml.push(renderCommonEvent(event));
+              eventHtml.push(posters);
+            } else if (!isActiveFilter()) {
+              eventHtml.push(renderCommonEvent(event));
+            }
+          } else if (!isActiveFilter()) {
+            eventHtml.push(renderCommonEvent(event));
+          }
+        }
+        if (eventHtml.length) {
+          const [weekday, calendarDate] = dayNames[date];
+          const dayCount = data.oral.filter((item) => item.date === date && !item.untimed).length;
+          sections.push('<section class="day" id="day-' + date + '">'
+            + '<div class="day-heading"><h2>' + escapeHtml(weekday) + ' <span>' + escapeHtml(calendarDate) + '</span></h2><span>' + dayCount + ' Presentation' + (dayCount === 1 ? '' : 's') + '</span></div>'
+            + '<div class="timeline">' + eventHtml.join("") + '</div>'
+            + '</section>');
+        }
+      }
+      program.innerHTML = sections.length ? sections.join("") : '<div class="empty">No presentations match these filters.</div>';
+    };
+
+    [search, dayFilter, trackFilter, statusFilter].forEach((control) => control.addEventListener("input", render));
+    reset.addEventListener("click", () => {
+      search.value = "";
+      dayFilter.value = "all";
+      trackFilter.value = "all";
+      statusFilter.value = "all";
+      render();
+      search.focus();
+    });
+    program.addEventListener('click', (event) => {
+      const link = event.target.closest('a[data-paper-target]');
+      if (!link) return;
+      event.preventDefault();
+      const targetId = link.dataset.paperTarget;
+      let target = document.getElementById(targetId);
+      if (!target) {
+        search.value = '';
+        dayFilter.value = 'all';
+        trackFilter.value = 'all';
+        statusFilter.value = 'all';
+        render();
+        target = document.getElementById(targetId);
+      }
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.focus({ preventScroll: true });
+      }
+    });
+    render();
+    const followProgramAnchor = () => {
+      if (!window.location.hash) return;
+      const anchor = decodeURIComponent(window.location.hash.slice(1));
+      const target = document.getElementById(anchor);
+      if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+    };
+    window.addEventListener('hashchange', followProgramAnchor);
+    window.addEventListener('load', followProgramAnchor);
+  </script>
+
+  <script>
+    const scrollProgress = document.getElementById("scroll-progress");
+    window.addEventListener("scroll", () => {
+      if (!scrollProgress) return;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (document.documentElement.scrollTop / height) * 100 : 0;
+      scrollProgress.style.width = scrolled + "%";
+    });
+  </script>
+</body>
+</html>

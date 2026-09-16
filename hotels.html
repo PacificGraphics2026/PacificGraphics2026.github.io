@@ -32,6 +32,8 @@
         .hotel-card:hover .hotel-photo { transform: scale(1.08); opacity: 1; }
         #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background-color: var(--theme-accent); z-index: 100; transition: width 0.1s linear; }
     </style>
+  <link rel="stylesheet" href="pg26_files/site-navigation.css">
+  <script src="pg26_files/site-navigation.js" defer></script>
 </head>
 
 <body>
@@ -39,45 +41,27 @@
         <img src="pg26_files/pg26_bg3.jpg" alt="BG" class="w-full h-full object-cover opacity-20 brightness-75" />
     </div>
     <div id="scroll-progress"></div>
-    <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
-        <div class="w-full xl:w-fit max-w-full mx-auto px-5 h-24 flex items-center justify-between xl:justify-center">
-            <a href="index.html#hero" class="header-logo-container" style="width:210px;height:96px;margin-right:1rem;flex-shrink:0;">
-                <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
-            </a>
-
-            <a href="program.html" class="xl:hidden ml-auto inline-flex items-center rounded-full border border-[var(--theme-accent)] px-4 py-2 text-sm font-bold tracking-[0.14em] text-[var(--theme-accent)]">PROGRAM</a>
-
-            <nav class="hidden xl:flex ml-4 gap-2 2xl:gap-5 text-[0.95rem] 2xl:text-lg font-semibold uppercase text-white items-center" id="main-nav" aria-label="Main navigation">
-                <a href="index.html#about" data-nav="about" class="nav-link">ABOUT</a>
-
-                <div class="relative group py-4">
-                    <a href="cfp.html" data-nav="calls" class="nav-link flex items-center gap-1">CALLS
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
-                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
-                        <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
-                        <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
-                    </div>
-                </div>
-
-                <a href="program.html" data-nav="program" class="nav-link">PROGRAM</a>
-                <a href="registration.html" data-nav="registration" class="nav-link">REGISTRATION</a>
-                <a href="index.html#keynotes" data-nav="keynotes" class="nav-link">KEYNOTES</a>
-                <a href="index.html#committee" data-nav="committee" class="nav-link">COMMITTEE</a>
-                <a href="support.html" data-nav="support" class="nav-link">SUPPORT</a>
-
-                <div class="relative group py-4">
-                    <a href="venue.html" data-nav="attend" class="nav-link active flex items-center gap-1" aria-current="page">ATTEND
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
-                    <div class="absolute right-0 top-full mt-[-10px] w-48 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
-                        <a href="venue.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">VENUE</a>
-                        <a href="hotels.html" class="block px-5 py-4 text-sm text-[var(--theme-accent)] bg-white/5 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading" aria-current="page">HOTELS</a>
-                    </div>
-                </div>
-
-                <a href="history.html" data-nav="history" class="nav-link">HISTORY</a>
-            </nav>
-        </div>
-    </header>
+    <header class="pg-site-header">
+    <div class="pg-header-inner">
+      <a class="pg-brand" href="index.html#hero" aria-label="Pacific Graphics 2026 home"><img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" width="210" height="96"></a>
+      <nav class="pg-desktop-nav" id="main-nav" aria-label="Main navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="calls">Calls<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div></details>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="program">Program<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="program.html">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="index.html#committee">Committee</a></div></details>
+<a class="pg-nav-link" data-nav="presenters" href="presenter-instructions.html">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<details class="pg-nav-group"><summary class="pg-nav-link active" data-nav="attend" aria-current="page">Attend<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="venue.html">Venue</a><a href="hotels.html" aria-current="page">Hotels</a></div></details>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav>
+      <details class="pg-mobile-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<div class="pg-mobile-group"><span class="" data-nav="calls">Calls</span><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div>
+<div class="pg-mobile-group"><span class="" data-nav="program">Program</span><a href="program.html">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="index.html#committee">Committee</a></div>
+<a class="pg-nav-link" data-nav="presenters" href="presenter-instructions.html">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<div class="pg-mobile-group"><span class="active" data-nav="attend">Attend</span><a href="venue.html">Venue</a><a href="hotels.html" aria-current="page">Hotels</a></div>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav></details>
+    </div>
+  </header>
 
     <main class="pt-32 pb-20 min-h-[80vh]">
         <div class="text-center mb-10 px-6">
@@ -224,6 +208,8 @@
                     'cfp.html': 'calls',
                     'sponsorships.html': 'calls',
                     'program.html': 'program',
+                    'full-program.html': 'program',
+                    'presenter-instructions.html': 'presenters',
                     'registration.html': 'registration',
                     'support.html': 'support',
                     'venue.html': 'attend',
@@ -236,7 +222,7 @@
                     activeSection = {
                         '#about': 'about',
                         '#keynotes': 'keynotes',
-                        '#committee': 'committee'
+                        '#committee': 'program'
                     }[window.location.hash] || 'about';
                 }
 

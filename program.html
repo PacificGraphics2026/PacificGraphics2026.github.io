@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program | Pacific Graphics 2026 (PG2026)</title>
+  <title>Program-at-a-Glance | Pacific Graphics 2026 (PG2026)</title>
   <link rel="icon" type="image/png" href="pg26_files/favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -426,296 +426,151 @@
       td { padding: 13px; }
     }
   </style>
+  <link rel="stylesheet" href="pg26_files/site-navigation.css">
+  <script src="pg26_files/site-navigation.js" defer></script>
 </head>
-<body>
+<body class="pg-program-page pg-overview">
   <div class="site-bg" aria-hidden="true">
     <img src="pg26_files/pg26_bg3.jpg" alt="">
   </div>
-    <header class="fixed w-full top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-sm border-b border-[var(--line-color)]">
-        <div class="w-full xl:w-fit max-w-full mx-auto px-5 h-24 flex items-center justify-between xl:justify-center">
-            <a href="index.html#hero" class="header-logo-container" style="width:210px;height:96px;margin-right:1rem;flex-shrink:0;">
-                <img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" class="h-full w-auto object-contain" />
-            </a>
-
-            <a href="program.html" class="xl:hidden ml-auto inline-flex items-center rounded-full border border-[var(--theme-accent)] px-4 py-2 text-sm font-bold tracking-[0.14em] bg-[var(--theme-accent)] text-[#06111D]" aria-current="page">PROGRAM</a>
-
-            <nav class="hidden xl:flex ml-4 gap-2 2xl:gap-5 text-[0.95rem] 2xl:text-lg font-semibold uppercase text-white items-center" id="main-nav" aria-label="Main navigation">
-                <a href="index.html#about" data-nav="about" class="nav-link">ABOUT</a>
-
-                <div class="relative group py-4">
-                    <a href="cfp.html" data-nav="calls" class="nav-link flex items-center gap-1">CALLS
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
-                    <div class="absolute left-0 top-full mt-[-10px] w-64 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
-                        <a href="cfp.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">CALL FOR PAPERS</a>
-                        <a href="sponsorships.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">CALL FOR SPONSORSHIPS</a>
-                    </div>
-                </div>
-
-                <a href="program.html" data-nav="program" class="nav-link active" aria-current="page">PROGRAM</a>
-                <a href="registration.html" data-nav="registration" class="nav-link">REGISTRATION</a>
-                <a href="index.html#keynotes" data-nav="keynotes" class="nav-link">KEYNOTES</a>
-                <a href="index.html#committee" data-nav="committee" class="nav-link">COMMITTEE</a>
-                <a href="support.html" data-nav="support" class="nav-link">SUPPORT</a>
-
-                <div class="relative group py-4">
-                    <a href="venue.html" data-nav="attend" class="nav-link flex items-center gap-1">ATTEND
-                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
-                    <div class="absolute right-0 top-full mt-[-10px] w-48 bg-[#06111D]/95 backdrop-blur-md border border-[var(--line-color)] rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 shadow-2xl overflow-hidden z-50">
-                        <a href="venue.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors border-b border-white/5 tracking-wider font-heading">VENUE</a>
-                        <a href="hotels.html" class="block px-5 py-4 text-sm text-slate-300 hover:text-[var(--theme-accent)] hover:bg-white/5 transition-colors tracking-wider font-heading">HOTELS</a>
-                    </div>
-                </div>
-
-                <a href="history.html" data-nav="history" class="nav-link">HISTORY</a>
-            </nav>
-        </div>
-    </header>
+    <header class="pg-site-header">
+    <div class="pg-header-inner">
+      <a class="pg-brand" href="index.html#hero" aria-label="Pacific Graphics 2026 home"><img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" width="210" height="96"></a>
+      <nav class="pg-desktop-nav" id="main-nav" aria-label="Main navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="calls">Calls<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div></details>
+<details class="pg-nav-group"><summary class="pg-nav-link active" data-nav="program" aria-current="page">Program<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="program.html" aria-current="page">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="index.html#committee">Committee</a></div></details>
+<a class="pg-nav-link" data-nav="presenters" href="presenter-instructions.html">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="attend">Attend<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="venue.html">Venue</a><a href="hotels.html">Hotels</a></div></details>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav>
+      <details class="pg-mobile-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<div class="pg-mobile-group"><span class="" data-nav="calls">Calls</span><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div>
+<div class="pg-mobile-group"><span class="active" data-nav="program">Program</span><a href="program.html" aria-current="page">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="index.html#committee">Committee</a></div>
+<a class="pg-nav-link" data-nav="presenters" href="presenter-instructions.html">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<div class="pg-mobile-group"><span class="" data-nav="attend">Attend</span><a href="venue.html">Venue</a><a href="hotels.html">Hotels</a></div>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav></details>
+    </div>
+  </header>
 
   <main id="program">
     <section class="hero">
       <span class="eyebrow">October 6–9, 2026 · Singapore</span>
-      <h1 class="text-5xl md:text-6xl">Program</h1>
+      <h1>Program-at-a-Glance</h1>
       <div class="accent-rule"></div>
-      <p class="intro">
-        Tentative program at a glance for Pacific Graphics 2026. Detailed paper titles, session themes,
-        chairs, and presentation schedules will be announced after the technical program is finalized.
-      </p>
-      <p class="venue-line">
-        Main venue: <strong>Ngee Ann Kongsi Auditorium, Singapore Management University</strong> ·
-        <a href="venue.html">Venue &amp; social events</a>
-      </p>
-    </section>
+      <p class="intro">Explore the four-day Pacific Graphics 2026 schedule. See the
+        <a href="full-program.html">Full Program</a> for paper titles, authors, rooms and individual presentation times.
+        All times are Singapore Time (SGT, UTC+8).</p>
+      <p class="venue-line">Paper sessions: <strong>Ngee Ann Kongsi Auditorium</strong> &amp; <strong>SOA Seminar Room 2-2</strong>.</p>
+      <p class="venue-line">Coffee breaks, posters and lunch: <strong>SMU Connexion</strong> · <a href="venue.html">Venue &amp; social events</a></p>
 
-    <section class="program-shell" aria-label="Pacific Graphics 2026 tentative program">
-      <div class="program-scroll">
-        <table>
+    <nav class="pg-section-links" aria-label="Program and presenter pages"><a href="program.html" aria-current="page">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="presenter-instructions.html">Presenter Instructions</a></nav>
+  </section>
+
+    <section class="program-shell" aria-label="Pacific Graphics 2026 program at a glance">
+      <div class="program-scroll" tabindex="0" role="region" aria-label="Four-day schedule; scroll horizontally on smaller screens">
+        <table><caption class="pg-sr-only">Pacific Graphics 2026 schedule, October 6–9. All times are Singapore Time.</caption>
           <thead>
             <tr>
               <th></th>
-              <th>Tuesday<span class="day-date">Oct 6</span></th>
-              <th>Wednesday<span class="day-date">Oct 7</span></th>
-              <th>Thursday<span class="day-date">Oct 8</span></th>
-              <th>Friday<span class="day-date">Oct 9</span></th>
+              <th scope="col"><a href="full-program.html#day-2026-10-06">Tuesday<span class="day-date">Oct 6</span></a></th>
+              <th scope="col"><a href="full-program.html#day-2026-10-07">Wednesday<span class="day-date">Oct 7</span></a></th>
+              <th scope="col"><a href="full-program.html#day-2026-10-08">Thursday<span class="day-date">Oct 8</span></a></th>
+              <th scope="col"><a href="full-program.html#day-2026-10-09">Friday<span class="day-date">Oct 9</span></a></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th class="period" scope="row">Morning</th>
-              <td>
-                <div class="slot">
-                  <span class="slot-time">08:30</span>
-                  <span class="slot-title">Registration</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">09:20–09:40</span>
-                  <span class="slot-title">Opening</span>
-                </div>
-                <div class="slot featured">
-                  <span class="slot-time">09:40–10:40</span>
-                  <span class="slot-title">Keynote · Marc Alexa</span>
-                  <span class="slot-subtitle">TU Berlin</span>
-                </div>
-                <div class="slot featured poster">
-                  <span class="slot-time">10:40–11:00</span>
-                  <span class="slot-title">Coffee Break</span>
-                </div>
-                <div class="slot featured award-talk">
-                  <span class="slot-time">11:00–12:00</span>
-                  <span class="slot-title">AG Award Talk · Baoquan Chen</span>
-                  <span class="slot-subtitle">Peking University</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot">
-                  <span class="slot-time">08:30</span>
-                  <span class="slot-title">Registration</span>
-                </div>
-                <div class="slot featured">
-                  <span class="slot-time">09:00–10:00</span>
-                  <span class="slot-title">Keynote · Ziwei Liu</span>
-                  <span class="slot-subtitle">Nanyang Technological University</span>
-                </div>
-                <div class="slot featured poster">
-                  <span class="slot-time">10:00–10:20</span>
-                  <span class="slot-title">Coffee Break</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">10:20–12:00</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot">
-                  <span class="slot-time">08:30</span>
-                  <span class="slot-title">Registration</span>
-                </div>
-                <div class="slot featured">
-                  <span class="slot-time">09:00–10:00</span>
-                  <span class="slot-title">Keynote · Adriana Schulz</span>
-                  <span class="slot-subtitle">Brown University</span>
-                </div>
-                <div class="slot featured poster">
-                  <span class="slot-time">10:00–10:20</span>
-                  <span class="slot-title">Coffee Break</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">10:20–12:00</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot">
-                  <span class="slot-time">08:30</span>
-                  <span class="slot-title">Registration</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">09:00–10:20</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-                <div class="slot featured poster">
-                  <span class="slot-time">10:20–10:40</span>
-                  <span class="slot-title">Coffee Break</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">10:40–12:00</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th class="period" scope="row">Noon</th>
-              <td>
-                <div class="slot">
-                  <span class="slot-time">12:00–13:30</span>
-                  <span class="slot-title">Lunch</span>
-                </div>
-              </td>
-              <td>
-                <div class="slot">
-                  <span class="slot-time">12:00–13:30</span>
-                  <span class="slot-title">Lunch</span>
-                </div>
-              </td>
-              <td>
-                <div class="slot">
-                  <span class="slot-time">12:00–13:30</span>
-                  <span class="slot-title">Lunch</span>
-                </div>
-              </td>
-              <td>
-                <div class="slot">
-                  <span class="slot-time">12:10–12:30</span>
-                  <span class="slot-title">Closing</span>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th class="period" scope="row">Afternoon</th>
-              <td>
-                <div class="slot">
-                  <span class="slot-time">13:30–15:10</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-                <div class="slot featured poster">
-                  <span class="slot-time">15:10–15:40</span>
-                  <span class="slot-title">Coffee Break &amp; Poster</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">15:40–18:10</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot">
-                  <span class="slot-time">13:30–15:10</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-                <div class="slot featured poster">
-                  <span class="slot-time">15:10–15:40</span>
-                  <span class="slot-title">Coffee Break &amp; Poster</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">15:40–17:20</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot">
-                  <span class="slot-time">13:30–15:10</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-                <div class="slot featured poster">
-                  <span class="slot-time">15:10–15:40</span>
-                  <span class="slot-title">Coffee Break &amp; Poster</span>
-                </div>
-                <div class="slot">
-                  <span class="slot-time">15:40–16:40</span>
-                  <span class="slot-title">Paper Sessions</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot">
-                  <span class="slot-title">—</span>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <th class="period" scope="row">Evening</th>
-              <td>
-                <div class="slot featured social">
-                  <span class="slot-time">18:30</span>
-                  <span class="slot-title">Welcome Reception</span>
-                  <span class="slot-subtitle">Jyu Gae Bistro, Lazada One · Buffet, free-flow drinks &amp; live band</span>
-                  <a class="event-link" href="venue.html">Event details →</a>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot">
-                  <span class="slot-title">No official social event scheduled</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot featured transport">
-                  <span class="slot-time">17:00</span>
-                  <span class="slot-title">Shuttle Bus to Gardens by the Bay</span>
-                  <span class="slot-subtitle">Departs from the conference venue at SMU.</span>
-                </div>
-                <div class="slot featured social">
-                  <span class="slot-time">17:30–19:30</span>
-                  <span class="slot-title">Banquet Dinner &amp; Best Paper Awards</span>
-                  <span class="slot-subtitle">Waterview Room, Gardens by the Bay · Best Paper Awards will be presented during the banquet.</span>
-                  <a class="event-link" href="venue.html">Event details →</a>
-                </div>
-                <div class="slot featured dome">
-                  <span class="slot-time">19:30 onward</span>
-                  <span class="slot-title">Gardens by the Bay Domes</span>
-                  <span class="slot-subtitle">Conference attendees may visit the Domes after the banquet. PG2026 will provide the required wristband.</span>
-                </div>
-              </td>
-
-              <td>
-                <div class="slot"><span class="slot-title">—</span></div>
-              </td>
-            </tr>
-          </tbody>
+<tr>
+<th class="period" scope="row">Morning</th>
+<td>
+<div class="slot" data-event-date="2026-10-06" data-event-start="08:30" data-event-end=""><span class="slot-time">08:30</span><span class="slot-title">Registration</span></div>
+<div class="slot" data-event-date="2026-10-06" data-event-start="09:20" data-event-end="09:40"><span class="slot-time">09:20–09:40</span><span class="slot-title">Opening</span><span class="slot-subtitle">Ngee Ann Kongsi Auditorium</span></div>
+<div class="slot featured" data-event-date="2026-10-06" data-event-start="09:40" data-event-end="10:40"><span class="slot-time">09:40–10:40</span><span class="slot-title">Keynote · Marc Alexa</span><span class="slot-subtitle">TU Berlin</span></div>
+<div class="slot featured poster" data-event-date="2026-10-06" data-event-start="10:40" data-event-end="11:10"><span class="slot-time">10:40–11:10</span><span class="slot-title">Coffee Break &amp; Poster</span><span class="slot-subtitle">SMU Connexion</span><a class="event-link" href="full-program.html#session-PM1">Poster session →</a></div>
+<div class="slot featured award-talk" data-event-date="2026-10-06" data-event-start="11:10" data-event-end="12:10"><span class="slot-time">11:10–12:10</span><span class="slot-title">AG Award Talk · Baoquan Chen</span><span class="slot-subtitle">Peking University</span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-07" data-event-start="08:30" data-event-end=""><span class="slot-time">08:30</span><span class="slot-title">Registration</span></div>
+<div class="slot featured" data-event-date="2026-10-07" data-event-start="09:00" data-event-end="10:00"><span class="slot-time">09:00–10:00</span><span class="slot-title">Keynote · Ziwei Liu</span><span class="slot-subtitle">Nanyang Technological University</span></div>
+<div class="slot featured poster" data-event-date="2026-10-07" data-event-start="10:00" data-event-end="10:30"><span class="slot-time">10:00–10:30</span><span class="slot-title">Coffee Break &amp; Poster</span><span class="slot-subtitle">SMU Connexion</span><a class="event-link" href="full-program.html#session-PM2">Poster session →</a></div>
+<div class="slot" data-event-date="2026-10-07" data-event-start="10:30" data-event-end="12:10"><span class="slot-time">10:30–12:10</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A3">Session A3</a> · <a class="pg-session-link" href="full-program.html#session-B3">Session B3</a></span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-08" data-event-start="08:30" data-event-end=""><span class="slot-time">08:30</span><span class="slot-title">Registration</span></div>
+<div class="slot featured" data-event-date="2026-10-08" data-event-start="09:00" data-event-end="10:00"><span class="slot-time">09:00–10:00</span><span class="slot-title">Keynote · Adriana Schulz</span><span class="slot-subtitle">Brown University</span></div>
+<div class="slot featured poster" data-event-date="2026-10-08" data-event-start="10:00" data-event-end="10:30"><span class="slot-time">10:00–10:30</span><span class="slot-title">Coffee Break &amp; Poster</span><span class="slot-subtitle">SMU Connexion</span><a class="event-link" href="full-program.html#session-PM3">Poster session →</a></div>
+<div class="slot" data-event-date="2026-10-08" data-event-start="10:30" data-event-end="12:10"><span class="slot-time">10:30–12:10</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A6">Session A6</a> · <a class="pg-session-link" href="full-program.html#session-B6">Session B6</a></span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-09" data-event-start="08:30" data-event-end=""><span class="slot-time">08:30</span><span class="slot-title">Registration</span></div>
+<div class="slot" data-event-date="2026-10-09" data-event-start="09:00" data-event-end="10:20"><span class="slot-time">09:00–10:20</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A9">Session A9</a> · <a class="pg-session-link" href="full-program.html#session-B9">Session B9</a></span></div>
+<div class="slot featured poster" data-event-date="2026-10-09" data-event-start="10:20" data-event-end="10:50"><span class="slot-time">10:20–10:50</span><span class="slot-title">Coffee Break</span><span class="slot-subtitle">SMU Connexion</span></div>
+<div class="slot" data-event-date="2026-10-09" data-event-start="10:50" data-event-end="12:10"><span class="slot-time">10:50–12:10</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A10">Session A10</a> · <a class="pg-session-link" href="full-program.html#session-B10">Session B10</a></span></div>
+</td>
+</tr>
+<tr>
+<th class="period" scope="row">Noon</th>
+<td>
+<div class="slot" data-event-date="2026-10-06" data-event-start="12:10" data-event-end="13:30"><span class="slot-time">12:10–13:30</span><span class="slot-title">Lunch</span><span class="slot-subtitle">SMU Connexion</span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-07" data-event-start="12:10" data-event-end="13:30"><span class="slot-time">12:10–13:30</span><span class="slot-title">Lunch</span><span class="slot-subtitle">SMU Connexion</span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-08" data-event-start="12:10" data-event-end="13:30"><span class="slot-time">12:10–13:30</span><span class="slot-title">Lunch</span><span class="slot-subtitle">SMU Connexion</span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-09" data-event-start="12:10" data-event-end="12:30"><span class="slot-time">12:10–12:30</span><span class="slot-title">Closing</span><span class="slot-subtitle">Ngee Ann Kongsi Auditorium</span></div>
+</td>
+</tr>
+<tr>
+<th class="period" scope="row">Afternoon</th>
+<td>
+<div class="slot" data-event-date="2026-10-06" data-event-start="13:30" data-event-end="15:10"><span class="slot-time">13:30–15:10</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A1">Session A1</a> · <a class="pg-session-link" href="full-program.html#session-B1">Session B1</a></span></div>
+<div class="slot featured poster" data-event-date="2026-10-06" data-event-start="15:10" data-event-end="15:40"><span class="slot-time">15:10–15:40</span><span class="slot-title">Coffee Break &amp; Poster</span><span class="slot-subtitle">SMU Connexion</span><a class="event-link" href="full-program.html#session-P1">Poster session →</a></div>
+<div class="slot" data-event-date="2026-10-06" data-event-start="15:40" data-event-end="18:10"><span class="slot-time">15:40–18:10</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A2">Session A2</a> · <a class="pg-session-link" href="full-program.html#session-B2">Session B2</a></span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-07" data-event-start="13:30" data-event-end="15:10"><span class="slot-time">13:30–15:10</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A4">Session A4</a> · <a class="pg-session-link" href="full-program.html#session-B4">Session B4</a></span></div>
+<div class="slot featured poster" data-event-date="2026-10-07" data-event-start="15:10" data-event-end="15:40"><span class="slot-time">15:10–15:40</span><span class="slot-title">Coffee Break &amp; Poster</span><span class="slot-subtitle">SMU Connexion</span><a class="event-link" href="full-program.html#session-P2">Poster session →</a></div>
+<div class="slot" data-event-date="2026-10-07" data-event-start="15:40" data-event-end="17:20"><span class="slot-time">15:40–17:20</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A5">Session A5</a> · <a class="pg-session-link" href="full-program.html#session-B5">Session B5</a></span></div>
+</td>
+<td>
+<div class="slot" data-event-date="2026-10-08" data-event-start="13:30" data-event-end="15:10"><span class="slot-time">13:30–15:10</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A7">Session A7</a> · <a class="pg-session-link" href="full-program.html#session-B7">Session B7</a></span></div>
+<div class="slot featured poster" data-event-date="2026-10-08" data-event-start="15:10" data-event-end="15:40"><span class="slot-time">15:10–15:40</span><span class="slot-title">Coffee Break &amp; Poster</span><span class="slot-subtitle">SMU Connexion</span><a class="event-link" href="full-program.html#session-P3">Poster session →</a></div>
+<div class="slot" data-event-date="2026-10-08" data-event-start="15:40" data-event-end="16:40"><span class="slot-time">15:40–16:40</span><span class="slot-title">Paper Sessions</span><span class="slot-subtitle"><a class="pg-session-link" href="full-program.html#session-A8">Session A8</a> · <a class="pg-session-link" href="full-program.html#session-B8">Session B8</a></span></div>
+</td>
+<td>
+<div class="slot"><span class="slot-title">—</span></div>
+</td>
+</tr>
+<tr>
+<th class="period" scope="row">Evening</th>
+<td>
+<div class="slot featured social" data-event-date="2026-10-06" data-event-start="18:30" data-event-end=""><span class="slot-time">18:30</span><span class="slot-title">Welcome Reception</span><span class="slot-subtitle">Jyu Gae Bistro, Lazada One · Buffet, free-flow drinks &amp; live band</span><a class="event-link" href="venue.html">Event details →</a></div>
+</td>
+<td>
+<div class="slot"><span class="slot-title">No official social event scheduled</span></div>
+</td>
+<td>
+<div class="slot featured transport" data-event-date="2026-10-08" data-event-start="17:00" data-event-end=""><span class="slot-time">17:00</span><span class="slot-title">Shuttle Bus to Gardens by the Bay</span><span class="slot-subtitle">Departs from the SMU conference venue</span></div>
+<div class="slot featured social" data-event-date="2026-10-08" data-event-start="17:30" data-event-end="19:30"><span class="slot-time">17:30–19:30</span><span class="slot-title">Banquet Dinner &amp; Best Paper Awards</span><span class="slot-subtitle">Waterview Room, Gardens by the Bay</span><a class="event-link" href="venue.html">Event details →</a></div>
+<div class="slot featured dome" data-event-date="2026-10-08" data-event-start="19:30" data-event-end=""><span class="slot-time">19:30</span><span class="slot-title">Gardens by the Bay Domes</span><span class="slot-subtitle">PG2026 wristband required.</span><a class="event-link" href="venue.html">Event details →</a></div>
+</td>
+<td>
+<div class="slot"><span class="slot-title">—</span></div>
+</td>
+</tr>
+</tbody>
         </table>
       </div>
     </section>
 
 
 
-    <div class="footer">© PG 2026 · Pacific Graphics 2026</div>
+    <div class="footer">Updated 16 September 2026<br>© PG 2026 · Pacific Graphics 2026</div>
   </main>
     <script>
         (() => {
@@ -725,6 +580,8 @@
                     'cfp.html': 'calls',
                     'sponsorships.html': 'calls',
                     'program.html': 'program',
+                    'full-program.html': 'program',
+                    'presenter-instructions.html': 'presenters',
                     'registration.html': 'registration',
                     'support.html': 'support',
                     'venue.html': 'attend',
@@ -737,7 +594,7 @@
                     activeSection = {
                         '#about': 'about',
                         '#keynotes': 'keynotes',
-                        '#committee': 'committee'
+                        '#committee': 'program'
                     }[window.location.hash] || 'about';
                 }
 

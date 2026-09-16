@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pacific Graphics 2026 presenter instructions for oral and poster presentations.">
+  <title>Pacific Graphics 2026 — Presenter Instructions</title>
+  <link rel="icon" type="image/x-icon" href="pg26_files/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#071625;
+      --navy-2:#0b2033;
+      --cyan:#00c8d7;
+      --cyan-dark:#087e8b;
+      --cyan-soft:#e8f9fb;
+      --gold:#c99718;
+      --gold-soft:#fff8df;
+      --purple:#6c52b5;
+      --purple-soft:#f1edfa;
+      --ink:#142536;
+      --muted:#64748b;
+      --line:#d7e2e8;
+      --paper:#ffffff;
+      --surface:#f4f8fa;
+      --green:#18784e;
+      --green-soft:#edf9f2;
+      --shadow:0 18px 46px -28px rgba(2,6,23,.58);
+      --font:'Montserrat',sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:120px}
+    body{margin:0;background:var(--surface);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65}
+    a{color:var(--cyan-dark)}
+    a:focus-visible,button:focus-visible{outline:3px solid rgba(0,200,215,.35);outline-offset:3px}
+
+    .site-bg{position:fixed;inset:0;z-index:-2;background:var(--navy);overflow:hidden;pointer-events:none}
+    .site-bg img{width:100%;height:100%;object-fit:cover;opacity:.23;filter:brightness(.88) saturate(1.02)}
+    .site-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,22,37,.30),rgba(7,22,37,.82) 47%,rgba(7,22,37,.96))}
+
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,17,29,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(148,163,184,.16)}
+    .site-header-inner{width:min(1400px,calc(100% - 2.5rem));min-height:108px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+    .header-logo-container{width:235px;height:88px;overflow:hidden;display:flex;align-items:center;flex:0 0 auto}
+    .header-logo-container img{width:auto;height:100%;object-fit:contain;filter:brightness(1.3) contrast(1.1)}
+    .main-nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:1.35rem;text-transform:uppercase;font-size:.8rem;font-weight:600;letter-spacing:.08em}
+    .nav-link{position:relative;padding:.55rem 0;color:#fff;text-decoration:none;white-space:nowrap}
+    .nav-link:hover,.nav-link.active{color:#00ffff}
+    .nav-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#00ffff;transform:scaleX(0);transition:transform .25s ease}
+    .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+
+    .hero{width:min(1180px,calc(100% - 2.5rem));margin:0 auto;padding:158px 0 4.6rem;text-align:center;color:#fff}
+    .hero-kicker{margin:0 0 .8rem;color:#cbd5e1;text-transform:uppercase;letter-spacing:.15em;font-size:.78rem;font-weight:600}
+    h1{margin:0;font-size:clamp(2.55rem,6vw,4.55rem);line-height:1.02;letter-spacing:.10em;text-transform:uppercase;font-weight:700}
+    .hero-line{width:8rem;height:4px;margin:1.4rem auto 1.25rem;border-radius:999px;background:#00ffff;box-shadow:0 0 14px rgba(0,255,255,.6)}
+    .hero p:last-child{max-width:800px;margin:0 auto;color:#e2e8f0;font-weight:300;font-size:1rem}
+
+    main{width:min(1180px,calc(100% - 2.5rem));margin:-1.7rem auto 0;padding-bottom:5rem}
+    .summary-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin-bottom:1.2rem}
+    .summary-card{background:rgba(255,255,255,.98);border:1px solid rgba(203,213,225,.95);border-top:4px solid var(--cyan);border-radius:1rem;padding:1rem 1.05rem;box-shadow:var(--shadow)}
+    .summary-card:nth-child(2){border-top-color:var(--purple)}
+    .summary-card:nth-child(3){border-top-color:var(--gold)}
+    .summary-card:nth-child(4){border-top-color:#269968}
+    .summary-label{display:block;color:var(--muted);font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .summary-value{display:block;margin-top:.18rem;color:var(--ink);font-size:1.1rem;font-weight:750}
+    .summary-note{display:block;margin-top:.14rem;color:var(--muted);font-size:.73rem}
+
+    .layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:1.1rem;align-items:start}
+    .toc{position:sticky;top:126px;background:rgba(255,255,255,.97);border:1px solid var(--line);border-radius:1rem;padding:.8rem;box-shadow:var(--shadow)}
+    .toc-title{margin:.3rem .45rem .5rem;color:var(--muted);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .toc a{display:block;padding:.65rem .72rem;border-radius:.65rem;color:#334155;text-decoration:none;font-size:.83rem;font-weight:600}
+    .toc a:hover{background:var(--cyan-soft);color:var(--cyan-dark)}
+
+    .content{display:grid;gap:1rem}
+    .section-card{overflow:hidden;background:rgba(255,255,255,.98);border:1px solid var(--line);border-radius:1rem;box-shadow:var(--shadow)}
+    .section-head{padding:1rem 1.2rem .9rem;background:linear-gradient(180deg,#f0fafb,#fff);border-bottom:1px solid var(--line)}
+    .section-eyebrow{margin:0;color:var(--cyan-dark);font-size:.68rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+    .section-card:nth-of-type(2) .section-eyebrow{color:var(--purple)}
+    .section-card:nth-of-type(3) .section-eyebrow{color:#946b05}
+    .section-card h2{margin:.25rem 0 0;color:var(--ink);font-size:1.55rem;line-height:1.25}
+    .section-body{padding:1.1rem 1.2rem 1.2rem}
+    .section-body p{margin:.25rem 0 .85rem;color:#475569}
+    .section-body ul,.section-body ol{margin:.55rem 0 .2rem;padding-left:1.35rem}
+    .section-body li{margin:.43rem 0;color:#334155}
+    .section-body strong{color:#0f172a}
+
+    .time-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:.75rem 0 1rem}
+    .time-card{border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:.8rem;padding:.85rem 1rem;background:#fbfeff}
+    .time-card:nth-child(2){border-left-color:var(--purple)}
+    .time-card .kind{display:block;color:var(--muted);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+    .time-card .duration{display:block;margin:.1rem 0;color:var(--ink);font-size:1.45rem;font-weight:800}
+    .time-card .desc{color:var(--muted);font-size:.76rem}
+
+    .callout{margin:.9rem 0;padding:.85rem 1rem;border-left:4px solid var(--gold);border-radius:.7rem;background:var(--gold-soft);color:#5c4804;font-size:.88rem}
+    .callout.green{border-left-color:#269968;background:var(--green-soft);color:#165d3f}
+
+    .checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.8rem 0}
+    .check{display:flex;gap:.72rem;align-items:flex-start;padding:.75rem .85rem;border:1px solid var(--line);border-radius:.8rem;background:#fff}
+    .check-num{width:1.7rem;height:1.7rem;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;background:var(--cyan-soft);color:var(--cyan-dark);font-size:.75rem;font-weight:800}
+    .check strong{display:block;margin-bottom:.12rem;font-size:.86rem}
+    .check span{display:block;color:var(--muted);font-size:.76rem;line-height:1.45}
+
+    .downloads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:.75rem 0 .2rem}
+    .download-card{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem;border:1px solid var(--line);border-radius:.85rem;background:#fbfeff;text-decoration:none;color:var(--ink);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+    .download-card:hover{transform:translateY(-2px);border-color:#76dce5;box-shadow:0 12px 28px -22px rgba(0,135,150,.8)}
+    .download-card strong{display:block;font-size:.88rem}
+    .download-card span{display:block;margin-top:.12rem;color:var(--muted);font-size:.72rem}
+    .download-card .download-status{flex:0 0 auto;margin:0;padding:.35rem .55rem;border-radius:999px;background:var(--cyan-soft);color:var(--cyan-dark);font-size:.65rem;font-weight:800;white-space:nowrap}
+
+    .button-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.7rem;padding:.7rem 1rem;border-radius:999px;text-decoration:none;font-size:.78rem;font-weight:750;letter-spacing:.04em}
+    .btn.primary{background:var(--cyan-dark);color:#fff}
+    .btn.secondary{background:#fff;color:var(--cyan-dark);border:1px solid #99dbe2}
+
+    footer{padding:2rem 1.5rem 2.5rem;border-top:1px solid rgba(148,163,184,.18);background:var(--navy);color:#94a3b8;text-align:center;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase}
+    footer p{margin:.28rem 0}
+
+    @media(max-width:980px){
+      .site-header{position:static}.site-header-inner{min-height:auto;padding:.7rem 0;flex-direction:column;gap:.35rem}.main-nav{justify-content:center;gap:.55rem 1rem;padding-bottom:.5rem}.hero{padding-top:2.8rem}.layout{grid-template-columns:1fr}.toc{position:static;display:flex;flex-wrap:wrap;gap:.25rem}.toc-title{width:100%}.toc a{padding:.5rem .65rem}.summary-strip{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:680px){
+      .site-header-inner,.hero,main{width:min(100% - 1rem,1180px)}.header-logo-container{width:175px;height:68px}.main-nav{display:none}.hero{padding-top:2.2rem}.summary-strip,.time-grid,.checklist,.downloads{grid-template-columns:1fr}.layout{gap:.8rem}h1{font-size:2.25rem}.section-card h2{font-size:1.3rem}
+    }
+    @media print{.site-bg,.site-header,.toc{display:none!important}.hero{padding:1rem 0;color:#111}.hero p:last-child{color:#444}.hero-line{background:#088}.summary-card,.section-card{box-shadow:none}.layout{display:block}body{background:#fff}.section-card{break-inside:avoid}}
+  </style>
+  <link rel="stylesheet" href="pg26_files/site-navigation.css">
+  <script src="pg26_files/site-navigation.js" defer></script>
+</head>
+<body class="pg-program-page pg-presenters">
+  <div class="site-bg" aria-hidden="true"><img src="pg26_files/pg26_bg3.jpg" alt=""></div>
+
+  <header class="pg-site-header">
+    <div class="pg-header-inner">
+      <a class="pg-brand" href="index.html#hero" aria-label="Pacific Graphics 2026 home"><img src="pg26_files/PG2026_Logo_png.png" alt="Pacific Graphics 2026 Logo" width="210" height="96"></a>
+      <nav class="pg-desktop-nav" id="main-nav" aria-label="Main navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="calls">Calls<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div></details>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="program">Program<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="program.html">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="index.html#committee">Committee</a></div></details>
+<a class="pg-nav-link active" data-nav="presenters" href="presenter-instructions.html" aria-current="page">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<details class="pg-nav-group"><summary class="pg-nav-link" data-nav="attend">Attend<span class="pg-chevron" aria-hidden="true">⌄</span></summary><div class="pg-nav-submenu"><a href="venue.html">Venue</a><a href="hotels.html">Hotels</a></div></details>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav>
+      <details class="pg-mobile-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation"><a class="pg-nav-link" data-nav="about" href="index.html#about">About</a>
+<div class="pg-mobile-group"><span class="" data-nav="calls">Calls</span><a href="cfp.html">Call for Papers</a><a href="sponsorships.html">Call for Sponsorships</a></div>
+<div class="pg-mobile-group"><span class="" data-nav="program">Program</span><a href="program.html">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="index.html#committee">Committee</a></div>
+<a class="pg-nav-link active" data-nav="presenters" href="presenter-instructions.html" aria-current="page">Presenters</a>
+<a class="pg-nav-link" data-nav="registration" href="registration.html">Registration</a>
+<a class="pg-nav-link" data-nav="keynotes" href="index.html#keynotes">Keynotes</a>
+<div class="pg-mobile-group"><span class="" data-nav="attend">Attend</span><a href="venue.html">Venue</a><a href="hotels.html">Hotels</a></div>
+<a class="pg-nav-link" data-nav="history" href="history.html">History</a></nav></details>
+    </div>
+  </header>
+
+  <section class="hero">
+    <p class="hero-kicker">October 6–9, 2026 · Singapore</p>
+    <h1>Presenter Instructions</h1>
+    <div class="hero-line" aria-hidden="true"></div>
+    <p>Please review the instructions below before preparing your oral or poster presentation for Pacific Graphics 2026.</p>
+  
+    <nav class="pg-section-links" aria-label="Program and presenter pages"><a href="program.html">Program-at-a-Glance</a><a href="full-program.html">Full Program</a><a href="presenter-instructions.html" aria-current="page">Presenter Instructions</a></nav>
+  </section>
+
+  <main>
+    <section class="summary-strip" aria-label="Presentation summary">
+      <div class="summary-card"><span class="summary-label">Journal / Invited</span><span class="summary-value">15 + 5 minutes</span><span class="summary-note">Presentation + Q&amp;A · 20 min total</span></div>
+      <div class="summary-card"><span class="summary-label">Conference Papers</span><span class="summary-value">12 + 3 minutes</span><span class="summary-note">Presentation + Q&amp;A · 15 min total</span></div>
+      <div class="summary-card"><span class="summary-label">Posters</span><span class="summary-value">A0 portrait</span><span class="summary-note">841 × 1189 mm</span></div>
+      <div class="summary-card"><span class="summary-label">Attendance</span><span class="summary-value">In person</span><span class="summary-note">Unless a video presentation is approved</span></div>
+    </section>
+
+    <div class="layout">
+      <aside class="toc" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <a href="#oral">Oral presentations</a>
+        <a href="#onsite">On-site preparation</a>
+        <a href="#poster">Poster presentations</a>
+        <a href="#optional-poster">Optional poster for accepted papers</a>
+        <a href="#video">Online presentation submission</a>
+        <a href="#templates">Templates</a>
+        <a href="#checklist">Quick checklist</a>
+      </aside>
+
+      <div class="content">
+        <section class="section-card" id="oral">
+          <div class="section-head">
+            <p class="section-eyebrow">Oral presentations</p>
+            <h2>Presentation time and format</h2>
+          </div>
+          <div class="section-body">
+            <p>Please keep your talk within the presentation time below and reserve the Q&amp;A period for questions. The <a href="full-program.html">Full Program</a> shows the total slot for each paper. Session chairs will manage timing, transitions, and questions.</p>
+            <p>For an overview of the conference schedule, see the <a href="program.html">Program-at-a-Glance</a>.</p>
+            <div class="time-grid">
+              <div class="time-card"><span class="kind">Journal & Invited</span><span class="duration">15 + 5 min</span><span class="desc">15-minute presentation + 5-minute Q&amp;A (20 minutes total).</span></div>
+              <div class="time-card"><span class="kind">Conference Papers</span><span class="duration">12 + 3 min</span><span class="desc">12-minute presentation + 3-minute Q&amp;A (15 minutes total).</span></div>
+            </div>
+            <ul>
+              <li>Use a <strong>16:9 widescreen</strong> slide format.</li>
+              <li>The PG2026 PowerPoint template is available below and is recommended for a consistent conference appearance.</li>
+              <li>Use large, readable fonts and high-contrast figures. Avoid dense text and very small labels.</li>
+              <li>If your talk contains video or audio, embed the media in the presentation and test it before the session.</li>
+              <li>Please do not exceed the time assigned to your paper. Session chairs may stop presentations that run over time.</li>
+            </ul>
+
+            <div class="callout green" id="optional-poster">
+              <strong>Optional poster presentation for accepted papers.</strong> To encourage more discussion between authors and the audience, PG2026 is offering <strong>additional poster presentation opportunities to all accepted papers</strong>, including papers that already have an oral presentation. A poster gives attendees more time to ask follow-up questions and discuss your work in detail after the talk.
+              <br><br>
+              <strong>Space is limited and slots will be allocated on a first-come, first-served basis.</strong> If you would like to complement your oral presentation with a poster, please apply early. Submit one application per paper.
+              <div class="button-row">
+                <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf6pQCLj79p-USIommIXu_msMiY-TT39nKJ-W6GNKRuwkgxvw/viewform?usp=sharing&amp;ouid=109363050096593489784" target="_blank" rel="noopener">Poster Presentation Application</a>
+              </div>
+            </div>
+
+            <div class="callout"><strong>Important:</strong> Check the online program shortly before the conference for your final session, room, and presentation time.</div>
+          </div>
+        </section>
+
+        <section class="section-card" id="onsite">
+          <div class="section-head">
+            <p class="section-eyebrow">On-site preparation</p>
+            <h2>Before your session starts</h2>
+          </div>
+          <div class="section-body">
+            <div class="checklist">
+              <div class="check"><div class="check-num">1</div><div><strong>Arrive early</strong><span>Recommended: be in the room at least 15 minutes before the session begins.</span></div></div>
+              <div class="check"><div class="check-num">2</div><div><strong>Meet the session chair</strong><span>Let the chair know you are present and confirm the presentation order.</span></div></div>
+              <div class="check"><div class="check-num">3</div><div><strong>Bring a local copy</strong><span>Recommended: bring your slides on a USB drive and keep a second backup copy online or on your laptop.</span></div></div>
+              <div class="check"><div class="check-num">4</div><div><strong>Test media</strong><span>Check fonts, animations, video, audio, and any special playback requirements before the session.</span></div></div>
+            </div>
+            <p>If your presentation requires a special setup, live demonstration, or unusual media playback, please contact the organizers in advance so the venue setup can be confirmed.</p>
+          </div>
+        </section>
+
+        <section class="section-card" id="poster">
+          <div class="section-head">
+            <p class="section-eyebrow">Poster presentations</p>
+            <h2>Poster size, board assignment, and presentation</h2>
+          </div>
+          <div class="section-body">
+            <ul>
+              <li>Prepare your poster in <strong>A0 portrait orientation (841 × 1189 mm)</strong>.</li>
+              <li>A PG2026 poster PowerPoint template is available below. You may adapt the layout to suit your work while keeping the title and conference branding clear.</li>
+              <li>Your assigned <strong>poster session and board number</strong> will be shown in the conference program or confirmed by the organizers.</li>
+              <li>Please place your poster on the assigned board before your poster session and remove it after the session.</li>
+              <li>At least one author should remain near the poster during the assigned presentation period to discuss the work with attendees.</li>
+              <li>Keep the title, authors, affiliation, key figures, and main contribution readable from a reasonable standing distance.</li>
+            </ul>
+            <div class="callout green"><strong>Poster sessions:</strong> PG2026 poster presentations are scheduled together with selected coffee breaks. Poster sessions, coffee breaks, and lunch take place at <strong>SMU Connexion</strong>. Please follow the <a href="full-program.html">Full Program</a> for your allocated session and board.</div>
+            <div class="callout"><strong>Local poster printing:</strong> <a href="https://www.colorvizio.com/product/inkjet-poster/" target="_blank" rel="noopener">ColorVizio Inkjet Poster Printing</a> is located very close to the conference venue and can print posters within <strong>1 working day</strong> at an affordable price. Authors who prefer to print after arriving in Singapore may find this service convenient.</div>
+          </div>
+        </section>
+
+        <section class="section-card" id="video">
+          <div class="section-head">
+            <p class="section-eyebrow">Approved non-onsite presentations</p>
+            <h2>Online presentation submission</h2>
+          </div>
+          <div class="section-body">
+            <p>This option is for authors of accepted PG2026 papers who are <strong>unable to attend the conference for an onsite presentation</strong> and whose online presentation has been approved by the organizers.</p>
+            <ul>
+              <li>Prepare a <strong>10-minute recorded presentation</strong> of your paper.</li>
+              <li>Upload the recording to <strong>YouTube</strong> and provide the video link through the submission form below.</li>
+              <li>Please submit <strong>one response per paper</strong>.</li>
+              <li>Do not replace an onsite presentation with a recorded presentation unless the online presentation has been approved by the organizers.</li>
+            </ul>
+            <div class="callout"><strong>Recording length:</strong> The submitted online presentation should be approximately <strong>10 minutes</strong>, regardless of the onsite oral slot length.</div>
+            <div class="button-row">
+              <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf8jipurx-RrUDV_2nHJvzvO9JhGTnkthwlRCJdNxFiC5BIIQ/viewform?usp=sharing&amp;ouid=109363050096593489784" target="_blank" rel="noopener">Online Presentation Submission</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card" id="templates">
+          <div class="section-head">
+            <p class="section-eyebrow">Templates</p>
+            <h2>PG2026 presentation and poster templates</h2>
+          </div>
+          <div class="section-body">
+            <p>Download the PG2026 presentation and poster templates below. Both use the conference branding and simple layouts that you can adapt to your work.</p>
+            <div class="downloads">
+              <a class="download-card" href="pg26_files/templates/PG2026_presentation_template.pptx" download="PG2026_presentation_template.pptx">
+                <div><strong>Presentation template</strong><span>PowerPoint · 16:9 · title + content layouts</span></div><span class="download-status">Download ↓</span>
+              </a>
+              <a class="download-card" href="pg26_files/templates/PG2026_poster_template_A0_portrait.pptx" download="PG2026_poster_template_A0_portrait.pptx">
+                <div><strong>Poster template</strong><span>PowerPoint · A0 portrait · 841 × 1189 mm</span></div><span class="download-status">Download ↓</span>
+              </a>
+            </div>
+            <div class="button-row">
+              <a class="btn primary" href="full-program.html">View Program</a>
+              <a class="btn secondary" href="venue.html">Venue Information</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card" id="checklist">
+          <div class="section-head">
+            <p class="section-eyebrow">Final check</p>
+            <h2>Presenter checklist</h2>
+          </div>
+          <div class="section-body">
+            <ol>
+              <li>Confirm your final date, time, room, and session in the PG2026 program.</li>
+              <li>Prepare your oral slides in 16:9 or your poster in A0 portrait format.</li>
+              <li>Check that all figures, labels, videos, and fonts are clearly readable.</li>
+              <li>Bring a local copy and a backup copy of your presentation.</li>
+              <li>If you want an additional poster presentation, submit the poster application early because space is limited.</li>
+              <li>If you have an approved online presentation, submit your 10-minute YouTube recording through the online presentation form.</li>
+              <li>Arrive at the room early and introduce yourself to the session chair.</li>
+              <li>Stay within the allocated presentation time.</li>
+            </ol>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Updated 16 September 2026</p>
+    <p>© PG 2026 · Pacific Graphics 2026</p>
+  </footer>
+</body>
+</html>
