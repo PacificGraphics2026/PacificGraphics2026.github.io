@@ -57,7 +57,7 @@
         .trailer-program-link:hover { color: #06111D; background: var(--theme-accent); }
         .trailer-program-link:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 4px; }
         .trailer-player { overflow: hidden; border: 1px solid #274454; border-top: 3px solid var(--theme-accent); border-radius: 20px; background: #000000; box-shadow: 0 16px 48px -24px #00FFFF33; }
-        .trailer-player iframe { display: block; width: 100%; height: auto; min-height: 200px; aspect-ratio: 16 / 9; border: 0; }
+        .trailer-player video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; background: #000000; }
         @media (max-width: 640px) {
             #trailer { padding: 32px 24px 40px; }
             .trailer-player { border-radius: 12px; }
@@ -152,15 +152,15 @@
                 <a class="trailer-program-link" href="full-program.html">Explore the Full Program →</a>
             </div>
             <div class="trailer-player">
-                <iframe
-                    src="https://www.youtube.com/embed/fz0674x2fj0?playsinline=1&amp;rel=0"
-                    title="PG2026 Technical Papers Trailer"
-                    width="1280" height="720"
-                    loading="lazy"
-                    allow="encrypted-media; fullscreen; picture-in-picture"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen>
-                </iframe>
+                <video id="technical-papers-trailer"
+                    controls playsinline preload="metadata"
+                    poster="pg26_files/videos/PG2026_Technical_Papers_Trailer.jpg"
+                    width="1920" height="1080"
+                    aria-label="PG2026 Technical Papers Trailer">
+                    <source src="pg26_files/videos/PG2026_Technical_Papers_Trailer.mp4" type="video/mp4">
+                    Your browser does not support embedded video.
+                    <a href="pg26_files/videos/PG2026_Technical_Papers_Trailer.mp4" download>Download the trailer</a>.
+                </video>
             </div>
         </section>
 
