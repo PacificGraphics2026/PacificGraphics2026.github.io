@@ -1,0 +1,33 @@
+/* Homepage arrival guide and quick links. */
+.arrival-highlight { position: relative; width: min(1152px, 100%); margin: 0 auto; padding: 44px 24px 12px; }
+.arrival-heading { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+.arrival-kicker { margin: 0 0 12px; color: #00ffff; font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.arrival-highlight h2 { margin: 0; font-size: clamp(1.75rem, 3.8vw, 2.5rem); letter-spacing: .015em; line-height: 1.2; }
+.arrival-heading p:not(.arrival-kicker) { max-width: 620px; margin: 12px 0 0; color: #aabacc; font-size: .95rem; line-height: 1.7; }
+.arrival-button { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; gap: 12px; border-radius: 10px; padding: 15px 20px; background: #00ffff; color: #06111d; font-size: .85rem; font-weight: 700; text-decoration: none; }
+.arrival-button:hover { background: #acffff; }
+.arrival-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.arrival-card { display: flex; flex-direction: column; padding: 26px; border: 1px solid #294351; border-radius: 16px; background: #0d1c2de8; text-decoration: none; transition: border-color .2s, background .2s; }
+.arrival-card:hover { border-color: #00ffff; background: #122b3d; }
+.arrival-card-label { color: #73dadd; font-size: .68rem; font-weight: 700; letter-spacing: .10em; text-transform: uppercase; }
+.arrival-card h3 { margin: 18px 0 12px; font-size: 1.2rem; line-height: 1.35; letter-spacing: 0; }
+.arrival-card p { flex: 1; margin: 0 0 22px; color: #aabacc; font-size: .86rem; line-height: 1.7; }
+.arrival-card-link { color: #00ffff; font-size: .8rem; font-weight: 650; }
+.arrival-note { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; color: #567587; font-size: .77rem; line-height: 1.7; }
+.arrival-note a { color: #bad0dd; text-decoration: underline; text-underline-offset: 4px; }
+.arrival-highlight a:focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+@media (max-width: 900px) {
+  .arrival-heading { align-items: flex-start; flex-direction: column; gap: 20px; }
+}
+@media (max-width: 680px) {
+  #hero > .relative { width: 100%; }
+  #hero-main-title { font-size: clamp(3rem, 12vw, 5rem); }
+  #countdown-wrapper { width: 100%; padding: 0 16px; gap: 8px; }
+  #countdown-wrapper > div { min-width: 68px; padding: 14px 10px; }
+  #countdown-wrapper > div > span:first-child { font-size: 1.75rem; }
+  .arrival-highlight { padding-top: 32px; }
+  .arrival-cards { grid-template-columns: 1fr; }
+  .arrival-card { padding: 24px; }
+  .arrival-note { flex-direction: column; gap: 6px; }
+  .arrival-note > span { display: none; }
+}
