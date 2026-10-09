@@ -62,6 +62,30 @@
             #trailer { padding: 32px 24px 40px; }
             .trailer-player { border-radius: 12px; }
         }
+        .conference-thanks { width: min(1152px, 100%); margin: 0 auto; padding: 48px 24px; }
+        .conference-thanks h2 { margin: 0 0 16px; font-size: 2rem; letter-spacing: 0; line-height: 1.25; }
+        .conference-thanks p { max-width: 850px; margin: 0 0 24px; color: #CBD5E1; line-height: 1.8; }
+        .conference-thanks figure { margin: 0; }
+        .conference-thanks img { display: block; width: 100%; height: auto; border-radius: 8px; }
+        .conference-thanks figcaption { margin-top: 16px; text-align: right; }
+        .conference-thanks a { color: var(--theme-accent); text-decoration: underline; text-underline-offset: 4px; }
+        .conference-thanks a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 4px; }
+        .conference-awards { width: min(1152px, 100%); margin: 0 auto; padding: 0 24px 48px; }
+        .conference-awards h2 { margin: 0 0 28px; font-size: 2rem; letter-spacing: 0; line-height: 1.25; }
+        .awards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+        .award-category { min-width: 0; border-top: 3px solid #D7A12A; padding-top: 20px; }
+        .award-category h3 { margin: 0 0 28px; font-size: 1.25rem; letter-spacing: 0; line-height: 1.4; }
+        .award-result + .award-result { border-top: 1px solid #274454; margin-top: 24px; padding-top: 24px; }
+        .award-label { margin: 0 0 10px; color: var(--theme-accent); font-size: .8rem; font-weight: 700; letter-spacing: 0; text-transform: uppercase; }
+        .award-label.honorable { color: #EAB54B; }
+        .award-result h4 { margin: 0 0 14px; font-size: 1rem; letter-spacing: 0; line-height: 1.5; overflow-wrap: anywhere; }
+        .award-authors { margin: 0; color: #CBD5E1; font-size: .875rem; line-height: 1.7; overflow-wrap: anywhere; }
+        @media (max-width: 900px) { .awards-grid { grid-template-columns: 1fr; gap: 32px; } }
+        @media (max-width: 640px) {
+            .conference-thanks { padding: 32px 24px; }
+            .conference-thanks h2 { font-size: 1.5rem; }
+            .conference-awards h2 { font-size: 1.5rem; }
+        }
     </style>
     <link rel="stylesheet" href="pg26_files/attendee-guide.css?v=20261002">
     <link rel="stylesheet" href="pg26_files/site-navigation.css">
@@ -140,6 +164,60 @@
                     <span class="hidden md:inline-block w-2 h-2 rounded-full bg-[var(--theme-accent)] shadow-[0_0_10px_var(--theme-accent)]"></span>
                     <span class="text-[var(--theme-accent)]">SINGAPORE</span>
                 </div>
+            </div>
+        </section>
+
+        <section id="thank-you" class="conference-thanks" aria-labelledby="thank-you-title">
+            <h2 id="thank-you-title">Thank you for joining Pacific Graphics 2026!</h2>
+            <p>Thank you to all our attendees for making Pacific Graphics 2026 in Singapore such a memorable gathering. Your research, ideas, and conversations brought the conference to life. We are grateful to our speakers, authors, reviewers, volunteers, organizers, and sponsors for their contributions, and we look forward to seeing you again at the next Pacific Graphics.</p>
+            <figure>
+                <img src="gallery/pano.JPG" alt="Pacific Graphics 2026 attendees gathered for the conference group photo in Singapore" loading="lazy" decoding="async">
+                <figcaption><a href="gallery.html">View the conference photo gallery</a></figcaption>
+            </figure>
+        </section>
+
+        <section id="awards" class="conference-awards" aria-labelledby="awards-title">
+            <h2 id="awards-title">Pacific Graphics 2026 Awards</h2>
+            <div class="awards-grid">
+                <article class="award-category" aria-labelledby="best-paper-title">
+                    <h3 id="best-paper-title">Best Paper Award</h3>
+                    <div class="award-result">
+                        <p class="award-label">Winner</p>
+                        <h4>Scalable Capacity-Constrained Power Diagrams via Compressed Optimal Assignment</h4>
+                        <p class="award-authors">Jiantao Song, Yunqi Yang, Shuangmin Chen, Changhe Tu, and Shiqing Xin</p>
+                    </div>
+                    <div class="award-result">
+                        <p class="award-label honorable">Honorable Mention</p>
+                        <h4>STITCH: Structure Tensor Informed Topologically Coherent Hair Reconstruction</h4>
+                        <p class="award-authors">Alireza Vafaei, Jan Spindler, Hannah Dr&ouml;ge, Markus Plack, Patrick Stotko, and Reinhard Klein</p>
+                    </div>
+                </article>
+                <article class="award-category" aria-labelledby="best-student-paper-title">
+                    <h3 id="best-student-paper-title">Best Student Paper Award</h3>
+                    <div class="award-result">
+                        <p class="award-label">Winner</p>
+                        <h4>Projective Affine Body Dynamics for Multibody Systems</h4>
+                        <p class="award-authors">Zimeng Ye, Xiaowei He, Yuzhong Guo, Yin Yang, Chenfanfu Jiang, and Hongan Wang</p>
+                    </div>
+                    <div class="award-result">
+                        <p class="award-label honorable">Honorable Mention</p>
+                        <h4>PropGesture: Few-shot Co-speech Gesture Synthesis for Handheld Props</h4>
+                        <p class="award-authors">Jiho Kang, Junghoon Choi, Jihun Shin, and Sung-Hee Lee</p>
+                    </div>
+                </article>
+                <article class="award-category" aria-labelledby="best-conference-paper-title">
+                    <h3 id="best-conference-paper-title">Best Conference Paper Award</h3>
+                    <div class="award-result">
+                        <p class="award-label">Winner</p>
+                        <h4>Real-Time Collision Handling for Signed Distance Fields via Caching and Importance Sampling</h4>
+                        <p class="award-authors">Chris Giles and Sheldon Andrews</p>
+                    </div>
+                    <div class="award-result">
+                        <p class="award-label honorable">Honorable Mention</p>
+                        <h4>Segmenting Geometric Textures of 3D Meshes</h4>
+                        <p class="award-authors">Weidan Xiong, Kaijie Qu, Shihao Feng, Shunqi Fan, Rongyu Xiong, and Hui Huang</p>
+                    </div>
+                </article>
             </div>
         </section>
 
